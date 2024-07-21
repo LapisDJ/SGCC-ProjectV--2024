@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class NewBehaviourScript : MonoBehaviour
 {
-
+    // Start is called before the first frame update
     void Start()
     {
-        if (Application.isPlaying)
+        
     }
 
+    // Update is called once per frame
     void Update()
     {
         
