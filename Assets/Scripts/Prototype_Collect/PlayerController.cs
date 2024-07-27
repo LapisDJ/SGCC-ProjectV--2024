@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    PlayerStat playerStat;
+    Player_Stat playerStat;
     [SerializeField]
     GameObject HPBar;
 
@@ -24,7 +25,7 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        playerStat = GetComponent<PlayerStat>();
+        playerStat = GetComponent<Player_Stat>();
         rb = GetComponent<Rigidbody2D>();
 
         if (playerStat == null)
@@ -69,23 +70,24 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (Input.GetKey(KeyCode.UpArrow))
-        {
-            rb.MovePosition(transform.position + new Vector3(0.0f, 1.0f, 0.0f) * Time.deltaTime * playerStat.getPlayerSpeed());
-        }
+        // if (Input.GetKey(KeyCode.UpArrow))
+        // {
+        //     rb.MovePosition(transform.position + new Vector3(0.0f, 1.0f, 0.0f) * Time.deltaTime * playerStat.getPlayerSpeed());
+        // }
 
-        if (Input.GetKey(KeyCode.DownArrow))
-        {
-            rb.MovePosition(transform.position - new Vector3(0.0f, 1.0f, 0.0f) * Time.deltaTime * playerStat.getPlayerSpeed());
-        }
-        if (Input.GetKey(KeyCode.LeftArrow))
-        {
-            rb.MovePosition(transform.position - new Vector3(1.0f, 0.0f, 0.0f) * Time.deltaTime * playerStat.getPlayerSpeed());
-        }
-        if (Input.GetKey(KeyCode.RightArrow))
-        {
-            rb.MovePosition(transform.position + new Vector3(1.0f, 0.0f, 0.0f) * Time.deltaTime * playerStat.getPlayerSpeed());
-        }
+        // if (Input.GetKey(KeyCode.DownArrow))
+        // {
+        //     rb.MovePosition(transform.position - new Vector3(0.0f, 1.0f, 0.0f) * Time.deltaTime * playerStat.getPlayerSpeed());
+        // }
+        // if (Input.GetKey(KeyCode.LeftArrow))
+        // {
+        //     rb.MovePosition(transform.position - new Vector3(1.0f, 0.0f, 0.0f) * Time.deltaTime * playerStat.getPlayerSpeed());
+        // }
+        // if (Input.GetKey(KeyCode.RightArrow))
+        // {
+        //     rb.MovePosition(transform.position + new Vector3(1.0f, 0.0f, 0.0f) * Time.deltaTime * playerStat.getPlayerSpeed());
+        // }
+        rb.velocity = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0).normalized * 5.0f;
 
         if (HPBar != null)
         {
@@ -133,7 +135,7 @@ public class PlayerController : MonoBehaviour
                 Monster monster = hitCollider.GetComponent<Monster>();
                 if (monster != null)
                 {
-                    monster.TakeDamage(playerStat.__AttackDamage); // 플레이어의 공격력만큼 피해를 줌
+                    //monster.TakeDamage(playerStat.AttackDamage); // 플레이어의 공격력만큼 피해를 줌
                 }
             }
         }
@@ -146,7 +148,7 @@ public class PlayerController : MonoBehaviour
                 Monster monster = hitCollider.GetComponent<Monster>();
                 if (monster != null)
                 {
-                    monster.TakeDamage(playerStat.__AttackDamage); // 플레이어의 공격력만큼 피해를 줌
+                    //monster.TakeDamage(playerStat.AttackDamage); // 플레이어의 공격력만큼 피해를 줌
                 }
             }
         }

@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    public PlayerStat PlayerStat;
+    public Player_Stat PlayerStat;
     public float bulletDamage;
 
     void Start ()
     {
-        bulletDamage = PlayerStat.__AttackDamage;
+        bulletDamage = PlayerStat.GetAD();
     }
 
     void OnTriggerEnter2D(Collider2D other)

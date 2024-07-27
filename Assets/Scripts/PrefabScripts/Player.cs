@@ -5,29 +5,34 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
 
-    PlayerStat playerStat;
-    PlayerController playerController;
+    Player_Stat playerstat;
+    Player_Con playerController;
+    [SerializeField] float CurrentHP;
+
     void Awake()
     {
-        playerStat = GetComponent<PlayerStat>();
-        playerController = GetComponent<PlayerController>();
+        playerstat = GetComponent<Player_Stat>();
+        playerController = GetComponent<Player_Con>();
+        CurrentHP = playerstat.GetCurrentHP();
     }
 
 
-    void Update()
+    void FixedUpdate()
     {
         
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
-        if (playerStat != null)
+        CurrentHP = playerstat.GetCurrentHP();
+        if (playerstat != null)
         {
-            playerStat.CurrentHP -= damage;
-            if (playerStat.CurrentHP <= 0)
+            CurrentHP -= damage;
+            if (CurrentHP <= 0)
             {
                 Die();
             }
+            playerstat.Getdamage(damage);
         }
     }
 
