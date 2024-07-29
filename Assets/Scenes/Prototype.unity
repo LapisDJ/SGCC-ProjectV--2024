@@ -210,6 +210,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Monster 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5703075016005794536, guid: ffd17a42ca7cc664981d88e2a35879b9, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7468599394232733844, guid: ffd17a42ca7cc664981d88e2a35879b9, type: 3}
       propertyPath: m_LocalPosition.x
       value: -8.66
@@ -14111,6 +14115,7 @@ GameObject:
   - component: {fileID: 1084714434}
   - component: {fileID: 1084714435}
   - component: {fileID: 1084714436}
+  - component: {fileID: 1084714437}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -14174,7 +14179,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_FlipX: 0
@@ -14195,7 +14200,7 @@ Transform:
   m_GameObject: {fileID: 1084714429}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 13.22, y: 2.7624192, z: 0}
+  m_LocalPosition: {x: 1.825, y: 1.226, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -14211,7 +14216,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1084714429}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -14303,6 +14308,34 @@ MonoBehaviour:
   CurrentHP: 100
   __AttackDamage: 10
   __PlayerSpeed: 10
+--- !u!114 &1084714437
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1084714429}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3501144d395a71a4fbd21207b0fba248, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  knifeDronePrefab: {fileID: 6163855391650666056, guid: 5c4135b3d9dec5648938b424cc79fa92, type: 3}
+  rotationSpeed: 100
+  knifeRadius: 2
+  fanAttackRadius: 1.5
+  fanStartAngle: 30
+  fanEndAngle: 120
+  circleAttackRadius: 2
+  rectangleAttackSize: {x: 3, y: 1}
+  rotateKnifeKey: 120
+  fanAttackKey: 99
+  circleAttackKey: 118
+  rectangleAttackKey: 98
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  highlightColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &1441412865
 GameObject:
   m_ObjectHideFlags: 0
