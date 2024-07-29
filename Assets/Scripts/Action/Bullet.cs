@@ -9,7 +9,7 @@ public class Bullet : MonoBehaviour
 
     void Start ()
     {
-        bulletDamage = PlayerStat.GetAD();
+        bulletDamage = PlayerStat.ADbylevel;
     }
 
     void OnTriggerEnter2D(Collider2D other)

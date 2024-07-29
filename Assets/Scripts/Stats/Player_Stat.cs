@@ -10,33 +10,22 @@ public class Player_Stat : MonoBehaviour
     [SerializeField] float WorkSpeed = 1.0f;
     [SerializeField] float Luck = 0.0f;
     [SerializeField] float CriticalChance = 0.0f;
-    [SerializeField] class HP
-    {
-        public float current;
-        public float bylevel = 50.0f;
-        public float bonus = 1.0f; 
-        public float max;
-        public float previousmax;
-    }
-    [SerializeField] class Speed
-    {
-        public float add = 5.0f;
-        public float multi = 1.0f;
-        public float fin;
-    }
-    [SerializeField] class AttackDamage
-    {
-        public float bylevel = 5.0f;
-        public float additional;
-    }
-    [SerializeField] HP hp;
-    [SerializeField] Speed speed;
-    [SerializeField] AttackDamage ad;
+    //hp
+    public float HPcurrent;
+    [SerializeField] float HPbylevel = 50.0f;
+    [SerializeField] float HPbonus = 1.0f; 
+    public float HPmax;
+    public float HPpreviousmax;
+    //speed
+    public float Speedadd = 5.0f;
+    public float Speedmulti = 1.0f;
+    public float Speedfin;
+    //attackdamage
+    public float ADbylevel = 5.0f;
+    public float ADadditional;
+
     void Start()
     {
-        hp = GetComponent<HP>();
-        speed = GetComponent<Speed>();
-        ad = GetComponent<AttackDamage>();
         InitializeStats();
     }
     
@@ -61,51 +50,51 @@ public class Player_Stat : MonoBehaviour
     }
     void UpdateStatsByLevel()
     {
-        hp.max = hp.bylevel * hp.bonus;
-        hp.previousmax = hp.max;
+        HPmax = HPbylevel * HPbonus;
+        HPpreviousmax = HPmax;
         switch(player_level)
         {
             case 1:
-                hp.max = hp.bylevel * hp.bonus;
-                hp.previousmax = hp.max;
-                hp.current = hp.max;
-                ad.bylevel = 5.0f;
-                ad.additional = 0.0f;
+                HPmax = HPbylevel * HPbonus;
+                HPpreviousmax = HPmax;
+                HPcurrent = HPmax;
+                ADbylevel = 5.0f;
+                ADadditional = 0.0f;
                 break;
             case 2:
-                ad.bylevel++;
+                ADbylevel++;
                 break;
             case 3:
-                ad.bylevel++;
+                ADbylevel++;
                 break;
             case 4:
-                ad.bylevel++;
+                ADbylevel++;
                 break;
             case 5:
-                ad.bylevel++;
+                ADbylevel++;
                 Luck += 0.05f;
                 break;
             case 6:
-                ad.bylevel++;
+                ADbylevel++;
                 break;
             case 7:
-                ad.bylevel++;
+                ADbylevel++;
                 break;
             case 8:
-                ad.bylevel++;
+                ADbylevel++;
                 break;
             case 9:
-                ad.bylevel++;
+                ADbylevel++;
                 break;
             case 10:
-                ad.bylevel+=3;
+                ADbylevel+=3;
                 WorkSpeed += 0.05f;
                 Luck += 0.05f;
-                speed.multi += 0.1f;
-                hp.bonus += 0.1f;
+                Speedmulti += 0.1f;
+                HPbonus += 0.1f;
                 break;
             case 11:
-                ad.bylevel++;
+                ADbylevel++;
                 break;
             // 나머지 레벨에 따른 스탯 증가(자동사냥 '해줘')
 
@@ -113,31 +102,15 @@ public class Player_Stat : MonoBehaviour
                 // 최고 레벨을 넘어가는 경우 처리
                 break;
         }
-        hp.max = hp.bylevel * hp.bonus;
-        hp.current += hp.max - hp.previousmax;
-        speed.fin = speed.add * speed.multi;
+        HPmax = HPbylevel * HPbonus;
+        HPcurrent += HPmax - HPpreviousmax;
+        Speedfin = Speedadd * Speedmulti;
         
         // 현재 체력 증가량만큼 추가
     }
-    public float GetCurrentHP()
-    {
-        return this.hp.current;
-    }
-    public float GetMaxHP()
-    {
-        return this.hp.max;
-    }
-    public float GetAD()
-    {
-        return this.ad.additional + this.ad.bylevel;
-    }
-    public float GetSpeed()
-    {
-        return this.speed.fin;
-    }
     public void Getdamage(float damage)
     {
-        this.hp.current -= damage;
+        this.HPcurrent -= damage;
     }
 }
 

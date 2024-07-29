@@ -20,8 +20,8 @@ public class HPBar : MonoBehaviour
 
     void Update()
     {
-        float currenthp = playerstat.GetCurrentHP();
-        float maxhp = playerstat.GetMaxHP();
+        float currenthp = playerstat.HPcurrent;
+        float maxhp = playerstat.HPmax;
         //슬라이더로 체력바 표시
         slider.value = currenthp / maxhp;
         //체력바 위치 조정

@@ -25,8 +25,9 @@ public class Player_Con : MonoBehaviour
     
     void FixedUpdate()
     {
+        speed = playerstat.Speedadd * playerstat.Speedmulti;
         //플레이어 이동
         dir = new Vector3(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"),0).normalized;
-        rb.velocity =  dir * 5.0f;
+        rb.velocity =  dir * speed;
     }
 }
