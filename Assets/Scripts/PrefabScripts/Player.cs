@@ -5,26 +5,22 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
 
-    PlayerStat playerStat;
-    PlayerController playerController;
+    Player_Stat playerstat;
+    Player_Con playerController;
+
     void Awake()
     {
-        playerStat = GetComponent<PlayerStat>();
-        playerController = GetComponent<PlayerController>();
+        playerstat = GetComponent<Player_Stat>();
+        playerController = GetComponent<Player_Con>();
     }
 
 
-    void Update()
+    public void TakeDamage(float damage)
     {
-        
-    }
-
-    public void TakeDamage(int damage)
-    {
-        if (playerStat != null)
+        if (playerstat != null)
         {
-            playerStat.CurrentHP -= damage;
-            if (playerStat.CurrentHP <= 0)
+            playerstat.HPcurrent -= damage;
+            if (playerstat.HPcurrent <= 0)
             {
                 Die();
             }

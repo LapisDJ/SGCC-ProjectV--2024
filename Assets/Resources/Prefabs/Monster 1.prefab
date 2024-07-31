@@ -100,7 +100,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  __MonsterSpeed: 10
+  rb: {fileID: 0}
+  speed: 0
+  monster: {fileID: 0}
 --- !u!50 &-3574141526916872300
 Rigidbody2D:
   serializedVersion: 4
