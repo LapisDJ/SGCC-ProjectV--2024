@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController_Legacy : MonoBehaviour
 {
-
     public Vector2 inputVec;        // 방향키 좌표값을 입력받을 변수
     private Vector2 lastDirection;  // 플레이어가 마지막으로 바라본 방향 저장
+    
     Player_Stat playerStat;
-
     [SerializeField]
     GameObject HPBar;
     [SerializeField]
@@ -115,7 +114,8 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        rb.velocity = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0).normalized * 5.0f;
+        Vector2 nextVec = inputVec.normalized * playerStat.getPlayerSpeed() * Time.fixedDeltaTime;
+        rb.MovePosition(rb.position + nextVec);
 
         if (HPBar != null)
         {

@@ -1,28 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Callbacks;
 using UnityEngine;
 
 public class MonsterController : MonoBehaviour
 {
 
-    [SerializeField]
-    GameObject player;
-
-    [SerializeField]
-    float __MonsterSpeed = 3.0f;
+    public GameObject player;
+    [SerializeField] Rigidbody2D rb;
+    [SerializeField] float speed = 0.0f;
+    [SerializeField] Monster monster;
 
     void Start()
     {
-        
+        monster = GetComponent<Monster>();
+        rb = GetComponent<Rigidbody2D>();
+        speed = monster.GetCurrentSpeed();
     }
-
-    void Update()
+        void Update()
     {
         Vector3 PlayerPosition = player.transform.position;
         Vector3 MonsterPosition = transform.position;
-
-        Vector3 dirVector = (PlayerPosition - MonsterPosition).normalized;
-
-        transform.position = Vector3.MoveTowards(MonsterPosition, PlayerPosition, __MonsterSpeed * Time.deltaTime);
+        rb.velocity = (PlayerPosition - MonsterPosition).normalized * speed;
     }
 }
