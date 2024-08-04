@@ -5,14 +5,11 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-<<<<<<< HEAD:Assets/Scripts/Controllers/PlayerController.cs
+
     public Vector2 inputVec;        // 방향키 좌표값을 입력받을 변수
     private Vector2 lastDirection;  // 플레이어가 마지막으로 바라본 방향 저장
-    
-    PlayerStat playerStat;
-=======
     Player_Stat playerStat;
->>>>>>> 1694c61c7e9e37c40e547f73f118a6e0426bfa32:Assets/Scripts/Prototype_Collect/PlayerController.cs
+
     [SerializeField]
     GameObject HPBar;
     [SerializeField]
@@ -118,29 +115,7 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-<<<<<<< HEAD:Assets/Scripts/Controllers/PlayerController.cs
-        Vector2 nextVec = inputVec.normalized * playerStat.getPlayerSpeed() * Time.fixedDeltaTime;
-        rb.MovePosition(rb.position + nextVec);
-=======
-        // if (Input.GetKey(KeyCode.UpArrow))
-        // {
-        //     rb.MovePosition(transform.position + new Vector3(0.0f, 1.0f, 0.0f) * Time.deltaTime * playerStat.getPlayerSpeed());
-        // }
-
-        // if (Input.GetKey(KeyCode.DownArrow))
-        // {
-        //     rb.MovePosition(transform.position - new Vector3(0.0f, 1.0f, 0.0f) * Time.deltaTime * playerStat.getPlayerSpeed());
-        // }
-        // if (Input.GetKey(KeyCode.LeftArrow))
-        // {
-        //     rb.MovePosition(transform.position - new Vector3(1.0f, 0.0f, 0.0f) * Time.deltaTime * playerStat.getPlayerSpeed());
-        // }
-        // if (Input.GetKey(KeyCode.RightArrow))
-        // {
-        //     rb.MovePosition(transform.position + new Vector3(1.0f, 0.0f, 0.0f) * Time.deltaTime * playerStat.getPlayerSpeed());
-        // }
         rb.velocity = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0).normalized * 5.0f;
->>>>>>> 1694c61c7e9e37c40e547f73f118a6e0426bfa32:Assets/Scripts/Prototype_Collect/PlayerController.cs
 
         if (HPBar != null)
         {
