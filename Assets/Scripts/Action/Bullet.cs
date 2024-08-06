@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    public PlayerStat PlayerStat;
+//    public PlayerStat PlayerStat;
     public float bulletDamage;
     public bool canPenetrate = false;   // 총알이 관통하는지 여부를 결정
     public bool isBazukapo = false;    // 바주카포인지 여부 판단
     public float explosionRadius = 1.0f;    // 폭발 반경 ( == 피해 범위 ) - 변화
     void Start ()
     {
-        bulletDamage = PlayerStat.__AttackDamage;
+        //bulletDamage = PlayerStat.__AttackDamage;
     }
 
     void OnTriggerEnter2D(Collider2D other)
