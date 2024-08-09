@@ -7,7 +7,7 @@ public class MainButton : MonoBehaviour
 {
     public void OnClickNewgame()
     {
-        SceneManager.LoadScene("Character Choose");
+        LoadingSceneController.Loadscene("Character choose");
     }
     public void OnClickBringup()
     {
