@@ -9,6 +9,7 @@ using UnityEngine.UI;
 public class Timer : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI timer;
+    public static string time;
     private int wholetime;
     private int minute;
     private int second;
@@ -27,23 +28,24 @@ public class Timer : MonoBehaviour
         {
             if(minute < 10)
             {
-                timer.text = '0' + Convert.ToString(minute) + " : " + '0' + Convert.ToString(second);
+                time = '0' + Convert.ToString(minute) + " : " + '0' + Convert.ToString(second);
             }
             else
             {
-                timer.text = Convert.ToString(minute) + " : " + '0' + Convert.ToString(second);
+                time = Convert.ToString(minute) + " : " + '0' + Convert.ToString(second);
             }
         }
         else
         {
             if(minute < 10)
             {
-                timer.text = '0' + Convert.ToString(minute) + " : " + Convert.ToString(second);
+                time = '0' + Convert.ToString(minute) + " : " + Convert.ToString(second);
             }
             else
             {
-                timer.text = Convert.ToString(minute) + " : " + Convert.ToString(second);
+                time = Convert.ToString(minute) + " : " + Convert.ToString(second);
             }
         }
+        timer.text = time;
     }
 }
