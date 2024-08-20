@@ -2,21 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Zombie_Dog : MonoBehaviour
+public class Zombie_Dog : Monster
 {
-    [SerializeField] float Attack_Damage = 6.0f;
-    [SerializeField] float HP = 200.0f;
-    [SerializeField] float Speed = 5.0f;
-    public float GetAD()
+    public Zombie_Dog() : base(200f, 6f, 5f, WeaknessType.Slash) { } // 생성자 : 최대 체력, 공격력, 이동 속도, 약점 타입
+
+    public float getAttackDamage()
     {
-        return this.Attack_Damage;
+        return this.attackDamage;
     }
-    public float GetHP()
+    public float getHP()
     {
-        return this.HP;
+        return this.currentHP;
     }
-    public float GetSpeed()
+    public float getSpeed()
     {
-        return this.Speed;
+        return this.speed;
     }
 }

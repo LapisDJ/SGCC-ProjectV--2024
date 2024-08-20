@@ -2,21 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Aged_Robot : MonoBehaviour
+public class Aged_Robot : Monster
 {
-    [SerializeField] float Attack_Damage = 8.0f;
-    [SerializeField] float HP = 25000.0f;
-    [SerializeField] float Speed = 3.5f;
-    public float GetAD()
+    public Aged_Robot() : base(25000f, 8f, 3.5f, WeaknessType.Blow) { } // 생성자 : 최대 체력, 공격력, 이동 속도, 약점 타입
+
+    public float getAttackDamage()
     {
-        return this.Attack_Damage;
+        return this.attackDamage;
     }
-    public float GetHP()
+    public float getHP()
     {
-        return this.HP;
+        return this.currentHP;
     }
-    public float GetSpeed()
+    public float getSpeed()
     {
-        return this.Speed;
+        return this.speed;
     }
 }

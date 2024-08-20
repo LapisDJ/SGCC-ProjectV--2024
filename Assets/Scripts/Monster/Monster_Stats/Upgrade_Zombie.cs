@@ -2,21 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Upgrade_Zombie : MonoBehaviour
+public class Upgrade_Zombie : Monster
 {
-    [SerializeField] float Attack_Damage = 20.0f;
-    [SerializeField] float HP = 1000000.0f;
-    [SerializeField] float Speed = 4.0f;
-    public float GetAD()
+    public Upgrade_Zombie() : base(30000f, 10f, 4f, WeaknessType.Slash) { } // 생성자 : 최대 체력, 공격력, 이동 속도, 약점 타입
+
+    public float getAttackDamage()
     {
-        return this.Attack_Damage;
+        return this.attackDamage;
     }
-    public float GetHP()
+    public float getHP()
     {
-        return this.HP;
+        return this.currentHP;
     }
-    public float GetSpeed()
+    public float getSpeed()
     {
-        return this.Speed;
+        return this.speed;
     }
 }

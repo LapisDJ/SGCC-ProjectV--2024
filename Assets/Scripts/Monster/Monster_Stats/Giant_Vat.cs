@@ -2,21 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Giant_Vat : MonoBehaviour
+public class Giant_Vat : Monster
 {
-    [SerializeField] float Attack_Damage = 4.0f;
-    [SerializeField] float HP = 200.0f;
-    [SerializeField] float Speed = 3.5f;
-    public float GetAD()
+    public Giant_Vat() : base(200f, 4f, 3.5f, WeaknessType.All) { } // 생성자 : 최대 체력, 공격력, 이동 속도, 약점 타입
+
+    public float getAttackDamage()
     {
-        return this.Attack_Damage;
+        return this.attackDamage;
     }
-    public float GetHP()
+    public float getHP()
     {
-        return this.HP;
+        return this.currentHP;
     }
-    public float GetSpeed()
+    public float getSpeed()
     {
-        return this.Speed;
+        return this.speed;
     }
 }
