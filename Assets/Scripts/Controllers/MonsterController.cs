@@ -15,7 +15,7 @@ public class MonsterController : MonoBehaviour
     {
         monster = GetComponent<Monster>();
         rb = GetComponent<Rigidbody2D>();
-        speed = monster.GetCurrentSpeed();
+        //speed = monster.GetCurrentSpeed();
     }
         void Update()
     {
