@@ -19,6 +19,25 @@ public class WeaponCoolEffect : MonoBehaviour
     {
         WeaponCoolChk();
     }
+    void Update()//테스트용 코드. 텐키가 아닌 숫자 1부터 4까지 누르면 해당 쿨타임이펙트가 실행됨.
+    {
+        if(Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            iscool[0] = true;
+        }
+        if(Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            iscool[1] = true;
+        }
+        if(Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            iscool[2] = true;
+        }
+        if(Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            iscool[3] = true;
+        }
+    }
     public static void WeaponCoolSetting(int weaponnum)
     {
         getweapontimes[weaponnum] = weapontimes[weaponnum];
