@@ -106,5 +106,11 @@ public class Player_Stat : MonoBehaviour
         
         // 현재 체력 증가량만큼 추가
     }
+
+    public bool CheckCritical()
+    {
+        float randomValue = Random.Range(0f, 1f); // 0에서 1 사이의 랜덤 값을 생성
+        return randomValue < CriticalChance;
+    }
 }
 
