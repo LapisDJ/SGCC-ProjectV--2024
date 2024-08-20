@@ -2,19 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CircleSword : Skill
+public class Sword : Skill
 {
-    public CircleSword() : base("CircleSword", 2f, 4f) { } // 생성자 : 스킬명, 1랩 데미지, 1랩 쿨타임
+    float attackWidth = 3f; // 가로 범위
+    float attackHeight = 1f; //세로 범위
+    WeaknessType weaknessType = WeaknessType.Slash; // 공격 타임 : 참격 
+    public Sword() : base("Sword", 2f, 4f) { } // 생성자 : 스킬명, 1랩 데미지, 1랩 쿨타임
 
-    private float circleAttackRadius = 2f; // 원 범위 반지름
-    WeaknessType weaknessType = WeaknessType.Slash;
     public override void Activate(GameObject target) // 몬스터와 상호 작용 로직
     {
+        Vector2 attackSize = new Vector2(attackWidth, attackHeight); // 공격 범위
+        Vector2 attackPosition = player.transform.position; // 기준점 : 플레이어 위치
         Monster monster;
         float totalDamage = 0f; // 몬스터가 입는 총 데미지
 
         // 범위 내의 모든 콜라이더를 가져옴 (히트스캔 방식)
-        Collider2D[] hitColliders = Physics2D.OverlapCircleAll(player.transform.position, circleAttackRadius);
+        Collider2D[] hitColliders = Physics2D.OverlapBoxAll(attackPosition, attackSize, 0f);
 
         foreach (var hitCollider in hitColliders) // 범위 안의 모든 몬스터에 대하여 반복문
         {
@@ -34,32 +37,40 @@ public class CircleSword : Skill
                 totalDamage = finalDamage(damageInfo);
                 monster.TakeDamage(totalDamage);
             }
+
+            if (level >= 8)
+            {
+                StartCoroutine(DoubleAttack(target));
+            }
         }
     }
 
-    public override void LevelUp() // 칼날 의수(원형 참격) 레벨업 로직
+    public override void LevelUp() // 검 레벨 업 로직
     {
         base.LevelUp(); // 스킬 레벨업
         this.skillDamage += 1f;
 
         switch (level)
         {
-            case 3: // 2->3랩: 쿨타임 1초 감소
+            case 3:
                 this.cooldown--;
                 break;
-            case 5: // 3->4랩: 반지름 2->2.25
-                this.circleAttackRadius = 2.25f;
-                break;
-            case 6: //5->6랩: 쿨타임 1초 감소
+            case 5:
                 this.cooldown--;
                 break;
-            case 7: //6->7랩: 반지름 2->2.25
-                this.circleAttackRadius = 2.5f;
+            case 6:
+                this.cooldown--;
                 break;
-            case 8: //7->8랩: 스킬 데미지 2배 증가
-                this.skillDamage *= 2;
+            case 7: // 6->7랩: 범위 5x1로 증가
+                attackWidth = 5f;
                 break;
-
         }
     }
+
+    private IEnumerator DoubleAttack(GameObject target) // 8레벨 2회 공격을 코루틴으로 구현
+    {
+        yield return new WaitForSeconds(0.25f); // 0.25초 대기
+        Activate(target); // 두 번째 공격
+    }
+
 }

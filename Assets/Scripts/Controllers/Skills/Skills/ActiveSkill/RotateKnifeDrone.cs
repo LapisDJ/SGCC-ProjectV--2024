@@ -11,11 +11,39 @@ public class RotateKnifeDrone : Skill
     public float knifeRadius = 2f; // 1랩 칼날 회전 반지름
     private List<GameObject> knifeDrones = new List<GameObject>(); // 칼날 개수 리스트
     private int knifeCount = 2; // 1랩 칼날 개수
+    WeaknessType weaknessType = WeaknessType.Slash;
 
 
     public override void Activate(GameObject target) // 몬스터와 상호 작용 로직
     {
+        foreach (GameObject knife in knifeDrones)
+        {
+            // 드론이 몬스터와 충돌하는지 확인
+            Collider2D[] hitColliders = Physics2D.OverlapCircleAll(knife.transform.position, 0.5f); // 칼날 크기 맞추어 수정 필요
+            foreach (var hitCollider in hitColliders)
+            {
+                if (hitCollider.CompareTag("Monster1") || hitCollider.CompareTag("Monster2") || hitCollider.CompareTag("Monster3"))
+                {
+                    Monster monster = hitCollider.GetComponent<Monster>();
+                    float totalDamage = 0f; // 몬스터가 입는 총 데미지
 
+                    float weaknessMultipler = (hitCollider.CompareTag("Monster1") || hitCollider.CompareTag("Monster3")) ? 1.5f : 1f;
+                    if (monster != null)
+                    {
+                        DamageInfo damageInfo = new DamageInfo
+                        {
+                            skillDamage = this.skillDamage,
+                            playerDamage = player.playerStat.attackDamageByLevel,
+                            weaknessMultipler = weaknessMultipler,
+                            isCritical = player.playerStat.CheckCritical()
+                        };
+
+                        totalDamage = finalDamage(damageInfo);
+                        monster.TakeDamage(totalDamage);
+                    }
+                }
+            }
+        }
     }
 
     public override void LevelUp() // 칼날 드론 레벨업 로직
@@ -23,7 +51,7 @@ public class RotateKnifeDrone : Skill
         base.LevelUp(); // 스킬 레벨업
         this.skillDamage += 1f;
 
-        switch(level)
+        switch (level)
         {
             case 1: // 0 -> 1랩 : 기본값으로 칼날 생성
                 GenerateKnives(this.knifeCount); // 칼날 2개
