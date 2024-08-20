@@ -8,15 +8,14 @@ public class WeaponCoolEffect : MonoBehaviour
     public Image[] weaponimages;
     public Image[] hideweaponimages;
     public static bool[] iscool = {false,false,false,false};
-    public static float[] weapontimes = {3,6,9,12};//추후에 바뀌어야함.
+    public static float[] weapontimes = {3,6,9,12};//추후에 바뀌어야함(쿨타임 받아오기)
     public static float[] getweapontimes = {0,0,0,0};
     void Start()
     {
         
     }
 
-    // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         WeaponCoolChk();
     }
@@ -25,7 +24,7 @@ public class WeaponCoolEffect : MonoBehaviour
         getweapontimes[weaponnum] = weapontimes[weaponnum];
         iscool[weaponnum] = true;
     }
-    private void WeaponCoolChk()
+    private void WeaponCoolChk()//iscool의 여부 판단
     {
         if(iscool[0])
         {
@@ -45,10 +44,10 @@ public class WeaponCoolEffect : MonoBehaviour
         }
     }
 
-    IEnumerator CoolTimeChk(int weaponnum)
+    IEnumerator CoolTimeChk(int weaponnum)//스킬쿨타임 잔여량만큼 불투명한 상자로 가리는 함수. 쿨타임이 0 이하일 시 iscool도 false로 바꿔줌.
     {
         yield return null;
-
+        WeaponCoolSetting(weaponnum);
         if(getweapontimes[weaponnum]>0)
         {
             getweapontimes[weaponnum] -= Time.deltaTime;
