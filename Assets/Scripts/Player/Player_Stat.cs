@@ -36,7 +36,7 @@ public class Player_Stat : MonoBehaviour
             LevelUp();
         }
     }
-    void LevelUp()
+    public void LevelUp()
     {
         player_level++;
         UpdateStatsByLevel();
