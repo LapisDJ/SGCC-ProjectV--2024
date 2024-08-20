@@ -15685,8 +15685,8 @@ RectTransform:
   - {fileID: 1758974368}
   m_Father: {fileID: 221152306}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -16127,11 +16127,10 @@ MonoBehaviour:
   HPbonus: 1
   HPmax: 0
   HPpreviousmax: 0
-  Speedadd: 5
-  Speedmulti: 1
-  Speedfin: 0
-  ADbylevel: 5
-  ADadditional: 0
+  speedAdd: 5
+  speedMulti: 1
+  speedFin: 0
+  attackDamageByLevel: 5
 --- !u!114 &1062601524
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16439,6 +16438,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68b5880349ab52541a0cd4277aa72cfb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerStat: {fileID: 0}
+  playerController: {fileID: 0}
 --- !u!114 &1084714436
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16455,6 +16456,16 @@ MonoBehaviour:
   playerstat: {fileID: 1084714437}
   dir: {x: 0, y: 0, z: 0}
   speed: 0
+  isInteracting: 0
+  interactionTime: 0
+  requiredInteractionTime: 10
+  interactionRange: 10
+  canInteracting: 0
+  playerLocation: {x: 0, y: 0}
+  playerLocationBefore: {x: 0, y: 0}
+  engineer: {fileID: 0}
+  distance: 0
+  engineerController: {fileID: 0}
 --- !u!114 &1084714437
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16477,11 +16488,10 @@ MonoBehaviour:
   HPbonus: 1
   HPmax: 0
   HPpreviousmax: 0
-  Speedadd: 5
-  Speedmulti: 1
-  Speedfin: 0
-  ADbylevel: 5
-  ADadditional: 0
+  speedAdd: 5
+  speedMulti: 1
+  speedFin: 0
+  attackDamageByLevel: 5
 --- !u!1 &1090524258
 GameObject:
   m_ObjectHideFlags: 0
