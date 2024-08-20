@@ -25,7 +25,7 @@ public class Player_Controller : MonoBehaviour
     
     void FixedUpdate()
     {
-        speed = playerstat.Speedadd * playerstat.Speedmulti;
+        speed = playerstat.speedAdd * playerstat.speedMulti;
         //플레이어 이동
         dir = new Vector3(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"),0).normalized;
         rb.velocity =  dir * speed;

@@ -17,12 +17,12 @@ public class Player_Stat : MonoBehaviour
     public float HPmax; // 플례이어 최대체력
     public float HPpreviousmax;
     //speed
-    public float Speedadd = 5.0f;
-    public float Speedmulti = 1.0f;
-    public float Speedfin;
+    public float speedAdd = 5.0f;
+    public float speedMulti = 1.0f;
+    public float speedFin;
     //attackdamage
-    public float ADbylevel = 5.0f;
-    public float ADadditional;
+    public float attackDamageByLevel = 5.0f;
+    public float attackDamageAdditional;
 
     void Start()
     {
@@ -58,43 +58,43 @@ public class Player_Stat : MonoBehaviour
                 HPmax = HPbylevel * HPbonus;
                 HPpreviousmax = HPmax;
                 HPcurrent = HPmax;
-                ADbylevel = 5.0f;
-                ADadditional = 0.0f;
+                attackDamageByLevel = 5.0f;
+                attackDamageAdditional = 0.0f;
                 break;
             case 2:
-                ADbylevel++;
+                attackDamageByLevel++;
                 break;
             case 3:
-                ADbylevel++;
+                attackDamageByLevel++;
                 break;
             case 4:
-                ADbylevel++;
+                attackDamageByLevel++;
                 break;
             case 5:
-                ADbylevel++;
+                attackDamageByLevel++;
                 Luck += 0.05f;
                 break;
             case 6:
-                ADbylevel++;
+                attackDamageByLevel++;
                 break;
             case 7:
-                ADbylevel++;
+                attackDamageByLevel++;
                 break;
             case 8:
-                ADbylevel++;
+                attackDamageByLevel++;
                 break;
             case 9:
-                ADbylevel++;
+                attackDamageByLevel++;
                 break;
             case 10:
-                ADbylevel+=3;
+                attackDamageByLevel+=3;
                 WorkSpeed += 0.05f;
                 Luck += 0.05f;
-                Speedmulti += 0.1f;
+                speedMulti += 0.1f;
                 HPbonus += 0.1f;
                 break;
             case 11:
-                ADbylevel++;
+                attackDamageByLevel++;
                 break;
             // 나머지 레벨에 따른 스탯 증가(자동사냥 '해줘')
 
@@ -104,13 +104,9 @@ public class Player_Stat : MonoBehaviour
         }
         HPmax = HPbylevel * HPbonus;
         HPcurrent += HPmax - HPpreviousmax;
-        Speedfin = Speedadd * Speedmulti;
+        speedFin = speedAdd * speedMulti;
         
         // 현재 체력 증가량만큼 추가
-    }
-    public void Getdamage(float damage)
-    {
-        this.HPcurrent -= damage;
     }
 }
 

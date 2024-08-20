@@ -5,30 +5,30 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
 
-    Player_Stat playerstat;
+    Player_Stat playerStat;
     Player_Controller playerController;
 
-    void Awake()
+    void Awake() // 초기화: 스탯, 컨트롤러 불러오기
     {
-        playerstat = GetComponent<Player_Stat>();
+        playerStat = GetComponent<Player_Stat>();
         playerController = GetComponent<Player_Controller>();
     }
 
 
-    public void TakeDamage(float damage)
+    public void TakeDamage(float damage) // 플레이어가 받는 데미지 로직
     {
-        if (playerstat != null)
+        if (playerStat != null)
         {
-            playerstat.HPcurrent -= damage;
-            if (playerstat.HPcurrent <= 0)
+            playerStat.HPcurrent -= damage;
+            if (playerStat.HPcurrent <= 0)
             {
                 Die();
             }
         }
     }
 
-    public void Die()
+    public void Die() // 플레이어 사망 게임 오버
     {
-        Destroy(gameObject);
+        Destroy(this);
     }
 }
