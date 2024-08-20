@@ -9,7 +9,7 @@ public enum WeaknessType
     Slash, // 참격
     Blow, // 타격
     All // 참격, 타격
-}
+};
 
 public class Monster : MonoBehaviour
 {

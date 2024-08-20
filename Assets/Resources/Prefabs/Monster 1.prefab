@@ -10,9 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 7468599394232733844}
   - component: {fileID: 5703075016005794536}
-  - component: {fileID: 98710969819657621}
   - component: {fileID: -3574141526916872300}
   - component: {fileID: 3818108064310841686}
+  - component: {fileID: 6705985290449627446}
+  - component: {fileID: 191330034048481211}
   m_Layer: 0
   m_Name: Monster 1
   m_TagString: Monster
@@ -87,22 +88,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &98710969819657621
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1034961518565794693}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 590cf5cfbd0df1b47a36e2ff47d2943e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  rb: {fileID: 0}
-  speed: 0
-  monster: {fileID: 0}
 --- !u!50 &-3574141526916872300
 Rigidbody2D:
   serializedVersion: 4
@@ -165,3 +150,36 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
+--- !u!114 &6705985290449627446
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1034961518565794693}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25dee8abd6b7d1c4a89141aef2fc5741, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentHP: 0
+  attackDamage: 0
+  speed: 0
+  lastAttacktime: 0
+  attackCooldown: 0
+--- !u!114 &191330034048481211
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1034961518565794693}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 590cf5cfbd0df1b47a36e2ff47d2943e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  rb: {fileID: 0}
+  speed: 0
+  monster: {fileID: 0}
