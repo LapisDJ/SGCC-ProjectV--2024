@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Player_Stat : MonoBehaviour
 {
-    [SerializeField] int player_level = 1; // 플레이어 레벨
+    [SerializeField] public int player_level = 1; // 플레이어 레벨
     [SerializeField] float expgainrate = 1.0f; // 플레이어 경험치
     [SerializeField] float WorkSpeed = 1.0f; // 플레이어 작업 속도
     [SerializeField] float Luck = 0.0f; // 플레이어 행운
