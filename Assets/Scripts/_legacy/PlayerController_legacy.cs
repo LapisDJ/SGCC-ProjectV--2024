@@ -114,7 +114,7 @@ public class PlayerController_Legacy : MonoBehaviour
 
     void FixedUpdate()
     {
-        Vector2 nextVec = inputVec.normalized * playerStat.getPlayerSpeed() * Time.fixedDeltaTime;
+        Vector2 nextVec = inputVec.normalized * playerStat.Speedfin * Time.fixedDeltaTime;
         rb.MovePosition(rb.position + nextVec);
 
         if (HPBar != null)
