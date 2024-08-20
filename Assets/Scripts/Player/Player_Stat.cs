@@ -5,16 +5,16 @@ using UnityEngine;
 
 public class Player_Stat : MonoBehaviour
 {
-    [SerializeField] int player_level = 1;
-    [SerializeField] float expgainrate = 1.0f;
-    [SerializeField] float WorkSpeed = 1.0f;
-    [SerializeField] float Luck = 0.0f;
-    [SerializeField] float CriticalChance = 0.0f;
+    [SerializeField] int player_level = 1; // 플레이어 레벨
+    [SerializeField] float expgainrate = 1.0f; // 플레이어 경험치
+    [SerializeField] float WorkSpeed = 1.0f; // 플레이어 작업 속도
+    [SerializeField] float Luck = 0.0f; // 플레이어 행운
+    [SerializeField] float CriticalChance = 0.0f; // 플레이어 치명타 확률
     //hp
-    public float HPcurrent;
-    [SerializeField] float HPbylevel = 50.0f;
-    [SerializeField] float HPbonus = 1.0f; 
-    public float HPmax;
+    public float HPcurrent; // 플레이어 현재 HP
+    [SerializeField] float HPbylevel = 50.0f; // 플레이어 10랩마다 성장 체력
+    [SerializeField] float HPbonus = 1.0f; // 플
+    public float HPmax; // 플례이어 최대체력
     public float HPpreviousmax;
     //speed
     public float Speedadd = 5.0f;

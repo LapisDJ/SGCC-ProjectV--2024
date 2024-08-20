@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class Playerskill_legacy : MonoBehaviour
 {
 
     public Vector2 inputVec;        // 방향키 좌표값을 입력받을 변수

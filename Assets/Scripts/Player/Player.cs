@@ -6,12 +6,12 @@ public class Player : MonoBehaviour
 {
 
     Player_Stat playerstat;
-    Player_Con playerController;
+    Player_Controller playerController;
 
     void Awake()
     {
         playerstat = GetComponent<Player_Stat>();
-        playerController = GetComponent<Player_Con>();
+        playerController = GetComponent<Player_Controller>();
     }
 
 

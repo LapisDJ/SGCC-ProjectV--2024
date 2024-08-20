@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player_Con : MonoBehaviour
+public class Player_Controller : MonoBehaviour
 {
     [SerializeField] Rigidbody2D rb;
     [SerializeField] Player_Stat playerstat;
