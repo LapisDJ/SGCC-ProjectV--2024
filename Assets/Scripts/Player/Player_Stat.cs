@@ -27,7 +27,7 @@ public class Player_Stat : MonoBehaviour
     {
         InitializeStats();
     }
-    
+
     void Update()
     {
         // 레벨 업 테스트용 코드(L키 누르면 레벨업)
@@ -51,7 +51,7 @@ public class Player_Stat : MonoBehaviour
     {
         HPmax = HPbylevel * HPbonus;
         HPpreviousmax = HPmax;
-        switch(player_level)
+        switch (player_level)
         {
             case 1:
                 HPmax = HPbylevel * HPbonus;
@@ -85,7 +85,7 @@ public class Player_Stat : MonoBehaviour
                 attackDamageByLevel++;
                 break;
             case 10:
-                attackDamageByLevel+=3;
+                attackDamageByLevel += 3;
                 WorkSpeed += 0.05f;
                 Luck += 0.05f;
                 speedMulti += 0.1f;
@@ -164,8 +164,13 @@ public class Player_Stat : MonoBehaviour
         HPmax = HPbylevel * HPbonus;
         HPcurrent += HPmax - HPpreviousmax;
         speedFin = speedAdd * speedMulti;
-        
+
         // 현재 체력 증가량만큼 추가
     }
-}
 
+    public bool CheckCritical()
+    {
+        float randomValue = Random.Range(0f, 1f); // 0에서 1 사이의 랜덤 값을 생성
+        return randomValue < CriticalChance;
+    }
+}
