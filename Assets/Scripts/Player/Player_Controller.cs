@@ -6,7 +6,7 @@ public class Player_Controller : MonoBehaviour
 {
     [SerializeField] Rigidbody2D rb;
     [SerializeField] Player_Stat playerstat;
-    [SerializeField] Vector3 dir;
+    [SerializeField] public Vector3 dir;    // public 변환
     [SerializeField] float speed;
     void Start()
     {
