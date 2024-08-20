@@ -23,19 +23,19 @@ public class WeaponCoolEffect : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Alpha1))
         {
-            iscool[0] = true;
+            WeaponCoolSetting(0);
         }
         if(Input.GetKeyDown(KeyCode.Alpha2))
         {
-            iscool[1] = true;
+            WeaponCoolSetting(1);
         }
         if(Input.GetKeyDown(KeyCode.Alpha3))
         {
-            iscool[2] = true;
+            WeaponCoolSetting(2);
         }
         if(Input.GetKeyDown(KeyCode.Alpha4))
         {
-            iscool[3] = true;
+            WeaponCoolSetting(3);
         }
     }
     public static void WeaponCoolSetting(int weaponnum)
@@ -66,8 +66,7 @@ public class WeaponCoolEffect : MonoBehaviour
     IEnumerator CoolTimeChk(int weaponnum)//스킬쿨타임 잔여량만큼 불투명한 상자로 가리는 함수. 쿨타임이 0 이하일 시 iscool도 false로 바꿔줌.
     {
         yield return null;
-        WeaponCoolSetting(weaponnum);
-        if(getweapontimes[weaponnum]>0)
+        while(getweapontimes[weaponnum] >= 0)
         {
             getweapontimes[weaponnum] -= Time.deltaTime;
             if(getweapontimes[weaponnum] < 0)
@@ -76,6 +75,7 @@ public class WeaponCoolEffect : MonoBehaviour
             }
             float time = getweapontimes[weaponnum]/weapontimes[weaponnum];
             hideweaponimages[weaponnum].fillAmount = time;
+            yield return null;
         }
     }
 }
