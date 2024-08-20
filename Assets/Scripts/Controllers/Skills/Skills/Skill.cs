@@ -1,7 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
+
+public struct DamageInfo
+{
+    public float skillDamage; // 스킬 데미지
+    public float playerDamage; // 플레이어 데미지
+    public float weaknessMultipler; // 약점 계수
+    public bool isCritical; // 치명타 여부
+}
 public abstract class Skill : MonoBehaviour
 {
     public string skillName; // 스킬명

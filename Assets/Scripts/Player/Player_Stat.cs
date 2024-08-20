@@ -21,8 +21,7 @@ public class Player_Stat : MonoBehaviour
     public float speedMulti = 1.0f;
     public float speedFin;
     //attackdamage
-    public float attackDamageByLevel = 5.0f;
-    public float attackDamageAdditional;
+    public float attackDamageByLevel = 5.0f; //플레이어 자체 공격력
 
     void Start()
     {
@@ -59,7 +58,6 @@ public class Player_Stat : MonoBehaviour
                 HPpreviousmax = HPmax;
                 HPcurrent = HPmax;
                 attackDamageByLevel = 5.0f;
-                attackDamageAdditional = 0.0f;
                 break;
             case 2:
                 attackDamageByLevel++;
