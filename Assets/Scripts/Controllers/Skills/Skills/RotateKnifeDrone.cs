@@ -21,7 +21,7 @@ public class RotateKnifeDrone : Skill
     public override void LevelUp() // 칼날 드론 레벨업 로직
     {
         base.LevelUp(); // 스킬 레벨업
-        this.baseDamage += 1f;
+        this.skillDamage += 1f;
 
         switch(level)
         {

@@ -4,18 +4,18 @@ using System.Collections.Generic;
 
 public class Skill_legacy : MonoBehaviour
 {
-    public GameObject knifeDronePrefab; // 프리펩 설정
+    //public GameObject knifeDronePrefab; // 프리펩 설정
     // public float rotationSpeed = 100f; // 회전 속도 설정
     // public float knifeRadius = 2f; // 칼날 회전 반지름 설정
     public float fanAttackRadius = 1.5f; // 부채꼴 반지름
     public float fanStartAngle = 30f; // 부채꼴 시작 각도
     public float fanEndAngle = 120f; // 부채꼴 끝 각도
-    public float circleAttackRadius = 2f; // 원 범위 반지름
+    //public float circleAttackRadius = 2f; // 원 범위 반지름
     public Vector2 rectangleAttackSize = new Vector2(3f, 1f); // 직사각형 크기
-    public KeyCode rotateKnifeKey = KeyCode.X; // 칼날 회전 키
-    public KeyCode fanAttackKey = KeyCode.C; // 부채꼴 공격 키
-    public KeyCode circleAttackKey = KeyCode.V; // 원 범위 공격 키
-    public KeyCode rectangleAttackKey = KeyCode.B; // 직사각형 범위 공격 키
+    // public KeyCode rotateKnifeKey = KeyCode.X; // 칼날 회전 키
+    // public KeyCode fanAttackKey = KeyCode.C; // 부채꼴 공격 키
+    // public KeyCode circleAttackKey = KeyCode.V; // 원 범위 공격 키
+    // public KeyCode rectangleAttackKey = KeyCode.B; // 직사각형 범위 공격 키
     public LayerMask enemyLayer; // 적 레이어 마스크
     public Color highlightColor = new Color(1, 0, 0, 0.5f); // 색칠할 색상
 
@@ -23,45 +23,45 @@ public class Skill_legacy : MonoBehaviour
     // private int knifeCount = 2; // 초기 칼날 개수
     // private int skillLevel = 1; // 초기 스킬 레벨
 
-    void Update()
-    {
-        // // 칼날 회전 스킬
-        // if (Input.GetKeyDown(rotateKnifeKey))
-        // {
-        //     if (knifeDrones.Count == 0)
-        //     {
-        //         GenerateKnives();
-        //     }
-        //     else
-        //     {
-        //         DestroyKnives();
-        //     }
-        // }
+    // void Update()
+    // {
+    //     // // 칼날 회전 스킬
+    //     // if (Input.GetKeyDown(rotateKnifeKey))
+    //     // {
+    //     //     if (knifeDrones.Count == 0)
+    //     //     {
+    //     //         GenerateKnives();
+    //     //     }
+    //     //     else
+    //     //     {
+    //     //         DestroyKnives();
+    //     //     }
+    //     // }
 
-        // // 칼날 회전
-        // if (knifeDrones.Count > 0)
-        // {
-        //     RotateKnives();
-        // }
+    //     // // 칼날 회전
+    //     // if (knifeDrones.Count > 0)
+    //     // {
+    //     //     RotateKnives();
+    //     // }
 
-        // 부채꼴 공격 스킬
-        if (Input.GetKeyDown(fanAttackKey))
-        {
-            PerformFanShapeAttack();
-        }
+    //     // 부채꼴 공격 스킬
+    //     if (Input.GetKeyDown(fanAttackKey))
+    //     {
+    //         PerformFanShapeAttack();
+    //     }
 
-        // 원 범위 공격 스킬
-        if (Input.GetKeyDown(circleAttackKey))
-        {
-            PerformCircleAttack();
-        }
+    //     // 원 범위 공격 스킬
+    //     if (Input.GetKeyDown(circleAttackKey))
+    //     {
+    //         PerformCircleAttack();
+    //     }
 
-        // 직사각형 범위 공격 스킬
-        if (Input.GetKeyDown(rectangleAttackKey))
-        {
-            PerformRectangleAttack();
-        }
-    }
+    //     // 직사각형 범위 공격 스킬
+    //     if (Input.GetKeyDown(rectangleAttackKey))
+    //     {
+    //         PerformRectangleAttack();
+    //     }
+    // }
 
     // 공통 공격 로직
     void PerformAttack(Collider2D[] hitEnemies)
