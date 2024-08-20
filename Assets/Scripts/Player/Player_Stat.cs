@@ -21,8 +21,7 @@ public class Player_Stat : MonoBehaviour
     public float speedMulti = 1.0f;
     public float speedFin;
     //attackdamage
-    public float attackDamageByLevel = 5.0f;
-    public float attackDamageAdditional;
+    public float attackDamageByLevel = 5.0f; //플레이어 자체 공격력
 
     void Start()
     {
@@ -59,7 +58,6 @@ public class Player_Stat : MonoBehaviour
                 HPpreviousmax = HPmax;
                 HPcurrent = HPmax;
                 attackDamageByLevel = 5.0f;
-                attackDamageAdditional = 0.0f;
                 break;
             case 2:
                 attackDamageByLevel++;
@@ -96,7 +94,68 @@ public class Player_Stat : MonoBehaviour
             case 11:
                 attackDamageByLevel++;
                 break;
-            // 나머지 레벨에 따른 스탯 증가(자동사냥 '해줘')
+            case 12:
+                attackDamageByLevel++;
+                break;
+            case 13:
+                attackDamageByLevel++;
+                break;
+            case 14:
+                attackDamageByLevel++;
+                break;
+            case 15:
+                attackDamageByLevel++;
+                Luck += 0.05f;
+                break;
+            case 16:
+                attackDamageByLevel++;
+                break;
+            case 17:
+                attackDamageByLevel++;
+                break;
+            case 18:
+                attackDamageByLevel++;
+                break;
+            case 19:
+                attackDamageByLevel++;
+                break;
+            case 20:
+                attackDamageByLevel+= 3;
+                Luck += 0.05f;
+                WorkSpeed += 0.05f;
+                break;
+            case 21:
+                attackDamageByLevel++;
+                break;
+            case 22:
+                attackDamageByLevel++;
+                break;
+            case 23:
+                attackDamageByLevel++;
+                break;
+            case 24:
+                attackDamageByLevel++;
+                break;
+            case 25:
+                attackDamageByLevel++;
+                Luck += 0.05f;
+                break;
+            case 26:
+                attackDamageByLevel++;
+                break;
+            case 27:
+                attackDamageByLevel++;
+                break;
+            case 28:
+                attackDamageByLevel++;
+                break;
+            case 29:
+                attackDamageByLevel++;
+                break;
+            case 30:
+                attackDamageByLevel += 3;
+                break;
+            
 
             default:
                 // 최고 레벨을 넘어가는 경우 처리
