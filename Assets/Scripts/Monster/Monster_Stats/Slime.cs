@@ -2,21 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Slime : MonoBehaviour
+public class Slime : Monster
 {
-    [SerializeField] float Attack_Damage = 1.0f;
-    [SerializeField] float HP = 80.0f;
-    [SerializeField] float Speed = 1.0f;
-    public float GetAD()
+    public Slime() : base(80f, 1f, 1f, WeaknessType.All) { } // 생성자 : 최대 체력, 공격력, 이동 속도, 약점 타입
+
+    public float getAttackDamage()
     {
-        return this.Attack_Damage;
+        return this.attackDamage;
     }
-    public float GetHP()
+    public float getHP()
     {
-        return this.HP;
+        return this.currentHP;
     }
-    public float GetSpeed()
+    public float getSpeed()
     {
-        return this.Speed;
+        return this.speed;
     }
 }

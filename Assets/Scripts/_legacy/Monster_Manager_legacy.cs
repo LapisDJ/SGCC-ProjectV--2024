@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEditor.Timeline;
 using UnityEngine;
 
-public class Monster_Manager : MonoBehaviour
+public class Monster_Manager_legacy : MonoBehaviour
 {
     [SerializeField] float initial_time;
     [SerializeField] float gametime;

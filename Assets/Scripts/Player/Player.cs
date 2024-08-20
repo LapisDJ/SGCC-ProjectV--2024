@@ -5,8 +5,8 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
 
-    Player_Stat playerStat;
-    Player_Controller playerController;
+    public Player_Stat playerStat;
+    public Player_Controller playerController;
 
     void Awake() // 초기화: 스탯, 컨트롤러 불러오기
     {
