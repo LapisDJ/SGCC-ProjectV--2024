@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2940365538776196483}
   - component: {fileID: 3918287650202249183}
+  - component: {fileID: 6672957617415957593}
   m_Layer: 0
   m_Name: Aged_Robot
   m_TagString: Untagged
@@ -84,3 +85,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &6672957617415957593
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4404071691490233974}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61ab044a94030456c89901e884505103, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentHP: 25000
+  attackDamage: 8
+  speed: 3.5
+  lastAttacktime: 0
+  attackCooldown: 0

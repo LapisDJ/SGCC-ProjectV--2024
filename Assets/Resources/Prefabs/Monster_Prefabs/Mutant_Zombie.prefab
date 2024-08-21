@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8552229920331916927}
   - component: {fileID: 7017428749903913700}
+  - component: {fileID: 7389315639838219669}
   m_Layer: 0
   m_Name: Mutant_Zombie
   m_TagString: Untagged
@@ -84,3 +85,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &7389315639838219669
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3015670882417463067}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 368530de34031454c99dfcf886ed6ff2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentHP: 1000000
+  attackDamage: 20
+  speed: 4
+  lastAttacktime: 0
+  attackCooldown: 0
