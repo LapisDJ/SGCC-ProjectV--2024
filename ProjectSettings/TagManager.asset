@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Monster
   - Engineer
+  - Monster1
+  - Monster2
+  - Monster3
   layers:
   - Default
   - TransparentFX

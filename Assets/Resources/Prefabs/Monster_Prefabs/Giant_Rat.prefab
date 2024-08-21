@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2995306495166443421}
   m_Layer: 0
   m_Name: Giant_Rat
-  m_TagString: Untagged
+  m_TagString: Monster3
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
