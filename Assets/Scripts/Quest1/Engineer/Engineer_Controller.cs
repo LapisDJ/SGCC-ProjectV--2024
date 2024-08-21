@@ -6,9 +6,9 @@ public class Engineer_Controller : MonoBehaviour
 {
     [SerializeField] Player_Stat playerstat;
     public Transform player; // 플레이어의 위치를 저장
-    public float followDistance = 1f; // 플레이어와 엔지니어 사이의 거리
+    public float followDistance = 7f; // 플레이어와 엔지니어 사이의 거리      7f는 임시
     public float moveSpeedMultiplier = 1.0f; // 엔지니어의 이동 속도 보정값
-    private bool isFollowing = false;
+    public bool isFollowing = false;
 
     void Start()
     {
@@ -19,7 +19,6 @@ public class Engineer_Controller : MonoBehaviour
         }
     }
 
-
     void Update()
     {
         // 엔지니어가 플레이어를 따라다니는 기능
@@ -27,11 +26,6 @@ public class Engineer_Controller : MonoBehaviour
         {
             FollowPlayer();
         }
-    }
-
-    void StartFollowing()
-    {
-        isFollowing = true; // 엔지니어가 플레이어를 따르게 설정
     }
 
     void FollowPlayer()
@@ -42,14 +36,14 @@ public class Engineer_Controller : MonoBehaviour
         // 엔지니어가 플레이어를 지정된 거리만큼 유지하면서 따라가도록 설정
         if (distance > followDistance)
         {
-            // 플레이어 위치에서 엔지니어의 위치를 뺀 벡터를 정규화(normalized)하여 방향 벡터를 얻음
-            Vector2 direction = ((Vector2)transform.position - (Vector2)player.position).normalized;
+            // 플레이어 위치에서 엔지니어의 위치를 뺀 벡터를 정규화하여 방향 벡터를 얻음
+            Vector2 direction = (player.position - transform.position).normalized;
 
             // 플레이어 위치에서 followDistance만큼 떨어진 목표 위치를 계산
-            Vector2 targetPosition = (Vector2)player.position + direction * followDistance;
+            Vector2 targetPosition = (Vector2)player.position - direction * followDistance;
 
             // 엔지니어를 목표 위치로 이동
-            transform.position = Vector2.MoveTowards(transform.position, targetPosition, playerstat.speedFin * moveSpeedMultiplier * Time.deltaTime);
+            transform.position = Vector2.MoveTowards(transform.position, targetPosition, 10f * Time.deltaTime);         // 10f 는 임시
         }
     }
 }
