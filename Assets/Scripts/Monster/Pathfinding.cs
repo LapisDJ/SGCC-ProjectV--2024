@@ -3,68 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class Pathfinding : MonoBehaviour
+public class SimplePathfinding : MonoBehaviour
 {
-    public class Node
-    {
-        public Vector3Int Position { get; private set; }
-        public List<Node> Neighbors { get; private set; }
-
-        public Node(Vector3Int position)
-        {
-            Position = position;
-            Neighbors = new List<Node>();
-        }
-
-        public void AddNeighbor(Node neighbor)
-        {
-            if (!Neighbors.Contains(neighbor))
-            {
-                Neighbors.Add(neighbor);
-            }
-        }
-    }
-
-    public class PriorityQueue<T>
-    {
-        private List<KeyValuePair<T, float>> elements = new List<KeyValuePair<T, float>>();
-
-        public int Count => elements.Count;
-
-        public void Enqueue(T item, float priority)
-        {
-            elements.Add(new KeyValuePair<T, float>(item, priority));
-        }
-
-        public T Dequeue()
-        {
-            if (elements.Count == 0)
-            {
-                throw new InvalidOperationException("The queue is empty.");
-            }
-
-            int bestIndex = 0;
-            for (int i = 1; i < elements.Count; i++)
-            {
-                if (elements[i].Value < elements[bestIndex].Value)
-                {
-                    bestIndex = i;
-                }
-            }
-
-            T bestItem = elements[bestIndex].Key;
-            elements.RemoveAt(bestIndex);
-            return bestItem;
-        }
-    }
-
-    public Tilemap tilemap;
+    public Tilemap backgroundTilemap;
+    public Tilemap[] obstacleTilemaps; // Top, Bottom, Left, Right, Wreck, Building 등을 포함
     public Transform player;
     public Transform monster;
     private Vector3Int playerCellPosition;
     private Vector3Int monsterCellPosition;
 
-    private Dictionary<Vector3Int, Node> graph = new Dictionary<Vector3Int, Node>();
+    private Dictionary<Vector3Int, List<Vector3Int>> graph = new Dictionary<Vector3Int, List<Vector3Int>>();
 
     void Start()
     {
@@ -73,16 +21,16 @@ public class Pathfinding : MonoBehaviour
 
     void Update()
     {
-        playerCellPosition = tilemap.WorldToCell(player.transform.position);
-        monsterCellPosition = tilemap.WorldToCell(monster.transform.position);
+        playerCellPosition = backgroundTilemap.WorldToCell(player.position);
+        monsterCellPosition = backgroundTilemap.WorldToCell(monster.position);
 
         if (graph.ContainsKey(monsterCellPosition) && graph.ContainsKey(playerCellPosition))
         {
             List<Vector3Int> path = FindPath(monsterCellPosition, playerCellPosition);
 
-            if (path.Count > 0)
+            if (path != null && path.Count > 0)
             {
-                Vector3 nextPosition = tilemap.CellToWorld(path[0]);
+                Vector3 nextPosition = backgroundTilemap.CellToWorld(path[0]);
                 monster.position = Vector3.MoveTowards(monster.position, nextPosition, Time.deltaTime * 2f);
             }
             else
@@ -98,7 +46,7 @@ public class Pathfinding : MonoBehaviour
 
     void GenerateGraphFromTilemap()
     {
-        BoundsInt bounds = tilemap.cellBounds;
+        BoundsInt bounds = backgroundTilemap.cellBounds;
 
         for (int x = bounds.xMin; x < bounds.xMax; x++)
         {
@@ -106,75 +54,93 @@ public class Pathfinding : MonoBehaviour
             {
                 Vector3Int tilePosition = new Vector3Int(x, y, 0);
 
-                if (!tilemap.HasTile(tilePosition))
+                if (IsWalkable(tilePosition))
                 {
-                    Node node = new Node(tilePosition);
-                    graph[tilePosition] = node;
+                    List<Vector3Int> neighbors = new List<Vector3Int>();
+                    Vector3Int[] directions = { Vector3Int.up, Vector3Int.down, Vector3Int.left, Vector3Int.right };
 
-                    Vector3Int[] neighbors = { Vector3Int.up, Vector3Int.down, Vector3Int.left, Vector3Int.right };
-                    foreach (Vector3Int direction in neighbors)
+                    foreach (Vector3Int direction in directions)
                     {
                         Vector3Int neighborPos = tilePosition + direction;
-                        if (!tilemap.HasTile(neighborPos) && graph.ContainsKey(neighborPos))
+                        if (IsWalkable(neighborPos))
                         {
-                            node.AddNeighbor(graph[neighborPos]);
-                            graph[neighborPos].AddNeighbor(node);
+                            neighbors.Add(neighborPos);
                         }
+                    }
+
+                    if (neighbors.Count > 0)
+                    {
+                        graph[tilePosition] = neighbors;
                     }
                 }
             }
         }
     }
 
-    List<Vector3Int> FindPath(Vector3Int start, Vector3Int goal)
+    bool IsWalkable(Vector3Int position)
     {
-        if (!graph.ContainsKey(start) || !graph.ContainsKey(goal))
+        if (!backgroundTilemap.HasTile(position))
+            return false;
+
+        foreach (Tilemap obstacleTilemap in obstacleTilemaps)
         {
-            Debug.LogError("Start or goal position is not in the graph.");
-            return new List<Vector3Int>();
+            if (obstacleTilemap.HasTile(position))
+                return false;
         }
 
-        PriorityQueue<Node> frontier = new PriorityQueue<Node>();
-        frontier.Enqueue(graph[start], 0);
+        return true;
+    }
 
-        Dictionary<Node, Node> cameFrom = new Dictionary<Node, Node>();
-        Dictionary<Node, float> costSoFar = new Dictionary<Node, float>();
+    List<Vector3Int> FindPath(Vector3Int start, Vector3Int goal)
+    {
+        HashSet<Vector3Int> visited = new HashSet<Vector3Int>();
+        PriorityQueue<Vector3Int> frontier = new PriorityQueue<Vector3Int>();
+        Dictionary<Vector3Int, Vector3Int> cameFrom = new Dictionary<Vector3Int, Vector3Int>();
+        Dictionary<Vector3Int, float> costSoFar = new Dictionary<Vector3Int, float>();
 
-        cameFrom[graph[start]] = graph[start];
-        costSoFar[graph[start]] = 0;
+        frontier.Enqueue(start, 0);
+        visited.Add(start);
+        cameFrom[start] = start;
+        costSoFar[start] = 0;
 
         while (frontier.Count > 0)
         {
-            Node current = frontier.Dequeue();
+            Vector3Int current = frontier.Dequeue();
 
-            if (current.Position == goal)
-                break;
-
-            foreach (Node next in current.Neighbors)
+            if (current == goal)
             {
-                float newCost = costSoFar[current] + 1;
+                return ReconstructPath(cameFrom, start, goal);
+            }
+
+            foreach (Vector3Int next in graph[current])
+            {
+                float newCost = costSoFar[current] + 1; // Assuming uniform cost between nodes
 
                 if (!costSoFar.ContainsKey(next) || newCost < costSoFar[next])
                 {
                     costSoFar[next] = newCost;
-                    float priority = newCost + Heuristic(next.Position, goal);
+                    float priority = newCost + Heuristic(next, goal);
                     frontier.Enqueue(next, priority);
                     cameFrom[next] = current;
                 }
             }
         }
 
-        List<Vector3Int> path = new List<Vector3Int>();
-        Node currentNode = graph[goal];
+        return null;
+    }
 
-        while (currentNode.Position != start)
+    List<Vector3Int> ReconstructPath(Dictionary<Vector3Int, Vector3Int> cameFrom, Vector3Int start, Vector3Int goal)
+    {
+        List<Vector3Int> path = new List<Vector3Int>();
+        Vector3Int currentNode = goal;
+
+        while (currentNode != start)
         {
-            path.Add(currentNode.Position);
             if (!cameFrom.ContainsKey(currentNode))
             {
-                Debug.LogWarning("Incomplete path found.");
-                return new List<Vector3Int>();
+                return null; // 경로가 불완전할 경우 null 반환
             }
+            path.Add(currentNode);
             currentNode = cameFrom[currentNode];
         }
 
@@ -185,5 +151,71 @@ public class Pathfinding : MonoBehaviour
     float Heuristic(Vector3Int a, Vector3Int b)
     {
         return Mathf.Abs(a.x - b.x) + Mathf.Abs(a.y - b.y);
+    }
+}
+
+// 우선순위 큐 클래스 (간단한 최소 힙 구현)
+public class PriorityQueue<T>
+{
+    private List<KeyValuePair<T, float>> elements = new List<KeyValuePair<T, float>>();
+
+    public int Count => elements.Count;
+
+    public void Enqueue(T item, float priority)
+    {
+        elements.Add(new KeyValuePair<T, float>(item, priority));
+        HeapifyUp(elements.Count - 1);
+    }
+
+    public T Dequeue()
+    {
+        if (elements.Count == 0)
+            throw new InvalidOperationException("The queue is empty.");
+
+        T bestItem = elements[0].Key;
+        elements[0] = elements[elements.Count - 1];
+        elements.RemoveAt(elements.Count - 1);
+        HeapifyDown(0);
+
+        return bestItem;
+    }
+
+    private void HeapifyUp(int index)
+    {
+        while (index > 0)
+        {
+            int parentIndex = (index - 1) / 2;
+            if (elements[index].Value >= elements[parentIndex].Value) break;
+
+            Swap(index, parentIndex);
+            index = parentIndex;
+        }
+    }
+
+    private void HeapifyDown(int index)
+    {
+        while (index * 2 + 1 < elements.Count)
+        {
+            int leftChildIndex = index * 2 + 1;
+            int rightChildIndex = index * 2 + 2;
+            int smallestChildIndex = leftChildIndex;
+
+            if (rightChildIndex < elements.Count && elements[rightChildIndex].Value < elements[leftChildIndex].Value)
+            {
+                smallestChildIndex = rightChildIndex;
+            }
+
+            if (elements[index].Value <= elements[smallestChildIndex].Value) break;
+
+            Swap(index, smallestChildIndex);
+            index = smallestChildIndex;
+        }
+    }
+
+    private void Swap(int indexA, int indexB)
+    {
+        var temp = elements[indexA];
+        elements[indexA] = elements[indexB];
+        elements[indexB] = temp;
     }
 }
