@@ -33971,7 +33971,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentHP: 0
   attackDamage: 0
-  speed: 5
+  speed: 20
   lastAttacktime: 0
   attackCooldown: 0
 --- !u!114 &499374973
@@ -33986,7 +33986,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 977ef13a68e58c14aaf8e8188c09ee40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tilemap: {fileID: 1878825005}
+  backgroundTilemap: {fileID: 484461024}
+  obstacleTilemaps:
+  - {fileID: 653376686}
+  - {fileID: 41982915}
+  - {fileID: 770553245}
+  - {fileID: 1488732903}
+  - {fileID: 645941946}
+  - {fileID: 1878825005}
   player: {fileID: 1583308532}
   monster: {fileID: 499374971}
 --- !u!1001 &637538943
@@ -34067,11 +34074,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7468599394232733844, guid: ffd17a42ca7cc664981d88e2a35879b9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6.9
+      value: 16.3
       objectReference: {fileID: 0}
     - target: {fileID: 7468599394232733844, guid: ffd17a42ca7cc664981d88e2a35879b9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 13.7
+      value: 41.8
       objectReference: {fileID: 0}
     - target: {fileID: 7468599394232733844, guid: ffd17a42ca7cc664981d88e2a35879b9, type: 3}
       propertyPath: m_LocalPosition.z
@@ -36304,7 +36311,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7468599394232733844, guid: 318bb5e12a81b67409a0e40e0a64039d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 14.3
+      value: 3.39
       objectReference: {fileID: 0}
     - target: {fileID: 7468599394232733844, guid: 318bb5e12a81b67409a0e40e0a64039d, type: 3}
       propertyPath: m_LocalPosition.z
