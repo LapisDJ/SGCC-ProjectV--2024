@@ -88,11 +88,11 @@ public class SkillManager : MonoBehaviour
     {
         //액티브와 방식은 같다.
         var retList = new List<PassiveSkill>();
-        if(activeSkills.Count >= maxPassiveSkills)
+        if(passiveSkills.Count >= maxPassiveSkills)
         {
             int rand1 = UnityEngine.Random.Range(0,maxPassiveSkills);
             int rand2 = UnityEngine.Random.Range(0,maxPassiveSkills);
-            while(rand1 != rand2)
+            while(rand1 == rand2)
             {
                 rand2 = UnityEngine.Random.Range(0,maxPassiveSkills);
             }
