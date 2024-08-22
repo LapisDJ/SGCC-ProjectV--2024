@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using Debug = UnityEngine.Debug;
 
 public class SimplePathfinding : MonoBehaviour
 {
@@ -11,8 +13,12 @@ public class SimplePathfinding : MonoBehaviour
     public Transform monster;
     private Vector3Int playerCellPosition;
     private Vector3Int monsterCellPosition;
+    public float Mon_speed = 20f;
 
     private Dictionary<Vector3Int, List<Vector3Int>> graph = new Dictionary<Vector3Int, List<Vector3Int>>();
+
+
+
 
     void Start()
     {
@@ -27,11 +33,91 @@ public class SimplePathfinding : MonoBehaviour
         if (graph.ContainsKey(monsterCellPosition) && graph.ContainsKey(playerCellPosition))
         {
             List<Vector3Int> path = FindPath(monsterCellPosition, playerCellPosition);
-
+            
             if (path != null && path.Count > 0)
             {
-                Vector3 nextPosition = backgroundTilemap.CellToWorld(path[0]);
-                monster.position = Vector3.MoveTowards(monster.position, nextPosition, Time.deltaTime * 2f);
+                int i = 1;
+                //Vector3 nextPosition = backgroundTilemap.CellToWorld(path[0]);
+                Vector3Int nextCellPosition = path[0]; // 기본적으로는 첫 번째 셀을 목표로 설정
+                Vector3Int up = new Vector3Int(monsterCellPosition.x, monsterCellPosition.y + 1, monsterCellPosition.z);
+                Vector3Int down = new Vector3Int(monsterCellPosition.x, monsterCellPosition.y - 1, monsterCellPosition.z);
+                Vector3Int left = new Vector3Int(monsterCellPosition.x - 1, monsterCellPosition.y, monsterCellPosition.z);
+                Vector3Int right = new Vector3Int(monsterCellPosition.x + 1, monsterCellPosition.y, monsterCellPosition.z);
+
+                Vector3Int up_left = new Vector3Int(monsterCellPosition.x - 1, monsterCellPosition.y + 1, monsterCellPosition.z);
+                Vector3Int down_left = new Vector3Int(monsterCellPosition.x - 1, monsterCellPosition.y - 1, monsterCellPosition.z);
+                Vector3Int down_right = new Vector3Int(monsterCellPosition.x + 1, monsterCellPosition.y - 1, monsterCellPosition.z);
+                Vector3Int up_right = new Vector3Int(monsterCellPosition.x + 1, monsterCellPosition.y + 1, monsterCellPosition.z);
+                // path[0]부터 탐색하여 x 또는 y 좌표가 모두 바뀌는 path[i]를 찾음
+                for (i = 1; i < path.Count; i++)
+                {
+                    if (path[i].x != path[0].x && path[i].y != path[0].y)
+                    {
+                        nextCellPosition = path[i - 1];
+                        break;
+                    }
+                }
+
+                    for (int j = i; j < path.Count; j++)
+                    {
+                        if (path[j].x != path[i-1].x && path[j].y != path[i-1].y)
+                        {
+                            nextCellPosition = path[j - 1];
+                            break;
+                        }
+                    }
+                if (!graph.ContainsKey(up) || !graph.ContainsKey(down) || !graph.ContainsKey(left) || !graph.ContainsKey(right) || !graph.ContainsKey(up_left) || !graph.ContainsKey(up_right) || !graph.ContainsKey(down_left) || !graph.ContainsKey(down_right))
+                {
+                    Vector3 nextPosition = backgroundTilemap.CellToWorld(path[0]);
+                    bool hasObstacleUp = !graph.ContainsKey(up);
+                    bool hasObstacleDown = !graph.ContainsKey(down);
+                    bool hasObstacleLeft = !graph.ContainsKey(left);
+                    bool hasObstacleRight = !graph.ContainsKey(right);
+                    bool hasObstacleUp_Left = !graph.ContainsKey(up_left);
+                    bool hasObstacleup_Right = !graph.ContainsKey(up_right);
+                    bool hasObstacledown_Left = !graph.ContainsKey(down_left);
+                    bool hasObstacledown_Right = !graph.ContainsKey(down_right);
+
+                    // 장애물이 있는 방향으로 이동하지 않도록 조정
+                    if (hasObstacleUp && nextCellPosition == up)
+                    {
+                        nextPosition += new Vector3(0, -0.9f, 0); // 위쪽에 장애물이 있으면 약간 아래로 이동
+                    }
+                    if (hasObstacleDown && nextCellPosition == down)
+                    {
+                        nextPosition += new Vector3(0, 0.9f, 0); // 아래쪽에 장애물이 있으면 약간 위로 이동
+                    }
+                    if (hasObstacleLeft && nextCellPosition == left)
+                    {
+                        nextPosition += new Vector3(0.9f, 0, 0); // 왼쪽에 장애물이 있으면 약간 오른쪽으로 이동
+                    }
+                    if (hasObstacleRight && nextCellPosition == right)
+                    {
+                        nextPosition += new Vector3(-0.9f, 0, 0); // 오른쪽에 장애물이 있으면 약간 왼쪽으로 이동
+                    }
+                    if (hasObstacleUp_Left && nextCellPosition == up)
+                    {
+                        nextPosition += new Vector3(0.9f, -0.9f, 0); 
+                    }
+                    if (hasObstacleup_Right && nextCellPosition == down)
+                    {
+                        nextPosition += new Vector3(-0.9f, -0.9f, 0); 
+                    }
+                    if (hasObstacledown_Left && nextCellPosition == left)
+                    {
+                        nextPosition += new Vector3(0.9f, 0.9f, 0);
+                    }
+                    if (hasObstacledown_Right && nextCellPosition == right)
+                    {
+                        nextPosition += new Vector3(-0.9f, 0.9f, 0); 
+                    }
+                    monster.position = Vector3.MoveTowards(monster.position, nextPosition, Time.deltaTime * Mon_speed);
+                }
+                else
+                {
+                    Vector3 nextPosition = backgroundTilemap.CellToWorld(nextCellPosition);
+                    monster.position = Vector3.MoveTowards(monster.position, nextPosition, Time.deltaTime * Mon_speed);
+                }
             }
             else
             {
