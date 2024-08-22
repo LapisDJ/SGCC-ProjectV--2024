@@ -10,7 +10,9 @@ public class UI_Manager : MonoBehaviour
     [SerializeField] GameObject SkillChoose;
     [SerializeField] GameObject MissionUI;
     [SerializeField] GameObject ExitSceneUI;
+    [SerializeField] GameObject pausemenu;
     [SerializeField] SkillManager skillmanager;
+    private bool ispause = false;
     public static bool isskillchoose = false;
     void Awake()
     {
@@ -23,6 +25,8 @@ public class UI_Manager : MonoBehaviour
         SkillChoose.SetActive(false);
         MissionUI.SetActive(false);
         ExitSceneUI.SetActive(false);
+        pausemenu.SetActive(false);
+        ispause = false;
     }
     public void SkillChooseStart()//진행중인 게임을 일시정지하고 레벨업할 스킬을 선택하는 창으로 진입.
     {
@@ -63,5 +67,48 @@ public class UI_Manager : MonoBehaviour
             SkillChooseStart();
             isskillchoose = false;
         }
+    }
+    void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            ispause = !ispause;
+            if(ispause)
+            {
+                Callmenu();
+            }
+            else
+            {
+                Closemenu();
+            }
+        }
+    }
+    public void Callmenu()
+    {
+        Time.timeScale = 0f;
+        pausemenu.SetActive(true);
+    }
+    public void Closemenu()
+    {
+        Time.timeScale = 1f;
+        pausemenu.SetActive(false);
+    }
+    public void PauseResume()
+    {
+        ispause = false;
+        Closemenu();
+    }
+    public void PauseMainmenu()
+    {
+        //게임 완성 후 게임 요소 destroy하는 함수 추가 필요
+        LoadingSceneController.Loadscene("Main Menu");
+    }
+    public void PauseQuit()
+    {
+        #if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+        #else
+        Application.Quit();
+        #endif
     }
 }

@@ -8,7 +8,7 @@ public class MainButton : MonoBehaviour
     //main scene
     public void OnClickNewgame()
     {
-        LoadingSceneController.Loadscene("Character choose");
+        SceneManager.LoadScene("Character choose");
     }
     public void OnClickBringup()
     {
@@ -21,6 +21,11 @@ public class MainButton : MonoBehaviour
     public void OnClickQuit()
     {
         Application.Quit();
+        #if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+        #else
+        Application.Quit();
+        #endif
     }
     //character choose scene
     int characternum;
@@ -30,7 +35,7 @@ public class MainButton : MonoBehaviour
     }
     public void Confirmbutton()
     {
-        SceneManager.LoadScene("Prototype");
+        LoadingSceneController.Loadscene("Prototype");
     }
     public void Previousbutton()
     {
