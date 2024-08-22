@@ -1,17 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class SpawnManager : MonoBehaviour
 {
     public GameObject slimePrefab, ratPrefab, batPrefab, zombieDogPrefab, zombiePrefab, elite1Prefab, elite2Prefab, oldRobotPrefab, smallSpiderRobotPrefab; // 각 몬스터의 프리펩
     public GameObject player; // 플레이어
     public float spawnDistance = 10.0f; //스폰 간격
-    public LayerMask obstacleLayer; 
+    public LayerMask obstacleLayer;
     private Camera mainCamera; // 카메라
     private float startTime; // 게임 시작 이후 경과시간
 
     private Dictionary<string, Queue<GameObject>> objectPools = new Dictionary<string, Queue<GameObject>>(); // <몬스터, 큐>의 형태로 오브젝트 풀 구성
+    private Queue<Vector3> spawnPointsQueue = new Queue<Vector3>(); // 동시 스폰을 위한, 해당 스폰 타이밍마다의 가능한 스폰 포인트 좌표 큐
+    [SerializeField] public Tilemap tilemap; // 유효 스폰 위치 검사 위한 타일맵
+
 
     void Awake()
     {
@@ -126,63 +131,51 @@ public class SpawnManager : MonoBehaviour
 
     void SpawnMonster(string poolKey, bool isDiagonal = false) // 몬스터 스폰시키기
     {
-        Vector3 spawnPosition = GetSpawnPosition(isDiagonal); // 스폰 위치 구하기
-        if (spawnPosition != Vector3.zero) // 영벡터가 아니면
+        GetSpawnPosition(isDiagonal);
+        while (spawnPointsQueue.Count > 0) // 큐에 스폰 포인트가 남아 있는지 확인
         {
-            GameObject monster = GetFromPool(poolKey); // 풀에서 꺼내온다.
+            Vector3 spawnPosition = spawnPointsQueue.Dequeue(); // 큐에서 위치를 꺼낸다.
+
+            GameObject monster = GetFromPool(poolKey); // 풀에서 몬스터를 가져온다.
             if (monster != null) // 몬스터가 null이 아니면
             {
-                monster.transform.position = spawnPosition; // 구한 스폰 위치에서 스폰시킨다.
+                monster.transform.position = spawnPosition; // 큐에서 꺼낸 위치에 몬스터를 스폰시킨다.
             }
         }
     }
 
-    Vector3 GetSpawnPosition(bool isDiagonal) // 스폰 위치 구하기
+    void GetSpawnPosition(bool isDiagonal)
     {
-        Vector3 playerPosition = player.transform.position; // 플레이어 위치
+        Vector3 playerPosition = player.transform.position; // 플레이어 좌표
 
-        float screenLeft = mainCamera.ViewportToWorldPoint(new Vector3(0, 0, mainCamera.nearClipPlane)).x; // 뷰포트 좌표계 -> 월드 좌표계 (뷰포트: (0, 0)이 좌하단 (1,1)이 우상단)
+        //카메라 좌표 -> 월드 좌표로 변환
+        float screenLeft = mainCamera.ViewportToWorldPoint(new Vector3(0, 0, mainCamera.nearClipPlane)).x;
         float screenRight = mainCamera.ViewportToWorldPoint(new Vector3(1, 0, mainCamera.nearClipPlane)).x;
         float screenTop = mainCamera.ViewportToWorldPoint(new Vector3(0, 1, mainCamera.nearClipPlane)).y;
         float screenBottom = mainCamera.ViewportToWorldPoint(new Vector3(0, 0, mainCamera.nearClipPlane)).y;
 
-        Vector3 spawnPosition = Vector3.zero; // 스폰 포지션 : 일단 영벡터로 초기화
-        int attemptCount = 0; // 시도 횟수(스폰 포지션이 벽일 경우 스폰 위치 이동)
+        Vector3[] spawnPositions = new Vector3[8]; // 일단 기본 스폰 위치 8개 포인트 설정
 
-        while (attemptCount < 10) // 최대 10번 탐색
+        // Define the 8 spawn points based on the diagram
+        spawnPositions[0] = new Vector3(screenLeft - spawnDistance, screenTop + spawnDistance, 0);
+        spawnPositions[1] = new Vector3((screenLeft + screenRight) / 2, screenTop + spawnDistance, 0);
+        spawnPositions[2] = new Vector3(screenRight + spawnDistance, screenTop + spawnDistance, 0);
+        spawnPositions[3] = new Vector3(screenRight + spawnDistance, (screenTop + screenBottom) / 2, 0);
+        spawnPositions[4] = new Vector3(screenRight + spawnDistance, screenBottom - spawnDistance, 0);
+        spawnPositions[5] = new Vector3((screenLeft + screenRight) / 2, screenBottom - spawnDistance, 0);
+        spawnPositions[6] = new Vector3(screenLeft - spawnDistance, screenBottom - spawnDistance, 0);
+        spawnPositions[7] = new Vector3(screenLeft - spawnDistance, (screenTop + screenBottom) / 2, 0);
+
+        for (int i = 0; i < 8; i++)
         {
-            attemptCount++;
-            if (isDiagonal) // 대각 스폰이면
-            {
-                int diagonalDirection = Random.Range(0, 4); // 4가지 대각 위치 중 랜덤
-                switch (diagonalDirection)
-                {
-                    case 0: spawnPosition = new Vector3(screenLeft - spawnDistance, screenTop + spawnDistance, 0); break;
-                    case 1: spawnPosition = new Vector3(screenRight + spawnDistance, screenTop + spawnDistance, 0); break;
-                    case 2: spawnPosition = new Vector3(screenLeft - spawnDistance, screenBottom - spawnDistance, 0); break;
-                    case 3: spawnPosition = new Vector3(screenRight + spawnDistance, screenBottom - spawnDistance, 0); break;
-                }
-            }
-            else // 대각 스폰이 아니면
-            {
-                int direction = Random.Range(0, 4); // 위치 랜덤 스폰
-                switch (direction)
-                {
-                    case 0: spawnPosition = new Vector3(Random.Range(screenLeft, screenRight), screenTop + spawnDistance, 0); break;
-                    case 1: spawnPosition = new Vector3(Random.Range(screenLeft, screenRight), screenBottom - spawnDistance, 0); break;
-                    case 2: spawnPosition = new Vector3(screenLeft - spawnDistance, Random.Range(screenBottom, screenTop), 0); break;
-                    case 3: spawnPosition = new Vector3(screenRight + spawnDistance, Random.Range(screenBottom, screenTop), 0); break;
-                }
-            }
+            Vector3Int tilePosition = tilemap.WorldToCell(spawnPositions[i]); // 월드 좌표를 타일맵 셀 좌표로 변환
 
-            if (!Physics2D.OverlapCircle(spawnPosition, 0.5f, obstacleLayer)) // 구한 스폰 위치가 장애물이 아니면
-            {
-                return spawnPosition; // 해당 스폰 위치 반환
-            }
+            TileBase tile = tilemap.GetTile(tilePosition); // 해당 위치의 타일을 가져옴
+            if (!Physics2D.OverlapCircle(spawnPositions[i], 0.5f, obstacleLayer) && (tile != null) && tilemap.HasTile(tilePosition) && tilemap.gameObject.CompareTag("map")) //해당 스폰 포지션이 맵 밖이 아니거나 장애물 위가 아니면
+                spawnPointsQueue.Enqueue(spawnPositions[i]);
         }
-
-        return Vector3.zero; // 장애물 때문에 적합한 위치를 찾지 못한 경우
     }
+
 
     void SpawnCircleFormation(string poolKey, int radius, int count) // 원형 스폰
     {
@@ -208,7 +201,7 @@ public class SpawnManager : MonoBehaviour
         float offset = 2.0f; // 떨어진 거리
         for (int i = 0; i < rows; i++) // 스폰할 줄만큼 반복
         {
-            Vector3 rowStart = new Vector3(playerPosition.x - (countPerRow / 2) * offset, playerPosition.y + (i * offset), 0); 
+            Vector3 rowStart = new Vector3(playerPosition.x - (countPerRow / 2) * offset, playerPosition.y + (i * offset), 0);
             for (int j = 0; j < countPerRow; j++)
             {
                 Vector3 position = rowStart + new Vector3(j * offset, 0, 0);
