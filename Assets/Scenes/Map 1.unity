@@ -33996,6 +33996,7 @@ MonoBehaviour:
   - {fileID: 1878825005}
   player: {fileID: 1583308532}
   monster: {fileID: 499374971}
+  Mon_speed: 10
 --- !u!1001 &637538943
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -36277,7 +36278,7 @@ MonoBehaviour:
   HPbonus: 1
   HPmax: 0
   HPpreviousmax: 0
-  speedAdd: 5
+  speedAdd: 20
   speedMulti: 1
   speedFin: 0
   attackDamageByLevel: 5
@@ -36299,7 +36300,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4044078766096519034, guid: 318bb5e12a81b67409a0e40e0a64039d, type: 3}
       propertyPath: speed
-      value: 5
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 4044078766096519034, guid: 318bb5e12a81b67409a0e40e0a64039d, type: 3}
       propertyPath: engineer
@@ -40087,7 +40088,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 27.41017
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
