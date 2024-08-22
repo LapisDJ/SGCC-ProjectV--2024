@@ -10,9 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 7954761224298603737}
   - component: {fileID: 1383190498136245197}
+  - component: {fileID: 4504928670239785984}
   m_Layer: 0
   m_Name: Spider_Robot
-  m_TagString: Untagged
+  m_TagString: Monster2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -72,7 +73,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
   m_Color: {r: 0.254717, g: 0.254717, b: 0.254717, a: 1}
   m_FlipX: 0
@@ -84,3 +85,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &4504928670239785984
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4322310473965505875}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f030aeaedd0924fbf9533f777ba18810, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentHP: 80
+  attackDamage: 4
+  speed: 6.5
+  lastAttacktime: 0
+  attackCooldown: 0

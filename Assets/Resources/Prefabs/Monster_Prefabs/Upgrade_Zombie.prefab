@@ -10,9 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 6135599934158280677}
   - component: {fileID: 7175726014411076679}
+  - component: {fileID: 5327743899738218376}
   m_Layer: 0
   m_Name: Upgrade_Zombie
-  m_TagString: Untagged
+  m_TagString: Monster1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -72,7 +73,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
   m_Color: {r: 0.08279351, g: 0.3962264, b: 0, a: 1}
   m_FlipX: 0
@@ -84,3 +85,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &5327743899738218376
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6061013600083493923}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5c94f0a59ac54a10a6312beef3519dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentHP: 30000
+  attackDamage: 10
+  speed: 4
+  lastAttacktime: 0
+  attackCooldown: 0
