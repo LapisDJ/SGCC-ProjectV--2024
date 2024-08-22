@@ -9,7 +9,7 @@ public class SpawnManager : MonoBehaviour
     public GameObject slimePrefab, ratPrefab, batPrefab, zombieDogPrefab, zombiePrefab, elite1Prefab, elite2Prefab, oldRobotPrefab, smallSpiderRobotPrefab; // 각 몬스터의 프리펩
     public GameObject player; // 플레이어
     public float spawnDistance = 10.0f; //스폰 간격
-    public LayerMask obstacleLayer;
+    [SerializeField] public LayerMask obstacleLayer;
     private Camera mainCamera; // 카메라
     private float startTime; // 게임 시작 이후 경과시간
 
@@ -157,20 +157,24 @@ public class SpawnManager : MonoBehaviour
         Vector3[] spawnPositions = new Vector3[8]; // 일단 기본 스폰 위치 8개 포인트 설정
 
         // Define the 8 spawn points based on the diagram
-        spawnPositions[0] = new Vector3(screenLeft - spawnDistance, screenTop + spawnDistance, 0);
+        spawnPositions[0] = new Vector3(screenLeft - spawnDistance, screenTop + spawnDistance, 0); // 대각선
         spawnPositions[1] = new Vector3((screenLeft + screenRight) / 2, screenTop + spawnDistance, 0);
-        spawnPositions[2] = new Vector3(screenRight + spawnDistance, screenTop + spawnDistance, 0);
+        spawnPositions[2] = new Vector3(screenRight + spawnDistance, screenTop + spawnDistance, 0); // 대각선
         spawnPositions[3] = new Vector3(screenRight + spawnDistance, (screenTop + screenBottom) / 2, 0);
-        spawnPositions[4] = new Vector3(screenRight + spawnDistance, screenBottom - spawnDistance, 0);
+        spawnPositions[4] = new Vector3(screenRight + spawnDistance, screenBottom - spawnDistance, 0); // 대각선
         spawnPositions[5] = new Vector3((screenLeft + screenRight) / 2, screenBottom - spawnDistance, 0);
-        spawnPositions[6] = new Vector3(screenLeft - spawnDistance, screenBottom - spawnDistance, 0);
+        spawnPositions[6] = new Vector3(screenLeft - spawnDistance, screenBottom - spawnDistance, 0); // 대각선
         spawnPositions[7] = new Vector3(screenLeft - spawnDistance, (screenTop + screenBottom) / 2, 0);
 
         for (int i = 0; i < 8; i++)
         {
+            if (isDiagonal && (i % 2 != 0)) // 대각선 스폰일 경우, 대각선 위치만 고려
+            {
+                continue;
+            }
             Vector3Int tilePosition = tilemap.WorldToCell(spawnPositions[i]); // 월드 좌표를 타일맵 셀 좌표로 변환
-
             TileBase tile = tilemap.GetTile(tilePosition); // 해당 위치의 타일을 가져옴
+
             if (!Physics2D.OverlapCircle(spawnPositions[i], 0.5f, obstacleLayer) && (tile != null) && tilemap.HasTile(tilePosition) && tilemap.gameObject.CompareTag("map")) //해당 스폰 포지션이 맵 밖이 아니거나 장애물 위가 아니면
                 spawnPointsQueue.Enqueue(spawnPositions[i]);
         }
@@ -180,40 +184,57 @@ public class SpawnManager : MonoBehaviour
     void SpawnCircleFormation(string poolKey, int radius, int count) // 원형 스폰
     {
         Vector3 center = player.transform.position; // 원의 중심 : 플레이어 좌표
+
         for (int i = 0; i < count; i++) // 스폰 개수만큼 반복
         {
-            float angle = i * Mathf.PI * 2 / count; //등각도 스폰
+            float angle = i * Mathf.PI * 2 / count; // 등각도 스폰
             Vector3 position = new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0) * radius + center; // 스폰 좌표 = 원위 극좌표 + 플레이어 중심 좌표
-            if (!Physics2D.OverlapCircle(position, 0.5f, obstacleLayer)) // 장애물이 아니면
+
+            Vector3Int tilePosition = tilemap.WorldToCell(position); // 월드 좌표를 타일맵 셀 좌표로 변환
+            TileBase tile = tilemap.GetTile(tilePosition); // 해당 위치의 타일을 가져옴
+
+            // 타일이 존재하고, 해당 타일맵의 타일이 "map" 태그를 가지고 있으며, 해당 위치가 장애물이 아닌 경우
+            if (tile != null && tilemap.HasTile(tilePosition) && tilemap.gameObject.CompareTag("map") &&
+                !Physics2D.OverlapCircle(position, 0.5f, obstacleLayer))
             {
-                GameObject monster = GetFromPool(poolKey); // 몬스터를 풀에서 가져온다.
+                GameObject monster = GetFromPool(poolKey); // 몬스터를 풀에서 가져옴
                 if (monster != null)
                 {
-                    monster.transform.position = position;
+                    monster.transform.position = position; // 몬스터를 해당 위치에 스폰
                 }
             }
         }
     }
 
-    void SpawnLineFormation(string poolKey, int rows, int countPerRow) // 플레이어 위치 기준 몬스터를 여러줄 스폰
+
+    void SpawnLineFormation(string poolKey, int rows, int countPerRow) // 플레이어 위치 기준 몬스터를 여러 줄 스폰
+{
+    Vector3 playerPosition = player.transform.position; // 플레이어 포지션
+    float offset = 2.0f; // 떨어진 거리
+
+    for (int i = 0; i < rows; i++) // 스폰할 줄만큼 반복
     {
-        Vector3 playerPosition = player.transform.position; // 플레이어 포지션
-        float offset = 2.0f; // 떨어진 거리
-        for (int i = 0; i < rows; i++) // 스폰할 줄만큼 반복
+        Vector3 rowStart = new Vector3(playerPosition.x - (countPerRow / 2) * offset, playerPosition.y + (i * offset), 0);
+
+        for (int j = 0; j < countPerRow; j++)
         {
-            Vector3 rowStart = new Vector3(playerPosition.x - (countPerRow / 2) * offset, playerPosition.y + (i * offset), 0);
-            for (int j = 0; j < countPerRow; j++)
+            Vector3 position = rowStart + new Vector3(j * offset, 0, 0);
+
+            Vector3Int tilePosition = tilemap.WorldToCell(position); // 월드 좌표를 타일맵 셀 좌표로 변환
+            TileBase tile = tilemap.GetTile(tilePosition); // 해당 위치의 타일을 가져옴
+
+            // 타일이 존재하고, 해당 타일맵의 타일이 "map" 태그를 가지고 있으며, 해당 위치가 장애물이 아닌 경우
+            if (tile != null && tilemap.HasTile(tilePosition) && tilemap.gameObject.CompareTag("map") &&
+                !Physics2D.OverlapCircle(position, 0.5f, obstacleLayer))
             {
-                Vector3 position = rowStart + new Vector3(j * offset, 0, 0);
-                if (!Physics2D.OverlapCircle(position, 0.5f, obstacleLayer))
+                GameObject monster = GetFromPool(poolKey); // 몬스터를 풀에서 가져옴
+                if (monster != null)
                 {
-                    GameObject monster = GetFromPool(poolKey);
-                    if (monster != null)
-                    {
-                        monster.transform.position = position;
-                    }
+                    monster.transform.position = position; // 몬스터를 해당 위치에 스폰
                 }
             }
         }
     }
+}
+
 }
