@@ -13,8 +13,8 @@ public class SkillManager : MonoBehaviour
     private List<Skill> availableActiveSkills = new List<Skill>(); // 모든 액티브 스킬 리스트
     private List<PassiveSkill> availablePassiveSkills = new List<PassiveSkill>(); // 모든 패시브 스킬 리스트
 
-    private List<Skill> activeSkills = new List<Skill>(); // 현재 활성화된 액티브 스킬
-    private List<PassiveSkill> passiveSkills = new List<PassiveSkill>(); // 현재 활성화된 패시브 스킬
+    public static List<Skill> activeSkills = new List<Skill>(); // 현재 활성화된 액티브 스킬
+    public static List<PassiveSkill> passiveSkills = new List<PassiveSkill>(); // 현재 활성화된 패시브 스킬
     void Awake()
     {
         DontDestroyOnLoad(gameObject);
@@ -113,7 +113,7 @@ public class SkillManager : MonoBehaviour
         return retList;
     }
     public static int skillchoice;//ui 버튼으로 입력받아서 int형식으로 저장
-    void SkillLevelUP()
+    public static void SkillLevelUP()
     {
         //0레벨이면 리스트에 등록, 1레벨 이상이면 레벨업만
         if(skillchoice < 2)
