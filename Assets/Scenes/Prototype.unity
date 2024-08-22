@@ -1068,7 +1068,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 193708224}
         m_TargetAssemblyTypeName: UI_Manager, Assembly-CSharp
-        m_MethodName: firstskillchooosebutton
+        m_MethodName: Firstskillchooosebutton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1622,7 +1622,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 193708224}
         m_TargetAssemblyTypeName: UI_Manager, Assembly-CSharp
-        m_MethodName: fourthskillchooosebutton
+        m_MethodName: Fourthskillchooosebutton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -16120,7 +16120,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 193708224}
         m_TargetAssemblyTypeName: UI_Manager, Assembly-CSharp
-        m_MethodName: confirmskillchoosebutton
+        m_MethodName: Confirmskillchoosebutton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -16562,7 +16562,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 193708224}
         m_TargetAssemblyTypeName: UI_Manager, Assembly-CSharp
-        m_MethodName: secondskillchooosebutton
+        m_MethodName: Secondskillchooosebutton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -17299,7 +17299,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1127092366
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17361,7 +17361,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!224 &1127092369
 RectTransform:
@@ -18186,7 +18186,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 193708224}
         m_TargetAssemblyTypeName: UI_Manager, Assembly-CSharp
-        m_MethodName: thirdskillchooosebutton
+        m_MethodName: Thirdskillchooosebutton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
