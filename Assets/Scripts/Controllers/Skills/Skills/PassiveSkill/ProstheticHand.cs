@@ -4,7 +4,12 @@ using UnityEngine;
 
 public class ProstheticHand : PassiveSkill
 {
-    public ProstheticHand() : base("ProstheticHand", 0.08f, 0f) {}// 생성자 : 스킬명, 1랩 데미지, 1랩 쿨타임
+    protected override void Awake()
+    {
+        skillName = "ProstheticHand";
+        effect = 0.08f;
+        cooldown = 0f;
+    }
     public override void LevelUp() // 업무용 의수 레벨업 로직
     {
         base.LevelUp(); // 스킬 레벨업

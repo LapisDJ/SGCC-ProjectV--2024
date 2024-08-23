@@ -4,7 +4,12 @@ using UnityEngine;
 
 public class Coin : PassiveSkill
 {
-    public Coin() : base("Coin", 0.05f, 0f) {}// 생성자 : 스킬명, 1랩 데미지, 1랩 쿨타임
+    protected override void Awake()
+    {
+        skillName = "Coin";
+        effect = 0.05f;
+        cooldown = 0f;
+    }
     public override void LevelUp() // 동전 레벨업 로직
     {
         base.LevelUp(); // 스킬 레벨업

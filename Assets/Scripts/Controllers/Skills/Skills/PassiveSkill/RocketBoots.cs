@@ -4,7 +4,12 @@ using UnityEngine;
 
 public class RocketBoots : PassiveSkill
 {
-    public RocketBoots() : base("RocketBoots", 0.1f, 0f) {}// 생성자 : 스킬명, 1랩 데미지, 1랩 쿨타임
+    protected override void Awake()
+    {
+        skillName = "RocketBoots";
+        effect = 0.1f;
+        cooldown = 0f;
+    }
     public override void LevelUp() // 로켓 장화 레벨업 로직
     {
         base.LevelUp(); // 스킬 레벨업

@@ -8,12 +8,15 @@ public class PassiveSkill : MonoBehaviour
     public int level; //스킬 레벨
     public float effect; // 효과량
     public float cooldown; // 쿨타임
-    public PassiveSkill(string name, float baseDamage, float baseCooldown) // 스킬 생성자, 모든 스킬을 레벨 0으로 하여 스킬 리스트에 스킬 객체 삽입(스킬 매니저에 존재)
+    protected PassiveSkill() // 기본 생성자
     {
-        this.skillName = name;
-        this.effect = baseDamage;
-        this.cooldown = baseCooldown;
-        this.level = 0;
+        level = 0;
+    }
+
+    // Unity의 API를 사용하는 초기화는 Awake에서 처리합니다.
+    protected virtual void Awake()
+    {
+        
     }
     public virtual void LevelUp() // 스킬 레벨업
     {

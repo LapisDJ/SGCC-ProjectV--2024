@@ -4,7 +4,12 @@ using UnityEngine;
 
 public class CalculateHelper : PassiveSkill
 {
-    public CalculateHelper() : base("CalculateHelper", 0.2f, 0f) {}// 생성자 : 스킬명, 1랩 데미지, 1랩 쿨타임
+    protected override void Awake()
+    {
+        skillName = "CalculateHelper";
+        effect = 0.2f;
+        cooldown = 0f;
+    }
     public override void LevelUp() // 연산 보조 장치 레벨업 로직
     {
         base.LevelUp(); // 스킬 레벨업
