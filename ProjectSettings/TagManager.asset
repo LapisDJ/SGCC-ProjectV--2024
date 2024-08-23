@@ -9,6 +9,10 @@ TagManager:
   - Monster1
   - Monster2
   - Monster3
+  - Surv1
+  - Surv2
+  - Surv3
+  - signalTower
   layers:
   - Default
   - TransparentFX
