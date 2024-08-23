@@ -4,69 +4,73 @@ using UnityEngine;
 
 public class Bazooka : Skill
 {
-    WeaknessType weaknessType = WeaknessType.Blow; // °ø°Ý Å¸ÀÓ : Å¸°Ý
-    public Bazooka() : base("Bazooka", 2f, 5f) { } // »ý¼ºÀÚ : ½ºÅ³¸í, 1·¦ µ¥¹ÌÁö, 1·¦ ÄðÅ¸ÀÓ
-    public GameObject bazookaPrefab; // ¹ÙÁÖÄ«Æ÷ ÇÁ¸®Æé
+    WeaknessType weaknessType = WeaknessType.Blow; // ï¿½ï¿½ï¿½ï¿½ Å¸ï¿½ï¿½ : Å¸ï¿½ï¿½
+    public GameObject bazookaPrefab; // ï¿½ï¿½ï¿½ï¿½Ä«ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     public float bulletSpeed = 10.0f;
-    private bool isBazookaAutoFire = false; // ¹ÙÁÖÄ«Æ÷ On Off·Î ±¸Çö
+    private bool isBazookaAutoFire = false; // ï¿½ï¿½ï¿½ï¿½Ä«ï¿½ï¿½ On Offï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     public float exploreRadius = 1f;
-    public bool canPenetrate = false;   // ÃÑ¾ËÀÌ °üÅëÇÏ´ÂÁö ¿©ºÎ¸¦ °áÁ¤
+    public bool canPenetrate = false;   // ï¿½Ñ¾ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Î¸ï¿½ ï¿½ï¿½ï¿½ï¿½
 
-
-
-    public override void LevelUp() // ¹ÙÁÖÄ«Æ÷ ·¹º§¾÷ ·ÎÁ÷
+    protected override void Awake()
     {
-        base.LevelUp(); // ½ºÅ³ ·¹º§¾÷
+        base.Awake();
+        skillName = "Bazooka";
+        skillDamage = 2f;
+        cooldown = 5f;
+    }
+    public override void LevelUp() // ï¿½ï¿½ï¿½ï¿½Ä«ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+    {
+        base.LevelUp(); // ï¿½ï¿½Å³ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         this.skillDamage += 1f;
 
         switch (level)
         {
-            case 1: // 0 -> 1·¦ : ±âº»°ªÀ¸·Î ¹ÙÁÖÄ«Æ÷ ¹ß»ç °¡´É
+            case 1: // 0 -> 1ï¿½ï¿½ : ï¿½âº»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ä«ï¿½ï¿½ ï¿½ß»ï¿½ ï¿½ï¿½ï¿½ï¿½
                 isBazookaAutoFire = !isBazookaAutoFire;
                 break;
-            case 3: // 2->3·¦ : ÄðÅ¸ÀÓ 1ÃÊ °¨¼Ò
+            case 3: // 2->3ï¿½ï¿½ : ï¿½ï¿½Å¸ï¿½ï¿½ 1ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
                 cooldown -= 1f;
                 break;
-            case 4: // 3->4·¦ : Æø¹ß ¹üÀ§ ¹ÝÁö¸§ Áõ°¡(¹ÝÁö¸§ 1¡æ ¹ÝÁö¸§ 1.5)
+            case 4: // 3->4ï¿½ï¿½ : ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 1ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 1.5)
                 exploreRadius += 0.5f;
                 break;
-            case 5: // 4->5·¦ : ÄðÅ¸ÀÓ 1ÃÊ °¨¼Ò
+            case 5: // 4->5ï¿½ï¿½ : ï¿½ï¿½Å¸ï¿½ï¿½ 1ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
                 cooldown -= 1f;
                 break;
-            case 6: // 5->6·¦ : Æø¹ß ¹üÀ§ ¹ÝÁö¸§ Áõ°¡ (1.5¡æ2)
+            case 6: // 5->6ï¿½ï¿½ : ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ (1.5ï¿½ï¿½2)
                 exploreRadius += 0.5f;
                 break;
-            case 7: // 6->7·¦ : ÄðÅ¸ÀÓ 1ÃÊ °¨¼Ò
+            case 7: // 6->7ï¿½ï¿½ : ï¿½ï¿½Å¸ï¿½ï¿½ 1ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
                 cooldown -= 1f;
                 break;
-            case 8: // 7->8·¦ : Æø¹ß ¹üÀ§ ¹ÝÁö¸§ (2¡æ3)
+            case 8: // 7->8ï¿½ï¿½ : ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ (2ï¿½ï¿½3)
                 exploreRadius += 1f;
                 break;
         }
     }
 
 
-public override void Activate(GameObject target) // ¸ó½ºÅÍ¿Í »óÈ£ ÀÛ¿ë ·ÎÁ÷
-{
-    GameObject nearestMonster = FindNearestMonster();
+    public override void Activate(GameObject target) // ï¿½ï¿½ï¿½Í¿ï¿½ ï¿½ï¿½È£ ï¿½Û¿ï¿½ ï¿½ï¿½ï¿½ï¿½
+    {
+        GameObject nearestMonster = FindNearestMonster();
         if (nearestMonster != null)
         {
             Vector3 direction = (nearestMonster.transform.position - transform.position).normalized;
-            Vector3 bulletSpawnPosition = transform.position + direction * 0.5f; // ÇÃ·¹ÀÌ¾î À§Ä¡¿¡¼­ ¾à°£ ¶³¾îÁø À§Ä¡
+            Vector3 bulletSpawnPosition = transform.position + direction * 0.5f; // ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ï¿½ï¿½ ï¿½à°£ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡
             GameObject bullet = Instantiate(bazookaPrefab, bulletSpawnPosition, Quaternion.identity);
             Rigidbody2D bulletRb = bullet.GetComponent<Rigidbody2D>();
             if (bulletRb != null)
             {
                 bulletRb.velocity = direction * bulletSpeed;
             }
-            // ÃÑ¾ËÀÇ Sprite Renderer ¼³Á¤
+            // ï¿½Ñ¾ï¿½ï¿½ï¿½ Sprite Renderer ï¿½ï¿½ï¿½ï¿½
             SpriteRenderer bulletSr = bullet.GetComponent<SpriteRenderer>();
             if (bulletSr != null)
             {
-                bulletSr.sortingLayerName = "Player"; // ÃÑ¾ËÀÇ sorting layer¸¦ ÇÃ·¹ÀÌ¾î¿Í °°Àº °ÍÀ¸·Î ¼³Á¤
-                bulletSr.sortingOrder = 1; // ÇÃ·¹ÀÌ¾îº¸´Ù ¾Õ¿¡ º¸ÀÌµµ·Ï ¼³Á¤
+                bulletSr.sortingLayerName = "Player"; // ï¿½Ñ¾ï¿½ï¿½ï¿½ sorting layerï¿½ï¿½ ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+                bulletSr.sortingOrder = 1; // ï¿½Ã·ï¿½ï¿½Ì¾îº¸ï¿½ï¿½ ï¿½Õ¿ï¿½ ï¿½ï¿½ï¿½Ìµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
             }
-            // ÇÃ·¹ÀÌ¾î¿Í ÃÑ¾Ë °£ÀÇ Ãæµ¹À» ¹«½Ã
+            // ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ï¿½ ï¿½Ñ¾ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½æµ¹ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
             Collider2D playerCollider = GetComponent<Collider2D>();
             Collider2D bulletCollider = bullet.GetComponent<Collider2D>();
             if (playerCollider != null && bulletCollider != null)
@@ -74,19 +78,19 @@ public override void Activate(GameObject target) // ¸ó½ºÅÍ¿Í »óÈ£ ÀÛ¿ë ·ÎÁ÷
                 Physics2D.IgnoreCollision(playerCollider, bulletCollider);
             }
 
-            // ÃÑ¾ËÀÇ Æø¹ß ½ºÅ©¸³Æ® ¼³Á¤
+            // ï¿½Ñ¾ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å©ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½
             Bullet explodeScript = bullet.GetComponent<Bullet>();
             if (explodeScript != null)
             {
                 explodeScript.isBazukapo = true;
-                explodeScript.explosionRadius = exploreRadius; // Æø¹ß ¹Ý°æ ¼³Á¤
+                explodeScript.explosionRadius = exploreRadius; // ï¿½ï¿½ï¿½ï¿½ ï¿½Ý°ï¿½ ï¿½ï¿½ï¿½ï¿½
                 explodeScript.damage = this.skillDamage;
 
-                // ¸ó½ºÅÍ¿¡ Ãæµ¹ ½Ã Æø¹ß ¹× µ¥¹ÌÁö Ã³¸®
+                // ï¿½ï¿½ï¿½Í¿ï¿½ ï¿½æµ¹ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½
                 explodeScript.OnHitMonster += (hitMonster) =>
                 {
                     ExplodeAndDamage(hitMonster.transform.position, exploreRadius);
-                    Destroy(bullet); // ÃÑ¾Ë Á¦°Å
+                    Destroy(bullet); // ï¿½Ñ¾ï¿½ ï¿½ï¿½ï¿½ï¿½
                 };
             }
 

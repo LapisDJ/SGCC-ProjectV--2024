@@ -4,7 +4,12 @@ using UnityEngine;
 
 public class PoweredSkin : PassiveSkill
 {
-    public PoweredSkin() : base("PoweredSkin", 0.1f, 0f) {}// 생성자 : 스킬명, 1랩 데미지, 1랩 쿨타임
+    protected override void Awake()
+    {
+        skillName = "PoweredSkin";
+        effect = 0.1f;
+        cooldown = 0f;
+    }
     public override void LevelUp() // 강화 피부 레벨업 로직
     {
         base.LevelUp(); // 스킬 레벨업

@@ -33954,7 +33954,6 @@ MonoBehaviour:
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 0
-  tilemap: {fileID: 0}
 --- !u!4 &619059096
 Transform:
   m_ObjectHideFlags: 0

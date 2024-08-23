@@ -4,8 +4,13 @@ using UnityEngine;
 
 public class RotateKnifeDrone : Skill
 {
-    public RotateKnifeDrone() : base("RotateKnifeDrone", 1f, 0f) { } // 생성자 : 스킬명, 1랩 데미지, 1랩 쿨타임
-
+    protected override void Awake()
+    {
+        base.Awake();
+        skillName = "RotateKnifeDrone";
+        skillDamage = 1f;
+        cooldown = 0f;
+    }
     public GameObject knifeDronePrefab; // 칼날 드론 프리펩
     public float rotationSpeed = 90f; // 1랩 칼날 회전 속도
     public float knifeRadius = 2f; // 1랩 칼날 회전 반지름

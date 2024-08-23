@@ -4,7 +4,12 @@ using UnityEngine;
 
 public class FatalVirus : PassiveSkill
 {
-    public FatalVirus() : base("FatalVirus", 0.01f, 0f) {}// 생성자 : 스킬명, 1랩 데미지, 1랩 쿨타임
+    protected override void Awake()
+    {
+        skillName = "FatalVirus";
+        effect = 0.01f;
+        cooldown = 0f;
+    }
     public override void LevelUp() // 치명적 바이러스 레벨업 로직
     {
         base.LevelUp(); // 스킬 레벨업

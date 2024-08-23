@@ -6,55 +6,61 @@ using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class ShotGun : Skill
 {
-    WeaknessType weaknessType = WeaknessType.Blow; // °ø°Ý Å¸ÀÓ : Å¸°Ý
-    public ShotGun() : base("ShotGun", 1f, 5f) { } // »ý¼ºÀÚ : ½ºÅ³¸í, 1·¦ µ¥¹ÌÁö, 1·¦ ÄðÅ¸ÀÓ
-    public GameObject shotGunPrefab; // ¼¦°Ç ÇÁ¸®Æé
+    WeaknessType weaknessType = WeaknessType.Blow; // ï¿½ï¿½ï¿½ï¿½ Å¸ï¿½ï¿½ : Å¸ï¿½ï¿½
+    protected override void Awake()
+    {
+        base.Awake();
+        skillName = "ShotGun";
+        skillDamage = 1f;
+        cooldown = 5f;
+    }
+    public GameObject shotGunPrefab; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     public Player_Controller playerControl;
     public Vector3 finalDir;
     public float bulletSpeed = 10.0f;
     int numOfBullet = 0;
-    public bool canPenetrate = true;   // ÃÑ¾ËÀÌ °üÅëÇÏ´ÂÁö ¿©ºÎ¸¦ °áÁ¤
+    public bool canPenetrate = true;   // ï¿½Ñ¾ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Î¸ï¿½ ï¿½ï¿½ï¿½ï¿½
 
 
     
-    public override void LevelUp() // ¼¦°Ç ·¹º§¾÷ ·ÎÁ÷
+    public override void LevelUp() // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     {
-        base.LevelUp(); // ½ºÅ³ ·¹º§¾÷
+        base.LevelUp(); // ï¿½ï¿½Å³ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         this.skillDamage += 1f;
 
         switch (level)
         {
-            case 1: // 0 -> 1·¦ : ±âº»°ªÀ¸·Î ¼¦°Ç ¹ß»ç °¡´É
+            case 1: // 0 -> 1ï¿½ï¿½ : ï¿½âº»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ß»ï¿½ ï¿½ï¿½ï¿½ï¿½
                 numOfBullet = 3;
                 break;
-            case 3: // 2->3·¦ : ÄðÅ¸ÀÓ 1ÃÊ °¨¼Ò
+            case 3: // 2->3ï¿½ï¿½ : ï¿½ï¿½Å¸ï¿½ï¿½ 1ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
                 cooldown -= 1f;
                 break;
-            case 5: // 4->5·¦ : ¼¦°Ç 4°¥·¡·Î ¹Ù²ñ
+            case 5: // 4->5ï¿½ï¿½ : ï¿½ï¿½ï¿½ï¿½ 4ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù²ï¿½
                 numOfBullet++;
                 break;
-            case 7: // 6->7·¦ : ÄðÅ¸ÀÓ 1ÃÊ °¨¼Ò
+            case 7: // 6->7ï¿½ï¿½ : ï¿½ï¿½Å¸ï¿½ï¿½ 1ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
                 cooldown -= 1f;
                 break;
-            case 8: // 7->8·¦ : ¼¦°Ç 5°¥·¡·Î ¹Ù²ñ
+            case 8: // 7->8ï¿½ï¿½ : ï¿½ï¿½ï¿½ï¿½ 5ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù²ï¿½
                 numOfBullet++;
                 break;
         }
     }
 
-    public override void Activate(GameObject target) // ¸ó½ºÅÍ¿Í »óÈ£ ÀÛ¿ë ·ÎÁ÷
+    public override void Activate(GameObject target) // ï¿½ï¿½ï¿½Í¿ï¿½ ï¿½ï¿½È£ ï¿½Û¿ï¿½ ï¿½ï¿½ï¿½ï¿½
     {
         switch (numOfBullet)
         {
             case 0:
                 break;
-            case 3: // ¼¦°Ç 3¹ß
+            case 3: // ï¿½ï¿½ï¿½ï¿½ 3ï¿½ï¿½
                 shootGun_3();
                 break;
-            case 4: // ¼¦°Ç 4¹ß
+            case 4: // ï¿½ï¿½ï¿½ï¿½ 4ï¿½ï¿½
                 shootGun_4();
                 break;
-            case 5: // ¼¦°Ç 5¹ß
+            case 5: // ï¿½ï¿½ï¿½ï¿½ 5ï¿½ï¿½
                 shootGun_5();
                 break;
         }
@@ -63,33 +69,33 @@ public class ShotGun : Skill
 
 
 
-    void shootGun_3() // ¼¦°Ç 3¹ß
+    void shootGun_3() // ï¿½ï¿½ï¿½ï¿½ 3ï¿½ï¿½
     {
-        Vector3 baseDirection = finalDir;  // ±âº» ¹ß»ç ¹æÇâÀ» ¸¶Áö¸· ¹Ù¶óº» ¹æÇâÀ¸·Î ¼³Á¤ ( ¼¦°ÇÀº ½ÃÀÛºÎÅÍ ÀÖÁö ¾ÊÀ¸´Ï±î ¿òÁ÷ÀÌ´Ù°¡ È¹µæÇß´Ù°í °¡Á¤ÇÏ¿¡ ÀÛ¼º )
+        Vector3 baseDirection = finalDir;  // ï¿½âº» ï¿½ß»ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù¶ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ( ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ûºï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ì´Ù°ï¿½ È¹ï¿½ï¿½ï¿½ß´Ù°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½ ï¿½Û¼ï¿½ )
         for (int i = -1; i <= 1; i++)
         {
-            // i°ª¿¡ µû¶ó °¢µµ¸¦ Á¶Á¤ÇÕ´Ï´Ù. -1, 0, 1¿¡ µû¶ó -30µµ, 0µµ, 30µµ
+            // iï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½. -1, 0, 1ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ -30ï¿½ï¿½, 0ï¿½ï¿½, 30ï¿½ï¿½
             float angle = 30.0f * i;
             Vector3 direction = Quaternion.Euler(0, 0, angle) * baseDirection;
 
-            // ÃÑ¾Ë »ý¼º À§Ä¡¸¦ ÇÃ·¹ÀÌ¾î ¾ÕÂÊÀ¸·Î ¼³Á¤
-            Vector3 bulletSpawnPosition = transform.position + direction * 0.5f; // ÇÃ·¹ÀÌ¾î À§Ä¡¿¡¼­ ¾à°£ ¶³¾îÁø À§Ä¡
+            // ï¿½Ñ¾ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+            Vector3 bulletSpawnPosition = transform.position + direction * 0.5f; // ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ï¿½ï¿½ ï¿½à°£ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡
 
-            // ÃÑ¾ËÀ» »ý¼ºÇÏ°í ¹ß»ç
+            // ï¿½Ñ¾ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ ï¿½ß»ï¿½
             GameObject bullet = Instantiate(shotGunPrefab, bulletSpawnPosition, Quaternion.identity);
             Rigidbody2D bulletRb = bullet.GetComponent<Rigidbody2D>();
             if (bulletRb != null)
             {
                 bulletRb.velocity = direction * bulletSpeed;
             }
-            // ÃÑ¾ËÀÇ Sprite Renderer ¼³Á¤
+            // ï¿½Ñ¾ï¿½ï¿½ï¿½ Sprite Renderer ï¿½ï¿½ï¿½ï¿½
             SpriteRenderer bulletSr = bullet.GetComponent<SpriteRenderer>();
             if (bulletSr != null)
             {
-                bulletSr.sortingLayerName = "Player"; // ÃÑ¾ËÀÇ sorting layer¸¦ ÇÃ·¹ÀÌ¾î¿Í °°Àº °ÍÀ¸·Î ¼³Á¤
-                bulletSr.sortingOrder = 1; // ÇÃ·¹ÀÌ¾îº¸´Ù ¾Õ¿¡ º¸ÀÌµµ·Ï ¼³Á¤
+                bulletSr.sortingLayerName = "Player"; // ï¿½Ñ¾ï¿½ï¿½ï¿½ sorting layerï¿½ï¿½ ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+                bulletSr.sortingOrder = 1; // ï¿½Ã·ï¿½ï¿½Ì¾îº¸ï¿½ï¿½ ï¿½Õ¿ï¿½ ï¿½ï¿½ï¿½Ìµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
             }
-            // ÇÃ·¹ÀÌ¾î¿Í ÃÑ¾Ë °£ÀÇ Ãæµ¹À» ¹«½Ã
+            // ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ï¿½ ï¿½Ñ¾ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½æµ¹ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
             Collider2D playerCollider = GetComponent<Collider2D>();
             Collider2D bulletCollider = bullet.GetComponent<Collider2D>();
             if (playerCollider != null && bulletCollider != null)
@@ -97,14 +103,14 @@ public class ShotGun : Skill
                 Physics2D.IgnoreCollision(playerCollider, bulletCollider);
             }
 
-            // ÃÑ¾ËÀÇ canPenetrate º¯¼ö¸¦ true·Î ¼³Á¤ÇÏ¿© °üÅë °¡´É ¼³Á¤
+            // ï¿½Ñ¾ï¿½ï¿½ï¿½ canPenetrate ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ trueï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
             Bullet bulletScript = bullet.GetComponent<Bullet>();
             if (bulletScript != null)
             {
                 bulletScript.canPenetrate = true;
                 bulletScript.damage = this.skillDamage;
 
-                // ¸ó½ºÅÍ¿Í Ãæµ¹ ½Ã µ¥¹ÌÁö¸¦ ÀÔÈ÷´Â ÀÌº¥Æ® ±¸µ¶
+                // ï¿½ï¿½ï¿½Í¿ï¿½ ï¿½æµ¹ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìºï¿½Æ® ï¿½ï¿½ï¿½ï¿½
                 bulletScript.OnHitMonster += (hitMonster) =>
                 {
                     Monster monster = hitMonster.GetComponent<Monster>();
@@ -128,33 +134,33 @@ public class ShotGun : Skill
         }
     }
 
-    void shootGun_4() // ¼¦°Ç 4¹ß
+    void shootGun_4() // ï¿½ï¿½ï¿½ï¿½ 4ï¿½ï¿½
         {
-            Vector3 baseDirection = finalDir;  // ±âº» ¹ß»ç ¹æÇâÀ» ¸¶Áö¸· ¹Ù¶óº» ¹æÇâÀ¸·Î ¼³Á¤
+            Vector3 baseDirection = finalDir;  // ï¿½âº» ï¿½ß»ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù¶ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
             for (int i = 0; i < 4; i++)
             {
-                // 4¹ßÀÇ ÃÑ¾ËÀ» -45µµ, -15µµ, 15µµ, 45µµ ¹æÇâÀ¸·Î ¹ß»ç
-                float angle = -45.0f + 30.0f * i; // 30µµ¾¿ Â÷ÀÌ ³ª´Â °¢µµ·Î ¹ß»ç
+                // 4ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ¾ï¿½ï¿½ï¿½ -45ï¿½ï¿½, -15ï¿½ï¿½, 15ï¿½ï¿½, 45ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß»ï¿½
+                float angle = -45.0f + 30.0f * i; // 30ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß»ï¿½
                 Vector3 direction = Quaternion.Euler(0, 0, angle) * baseDirection;
 
-                // ÃÑ¾Ë »ý¼º À§Ä¡¸¦ ÇÃ·¹ÀÌ¾î ¾ÕÂÊÀ¸·Î ¼³Á¤
-                Vector3 bulletSpawnPosition = transform.position + direction * 0.5f; // ÇÃ·¹ÀÌ¾î À§Ä¡¿¡¼­ ¾à°£ ¶³¾îÁø À§Ä¡
+                // ï¿½Ñ¾ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+                Vector3 bulletSpawnPosition = transform.position + direction * 0.5f; // ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ï¿½ï¿½ ï¿½à°£ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡
 
-                // ÃÑ¾ËÀ» »ý¼ºÇÏ°í ¹ß»ç
+                // ï¿½Ñ¾ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ ï¿½ß»ï¿½
                 GameObject bullet = Instantiate(shotGunPrefab, bulletSpawnPosition, Quaternion.identity);
                 Rigidbody2D bulletRb = bullet.GetComponent<Rigidbody2D>();
                 if (bulletRb != null)
                 {
                     bulletRb.velocity = direction * bulletSpeed;
                 }
-                // ÃÑ¾ËÀÇ Sprite Renderer ¼³Á¤
+                // ï¿½Ñ¾ï¿½ï¿½ï¿½ Sprite Renderer ï¿½ï¿½ï¿½ï¿½
                 SpriteRenderer bulletSr = bullet.GetComponent<SpriteRenderer>();
                 if (bulletSr != null)
                 {
-                    bulletSr.sortingLayerName = "Player"; // ÃÑ¾ËÀÇ sorting layer¸¦ ÇÃ·¹ÀÌ¾î¿Í °°Àº °ÍÀ¸·Î ¼³Á¤
-                    bulletSr.sortingOrder = 1; // ÇÃ·¹ÀÌ¾îº¸´Ù ¾Õ¿¡ º¸ÀÌµµ·Ï ¼³Á¤
+                    bulletSr.sortingLayerName = "Player"; // ï¿½Ñ¾ï¿½ï¿½ï¿½ sorting layerï¿½ï¿½ ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+                    bulletSr.sortingOrder = 1; // ï¿½Ã·ï¿½ï¿½Ì¾îº¸ï¿½ï¿½ ï¿½Õ¿ï¿½ ï¿½ï¿½ï¿½Ìµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
                 }
-                // ÇÃ·¹ÀÌ¾î¿Í ÃÑ¾Ë °£ÀÇ Ãæµ¹À» ¹«½Ã
+                // ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ï¿½ ï¿½Ñ¾ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½æµ¹ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
                 Collider2D playerCollider = GetComponent<Collider2D>();
                 Collider2D bulletCollider = bullet.GetComponent<Collider2D>();
                 if (playerCollider != null && bulletCollider != null)
@@ -162,14 +168,14 @@ public class ShotGun : Skill
                     Physics2D.IgnoreCollision(playerCollider, bulletCollider);
                 }
 
-                // ÃÑ¾ËÀÇ canPenetrate º¯¼ö¸¦ true·Î ¼³Á¤ÇÏ¿© °üÅë °¡´É ¼³Á¤
+                // ï¿½Ñ¾ï¿½ï¿½ï¿½ canPenetrate ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ trueï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
                 Bullet bulletScript = bullet.GetComponent<Bullet>();
                 if (bulletScript != null)
                 {
                     bulletScript.canPenetrate = true;
                     bulletScript.damage = this.skillDamage;
 
-                    // ¸ó½ºÅÍ¿Í Ãæµ¹ ½Ã µ¥¹ÌÁö¸¦ ÀÔÈ÷´Â ÀÌº¥Æ® ±¸µ¶
+                    // ï¿½ï¿½ï¿½Í¿ï¿½ ï¿½æµ¹ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìºï¿½Æ® ï¿½ï¿½ï¿½ï¿½
                     bulletScript.OnHitMonster += (hitMonster) =>
                     {
                         Monster monster = hitMonster.GetComponent<Monster>();
@@ -194,37 +200,37 @@ public class ShotGun : Skill
         }
 
 
-    void shootGun_5() // ¼¦°Ç 5¹ß
+    void shootGun_5() // ï¿½ï¿½ï¿½ï¿½ 5ï¿½ï¿½
             {
-                Vector3 baseDirection = finalDir;  // ±âº» ¹ß»ç ¹æÇâÀ» ¸¶Áö¸· ¹Ù¶óº» ¹æÇâÀ¸·Î ¼³Á¤
-                float angleStep = 24.0f;  // °¢ ÃÑ¾Ë °£ÀÇ °¢µµ Â÷ÀÌ
-                float initialAngle = -48.0f;  // Ã¹ ¹øÂ° ÃÑ¾ËÀÌ ¹ß»çµÇ´Â °¢µµ
+                Vector3 baseDirection = finalDir;  // ï¿½âº» ï¿½ß»ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù¶ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+                float angleStep = 24.0f;  // ï¿½ï¿½ ï¿½Ñ¾ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+                float initialAngle = -48.0f;  // Ã¹ ï¿½ï¿½Â° ï¿½Ñ¾ï¿½ï¿½ï¿½ ï¿½ß»ï¿½Ç´ï¿½ ï¿½ï¿½ï¿½ï¿½
 
-                // °¢µµ¸¦ ±âÁØÀ¸·Î 5¹ßÀÇ ÃÑ¾ËÀ» ¹ß»ç
+                // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 5ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ¾ï¿½ï¿½ï¿½ ï¿½ß»ï¿½
                 for (int i = 0; i < 5; i++)
                 {
-                    // °¢ ÃÑ¾ËÀÇ ¹æÇâÀ» °è»ê
-                    float angle = initialAngle + angleStep * i;  // -48µµ¿¡¼­ ½ÃÀÛÇØ¼­ 24µµ °£°ÝÀ¸·Î ¹ß»ç
+                    // ï¿½ï¿½ ï¿½Ñ¾ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
+                    float angle = initialAngle + angleStep * i;  // -48ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ 24ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß»ï¿½
                     Vector3 direction = Quaternion.Euler(0, 0, angle) * baseDirection;
 
-                    // ÃÑ¾Ë »ý¼º À§Ä¡¸¦ ÇÃ·¹ÀÌ¾î ¾ÕÂÊÀ¸·Î ¼³Á¤
-                    Vector3 bulletSpawnPosition = transform.position + direction * 0.5f; // ÇÃ·¹ÀÌ¾î À§Ä¡¿¡¼­ ¾à°£ ¶³¾îÁø À§Ä¡
+                    // ï¿½Ñ¾ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+                    Vector3 bulletSpawnPosition = transform.position + direction * 0.5f; // ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ï¿½ï¿½ ï¿½à°£ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡
 
-                    // ÃÑ¾ËÀ» »ý¼ºÇÏ°í ¹ß»ç
+                    // ï¿½Ñ¾ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ ï¿½ß»ï¿½
                     GameObject bullet = Instantiate(shotGunPrefab, bulletSpawnPosition, Quaternion.identity);
                     Rigidbody2D bulletRb = bullet.GetComponent<Rigidbody2D>();
                     if (bulletRb != null)
                     {
                         bulletRb.velocity = direction * bulletSpeed;
                     }
-                    // ÃÑ¾ËÀÇ Sprite Renderer ¼³Á¤
+                    // ï¿½Ñ¾ï¿½ï¿½ï¿½ Sprite Renderer ï¿½ï¿½ï¿½ï¿½
                     SpriteRenderer bulletSr = bullet.GetComponent<SpriteRenderer>();
                     if (bulletSr != null)
                     {
-                        bulletSr.sortingLayerName = "Player"; // ÃÑ¾ËÀÇ sorting layer¸¦ ÇÃ·¹ÀÌ¾î¿Í °°Àº °ÍÀ¸·Î ¼³Á¤
-                        bulletSr.sortingOrder = 1; // ÇÃ·¹ÀÌ¾îº¸´Ù ¾Õ¿¡ º¸ÀÌµµ·Ï ¼³Á¤
+                        bulletSr.sortingLayerName = "Player"; // ï¿½Ñ¾ï¿½ï¿½ï¿½ sorting layerï¿½ï¿½ ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+                        bulletSr.sortingOrder = 1; // ï¿½Ã·ï¿½ï¿½Ì¾îº¸ï¿½ï¿½ ï¿½Õ¿ï¿½ ï¿½ï¿½ï¿½Ìµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
                     }
-                    // ÇÃ·¹ÀÌ¾î¿Í ÃÑ¾Ë °£ÀÇ Ãæµ¹À» ¹«½Ã
+                    // ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ï¿½ ï¿½Ñ¾ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½æµ¹ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
                     Collider2D playerCollider = GetComponent<Collider2D>();
                     Collider2D bulletCollider = bullet.GetComponent<Collider2D>();
                     if (playerCollider != null && bulletCollider != null)
@@ -232,14 +238,14 @@ public class ShotGun : Skill
                         Physics2D.IgnoreCollision(playerCollider, bulletCollider);
                     }
 
-                    // ÃÑ¾ËÀÇ canPenetrate º¯¼ö¸¦ true·Î ¼³Á¤ÇÏ¿© °üÅë °¡´É ¼³Á¤
+                    // ï¿½Ñ¾ï¿½ï¿½ï¿½ canPenetrate ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ trueï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
                     Bullet bulletScript = bullet.GetComponent<Bullet>();
                     if (bulletScript != null)
                     {
                         bulletScript.canPenetrate = true;
                         bulletScript.damage = this.skillDamage;
 
-                        // ¸ó½ºÅÍ¿Í Ãæµ¹ ½Ã µ¥¹ÌÁö¸¦ ÀÔÈ÷´Â ÀÌº¥Æ® ±¸µ¶
+                        // ï¿½ï¿½ï¿½Í¿ï¿½ ï¿½æµ¹ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìºï¿½Æ® ï¿½ï¿½ï¿½ï¿½
                         bulletScript.OnHitMonster += (hitMonster) =>
                         {
                             Monster monster = hitMonster.GetComponent<Monster>();

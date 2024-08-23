@@ -4,8 +4,13 @@ using UnityEngine;
 
 public class ElectronicField : Skill
 {
-    public ElectronicField() : base("ElectronicField", 0.25f, 0.5f) { } // 생성자 : 스킬명, 1랩 데미지, 1랩 쿨타임(맞는 몬스터의 쿨타임)
-
+    protected override void Awake()
+    {
+        base.Awake();
+        skillName = "ElectronicField";
+        skillDamage = 0.25f;
+        cooldown = 0.5f;
+    }
     private float fieldRadius = 1.5f; // 원 범위 반지름
     WeaknessType weaknessType = WeaknessType.Blow;
 

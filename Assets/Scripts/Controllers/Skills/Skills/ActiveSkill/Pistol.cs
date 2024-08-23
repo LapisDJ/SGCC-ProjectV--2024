@@ -6,20 +6,26 @@ using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class Pistol : Skill
 {
-    WeaknessType weaknessType = WeaknessType.Blow; // °ø°Ý Å¸ÀÓ : Å¸°Ý
-    public Pistol() : base("Pistol", 1f, 3f) { } // »ý¼ºÀÚ : ½ºÅ³¸í, 1·¦ µ¥¹ÌÁö, 1·¦ ÄðÅ¸ÀÓ
-    public GameObject pistolPrefab; // ±ÇÃÑ ÇÁ¸®Æé
+    WeaknessType weaknessType = WeaknessType.Blow; // ï¿½ï¿½ï¿½ï¿½ Å¸ï¿½ï¿½ : Å¸ï¿½ï¿½
+    protected override void Awake()
+    {
+        base.Awake();
+        skillName = "Pistol";
+        skillDamage = 1f;
+        cooldown = 3f;
+    }
+    public GameObject pistolPrefab; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     public float bulletSpeed = 10.0f;
-    public bool canPenetrate = false;   // ÃÑ¾ËÀÌ °üÅëÇÏ´ÂÁö ¿©ºÎ¸¦ °áÁ¤
+    public bool canPenetrate = false;   // ï¿½Ñ¾ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Î¸ï¿½ ï¿½ï¿½ï¿½ï¿½
 
 
-    public override void Activate(GameObject target) // ¸ó½ºÅÍ¿Í »óÈ£ ÀÛ¿ë ·ÎÁ÷
+    public override void Activate(GameObject target) // ï¿½ï¿½ï¿½Í¿ï¿½ ï¿½ï¿½È£ ï¿½Û¿ï¿½ ï¿½ï¿½ï¿½ï¿½
     {
         GameObject nearestMonster = FindNearestMonster();
         if (nearestMonster != null)
         {
             Vector3 direction = (nearestMonster.transform.position - transform.position).normalized;
-            Vector3 bulletSpawnPosition = transform.position + direction * 0.5f; // ÇÃ·¹ÀÌ¾î À§Ä¡¿¡¼­ ¾à°£ ¶³¾îÁø À§Ä¡
+            Vector3 bulletSpawnPosition = transform.position + direction * 0.5f; // ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ï¿½ï¿½ ï¿½à°£ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡
             GameObject bullet = Instantiate(pistolPrefab, bulletSpawnPosition, Quaternion.identity);
 
             Rigidbody2D bulletRb = bullet.GetComponent<Rigidbody2D>();
@@ -28,15 +34,15 @@ public class Pistol : Skill
                 bulletRb.velocity = direction * bulletSpeed;
             }
 
-            // ÃÑ¾ËÀÇ Sprite Renderer ¼³Á¤
+            // ï¿½Ñ¾ï¿½ï¿½ï¿½ Sprite Renderer ï¿½ï¿½ï¿½ï¿½
             SpriteRenderer bulletSr = bullet.GetComponent<SpriteRenderer>();
             if (bulletSr != null)
             {
-                bulletSr.sortingLayerName = "Player"; // ÃÑ¾ËÀÇ sorting layer¸¦ ÇÃ·¹ÀÌ¾î¿Í °°Àº °ÍÀ¸·Î ¼³Á¤
-                bulletSr.sortingOrder = 1; // ÇÃ·¹ÀÌ¾îº¸´Ù ¾Õ¿¡ º¸ÀÌµµ·Ï ¼³Á¤
+                bulletSr.sortingLayerName = "Player"; // ï¿½Ñ¾ï¿½ï¿½ï¿½ sorting layerï¿½ï¿½ ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+                bulletSr.sortingOrder = 1; // ï¿½Ã·ï¿½ï¿½Ì¾îº¸ï¿½ï¿½ ï¿½Õ¿ï¿½ ï¿½ï¿½ï¿½Ìµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
             }
 
-            // ÇÃ·¹ÀÌ¾î¿Í ÃÑ¾Ë °£ÀÇ Ãæµ¹À» ¹«½Ã
+            // ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ï¿½ ï¿½Ñ¾ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½æµ¹ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
             Collider2D playerCollider = GetComponent<Collider2D>();
             Collider2D bulletCollider = bullet.GetComponent<Collider2D>();
             if (playerCollider != null && bulletCollider != null)
@@ -44,12 +50,12 @@ public class Pistol : Skill
                 Physics2D.IgnoreCollision(playerCollider, bulletCollider);
             }
 
-            // ¸ó½ºÅÍ¿¡°Ô µ¥¹ÌÁö¸¦ ÁÖ´Â ·ÎÁ÷
+            // ï¿½ï¿½ï¿½Í¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ï¿½
             Bullet bulletScript = bullet.AddComponent<Bullet>();
             bulletScript.damage = this.skillDamage;
             bulletScript.canPenetrate = this.canPenetrate;
 
-            // ÃÑ¾ËÀÌ ¸ó½ºÅÍ¿Í Ãæµ¹ÇÏ¸é ÃÑ¾ËÀ» Á¦°ÅÇÏ´Â ·ÎÁ÷
+            // ï¿½Ñ¾ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Í¿ï¿½ ï¿½æµ¹ï¿½Ï¸ï¿½ ï¿½Ñ¾ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½
             bulletScript.OnHitMonster += (hitMonster) =>
             {
                 Monster monster = hitMonster.GetComponent<Monster>();
@@ -76,36 +82,36 @@ public class Pistol : Skill
             };
         }
 
-        // ·¹º§ÀÌ 8 ÀÌ»óÀÏ °æ¿ì 2È¸ °ø°Ý
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 8 ï¿½Ì»ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ 2È¸ ï¿½ï¿½ï¿½ï¿½
         if (level >= 8)
         {
             StartCoroutine(DoubleAttack(target));
         }
     }
 
-    public override void LevelUp() // ±ÇÃÑ ·¹º§¾÷ ·ÎÁ÷
+    public override void LevelUp() // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     {
-        base.LevelUp(); // ½ºÅ³ ·¹º§¾÷
+        base.LevelUp(); // ï¿½ï¿½Å³ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         this.skillDamage += 1f;
 
         switch (level)
         {
-            case 3: // 2->3·¦ : ÄðÅ¸ÀÓ 1ÃÊ °¨¼Ò
+            case 3: // 2->3ï¿½ï¿½ : ï¿½ï¿½Å¸ï¿½ï¿½ 1ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
                 this.cooldown -= 1f;
                 break;
-            case 5: // 4->5·¦ : ÄðÅ¸ÀÓ 1ÃÊ °¨¼Ò
+            case 5: // 4->5ï¿½ï¿½ : ï¿½ï¿½Å¸ï¿½ï¿½ 1ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
                 this.cooldown -= 1f;
                 break;
-            case 7: // 6->7·¦ : µ¥¹ÌÁö 2 Áõ°¡
+            case 7: // 6->7ï¿½ï¿½ : ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 2 ï¿½ï¿½ï¿½ï¿½
                 this.skillDamage += 2f;
                 break;
         }
     }
 
-    private IEnumerator DoubleAttack(GameObject target) // 8·¹º§ 2È¸ °ø°ÝÀ» ÄÚ·çÆ¾À¸·Î ±¸Çö
+    private IEnumerator DoubleAttack(GameObject target) // 8ï¿½ï¿½ï¿½ï¿½ 2È¸ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ú·ï¿½Æ¾ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     {
-        yield return new WaitForSeconds(0.25f); // 0.25ÃÊ ´ë±â
-        Activate(target); // µÎ ¹øÂ° °ø°Ý
+        yield return new WaitForSeconds(0.25f); // 0.25ï¿½ï¿½ ï¿½ï¿½ï¿½
+        Activate(target); // ï¿½ï¿½ ï¿½ï¿½Â° ï¿½ï¿½ï¿½ï¿½
     }
 
 
