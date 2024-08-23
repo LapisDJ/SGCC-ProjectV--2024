@@ -4,31 +4,18 @@ using UnityEngine;
 
 public class Engineer : Player
 {
-    
+    // 엔지니어 전용 체력 설정
+    [SerializeField] private float engineerBaseHP = 100.0f; // 엔지니어 기본 HP
 
-    void Awake() // 초기화: 스탯, 컨트롤러 불러오기
-    {
-        playerStat = GetComponent<Player_Stat>(); // 부모 클래스의 stat 참조
-        playerController = GetComponent<Player_Controller>(); // 부모 클래스의 controller 참조
-    }
 
-    
-    /*
     public void TakeDamage(float damage)
     {
-        base.TakeDamage(damage); // 부모 클래스의 TakeDamage 메서드를 호출
-
-        if (playerStat.HPcurrent <= 0)
-        {
-            Die();
-        }
+        Debug.Log($"엔지니어가 {damage} 데미지를 받았습니다. 남은 체력: {engineerBaseHP}");
     }
 
     public void Die()
     {
-        Debug.Log("엔지니어가 죽었습니다.");
-        // 퀘스트 실패 로직 추가
-        Destroy(gameObject);
+        Debug.Log("엔지니어가 사망했습니다.");
     }
-    */
 }
+ 

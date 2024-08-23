@@ -3,14 +3,12 @@ using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
 
-public class Engineer_Controller : MonoBehaviour
+public class Surv2_Controller : MonoBehaviour
 {
     [SerializeField] Player_Stat playerstat;
     public Transform player; // 플레이어의 위치를 저장
-    public float followDistance = 10f; // 플레이어와 엔지니어 사이의 거리      7f는 임시
-    public float moveSpeedMultiplier = 1.0f; // 엔지니어의 이동 속도 보정값
+    public float followDistance = 6f; // 플레이어와 엔지니어 사이의 거리 임시값   
     public bool isFollowing = false;
-    public bool isMap1 = true;
     Vector2 inputDirection;
     Vector2 dir_temp;   // 플레이어가 마지막으로 바라본 방향 저장
 
@@ -36,6 +34,12 @@ public class Engineer_Controller : MonoBehaviour
         {
             dir_temp = inputDirection;
         }
+        // 플레이어가 설정되지 않은 경우를 방지
+        if (player == null)
+        {
+            Debug.LogWarning("Player reference is missing.");
+            return;
+        }
         // 엔지니어가 플레이어를 따라다니는 기능
         if (isFollowing)
         {
@@ -50,9 +54,9 @@ public class Engineer_Controller : MonoBehaviour
         float distance = Vector2.Distance(transform.position, player.position);
 
             // 엔지니어의 목표 위치를 플레이어의 바라보는 방향 반대쪽으로 계산
-            Vector2 targetPosition = (Vector2)player.position - inputDirection * followDistance;
+            Vector2 targetPosition = (Vector2)player.position - inputDirection * 2f;
 
         // 엔지니어를 목표 위치로 이동
-        transform.position = (Vector2)player.position - inputDirection * followDistance;
+        transform.position = (Vector2)player.position - inputDirection * 2f;
     }
 }
