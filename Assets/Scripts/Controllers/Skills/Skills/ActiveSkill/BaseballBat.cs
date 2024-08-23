@@ -6,7 +6,13 @@ using UnityEngine;
 
 public class BaseballBat : Skill
 {
-    public BaseballBat() : base("BaseballBat", 2f, 4f) { } // 생성자 : 스킬명, 1랩 데미지, 1랩 쿨타임
+    protected override void Awake()
+    {
+        base.Awake();
+        skillName = "BaseballBat";
+        skillDamage = 2f;
+        cooldown = 4f;
+    }
 
     private float angle = Mathf.PI / 8; // 부채꼴 범위의 반각
     private float radius = 1.5f; // 반지름

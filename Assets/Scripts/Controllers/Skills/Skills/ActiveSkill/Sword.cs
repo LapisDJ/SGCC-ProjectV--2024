@@ -7,8 +7,13 @@ public class Sword : Skill
     float attackWidth = 3f; // 가로 범위
     float attackHeight = 1f; //세로 범위
     WeaknessType weaknessType = WeaknessType.Slash; // 공격 타임 : 참격 
-    public Sword() : base("Sword", 2f, 4f) { } // 생성자 : 스킬명, 1랩 데미지, 1랩 쿨타임
-
+    protected override void Awake()
+    {
+        base.Awake();
+        skillName = "Sword";
+        skillDamage = 2f;
+        cooldown = 4f;
+    }
     public override void Activate(GameObject target) // 몬스터와 상호 작용 로직
     {
         Vector2 attackSize = new Vector2(attackWidth, attackHeight); // 공격 범위

@@ -4,7 +4,13 @@ using UnityEngine;
 
 public class CircleSword : Skill
 {
-    public CircleSword() : base("CircleSword", 2f, 4f) { } // 생성자 : 스킬명, 1랩 데미지, 1랩 쿨타임
+    protected override void Awake()
+    {
+        base.Awake();
+        skillName = "CircleSword";
+        skillDamage = 2f;
+        cooldown = 4f;
+    }
 
     private float circleAttackRadius = 2f; // 원 범위 반지름
     WeaknessType weaknessType = WeaknessType.Slash;

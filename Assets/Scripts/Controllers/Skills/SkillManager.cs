@@ -21,31 +21,49 @@ public class SkillManager : MonoBehaviour
     void Start() // 모든 액티브, 패시브 스킬 초기화 후 담기
     {
         // 액티브 스킬 초기화
-        availableActiveSkills.Add(new BaseballBat());
-        availableActiveSkills.Add(new Bazooka());
-        availableActiveSkills.Add(new CircleSword());
-        availableActiveSkills.Add(new ElectronicField());
-        availableActiveSkills.Add(new Pistol());
-        availableActiveSkills.Add(new RotateKnifeDrone());
-        availableActiveSkills.Add(new ShotGun());
+        availableActiveSkills.Add(CreateActiveSkill<BaseballBat>());
+        availableActiveSkills.Add(CreateActiveSkill<Bazooka>());
+        availableActiveSkills.Add(CreateActiveSkill<CircleSword>());
+        availableActiveSkills.Add(CreateActiveSkill<ElectronicField>());
+        availableActiveSkills.Add(CreateActiveSkill<Pistol>());
+        availableActiveSkills.Add(CreateActiveSkill<RotateKnifeDrone>());
+        availableActiveSkills.Add(CreateActiveSkill<ShotGun>());
 
         // 패시브 스킬 초기화
-        availablePassiveSkills.Add(new Adrenaline());
-        availablePassiveSkills.Add(new CalculateHelper());
-        availablePassiveSkills.Add(new Coin());
-        availablePassiveSkills.Add(new FatalVirus());
-        availablePassiveSkills.Add(new LearnPill());
-        availablePassiveSkills.Add(new PoweredSkin());
-        availablePassiveSkills.Add(new ProstheticHand());
-        availablePassiveSkills.Add(new RocketBoots());
-        availablePassiveSkills.Add(new TeleportDevice());
+        availablePassiveSkills.Add(CreatePassiveSkill<Adrenaline>());
+        availablePassiveSkills.Add(CreatePassiveSkill<CalculateHelper>());
+        availablePassiveSkills.Add(CreatePassiveSkill<Coin>());
+        availablePassiveSkills.Add(CreatePassiveSkill<FatalVirus>());
+        availablePassiveSkills.Add(CreatePassiveSkill<LearnPill>());
+        availablePassiveSkills.Add(CreatePassiveSkill<PoweredSkin>());
+        availablePassiveSkills.Add(CreatePassiveSkill<ProstheticHand>());
+        availablePassiveSkills.Add(CreatePassiveSkill<RocketBoots>());
+        availablePassiveSkills.Add(CreatePassiveSkill<TeleportDevice>());
+    }
+    private T CreateActiveSkill<T>() where T : Skill
+    {
+        GameObject skillObject = new GameObject(typeof(T).Name);
+        return skillObject.AddComponent<T>();
+    }
+    private T CreatePassiveSkill<T>() where T : PassiveSkill
+    {
+        GameObject skillObject = new GameObject(typeof(T).Name);
+        return skillObject.AddComponent<T>();
     }
     public static List<Skill> skillchoices;
     public static List<PassiveSkill> passivechoices;
     public void LevelUp()
     {
         skillchoices = GetRandomSkillChoices(); // 레벨업 ui에 선택될 액티브 스킬들
+        foreach (Skill active in skillchoices)
+        {
+            Debug.Log("ui에 표시되는 액티브 스킬 선택 목록" + active.skillName);//지금까지 나온 모든 액티브 스킬의 이름을 콘솔창에 띄움
+        }
         passivechoices = GetRandomPassiveChoices(); // 레벨업 ui에 선택될 패시브 스킬들
+        foreach (PassiveSkill passive in passivechoices)
+        {
+            Debug.Log("ui에 표시되는 액티브 스킬 선택 목록" + passive.skillName);//지금까지 나온 모든 액티브 스킬의 이름을 콘솔창에 띄움
+        }
     }
     void Update()
     {
@@ -55,24 +73,24 @@ public class SkillManager : MonoBehaviour
     private List<Skill> GetRandomSkillChoices() // 로직에 따라 액티브 스킬 2개 반환
     {
         var retList = new List<Skill>();
-        if(activeSkills.Count >= maxActiveSkills)//액티브 스킬 가짓수를 모두 채우면 가지고 있는 액티브 중에서 가져옴
+        if (activeSkills.Count >= maxActiveSkills)//액티브 스킬 가짓수를 모두 채우면 가지고 있는 액티브 중에서 가져옴
         {
-            int rand1 = UnityEngine.Random.Range(0,maxActiveSkills);
-            int rand2 = UnityEngine.Random.Range(0,maxActiveSkills);
-            while(rand1 == rand2)
+            int rand1 = UnityEngine.Random.Range(0, maxActiveSkills);
+            int rand2 = UnityEngine.Random.Range(0, maxActiveSkills);
+            while (rand1 == rand2)
             {
-                rand2 = UnityEngine.Random.Range(0,maxActiveSkills);
+                rand2 = UnityEngine.Random.Range(0, maxActiveSkills);
             }
             retList.Add(availableActiveSkills[rand1]);
             retList.Add(availableActiveSkills[rand2]);
         }
         else//액티브 스킬 가짓수를 모두 채우지 않았으면 모든 리스트에서 가져옴
         {
-            int rand1 = UnityEngine.Random.Range(0,7);
-            int rand2 = UnityEngine.Random.Range(0,7);
-            while(rand1 == rand2)
+            int rand1 = UnityEngine.Random.Range(0, 7);
+            int rand2 = UnityEngine.Random.Range(0, 7);
+            while (rand1 == rand2)
             {
-                rand2 = UnityEngine.Random.Range(0,7);
+                rand2 = UnityEngine.Random.Range(0, 7);
             }
             retList.Add(availableActiveSkills[rand1]);
             retList.Add(availableActiveSkills[rand2]);
@@ -83,24 +101,24 @@ public class SkillManager : MonoBehaviour
     {
         //액티브와 방식은 같다.
         var retList = new List<PassiveSkill>();
-        if(passiveSkills.Count >= maxPassiveSkills)
+        if (passiveSkills.Count >= maxPassiveSkills)
         {
-            int rand1 = UnityEngine.Random.Range(0,maxPassiveSkills);
-            int rand2 = UnityEngine.Random.Range(0,maxPassiveSkills);
-            while(rand1 == rand2)
+            int rand1 = UnityEngine.Random.Range(0, maxPassiveSkills);
+            int rand2 = UnityEngine.Random.Range(0, maxPassiveSkills);
+            while (rand1 == rand2)
             {
-                rand2 = UnityEngine.Random.Range(0,maxPassiveSkills);
+                rand2 = UnityEngine.Random.Range(0, maxPassiveSkills);
             }
             retList.Add(availablePassiveSkills[rand1]);
             retList.Add(availablePassiveSkills[rand2]);
         }
         else
         {
-            int rand1 = UnityEngine.Random.Range(0,9);
-            int rand2 = UnityEngine.Random.Range(0,9);
-            while(rand1 == rand2)
+            int rand1 = UnityEngine.Random.Range(0, 9);
+            int rand2 = UnityEngine.Random.Range(0, 9);
+            while (rand1 == rand2)
             {
-                rand2 = UnityEngine.Random.Range(0,9);
+                rand2 = UnityEngine.Random.Range(0, 9);
             }
             retList.Add(availablePassiveSkills[rand1]);
             retList.Add(availablePassiveSkills[rand2]);
@@ -121,11 +139,13 @@ public class SkillManager : MonoBehaviour
         }
         foreach (Skill active in activeSkills)
         {
-            Debug.Log(active.skillName);//지금까지 나온 모든 액티브 스킬의 이름을 콘솔창에 띄움
+            Debug.Log("레벨업된 액티브 스킬 이름" + active.skillName);//지금까지 나온 모든 액티브 스킬의 이름을 콘솔창에 띄움
+            Debug.Log("레벨업된 액티브 스킬 레벨" + active.level);
         }
         foreach (PassiveSkill passive in passiveSkills)
         {
-            Debug.Log(passive.skillName);//지금까지 나온 모든 패지브 스킬의 이름을 콘솔창에 띄움
+            Debug.Log("레벨업된 패시브 스킬 이름" + passive.skillName);//지금까지 나온 모든 패지브 스킬의 이름을 콘솔창에 띄움
+            Debug.Log("레벨업된 패시브 스킬 레벨" + passive.level);
         }
         skillchoices.Clear();//랜덤으로 두 개씩 뽑은 스킬 리스트들 초기화.
         passivechoices.Clear();
@@ -134,21 +154,21 @@ public class SkillManager : MonoBehaviour
     private static void LevelUpSkill(Skill skill)
     {
         cantfind = true;//일단 true로 초기화
-        foreach(Skill active in activeSkills)
+        foreach (Skill active in activeSkills)
         {
-            if(active == skill)//지금까지 고른 스킬리스트에 레벨업할 스킬이 있다면 실행.
+            if (active == skill)//지금까지 고른 스킬리스트에 레벨업할 스킬이 있다면 실행.
             {
                 active.LevelUp();//스킬 레벨업(고른 적 있는 리스트의)
                 cantfind = false;//고른적 있다고 바꿔버림.
                 break;
             }
         }
-        if(cantfind)//이전 if문이 발동되지 않음(리스트에 없음)
+        if (cantfind)//이전 if문이 발동되지 않음(리스트에 없음)
         {
             activeSkills.Add(skill);//리스트에 없다는 이야기이므로 일단 레벨업
-            foreach(Skill active in activeSkills)//아까 Add한 스킬 찾아서 레벨업.
+            foreach (Skill active in activeSkills)//아까 Add한 스킬 찾아서 레벨업.
             {
-                if(active == skill)
+                if (active == skill)
                 {
                     active.LevelUp();
                     cantfind = false;
@@ -160,21 +180,21 @@ public class SkillManager : MonoBehaviour
     private static void LevelUpPassiveSkill(PassiveSkill skill)
     {
         cantfind = true;
-        foreach(PassiveSkill passive in passiveSkills)
+        foreach (PassiveSkill passive in passiveSkills)
         {
-            if(passive == skill)
+            if (passive == skill)
             {
                 passive.LevelUp();
                 cantfind = false;
                 break;
             }
         }
-        if(cantfind)
+        if (cantfind)
         {
             passiveSkills.Add(skill);
-            foreach(PassiveSkill passive in passiveSkills)
+            foreach (PassiveSkill passive in passiveSkills)
             {
-                if(passive == skill)
+                if (passive == skill)
                 {
                     passive.LevelUp();
                     cantfind = false;
