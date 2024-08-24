@@ -50,7 +50,7 @@ public class Bazooka : Skill
     }
 
 
-    public override void Activate(GameObject target) // ���Ϳ� ��ȣ �ۿ� ����
+    public override void Activate() // ���Ϳ� ��ȣ �ۿ� ����
     {
         GameObject nearestMonster = FindNearestMonster();
         if (nearestMonster != null)

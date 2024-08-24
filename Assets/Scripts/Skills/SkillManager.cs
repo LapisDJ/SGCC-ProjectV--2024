@@ -67,7 +67,30 @@ public class SkillManager : MonoBehaviour
     }
     void Update()
     {
+        // 디버깅용 코드입니다. Q, W, E, R 키를 눌렀을 때 스킬 발동
+        if (Input.GetKeyDown(KeyCode.Q) && activeSkills.Count > 0)
+        {
+            activeSkills[0].Activate(); // Q에 해당하는 첫 번째 스킬 발동
+            Debug.Log("Q 키로 " + activeSkills[0].skillName + " 스킬을 발동했습니다.");
+        }
 
+        if (Input.GetKeyDown(KeyCode.W) && activeSkills.Count > 1)
+        {
+            activeSkills[1].Activate(); // W에 해당하는 두 번째 스킬 발동
+            Debug.Log("W 키로 " + activeSkills[1].skillName + " 스킬을 발동했습니다.");
+        }
+
+        if (Input.GetKeyDown(KeyCode.E) && activeSkills.Count > 2)
+        {
+            activeSkills[2].Activate(); // E에 해당하는 세 번째 스킬 발동
+            Debug.Log("E 키로 " + activeSkills[2].skillName + " 스킬을 발동했습니다.");
+        }
+
+        if (Input.GetKeyDown(KeyCode.R) && activeSkills.Count > 3)
+        {
+            activeSkills[3].Activate(); // R에 해당하는 네 번째 스킬 발동
+            Debug.Log("R 키로 " + activeSkills[3].skillName + " 스킬을 발동했습니다.");
+        }
     }
 
     private List<Skill> GetRandomSkillChoices() // 로직에 따라 액티브 스킬 2개 반환

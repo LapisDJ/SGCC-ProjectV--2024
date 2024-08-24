@@ -14,7 +14,7 @@ public class CircleSword : Skill
 
     private float circleAttackRadius = 2f; // 원 범위 반지름
     WeaknessType weaknessType = WeaknessType.Slash;
-    public override void Activate(GameObject target) // 몬스터와 상호 작용 로직
+    public override void Activate() // 몬스터와 상호 작용 로직
     {
         Monster monster;
         float totalDamage = 0f; // 몬스터가 입는 총 데미지

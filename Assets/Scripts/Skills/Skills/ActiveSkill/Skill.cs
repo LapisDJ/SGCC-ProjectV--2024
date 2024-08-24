@@ -19,13 +19,13 @@ public abstract class Skill : MonoBehaviour
     public float cooldown; // 쿨타임
     protected Player player;
 
-    // 생성자에서는 데이터를 초기화하지 않습니다. 대신 Awake 또는 Start를 사용합니다.
+    // 생성자에서는 데이터를 초기화하지 않습니다. 대신 Awake 또는 Start를 사용
     protected Skill() // 기본 생성자
     {
         level = 0;
     }
 
-    // Unity의 API를 사용하는 초기화는 Awake에서 처리합니다.
+    // Unity의 API를 사용하는 초기화는 Awake에서 처리
     protected virtual void Awake()
     {
         player = FindObjectOfType<Player>();
@@ -48,7 +48,7 @@ public abstract class Skill : MonoBehaviour
     }
 
     // 몬스터와 상호작용하는 추상 메서드
-    public abstract void Activate(GameObject target);
+    public abstract void Activate();
 
     // 데미지 계산을 위한 메서드
     protected float finalDamage(DamageInfo damageInfo)
@@ -59,4 +59,5 @@ public abstract class Skill : MonoBehaviour
         else
             return basicDamage;
     }
+
 }

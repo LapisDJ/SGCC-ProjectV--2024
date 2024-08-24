@@ -48,7 +48,7 @@ public class ShotGun : Skill
         }
     }
 
-    public override void Activate(GameObject target) // ���Ϳ� ��ȣ �ۿ� ����
+    public override void Activate() // ���Ϳ� ��ȣ �ۿ� ����
     {
         switch (numOfBullet)
         {

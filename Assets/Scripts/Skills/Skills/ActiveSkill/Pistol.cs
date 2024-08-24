@@ -19,7 +19,7 @@ public class Pistol : Skill
     public bool canPenetrate = false;   // �Ѿ��� �����ϴ��� ���θ� ����
 
 
-    public override void Activate(GameObject target) // ���Ϳ� ��ȣ �ۿ� ����
+    public override void Activate() // ���Ϳ� ��ȣ �ۿ� ����
     {
         GameObject nearestMonster = FindNearestMonster();
         if (nearestMonster != null)
@@ -85,7 +85,7 @@ public class Pistol : Skill
         // ������ 8 �̻��� ��� 2ȸ ����
         if (level >= 8)
         {
-            StartCoroutine(DoubleAttack(target));
+            StartCoroutine(DoubleAttack());
         }
     }
 
@@ -108,10 +108,10 @@ public class Pistol : Skill
         }
     }
 
-    private IEnumerator DoubleAttack(GameObject target) // 8���� 2ȸ ������ �ڷ�ƾ���� ����
+    private IEnumerator DoubleAttack() // 8���� 2ȸ ������ �ڷ�ƾ���� ����
     {
         yield return new WaitForSeconds(0.25f); // 0.25�� ���
-        Activate(target); // �� ��° ����
+        Activate(); // �� ��° ����
     }
 
 

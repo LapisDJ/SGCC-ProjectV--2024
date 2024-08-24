@@ -19,7 +19,7 @@ public class RotateKnifeDrone : Skill
     WeaknessType weaknessType = WeaknessType.Slash;
 
 
-    public override void Activate(GameObject target) // 몬스터와 상호 작용 로직
+    public override void Activate() // 몬스터와 상호 작용 로직
     {
         foreach (GameObject knife in knifeDrones)
         {

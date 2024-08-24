@@ -17,7 +17,7 @@ public class ElectronicField : Skill
     // 각 몬스터의 마지막 데미지 시간을 저장하는 딕셔너리
     private Dictionary<Collider2D, float> lastDamageTime = new Dictionary<Collider2D, float>();
 
-    public override void Activate(GameObject target) // 몬스터와 상호 작용 로직
+    public override void Activate() // 몬스터와 상호 작용 로직
     {
         Monster monster;
         float totalDamage = 0f; // 몬스터가 입는 총 데미지

@@ -14,7 +14,7 @@ public class Sword : Skill
         skillDamage = 2f;
         cooldown = 4f;
     }
-    public override void Activate(GameObject target) // 몬스터와 상호 작용 로직
+    public override void Activate() // 몬스터와 상호 작용 로직
     {
         Vector2 attackSize = new Vector2(attackWidth, attackHeight); // 공격 범위
         Vector2 attackPosition = player.transform.position; // 기준점 : 플레이어 위치
@@ -45,7 +45,7 @@ public class Sword : Skill
 
             if (level >= 8)
             {
-                StartCoroutine(DoubleAttack(target));
+                StartCoroutine(DoubleAttack());
             }
         }
     }
@@ -72,10 +72,10 @@ public class Sword : Skill
         }
     }
 
-    private IEnumerator DoubleAttack(GameObject target) // 8레벨 2회 공격을 코루틴으로 구현
+    private IEnumerator DoubleAttack() // 8레벨 2회 공격을 코루틴으로 구현
     {
         yield return new WaitForSeconds(0.25f); // 0.25초 대기
-        Activate(target); // 두 번째 공격
+        Activate(); // 두 번째 공격
     }
 
 }
