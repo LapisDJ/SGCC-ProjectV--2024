@@ -9,7 +9,7 @@ public class Adrenaline : PassiveSkill
         skillName = "Adrenaline";
         effect = 0.09f;
         cooldown = 0f;
-        icon.sprite = Resources.Load<Sprite>("Assets/TeamAssets/skill_icon/5.png");
+        icon.sprite = Resources.Load<Sprite>("UI/Icon/5.png");
     }
         public override void LevelUp() // 아드레날린 주사기 레벨업 로직
     {

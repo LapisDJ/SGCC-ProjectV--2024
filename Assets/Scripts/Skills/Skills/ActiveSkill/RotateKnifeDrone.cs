@@ -10,7 +10,7 @@ public class RotateKnifeDrone : Skill
         skillName = "RotateKnifeDrone";
         skillDamage = 1f;
         cooldown = 0f;
-        icon = Resources.Load<Sprite>("Assets/TeamAssets/skill_icon/17.png");
+        icon = Resources.Load<Sprite>("UI/Icon/17.png");
     }
     public GameObject knifeDronePrefab; // 칼날 드론 프리펩
     public float rotationSpeed = 90f; // 1랩 칼날 회전 속도

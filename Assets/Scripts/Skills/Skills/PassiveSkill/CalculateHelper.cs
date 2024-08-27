@@ -9,7 +9,7 @@ public class CalculateHelper : PassiveSkill
         skillName = "CalculateHelper";
         effect = 0.2f;
         cooldown = 0f;
-        icon.sprite = Resources.Load<Sprite>("Assets/TeamAssets/skill_icon/1.png");
+        icon.sprite = Resources.Load<Sprite>("UI/Icon/1.png");
     }
     public override void LevelUp() // 연산 보조 장치 레벨업 로직
     {

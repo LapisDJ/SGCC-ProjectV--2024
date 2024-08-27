@@ -15,7 +15,7 @@ public class Bazooka : Skill
         skillName = "Bazooka";
         skillDamage = 2f;
         cooldown = 5f;
-        icon = Resources.Load<Sprite>("Assets/TeamAssets/skill_icon/20.png");
+        icon = Resources.Load<Sprite>("UI/Icon/20");
     }
     public override void LevelUp() // 바주카포 레벨업 로직
     {
