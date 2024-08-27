@@ -10,7 +10,7 @@ public class CircleSword : Skill
         skillName = "CircleSword";
         skillDamage = 2f;
         cooldown = 4f;
-        icon.sprite = Resources.Load<Sprite>("Assets/TeamAssets/skill_icon/11.png");
+        icon = Resources.Load<Sprite>("Assets/TeamAssets/skill_icon/11.png");
     }
 
     private float circleAttackRadius = 2f; // 원 범위 반지름

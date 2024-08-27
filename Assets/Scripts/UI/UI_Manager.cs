@@ -89,10 +89,10 @@ public class UI_Manager : MonoBehaviour
         }
         if(isskillchoose)
         {
-            skillchoiceimages[0] = SkillManager.skillchoices[0].icon;
-            skillchoiceimages[1] = SkillManager.skillchoices[0].icon;
-            skillchoiceimages[2] = SkillManager.passivechoices[0].icon;
-            skillchoiceimages[3] = SkillManager.passivechoices[0].icon;
+            skillchoiceimages[0].sprite = SkillManager.skillchoices[0].icon.sprite;
+            skillchoiceimages[1].sprite = SkillManager.skillchoices[1].icon.sprite;
+            skillchoiceimages[2].sprite = SkillManager.passivechoices[0].icon.sprite;
+            skillchoiceimages[3].sprite = SkillManager.passivechoices[1].icon.sprite;
             SkillChooseStart();
             isskillchoose = false;
         }
@@ -148,9 +148,9 @@ public class UI_Manager : MonoBehaviour
         {
             bool isActive = i < SkillManager.activeSkills.Count;
             weaponImages[i].enabled = isActive;
-            weaponImages[i] = SkillManager.activeSkills[i].icon;
+            weaponImages[i].sprite = SkillManager.activeSkills[i].icon.sprite;
             hideWeaponImages[i].enabled = isActive;
-            hideWeaponImages[i] = SkillManager.activeSkills[i].icon;
+            hideWeaponImages[i].sprite = SkillManager.activeSkills[i].icon.sprite;
         }
     }
 

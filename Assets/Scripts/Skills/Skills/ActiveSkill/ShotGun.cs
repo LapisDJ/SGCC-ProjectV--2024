@@ -12,7 +12,7 @@ public class ShotGun : Skill
         skillName = "ShotGun";
         skillDamage = 1f;
         cooldown = 5f;
-        icon.sprite = Resources.Load<Sprite>("Assets/TeamAssets/skill_icon/10.png");
+        icon = Resources.Load<Sprite>("Assets/TeamAssets/skill_icon/10.png");
     }
 
     public GameObject shotGunPrefab; // 샷건 프리펩
