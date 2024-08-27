@@ -9,6 +9,7 @@ public class ProstheticHand : PassiveSkill
         skillName = "ProstheticHand";
         effect = 0.08f;
         cooldown = 0f;
+        icon.sprite = Resources.Load<Sprite>("Assets/TeamAssets/skill_icon/3.png");
     }
     public override void LevelUp() // 업무용 의수 레벨업 로직
     {

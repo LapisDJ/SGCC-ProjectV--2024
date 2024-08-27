@@ -9,6 +9,7 @@ public class Coin : PassiveSkill
         skillName = "Coin";
         effect = 0.05f;
         cooldown = 0f;
+        icon.sprite = Resources.Load<Sprite>("Assets/TeamAssets/skill_icon/2.png");
     }
     public override void LevelUp() // 동전 레벨업 로직
     {

@@ -13,6 +13,7 @@ public class Pistol : Skill
         skillName = "Pistol";
         skillDamage = 1f;
         cooldown = 3f;
+        icon.sprite = Resources.Load<Sprite>("Assets/TeamAssets/skill_icon/13.png");
     }
     [SerializeField] public GameObject pistolPrefab;// 권총 프리펩
     public float bulletSpeed = 10.0f;

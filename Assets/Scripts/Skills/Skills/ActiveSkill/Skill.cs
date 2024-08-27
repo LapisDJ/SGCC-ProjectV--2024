@@ -17,6 +17,7 @@ public abstract class Skill : MonoBehaviour
     public int level; // 스킬 레벨
     public float skillDamage; // 데미지
     public float cooldown; // 쿨타임
+    public Image icon;//아이콘
     [SerializeField] protected Player__ player;
 
     // 생성자에서는 데이터를 초기화하지 않습니다. 대신 Awake 또는 Start를 사용

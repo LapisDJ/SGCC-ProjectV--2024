@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PassiveSkill : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class PassiveSkill : MonoBehaviour
     public int level; //스킬 레벨
     public float effect; // 효과량
     public float cooldown; // 쿨타임
+    public Image icon;//아이콘
     protected PassiveSkill() // 기본 생성자
     {
         level = 0;

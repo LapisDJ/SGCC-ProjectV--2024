@@ -13,6 +13,7 @@ public class Sword : Skill
         skillName = "Sword";
         skillDamage = 2f;
         cooldown = 4f;
+        icon.sprite = Resources.Load<Sprite>("Assets/TeamAssets/skill_icon/11.png");
     }
     public override void Activate() // 몬스터와 상호 작용 로직
     {

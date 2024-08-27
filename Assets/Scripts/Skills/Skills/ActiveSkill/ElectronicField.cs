@@ -10,6 +10,7 @@ public class ElectronicField : Skill
         skillName = "ElectronicField";
         skillDamage = 0.25f;
         cooldown = 0.5f;
+        icon.sprite = Resources.Load<Sprite>("Assets/TeamAssets/skill_icon/9.png");
     }
     private float fieldRadius = 1.5f; // 원 범위 반지름
     WeaknessType weaknessType = WeaknessType.Blow;

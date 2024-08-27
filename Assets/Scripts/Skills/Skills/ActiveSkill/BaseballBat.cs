@@ -15,6 +15,7 @@ public class BaseballBat : Skill
         skillName = "BaseballBat";
         skillDamage = 2f;
         cooldown = 4f;
+        icon.sprite = Resources.Load<Sprite>("Assets/TeamAssets/skill_icon/12.png");
     }
 
     private float angle = Mathf.PI / 8; // 부채꼴 범위의 반각
