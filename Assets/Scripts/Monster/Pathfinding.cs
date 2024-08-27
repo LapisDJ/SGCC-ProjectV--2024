@@ -1,6 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq.Expressions;
+using System.Threading;
+using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using Debug = UnityEngine.Debug;
@@ -16,10 +20,14 @@ public class SimplePathfinding : MonoBehaviour
     public float Mon_speed = 20f;
 
     private Dictionary<Vector3Int, List<Vector3Int>> graph = new Dictionary<Vector3Int, List<Vector3Int>>();
-
-
-
-
+    Vector3 nextPosition;
+    Vector3 nextPosition_temp;
+    private int path_x = 0;
+    private int path_y = 0;
+    private float obstacle_distance = 1f;
+    public float obstacleCheckRadius = 0.5f; // 장애물 체크 반경
+    public Vector3Int previous_nextcellPosition = new Vector3Int();
+    int ifStart = 0;
     void Start()
     {
         GenerateGraphFromTilemap();
@@ -33,23 +41,13 @@ public class SimplePathfinding : MonoBehaviour
         if (graph.ContainsKey(monsterCellPosition) && graph.ContainsKey(playerCellPosition))
         {
             List<Vector3Int> path = FindPath(monsterCellPosition, playerCellPosition);
-            
+
             if (path != null && path.Count > 0)
             {
                 int i = 1;
-                //Vector3 nextPosition = backgroundTilemap.CellToWorld(path[0]);
-                Vector3Int nextCellPosition = path[0]; // 기본적으로는 첫 번째 셀을 목표로 설정
-                Vector3Int up = new Vector3Int(monsterCellPosition.x, monsterCellPosition.y + 1, monsterCellPosition.z);
-                Vector3Int down = new Vector3Int(monsterCellPosition.x, monsterCellPosition.y - 1, monsterCellPosition.z);
-                Vector3Int left = new Vector3Int(monsterCellPosition.x - 1, monsterCellPosition.y, monsterCellPosition.z);
-                Vector3Int right = new Vector3Int(monsterCellPosition.x + 1, monsterCellPosition.y, monsterCellPosition.z);
-
-                Vector3Int up_left = new Vector3Int(monsterCellPosition.x - 1, monsterCellPosition.y + 1, monsterCellPosition.z);
-                Vector3Int down_left = new Vector3Int(monsterCellPosition.x - 1, monsterCellPosition.y - 1, monsterCellPosition.z);
-                Vector3Int down_right = new Vector3Int(monsterCellPosition.x + 1, monsterCellPosition.y - 1, monsterCellPosition.z);
-                Vector3Int up_right = new Vector3Int(monsterCellPosition.x + 1, monsterCellPosition.y + 1, monsterCellPosition.z);
-                // path[0]부터 탐색하여 x 또는 y 좌표가 모두 바뀌는 path[i]를 찾음
-                for (i = 1; i < path.Count; i++)
+                Vector3Int nextCellPosition = path[0]; // 기본적으로는 첫 번째 셀을 목표로 설정 
+                /*
+                for (i = 1; i < path.Count; i++)    // 이동하는 그래프 노드에서 일직선 방향의 마지막 노드를 nextCellPosition에 저장
                 {
                     if (path[i].x != path[0].x && path[i].y != path[0].y)
                     {
@@ -57,67 +55,50 @@ public class SimplePathfinding : MonoBehaviour
                         break;
                     }
                 }
-
-                    for (int j = i; j < path.Count; j++)
+                */
+                /*
+                int j = 1;
+                for (j = i; j < path.Count; j++)
+                {
+                    if (path[j].x != path[i - 1].x && path[j].y != path[i - 1].y)
                     {
-                        if (path[j].x != path[i-1].x && path[j].y != path[i-1].y)
-                        {
+ 
                             nextCellPosition = path[j - 1];
                             break;
-                        }
                     }
-                if (!graph.ContainsKey(up) || !graph.ContainsKey(down) || !graph.ContainsKey(left) || !graph.ContainsKey(right) || !graph.ContainsKey(up_left) || !graph.ContainsKey(up_right) || !graph.ContainsKey(down_left) || !graph.ContainsKey(down_right))
+                }
+                */
+                if (ifStart == 0)
                 {
-                    Vector3 nextPosition = backgroundTilemap.CellToWorld(path[0]);
-                    bool hasObstacleUp = !graph.ContainsKey(up);
-                    bool hasObstacleDown = !graph.ContainsKey(down);
-                    bool hasObstacleLeft = !graph.ContainsKey(left);
-                    bool hasObstacleRight = !graph.ContainsKey(right);
-                    bool hasObstacleUp_Left = !graph.ContainsKey(up_left);
-                    bool hasObstacleup_Right = !graph.ContainsKey(up_right);
-                    bool hasObstacledown_Left = !graph.ContainsKey(down_left);
-                    bool hasObstacledown_Right = !graph.ContainsKey(down_right);
+                    nextCellPosition = path[0];
+                    ifStart++;
+                }
+                previous_nextcellPosition = nextCellPosition;
+                // 가장 가까운 그래프에 포함되지 않은 타일 찾기
+                Vector3Int closestNonGraphTile = FindClosestNonGraphTile(nextCellPosition);
 
-                    // 장애물이 있는 방향으로 이동하지 않도록 조정
-                    if (hasObstacleUp && nextCellPosition == up)
-                    {
-                        nextPosition += new Vector3(0, -0.9f, 0); // 위쪽에 장애물이 있으면 약간 아래로 이동
-                    }
-                    if (hasObstacleDown && nextCellPosition == down)
-                    {
-                        nextPosition += new Vector3(0, 0.9f, 0); // 아래쪽에 장애물이 있으면 약간 위로 이동
-                    }
-                    if (hasObstacleLeft && nextCellPosition == left)
-                    {
-                        nextPosition += new Vector3(0.9f, 0, 0); // 왼쪽에 장애물이 있으면 약간 오른쪽으로 이동
-                    }
-                    if (hasObstacleRight && nextCellPosition == right)
-                    {
-                        nextPosition += new Vector3(-0.9f, 0, 0); // 오른쪽에 장애물이 있으면 약간 왼쪽으로 이동
-                    }
-                    if (hasObstacleUp_Left && nextCellPosition == up)
-                    {
-                        nextPosition += new Vector3(0.9f, -0.9f, 0); 
-                    }
-                    if (hasObstacleup_Right && nextCellPosition == down)
-                    {
-                        nextPosition += new Vector3(-0.9f, -0.9f, 0); 
-                    }
-                    if (hasObstacledown_Left && nextCellPosition == left)
-                    {
-                        nextPosition += new Vector3(0.9f, 0.9f, 0);
-                    }
-                    if (hasObstacledown_Right && nextCellPosition == right)
-                    {
-                        nextPosition += new Vector3(-0.9f, 0.9f, 0); 
-                    }
-                    monster.position = Vector3.MoveTowards(monster.position, nextPosition, Time.deltaTime * Mon_speed);
+                // 두 점 사이의 거리 계산
+                float distance = Vector3.Distance(backgroundTilemap.CellToWorld(nextCellPosition), backgroundTilemap.CellToWorld(closestNonGraphTile));
+                //Debug.Log(distance);
+                // 거리가 1.5f보다 작을 경우, 거리를 1.5f로 보정
+                if (distance < 1.42f)
+                {
+                    Vector3 direction = (backgroundTilemap.CellToWorld(nextCellPosition) - backgroundTilemap.CellToWorld(closestNonGraphTile)).normalized;
+                    //Debug.Log(direction);
+                    Vector3 adjustedPosition = backgroundTilemap.CellToWorld(closestNonGraphTile) + direction * 0.48f;
+                    
+                    nextPosition = adjustedPosition; // 보정된 위치를 nextPosition에 저장
+                    //Debug.Log(monsterCellPosition + "               " + backgroundTilemap.CellToWorld(nextCellPosition) + "               " + backgroundTilemap.CellToWorld(closestNonGraphTile) + "               " + monster.position + "               " + nextPosition + " aaaaaaaaaaaaa");
                 }
                 else
                 {
-                    Vector3 nextPosition = backgroundTilemap.CellToWorld(nextCellPosition);
-                    monster.position = Vector3.MoveTowards(monster.position, nextPosition, Time.deltaTime * Mon_speed);
+                    nextPosition = backgroundTilemap.CellToWorld(nextCellPosition);
+                    //Debug.Log(monster.position + "               " + nextPosition + " bbbbbbbbbbbbbbbbbb");
                 }
+
+                //monster.position += (nextPosition - monster.position).normalized * Time.deltaTime * Mon_speed;
+                monster.position = Vector3.MoveTowards(monster.position, nextPosition, Mon_speed * Time.deltaTime);
+                //Debug.Log(monster.position);
             }
             else
             {
@@ -129,6 +110,9 @@ public class SimplePathfinding : MonoBehaviour
             Debug.LogError("One of the positions (monster or player) is not in the graph.");
         }
     }
+
+
+    
 
     void GenerateGraphFromTilemap()
     {
@@ -162,6 +146,35 @@ public class SimplePathfinding : MonoBehaviour
             }
         }
     }
+
+
+    Vector3Int FindClosestNonGraphTile(Vector3Int referenceTile)
+    {
+        Vector3Int closestTile = referenceTile;
+        float closestDistance = float.MaxValue;
+
+        for (int x = referenceTile.x - 100; x <= referenceTile.x + 100; x++)
+        {
+            for (int y = referenceTile.y - 100; y <= referenceTile.y + 100; y++)
+            {
+                Vector3Int currentTile = new Vector3Int(x, y, 0);
+
+                if (!graph.ContainsKey(currentTile))
+                {
+                    float distance = Vector3.Distance(backgroundTilemap.CellToWorld(referenceTile), backgroundTilemap.CellToWorld(currentTile));
+
+                    if (distance < closestDistance)
+                    {
+                        closestDistance = distance;
+                        closestTile = currentTile;
+                    }
+                }
+            }
+        }
+
+        return closestTile;
+    }
+
 
     bool IsWalkable(Vector3Int position)
     {
@@ -238,6 +251,7 @@ public class SimplePathfinding : MonoBehaviour
     {
         return Mathf.Abs(a.x - b.x) + Mathf.Abs(a.y - b.y);
     }
+
 }
 
 // 우선순위 큐 클래스 (간단한 최소 힙 구현)
@@ -304,4 +318,8 @@ public class PriorityQueue<T>
         elements[indexA] = elements[indexB];
         elements[indexB] = temp;
     }
+
+    
+
+
 }
