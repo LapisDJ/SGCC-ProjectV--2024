@@ -639,7 +639,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -399.99997, y: -260}
+  m_AnchoredPosition: {x: -400, y: -260}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &221152307
@@ -856,7 +856,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -399.99997, y: 260}
+  m_AnchoredPosition: {x: -400, y: 260}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &359090803
@@ -16731,7 +16731,7 @@ RectTransform:
   m_GameObject: {fileID: 1062601522}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 100}
-  m_LocalScale: {x: 0.016666668, y: 0.016666668, z: 0.016666668}
+  m_LocalScale: {x: 0.016666666, y: 0.016666666, z: 0.016666666}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 789065518}
@@ -17010,8 +17010,35 @@ MonoBehaviour:
   requiredInteractionTime: 10
   interactionRange: 1
   canInteracting: 0
+  canInteracting1: 0
+  canInteracting2: 0
+  canInteracting3: 0
+  canInteracting1_temp: 0
+  canInteracting2_temp: 0
+  canInteracting3_temp: 0
   engineer: {fileID: 584569937}
+  Surv1: {fileID: 0}
+  Surv2: {fileID: 0}
+  Surv3: {fileID: 0}
   distance: 0
+  distance1: 0
+  distance2: 0
+  distance3: 0
+  isInteractionStarted: 0
+  engineerController: {fileID: 0}
+  Surv1Controller: {fileID: 0}
+  Surv2Controller: {fileID: 0}
+  Surv3Controller: {fileID: 0}
+  playerFirst: {x: 0, y: 0, z: 0}
+  tempPlayerPosition: {x: 0, y: 0, z: 0}
+  hp_temp: 0
+  hp_Cur: 0
+  distance_first: 0
+  isMap2: 0
+  isMap3: 1
+  surviverCount: 3
+  countTemp: 3
+  reset: 0
 --- !u!1 &1086419510
 GameObject:
   m_ObjectHideFlags: 0
@@ -17372,7 +17399,7 @@ RectTransform:
   m_GameObject: {fileID: 1127092365}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 100}
-  m_LocalScale: {x: 0.016666668, y: 0.016666668, z: 0.016666668}
+  m_LocalScale: {x: 0.016666666, y: 0.016666666, z: 0.016666666}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 378143975}
@@ -18511,7 +18538,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 389.99997, y: 270}
+  m_AnchoredPosition: {x: 390, y: 270}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1647086374
@@ -19475,6 +19502,14 @@ GameObject:
   m_Component:
   - component: {fileID: 1861284604}
   - component: {fileID: 1861284603}
+  - component: {fileID: 1861284612}
+  - component: {fileID: 1861284611}
+  - component: {fileID: 1861284610}
+  - component: {fileID: 1861284609}
+  - component: {fileID: 1861284608}
+  - component: {fileID: 1861284607}
+  - component: {fileID: 1861284606}
+  - component: {fileID: 1861284605}
   m_Layer: 0
   m_Name: SkillManager
   m_TagString: Untagged
@@ -19511,6 +19546,157 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1861284605
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1861284602}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5e64d187b69a7b498575760425dfe43, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillName: 
+  level: 0
+  skillDamage: 0
+  cooldown: 0
+  player: {fileID: 0}
+--- !u!114 &1861284606
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1861284602}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f12e0af95e57fb4cb8fd1c97fe25091, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillName: 
+  level: 0
+  skillDamage: 0
+  cooldown: 0
+  player: {fileID: 0}
+  shotGunPrefab: {fileID: 0}
+  playerControl: {fileID: 0}
+  finalDir: {x: 0, y: 0, z: 0}
+  bulletSpeed: 10
+  canPenetrate: 1
+--- !u!114 &1861284607
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1861284602}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ac9f22731a01a44790f6e29dc89bbb3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillName: 
+  level: 0
+  skillDamage: 0
+  cooldown: 0
+  player: {fileID: 0}
+  knifeDronePrefab: {fileID: 0}
+  rotationSpeed: 90
+  knifeRadius: 2
+--- !u!114 &1861284608
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1861284602}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4c8a0d519563a34aa4671397bb0b08f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillName: 
+  level: 0
+  skillDamage: 0
+  cooldown: 0
+  player: {fileID: 0}
+  pistolPrefab: {fileID: 0}
+  bulletSpeed: 10
+  canPenetrate: 0
+--- !u!114 &1861284609
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1861284602}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8c65d73fe859164cb2dcb7daba26764, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillName: 
+  level: 0
+  skillDamage: 0
+  cooldown: 0
+  player: {fileID: 0}
+--- !u!114 &1861284610
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1861284602}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 268b6dbf001280e4cb9c1b69bc1553bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillName: 
+  level: 0
+  skillDamage: 0
+  cooldown: 0
+  player: {fileID: 0}
+--- !u!114 &1861284611
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1861284602}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b6d1dcab56279e4c94c8bec7593a8d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillName: 
+  level: 0
+  skillDamage: 0
+  cooldown: 0
+  player: {fileID: 0}
+  bazookaPrefab: {fileID: 0}
+  bulletSpeed: 10
+  exploreRadius: 1
+  canPenetrate: 0
+--- !u!114 &1861284612
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1861284602}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 322e2b4c2b83a3844b104ee1cabf41b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillName: 
+  level: 0
+  skillDamage: 0
+  cooldown: 0
+  player: {fileID: 0}
 --- !u!1 &1875975676
 GameObject:
   m_ObjectHideFlags: 0
