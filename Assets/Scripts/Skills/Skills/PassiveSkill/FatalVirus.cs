@@ -9,7 +9,7 @@ public class FatalVirus : PassiveSkill
         skillName = "FatalVirus";
         effect = 0.01f;
         cooldown = 0f;
-        icon.sprite = Resources.Load<Sprite>("UI/Icon/6.png");
+        icon = Resources.Load<Sprite>("UI/Icon/6.png");
     }
     public override void LevelUp() // 치명적 바이러스 레벨업 로직
     {

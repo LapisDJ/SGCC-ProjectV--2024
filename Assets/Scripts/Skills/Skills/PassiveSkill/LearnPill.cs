@@ -9,7 +9,7 @@ public class LearnPill : PassiveSkill
         skillName = "LearnPill";
         effect = 0.3f;
         cooldown = 0f;
-        icon.sprite = Resources.Load<Sprite>("UI/Icon/4.png");
+        icon = Resources.Load<Sprite>("UI/Icon/4.png");
     }
     public override void LevelUp() // 학습 증진 알약 레벨업 로직
     {

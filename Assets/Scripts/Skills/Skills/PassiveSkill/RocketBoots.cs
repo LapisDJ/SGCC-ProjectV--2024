@@ -9,7 +9,7 @@ public class RocketBoots : PassiveSkill
         skillName = "RocketBoots";
         effect = 0.1f;
         cooldown = 0f;
-        icon.sprite = Resources.Load<Sprite>("UI/Icon/7.png");
+        icon = Resources.Load<Sprite>("UI/Icon/7.png");
     }
     public override void LevelUp() // 로켓 장화 레벨업 로직
     {
