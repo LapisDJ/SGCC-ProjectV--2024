@@ -14,7 +14,7 @@ public class Pistol : Skill
         skillDamage = 1f;
         cooldown = 3f;
     }
-    public GameObject pistolPrefab;// 권총 프리펩
+    [SerializeField] public GameObject pistolPrefab;// 권총 프리펩
     public float bulletSpeed = 10.0f;
     public bool canPenetrate = false;    // 총알이 관통하는지 여부를 결정
 
@@ -24,62 +24,44 @@ public class Pistol : Skill
         GameObject nearestMonster = FindNearestMonster();
         if (nearestMonster != null)
         {
-            Vector3 direction = (nearestMonster.transform.position - transform.position).normalized;
-            Vector3 bulletSpawnPosition = transform.position + direction * 0.5f;  // 플레이어 위치에서 약간 떨어진 위치
-            GameObject bullet = Instantiate(pistolPrefab, bulletSpawnPosition, Quaternion.identity);
+            Vector3 direction = (nearestMonster.transform.position - player.transform.position).normalized;
+            Vector3 bulletSpawnPosition = player.transform.position + direction * 0.5f;  // 플레이어 위치에서 약간 떨어진 위치
+            GameObject pistolBullet = Instantiate(pistolPrefab, bulletSpawnPosition, Quaternion.identity);
+            Debug.Log("bullet 프리펩 생성 완료");
 
-            Rigidbody2D bulletRb = bullet.GetComponent<Rigidbody2D>();
+            // Bullet 컴포넌트 가져오기
+            PistolBullet PistolBulletScript = pistolBullet.GetComponent<PistolBullet>();
+            if (PistolBulletScript != null)
+            {
+                float totalDamage;
+                float weaknessMultipler = (nearestMonster.CompareTag("Monster2") || nearestMonster.CompareTag("Monster3")) ? 1.5f : 1f;
+
+                DamageInfo damageInfo = new DamageInfo
+                {
+                    skillDamage = this.skillDamage,
+                    playerDamage = player.playerStat.attackDamageByLevel,
+                    weaknessMultipler = weaknessMultipler,
+                    isCritical = player.playerStat.CheckCritical()
+                };
+
+                totalDamage = finalDamage(damageInfo);
+                PistolBulletScript.damage = totalDamage;
+            }
+
+            Rigidbody2D bulletRb = PistolBulletScript.GetComponent<Rigidbody2D>();
             if (bulletRb != null)
             {
                 bulletRb.velocity = direction * bulletSpeed;
-            }
-
-            // 총알의 Sprite Renderer 설정
-            SpriteRenderer bulletSr = bullet.GetComponent<SpriteRenderer>();
-            if (bulletSr != null)
-            {
-                bulletSr.sortingLayerName = "Player"; // 총알의 sorting layer를 플레이어와 같은 것으로 설정
-                bulletSr.sortingOrder = 1; // 플레이어보다 앞에 보이도록 설정
+                Debug.Log("bullet 속도 계산 완료");
             }
 
             // 플레이어와 총알 간의 충돌을 무시
             Collider2D playerCollider = GetComponent<Collider2D>();
-            Collider2D bulletCollider = bullet.GetComponent<Collider2D>();
+            Collider2D bulletCollider = pistolBullet.GetComponent<Collider2D>();
             if (playerCollider != null && bulletCollider != null)
             {
                 Physics2D.IgnoreCollision(playerCollider, bulletCollider);
             }
-
-            // 몬스터에게 데미지를 주는 로직
-            Bullet bulletScript = bullet.AddComponent<Bullet>();
-            bulletScript.damage = this.skillDamage;
-            bulletScript.canPenetrate = this.canPenetrate;
-
-            // 총알이 몬스터와 충돌하면 총알을 제거하는 로직
-            bulletScript.OnHitMonster += (hitMonster) =>
-            {
-                Monster monster = hitMonster.GetComponent<Monster>();
-                if (monster != null)
-                {
-                    float weaknessMultipler = (hitMonster.CompareTag("Monster1") || hitMonster.CompareTag("Monster3")) ? 1.5f : 1f;
-
-                    DamageInfo damageInfo = new DamageInfo
-                    {
-                        skillDamage = this.skillDamage,
-                        playerDamage = player.playerStat.attackDamageByLevel,
-                        weaknessMultipler = weaknessMultipler,
-                        isCritical = player.playerStat.CheckCritical()
-                    };
-
-                    float totalDamage = finalDamage(damageInfo);
-                    monster.TakeDamage(totalDamage);
-                }
-
-                if (!canPenetrate)
-                {
-                    Destroy(bullet);
-                }
-            };
         }
 
         // 레벨이 8 이상일 경우 2회 공격
@@ -88,6 +70,7 @@ public class Pistol : Skill
             StartCoroutine(DoubleAttack());
         }
     }
+
 
     public override void LevelUp() // 권총 레벨업 로직
     {
