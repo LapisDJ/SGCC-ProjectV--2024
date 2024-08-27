@@ -586,6 +586,16 @@ MonoBehaviour:
   skillmanager: {fileID: 1861284603}
   StartUI: {fileID: 270252532}
   tempskillchoice: 0
+  weaponImages:
+  - {fileID: 1650856517}
+  - {fileID: 1274275855}
+  - {fileID: 943983520}
+  - {fileID: 850942942}
+  hideWeaponImages:
+  - {fileID: 1686756995}
+  - {fileID: 870711195}
+  - {fileID: 1850918809}
+  - {fileID: 105513300}
 --- !u!4 &193708225
 Transform:
   m_ObjectHideFlags: 0
@@ -947,7 +957,6 @@ GameObject:
   m_Component:
   - component: {fileID: 359090802}
   - component: {fileID: 359090803}
-  - component: {fileID: 359090804}
   m_Layer: 0
   m_Name: weaponcool
   m_TagString: Untagged
@@ -1004,28 +1013,6 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
---- !u!114 &359090804
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 359090801}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a0bb4f8a02de42a0a7cd6f0bedccb3a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  weaponimages:
-  - {fileID: 1650856517}
-  - {fileID: 1274275855}
-  - {fileID: 943983520}
-  - {fileID: 850942942}
-  hideweaponimages:
-  - {fileID: 1686756995}
-  - {fileID: 870711195}
-  - {fileID: 1850918809}
-  - {fileID: 105513300}
 --- !u!1 &360421138
 GameObject:
   m_ObjectHideFlags: 0

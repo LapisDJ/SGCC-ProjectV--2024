@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using JetBrains.Annotations;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UI_Manager : MonoBehaviour
 {
@@ -31,6 +32,15 @@ public class UI_Manager : MonoBehaviour
         StartUI.SetActive(true);
         isskillchoose = false;
         ispause = false;
+        //스킬쿨
+        foreach (Image weapon in weaponImages)
+        {
+            weapon.enabled = false;
+        }
+        foreach (Image hide in hideWeaponImages)
+        {
+            hide.enabled = false;
+        }
     }
     public void SkillChooseStart()//진행중인 게임을 일시정지하고 레벨업할 스킬을 선택하는 창으로 진입.
     {
@@ -63,14 +73,6 @@ public class UI_Manager : MonoBehaviour
         Time.timeScale = 1.0f;
         SkillManager.SkillLevelUP();
     }
-    void FixedUpdate()
-    {
-        if(isskillchoose)
-        {
-            SkillChooseStart();
-            isskillchoose = false;
-        }
-    }
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.Escape))
@@ -85,6 +87,18 @@ public class UI_Manager : MonoBehaviour
                 Closemenu();
             }
         }
+        if(isskillchoose)
+        {
+            skillchoiceimages[0].sprite = SkillManager.skillchoices[0].icon;
+            skillchoiceimages[1].sprite = SkillManager.skillchoices[0].icon;
+            skillchoiceimages[2].sprite = SkillManager.passivechoices[0].icon;
+            skillchoiceimages[3].sprite = SkillManager.passivechoices[0].icon;
+            SkillChooseStart();
+            isskillchoose = false;
+        }
+        //스킬쿨
+        WeaponCoolChk();
+        UpdateWeaponImages();
     }
     public void Callmenu()
     {
@@ -119,4 +133,58 @@ public class UI_Manager : MonoBehaviour
         Time.timeScale = 1f;
         StartUI.SetActive(false);
     }
+    //스킬쿨 UI
+    public Image[] weaponImages;
+    public Image[] hideWeaponImages;
+    public static bool[] isCool = { false, false, false, false };
+    public static float[] weaponTimes = { 3, 6, 9, 12 }; // 추후에 바뀌어야 함(쿨타임 받아오기)
+    public static float[] getWeaponTimes = { 0, 0, 0, 0 };
+
+    private Coroutine[] coolTimeCoroutines = new Coroutine[4];
+
+    private void UpdateWeaponImages()
+    {
+        for (int i = 0; i < weaponImages.Length; i++)
+        {
+            bool isActive = i < SkillManager.activeSkills.Count;
+            weaponImages[i].enabled = isActive;
+            weaponImages[i].sprite = SkillManager.activeSkills[i].icon;
+            hideWeaponImages[i].enabled = isActive;
+            hideWeaponImages[i].sprite = SkillManager.activeSkills[i].icon;
+        }
+    }
+
+    void WeaponCoolChk()
+    {
+        for (int i = 0; i < isCool.Length; i++)
+        {
+            if (isCool[i] && coolTimeCoroutines[i] == null)
+            {
+                coolTimeCoroutines[i] = StartCoroutine(CoolTimeChk(i));
+            }
+        }
+    }
+
+    public static void WeaponCoolSetting(int weaponNum)
+    {
+        getWeaponTimes[weaponNum] = weaponTimes[weaponNum];
+        isCool[weaponNum] = true;
+    }
+
+    IEnumerator CoolTimeChk(int weaponNum)
+    {
+        while (getWeaponTimes[weaponNum] > 0)
+        {
+            getWeaponTimes[weaponNum] -= Time.deltaTime;
+            float time = Mathf.Clamp01(getWeaponTimes[weaponNum] / weaponTimes[weaponNum]);
+            hideWeaponImages[weaponNum].fillAmount = time;
+            yield return null;
+        }
+
+        isCool[weaponNum] = false;
+        hideWeaponImages[weaponNum].fillAmount = 0f;
+        coolTimeCoroutines[weaponNum] = null;
+    }
+    //스킬레벨업 UI
+    public Image[] skillchoiceimages;
 }

@@ -1,81 +1,74 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class WeaponCoolEffect : MonoBehaviour
 {
-    public Image[] weaponimages;
-    public Image[] hideweaponimages;
-    public static bool[] iscool = {false,false,false,false};
-    public static float[] weapontimes = {3,6,9,12};//추후에 바뀌어야함(쿨타임 받아오기)
-    public static float[] getweapontimes = {0,0,0,0};
+    public Image[] weaponImages;
+    public Image[] hideWeaponImages;
+    public static bool[] isCool = { false, false, false, false };
+    public static float[] weaponTimes = { 3, 6, 9, 12 }; // 추후에 바뀌어야 함(쿨타임 받아오기)
+    public static float[] getWeaponTimes = { 0, 0, 0, 0 };
+
+    private Coroutine[] coolTimeCoroutines = new Coroutine[4];
+
     void Start()
     {
-        
+        foreach (Image weapon in weaponImages)
+        {
+            weapon.enabled = false;
+        }
+        foreach (Image hide in hideWeaponImages)
+        {
+            hide.enabled = false;
+        }
     }
 
-    void FixedUpdate()
+    void Update()
     {
         WeaponCoolChk();
+        UpdateWeaponImages();
     }
-    void Update()//테스트용 코드. 텐키가 아닌 숫자 1부터 4까지 누르면 해당 쿨타임이펙트가 실행됨.
+
+    private void UpdateWeaponImages()
     {
-        if(Input.GetKeyDown(KeyCode.Alpha1))
+        for (int i = 0; i < weaponImages.Length; i++)
         {
-            WeaponCoolSetting(0);
-        }
-        if(Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            WeaponCoolSetting(1);
-        }
-        if(Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            WeaponCoolSetting(2);
-        }
-        if(Input.GetKeyDown(KeyCode.Alpha4))
-        {
-            WeaponCoolSetting(3);
-        }
-    }
-    public static void WeaponCoolSetting(int weaponnum)
-    {
-        getweapontimes[weaponnum] = weapontimes[weaponnum];
-        iscool[weaponnum] = true;
-    }
-    private void WeaponCoolChk()//iscool의 여부 판단
-    {
-        if(iscool[0])
-        {
-            StartCoroutine(CoolTimeChk(0));
-        }
-        if(iscool[1])
-        {
-            StartCoroutine(CoolTimeChk(1));
-        }
-        if(iscool[2])
-        {
-            StartCoroutine(CoolTimeChk(2));
-        }
-        if(iscool[3])
-        {
-            StartCoroutine(CoolTimeChk(3));
+            bool isActive = i < SkillManager.activeSkills.Count;
+            weaponImages[i].enabled = isActive;
+            hideWeaponImages[i].enabled = isActive;
         }
     }
 
-    IEnumerator CoolTimeChk(int weaponnum)//스킬쿨타임 잔여량만큼 불투명한 상자로 가리는 함수. 쿨타임이 0 이하일 시 iscool도 false로 바꿔줌.
+    void WeaponCoolChk()
     {
-        yield return null;
-        while(getweapontimes[weaponnum] >= 0)
+        for (int i = 0; i < isCool.Length; i++)
         {
-            getweapontimes[weaponnum] -= Time.deltaTime;
-            if(getweapontimes[weaponnum] < 0)
+            if (isCool[i] && coolTimeCoroutines[i] == null)
             {
-                iscool[weaponnum] = false;
+                coolTimeCoroutines[i] = StartCoroutine(CoolTimeChk(i));
             }
-            float time = getweapontimes[weaponnum]/weapontimes[weaponnum];
-            hideweaponimages[weaponnum].fillAmount = time;
+        }
+    }
+
+    public static void WeaponCoolSetting(int weaponNum)
+    {
+        getWeaponTimes[weaponNum] = weaponTimes[weaponNum];
+        isCool[weaponNum] = true;
+    }
+
+    IEnumerator CoolTimeChk(int weaponNum)
+    {
+        while (getWeaponTimes[weaponNum] > 0)
+        {
+            getWeaponTimes[weaponNum] -= Time.deltaTime;
+            float time = Mathf.Clamp01(getWeaponTimes[weaponNum] / weaponTimes[weaponNum]);
+            hideWeaponImages[weaponNum].fillAmount = time;
             yield return null;
         }
+
+        isCool[weaponNum] = false;
+        hideWeaponImages[weaponNum].fillAmount = 0f;
+        coolTimeCoroutines[weaponNum] = null;
     }
 }
