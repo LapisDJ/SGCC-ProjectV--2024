@@ -29156,7 +29156,9 @@ MonoBehaviour:
   - {fileID: 653376682}
   player: {fileID: 1799502645}
   monster: {fileID: 622233090}
-  Mon_speed: 3
+  Mon_speed: 1
+  obstacleCheckRadius: 0.5
+  previous_nextcellPosition: {x: 0, y: 0, z: 0}
 --- !u!4 &622233090 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7468599394232733844, guid: ffd17a42ca7cc664981d88e2a35879b9, type: 3}
@@ -31538,7 +31540,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5145284096008356335, guid: 0c0b02dca944dcc4ead2c01d020df197, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -31617,27 +31620,38 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
-    - {fileID: 1184759712856789489, guid: 318bb5e12a81b67409a0e40e0a64039d, type: 3}
     - {fileID: 4044078766096519034, guid: 318bb5e12a81b67409a0e40e0a64039d, type: 3}
+    - {fileID: 1184759712856789489, guid: 318bb5e12a81b67409a0e40e0a64039d, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 1034961518565794693, guid: 318bb5e12a81b67409a0e40e0a64039d, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1799502644}
-    - targetCorrespondingSourceObject: {fileID: 1034961518565794693, guid: 318bb5e12a81b67409a0e40e0a64039d, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1799502649}
-    - targetCorrespondingSourceObject: {fileID: 1034961518565794693, guid: 318bb5e12a81b67409a0e40e0a64039d, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 1799502648}
+    - targetCorrespondingSourceObject: {fileID: 1034961518565794693, guid: 318bb5e12a81b67409a0e40e0a64039d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1799502646}
+    - targetCorrespondingSourceObject: {fileID: 1034961518565794693, guid: 318bb5e12a81b67409a0e40e0a64039d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1799502653}
+    - targetCorrespondingSourceObject: {fileID: 1034961518565794693, guid: 318bb5e12a81b67409a0e40e0a64039d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1799502654}
+    - targetCorrespondingSourceObject: {fileID: 1034961518565794693, guid: 318bb5e12a81b67409a0e40e0a64039d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1799502655}
   m_SourcePrefab: {fileID: 100100000, guid: 318bb5e12a81b67409a0e40e0a64039d, type: 3}
 --- !u!1 &1799502635 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1034961518565794693, guid: 318bb5e12a81b67409a0e40e0a64039d, type: 3}
   m_PrefabInstance: {fileID: 1764436284}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1799502644
+--- !u!4 &1799502645 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7468599394232733844, guid: 318bb5e12a81b67409a0e40e0a64039d, type: 3}
+  m_PrefabInstance: {fileID: 1764436284}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1799502646
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -31646,17 +31660,59 @@ MonoBehaviour:
   m_GameObject: {fileID: 1799502635}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a791af17c4f464c639cc08e73f2f2936, type: 3}
+  m_Script: {fileID: 11500000, guid: 61eba116bc333594ab74f56e3fd268c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Player_Controller_Final: {fileID: 0}
+  engineer: {fileID: 1279397271}
+--- !u!114 &1799502648
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1799502635}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63bda0fa829efe248a30f8b004841019, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb: {fileID: 0}
+  playerstat: {fileID: 0}
+  dir: {x: 0, y: 0, z: 0}
+  speed: 0
+  Quest1: {fileID: 0}
+  isInteracting: 0
+  interactionTime: 0
+  requiredInteractionTime: 10
+  interactionRange: 5
+  canInteracting: 0
+  distanceBetweenPlayer: 0
+  isInteractionStarted: 0
+  playerFirstPosition: {x: 29.5, y: -3.5, z: 0}
+  interactPlayerPosition: {x: 0, y: 0, z: 0}
+  hp_temp: 0
+  hp_Cur: 0
+  distanceBetweenFirstPosition: 0
+  engineerController: {fileID: 0}
+  isMap1: 1
+  isMap2: 0
+  isMap3: 0
+--- !u!114 &1799502653
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1799502635}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ebe7b09c5e674f4898169dc6da3ef01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   playerStat: {fileID: 0}
   playerController: {fileID: 0}
---- !u!4 &1799502645 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7468599394232733844, guid: 318bb5e12a81b67409a0e40e0a64039d, type: 3}
-  m_PrefabInstance: {fileID: 1764436284}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1799502648
+--- !u!114 &1799502654
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -31682,7 +31738,7 @@ MonoBehaviour:
   speedMulti: 1
   speedFin: 0
   attackDamageByLevel: 5
---- !u!114 &1799502649
+--- !u!114 &1799502655
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -31691,26 +31747,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1799502635}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3d07d4d03a1776445970c1f1d2ee7826, type: 3}
+  m_Script: {fileID: 11500000, guid: 22e6dcc8f2dcd1b4f80e36bfa70f877c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 0}
-  playerstat: {fileID: 0}
-  dir: {x: 0, y: 0, z: 0}
-  speed: 0
-  isInteracting: 0
-  interactionTime: 0
-  requiredInteractionTime: 2
-  interactionRange: 3
-  canInteracting: 0
-  engineer: {fileID: 1279397271}
-  distance: 0
-  engineerController: {fileID: 0}
-  playerFirst: {x: 0, y: 0, z: 0}
-  tempPlayerPosition: {x: 0, y: 0, z: 0}
-  hp_temp: 0
-  hp_Cur: 0
-  distance_first: 0
+  Engineer: {fileID: 0}
+  player: {fileID: 1799502645}
+  followDistance: 1
+  isFollowing: 0
 --- !u!1 &1878825002
 GameObject:
   m_ObjectHideFlags: 0
@@ -35395,6 +35438,7 @@ GameObject:
   - component: {fileID: 2023131566}
   - component: {fileID: 2023131565}
   - component: {fileID: 2023131564}
+  - component: {fileID: 2023131567}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -35476,6 +35520,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2023131567
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2023131563}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: defc6c0843cae8b44801bcd44d111979, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 622233084}
+  __zPos: -10
 --- !u!1001 &1585001887292791514
 PrefabInstance:
   m_ObjectHideFlags: 0
