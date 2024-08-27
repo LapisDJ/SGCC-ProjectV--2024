@@ -2,10 +2,13 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 //using System.Numerics;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 using UnityEngine;
 
 public class BaseballBat : Skill
-{
+{  
     protected override void Awake()
     {
         base.Awake();
@@ -111,6 +114,12 @@ public class BaseballBat : Skill
         float angleOffset = angle * Mathf.Rad2Deg;
         Vector2 leftBoundary = Quaternion.Euler(0, 0, -angleOffset) * direction;
         Vector2 rightBoundary = Quaternion.Euler(0, 0, angleOffset) * direction;
+
+        #if UNITY_EDITOR
+        // Handles을 사용하여 부채꼴을 채움
+        Handles.color = new Color(1, 0, 0, 0.2f); // 반투명 빨간색
+        Handles.DrawSolidArc(center, Vector3.forward, leftBoundary, angleOffset * 2, radius);
+        #endif
 
         // 부채꼴의 선 그리기
         Gizmos.DrawLine(center, center + new Vector3(leftBoundary.x, leftBoundary.y, 0) * radius);

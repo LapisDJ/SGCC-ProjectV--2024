@@ -17,7 +17,7 @@ public abstract class Skill : MonoBehaviour
     public int level; // 스킬 레벨
     public float skillDamage; // 데미지
     public float cooldown; // 쿨타임
-    protected Player player;
+    [SerializeField] protected Player__ player;
 
     // 생성자에서는 데이터를 초기화하지 않습니다. 대신 Awake 또는 Start를 사용
     protected Skill() // 기본 생성자
@@ -28,7 +28,11 @@ public abstract class Skill : MonoBehaviour
     // Unity의 API를 사용하는 초기화는 Awake에서 처리
     protected virtual void Awake()
     {
-        player = FindObjectOfType<Player>();
+        player = FindObjectOfType<Player__>();
+        if (player == null)
+        {
+            Debug.LogError("Player 오브젝트를 찾을 수 없습니다. 씬에 Player 오브젝트가 존재하는지 확인하세요.");
+        }
     }
 
     public virtual void LevelUp() // 스킬 레벨업
