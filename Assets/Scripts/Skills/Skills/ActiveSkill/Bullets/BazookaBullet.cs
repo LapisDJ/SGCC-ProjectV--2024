@@ -14,7 +14,7 @@ public class BazookaBullet : Bullet
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Monster"))
+        if (collision.CompareTag("Monster1")||collision.CompareTag("Monster2")||collision.CompareTag("Monster3"))
         {
             ExplodeAndDamage(collision.transform.position, explosionRadius, damageInfo);
             Destroy(gameObject); // 총알 제거

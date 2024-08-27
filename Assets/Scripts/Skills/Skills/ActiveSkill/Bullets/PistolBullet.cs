@@ -10,7 +10,7 @@ public class PistolBullet : Bullet
         canPenetrate = false;
     }
 
-     private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Monster1")||collision.CompareTag("Monster2")||collision.CompareTag("Monster3"))
         {
