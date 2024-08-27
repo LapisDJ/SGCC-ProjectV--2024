@@ -37,7 +37,7 @@ public class ShotGun : Skill
             Vector3 direction = Quaternion.Euler(0, 0, angle) * baseDirection;
 
             // 총알 생성 위치를 플레이어 앞쪽으로 설정
-            Vector3 bulletSpawnPosition = transform.position + direction * 0.5f;
+            Vector3 bulletSpawnPosition = player.transform.position + direction * 0.5f;
 
             // 총알을 생성하고 발사
             GameObject ShotGunbullet = Instantiate(shotGunPrefab, bulletSpawnPosition, Quaternion.identity);
@@ -56,7 +56,7 @@ public class ShotGun : Skill
 
                 ShotGunBulletScript.damageInfo = damageInfo;
             }
-            
+
             Rigidbody2D bulletRb = ShotGunbullet.GetComponent<Rigidbody2D>();
             if (bulletRb != null)
             {

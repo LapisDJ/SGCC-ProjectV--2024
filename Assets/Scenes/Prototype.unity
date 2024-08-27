@@ -19581,9 +19581,8 @@ MonoBehaviour:
   cooldown: 0
   player: {fileID: 0}
   shotGunPrefab: {fileID: 2216668499185153775, guid: a2b2e7ba8fded164598971f8ec05f70b, type: 3}
-  playerControl: {fileID: 0}
-  finalDir: {x: 0, y: 0, z: 0}
   bulletSpeed: 10
+  numOfBullet: 0
   canPenetrate: 1
 --- !u!114 &1861284607
 MonoBehaviour:
@@ -19679,7 +19678,6 @@ MonoBehaviour:
   bazookaPrefab: {fileID: 4954568644503957765, guid: 7e9106525c6b6294cacabe05c577d54c, type: 3}
   bulletSpeed: 10
   exploreRadius: 1
-  canPenetrate: 0
 --- !u!114 &1861284612
 MonoBehaviour:
   m_ObjectHideFlags: 0

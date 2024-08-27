@@ -51,7 +51,7 @@ public class Bazooka : Skill
         if (nearestMonster != null)
         {
             Vector3 direction = (nearestMonster.transform.position - transform.position).normalized;
-            Vector3 bulletSpawnPosition = transform.position + direction * 0.5f; // 플레이어 위치에서 약간 떨어진 위치
+            Vector3 bulletSpawnPosition = player.transform.position + direction * 0.5f; // 플레이어 위치에서 약간 떨어진 위치
             GameObject bazookaBullet = Instantiate(bazookaPrefab, bulletSpawnPosition, Quaternion.identity);
             Debug.Log("Bazooka bullet 프리펩 생성 완료");
 
