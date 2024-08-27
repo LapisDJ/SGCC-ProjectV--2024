@@ -12,10 +12,12 @@ public class UI_Manager : MonoBehaviour
     [SerializeField] GameObject ExitSceneUI;
     [SerializeField] GameObject pausemenu;
     [SerializeField] SkillManager skillmanager;
+    [SerializeField] GameObject StartUI;
     private bool ispause = false;
     public static bool isskillchoose = false;
     void Awake()
     {
+        Time.timeScale = 0f;
         DontDestroyOnLoad(gameObject);
     }
     void Start()
@@ -26,6 +28,7 @@ public class UI_Manager : MonoBehaviour
         MissionUI.SetActive(false);
         ExitSceneUI.SetActive(false);
         pausemenu.SetActive(false);
+        StartUI.SetActive(true);
         isskillchoose = false;
         ispause = false;
     }
@@ -110,5 +113,10 @@ public class UI_Manager : MonoBehaviour
         #else
         Application.Quit();
         #endif
+    }
+    public void StartConfirmButton()
+    {
+        Time.timeScale = 1f;
+        StartUI.SetActive(false);
     }
 }
