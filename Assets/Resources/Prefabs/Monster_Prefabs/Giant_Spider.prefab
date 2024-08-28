@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6816733197759881537}
   - component: {fileID: 2912497194055487305}
-  - component: {fileID: 3913282931784179568}
   m_Layer: 0
   m_Name: Giant_Spider
   m_TagString: Monster1
@@ -74,8 +73,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 1, g: 0.7390555, b: 0.0141509175, a: 1}
+  m_Sprite: {fileID: 429998746, guid: 2a1e23700ae30c84c99144760d94985b, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -85,20 +84,3 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &3913282931784179568
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1059873796151527030}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26ebf2c6445f2488ba3a2056b609c59d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentHP: 80
-  attackDamage: 1
-  speed: 1
-  lastAttacktime: 0
-  attackCooldown: 0
