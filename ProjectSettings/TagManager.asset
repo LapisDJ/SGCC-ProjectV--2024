@@ -14,6 +14,7 @@ TagManager:
   - Surv3
   - signalTower
   - middleBoss
+  - Boss
   layers:
   - Default
   - TransparentFX
