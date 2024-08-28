@@ -12,7 +12,7 @@ public class Bazooka : Skill
     protected override void Awake()
     {
         base.Awake();
-        skillName = "Bazooka";
+        skillName = "바주카포";
         skillDamage = 2f;
         cooldown = 5f;
         icon = Resources.Load<Sprite>("UI/Icon/20");

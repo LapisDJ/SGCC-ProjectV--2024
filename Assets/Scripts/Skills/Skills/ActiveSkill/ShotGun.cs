@@ -9,10 +9,10 @@ public class ShotGun : Skill
     protected override void Awake()
     {
         base.Awake();
-        skillName = "ShotGun";
+        skillName = "샷건";
         skillDamage = 1f;
         cooldown = 5f;
-        icon = Resources.Load<Sprite>("UI/Icon/10.png");
+        icon = Resources.Load<Sprite>("UI/Icon/10");
     }
 
     public GameObject shotGunPrefab; // 샷건 프리펩

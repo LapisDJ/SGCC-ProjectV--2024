@@ -6,10 +6,10 @@ public class Adrenaline : PassiveSkill
 {
     protected override void Awake()
     {
-        skillName = "Adrenaline";
+        skillName = "아드레날린 주사기";
         effect = 0.09f;
         cooldown = 0f;
-        icon = Resources.Load<Sprite>("UI/Icon/5.png");
+        icon = Resources.Load<Sprite>("UI/Icon/5");
     }
         public override void LevelUp() // 아드레날린 주사기 레벨업 로직
     {

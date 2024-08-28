@@ -6,10 +6,10 @@ public class FatalVirus : PassiveSkill
 {
     protected override void Awake()
     {
-        skillName = "FatalVirus";
+        skillName = "치명적 바이러스";
         effect = 0.01f;
         cooldown = 0f;
-        icon = Resources.Load<Sprite>("UI/Icon/6.png");
+        icon = Resources.Load<Sprite>("UI/Icon/6");
     }
     public override void LevelUp() // 치명적 바이러스 레벨업 로직
     {

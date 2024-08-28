@@ -10,10 +10,10 @@ public class Pistol : Skill
     protected override void Awake()
     {
         base.Awake();
-        skillName = "Pistol";
+        skillName = "권총";
         skillDamage = 1f;
         cooldown = 3f;
-        icon = Resources.Load<Sprite>("UI/Icon/13.png");
+        icon = Resources.Load<Sprite>("UI/Icon/13");
     }
     [SerializeField] public GameObject pistolPrefab;// 권총 프리펩
     public float bulletSpeed = 10.0f;

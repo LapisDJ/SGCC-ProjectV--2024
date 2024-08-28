@@ -12,10 +12,10 @@ public class BaseballBat : Skill
     protected override void Awake()
     {
         base.Awake();
-        skillName = "BaseballBat";
+        skillName = "야구 방망이";
         skillDamage = 2f;
         cooldown = 4f;
-        icon = Resources.Load<Sprite>("UI/Icon/12.png");
+        icon = Resources.Load<Sprite>("UI/Icon/12");
     }
 
     private float angle = Mathf.PI / 8; // 부채꼴 범위의 반각

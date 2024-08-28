@@ -6,10 +6,10 @@ public class TeleportDevice : PassiveSkill
 {
     protected override void Awake()
     {
-        skillName = "TeleportDevice";
+        skillName = "아공간 전송 장치";
         effect = 3f;
         cooldown = 30f;
-        icon = Resources.Load<Sprite>("UI/Icon/0.png");
+        icon = Resources.Load<Sprite>("UI/Icon/0");
     }
     public override void LevelUp() // 아공간 전송 장치 레벨업 로직
     {
