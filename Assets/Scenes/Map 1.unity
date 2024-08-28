@@ -29114,6 +29114,7 @@ MonoBehaviour:
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 0
+  tilemap: {fileID: 0}
 --- !u!4 &619059096
 Transform:
   m_ObjectHideFlags: 0
@@ -29183,6 +29184,14 @@ PrefabInstance:
     - target: {fileID: 1034961518565794693, guid: ffd17a42ca7cc664981d88e2a35879b9, type: 3}
       propertyPath: m_Name
       value: Monster 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1034961518565794693, guid: ffd17a42ca7cc664981d88e2a35879b9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5703075016005794536, guid: ffd17a42ca7cc664981d88e2a35879b9, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7468599394232733844, guid: ffd17a42ca7cc664981d88e2a35879b9, type: 3}
       propertyPath: m_LocalPosition.x
@@ -31440,7 +31449,7 @@ Sprite:
         format: 0
         dimension: 0
       m_DataSize: 80
-      _typelessdata: 000000bf0000003f000000000000003f0000003f00000000000000bf000000bf000000000000003f000000bf000000000000000000000000000000000000000000000000000000000000000000000000
+      _typelessdata: 000000bf0000003f000000000000003f0000003f00000000000000bf000000bf000000000000003f000000bf00000000000000000000803f0000803f0000803f00000000000000000000803f00000000
     m_Bindpose: []
     textureRect:
       serializedVersion: 2
@@ -31473,9 +31482,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 479921e30c6e34a58b1d082d950d5db9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerStat: {fileID: 0}
-  playerController: {fileID: 0}
-  engineerBaseHP: 100
+  playerstat: {fileID: 0}
+  isInteractionStarted: 0
+  player: {fileID: 1799502645}
 --- !u!1001 &1482744113
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -31499,6 +31508,10 @@ PrefabInstance:
     - target: {fileID: 5145284096008356335, guid: 0c0b02dca944dcc4ead2c01d020df197, type: 3}
       propertyPath: isFollowing
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5703075016005794536, guid: 0c0b02dca944dcc4ead2c01d020df197, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7468599394232733844, guid: 0c0b02dca944dcc4ead2c01d020df197, type: 3}
       propertyPath: m_LocalPosition.x
@@ -31542,6 +31555,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 5145284096008356335, guid: 0c0b02dca944dcc4ead2c01d020df197, type: 3}
+    - {fileID: 3736099413039503924, guid: 0c0b02dca944dcc4ead2c01d020df197, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -31559,6 +31573,50 @@ Tilemap:
   m_CorrespondingSourceObject: {fileID: 960647767379924398, guid: f3aed67682776ea439f1be6cbbd65506, type: 3}
   m_PrefabInstance: {fileID: 3388871518763881938}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1751348906
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1751348908}
+  - component: {fileID: 1751348907}
+  m_Layer: 0
+  m_Name: QuestManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1751348907
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1751348906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae028458a60a78046bd41b2a7c1e6ba3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1751348908
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1751348906}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -3.0356567, y: 24.986696, z: -0.3357149}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1764436284
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -31578,6 +31636,10 @@ PrefabInstance:
     - target: {fileID: 1034961518565794693, guid: 318bb5e12a81b67409a0e40e0a64039d, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 5703075016005794536, guid: 318bb5e12a81b67409a0e40e0a64039d, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7468599394232733844, guid: 318bb5e12a81b67409a0e40e0a64039d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -31627,15 +31689,6 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 1034961518565794693, guid: 318bb5e12a81b67409a0e40e0a64039d, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1799502648}
-    - targetCorrespondingSourceObject: {fileID: 1034961518565794693, guid: 318bb5e12a81b67409a0e40e0a64039d, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1799502646}
-    - targetCorrespondingSourceObject: {fileID: 1034961518565794693, guid: 318bb5e12a81b67409a0e40e0a64039d, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1799502653}
-    - targetCorrespondingSourceObject: {fileID: 1034961518565794693, guid: 318bb5e12a81b67409a0e40e0a64039d, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 1799502654}
     - targetCorrespondingSourceObject: {fileID: 1034961518565794693, guid: 318bb5e12a81b67409a0e40e0a64039d, type: 3}
       insertIndex: -1
@@ -31651,67 +31704,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7468599394232733844, guid: 318bb5e12a81b67409a0e40e0a64039d, type: 3}
   m_PrefabInstance: {fileID: 1764436284}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1799502646
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1799502635}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 61eba116bc333594ab74f56e3fd268c3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Player_Controller_Final: {fileID: 0}
-  engineer: {fileID: 1279397271}
---- !u!114 &1799502648
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1799502635}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 63bda0fa829efe248a30f8b004841019, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rb: {fileID: 0}
-  playerstat: {fileID: 0}
-  dir: {x: 0, y: 0, z: 0}
-  speed: 0
-  Quest1: {fileID: 0}
-  isInteracting: 0
-  interactionTime: 0
-  requiredInteractionTime: 10
-  interactionRange: 5
-  canInteracting: 0
-  distanceBetweenPlayer: 0
-  isInteractionStarted: 0
-  playerFirstPosition: {x: 29.5, y: -3.5, z: 0}
-  interactPlayerPosition: {x: 0, y: 0, z: 0}
-  hp_temp: 0
-  hp_Cur: 0
-  distanceBetweenFirstPosition: 0
-  engineerController: {fileID: 0}
-  isMap1: 1
-  isMap2: 0
-  isMap3: 0
---- !u!114 &1799502653
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1799502635}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ebe7b09c5e674f4898169dc6da3ef01, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerStat: {fileID: 0}
-  playerController: {fileID: 0}
 --- !u!114 &1799502654
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31747,13 +31739,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1799502635}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 22e6dcc8f2dcd1b4f80e36bfa70f877c, type: 3}
+  m_Script: {fileID: 11500000, guid: 3d07d4d03a1776445970c1f1d2ee7826, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Engineer: {fileID: 0}
-  player: {fileID: 1799502645}
-  followDistance: 1
-  isFollowing: 0
+  playerstat: {fileID: 0}
+  isInteractionStarted: 0
 --- !u!1 &1878825002
 GameObject:
   m_ObjectHideFlags: 0
@@ -35532,7 +35522,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: defc6c0843cae8b44801bcd44d111979, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 622233084}
+  player: {fileID: 1799502635}
   __zPos: -10
 --- !u!1001 &1585001887292791514
 PrefabInstance:
@@ -35788,3 +35778,4 @@ SceneRoots:
   - {fileID: 637538943}
   - {fileID: 1482744113}
   - {fileID: 619059096}
+  - {fileID: 1751348908}

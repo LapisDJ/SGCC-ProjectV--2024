@@ -20,7 +20,7 @@ public class PlayerController : MonoBehaviour
             1 => new Vector3(29.5f, -3.5f, 0),
             2 => new Vector3(0.5f, -3f, 0),
             3 => new Vector3(2f, 24f, 0),
-             => transform.position
+             _=> transform.position
         };
     }
 

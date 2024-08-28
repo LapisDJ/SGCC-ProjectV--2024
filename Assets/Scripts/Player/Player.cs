@@ -6,12 +6,12 @@ public class Player : MonoBehaviour
 {
 
     public Player_Stat playerStat;
-    public Player_Controller playerController;
+    public PlayerController playerController;
 
     void Awake() // 초기화: 스탯, 컨트롤러 불러오기
     {
         playerStat = GetComponent<Player_Stat>();
-        playerController = GetComponent<Player_Controller>();
+        playerController = GetComponent<PlayerController>();
     }
 
 
