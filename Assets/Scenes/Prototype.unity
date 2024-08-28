@@ -17317,33 +17317,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d07d4d03a1776445970c1f1d2ee7826, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 0}
   playerstat: {fileID: 1084714436}
-  dir: {x: 0, y: 0, z: 0}
-  speed: 0
-  Quest1: {fileID: 0}
-  Quest2: {fileID: 0}
-  Quest3: {fileID: 0}
-  isInteracting: 0
-  interactionTime: 0
-  requiredInteractionTime: 10
-  interactionRange: 1
-  canInteracting: 0
-  distanceBetweenPlayer: 0
   isInteractionStarted: 0
-  playerFirstPosition: {x: 0.5, y: -3, z: 0}
-  interactPlayerPosition: {x: 0, y: 0, z: 0}
-  hp_temp: 0
-  hp_Cur: 0
-  distanceBetweenFirstPosition: 0
-  isBossAppear: 0
-  isBossDead: 0
-  isWithinXRange: 0
-  isWithinYRange: 0
-  engineerController: {fileID: 0}
-  isMap1: 1
-  isMap2: 0
-  isMap3: 1
 --- !u!1 &1086419510
 GameObject:
   m_ObjectHideFlags: 0
