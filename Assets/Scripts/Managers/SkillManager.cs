@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class SkillManager : MonoBehaviour
 {
+    public static SkillManager instance;
+
     public int maxActiveSkills = 4; //최대 액티브 개수
     public int maxPassiveSkills = 6; //최대 패시브 개수
 
@@ -14,9 +16,17 @@ public class SkillManager : MonoBehaviour
 
     public static List<Skill> activeSkills = new List<Skill>(); // 현재 활성화된 액티브 스킬
     public static List<PassiveSkill> passiveSkills = new List<PassiveSkill>(); // 현재 활성화된 패시브 스킬
-    void Awake()
+     private void Awake()
     {
-        DontDestroyOnLoad(gameObject);
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
     void Start() // 모든 액티브, 패시브 스킬 초기화 후 담기
     {

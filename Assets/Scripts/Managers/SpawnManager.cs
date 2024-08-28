@@ -6,6 +6,7 @@ using UnityEngine.Tilemaps;
 
 public class SpawnManager : MonoBehaviour
 {
+    public static SpawnManager instance;
     public GameObject slimePrefab, ratPrefab, batPrefab, zombieDogPrefab, zombiePrefab, elite1Prefab, elite2Prefab, oldRobotPrefab, smallSpiderRobotPrefab; // 각 몬스터의 프리펩
     public GameObject player; // 플레이어
     public float spawnDistance = 10.0f; //스폰 간격
@@ -17,10 +18,17 @@ public class SpawnManager : MonoBehaviour
     private Queue<Vector3> spawnPointsQueue = new Queue<Vector3>(); // 동시 스폰을 위한, 해당 스폰 타이밍마다의 가능한 스폰 포인트 좌표 큐
     [SerializeField] public Tilemap tilemap; // 유효 스폰 위치 검사 위한 타일맵
 
-
-    void Awake()
+    private void Awake()
     {
-        DontDestroyOnLoad(gameObject); // 씬 넘어가도 파괴x
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     void Start()
