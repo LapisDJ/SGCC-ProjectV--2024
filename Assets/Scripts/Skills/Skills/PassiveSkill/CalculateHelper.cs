@@ -6,10 +6,10 @@ public class CalculateHelper : PassiveSkill
 {
     protected override void Awake()
     {
-        skillName = "CalculateHelper";
+        skillName = "연산 보조 장치";
         effect = 0.2f;
         cooldown = 0f;
-        icon = Resources.Load<Sprite>("UI/Icon/1.png");
+        icon = Resources.Load<Sprite>("UI/Icon/1");
     }
     public override void LevelUp() // 연산 보조 장치 레벨업 로직
     {

@@ -6,10 +6,10 @@ public class ProstheticHand : PassiveSkill
 {
     protected override void Awake()
     {
-        skillName = "ProstheticHand";
+        skillName = "업무용 의수";
         effect = 0.08f;
         cooldown = 0f;
-        icon = Resources.Load<Sprite>("UI/Icon/3.png");
+        icon = Resources.Load<Sprite>("UI/Icon/3");
     }
     public override void LevelUp() // 업무용 의수 레벨업 로직
     {

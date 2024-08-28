@@ -7,10 +7,10 @@ public class RotateKnifeDrone : Skill
     protected override void Awake()
     {
         base.Awake();
-        skillName = "RotateKnifeDrone";
+        skillName = "회전형 칼날 드론";
         skillDamage = 1f;
         cooldown = 0f;
-        icon = Resources.Load<Sprite>("UI/Icon/17.png");
+        icon = Resources.Load<Sprite>("UI/Icon/17");
     }
     public GameObject knifeDronePrefab; // 칼날 드론 프리펩
     public float rotationSpeed = 90f; // 1랩 칼날 회전 속도

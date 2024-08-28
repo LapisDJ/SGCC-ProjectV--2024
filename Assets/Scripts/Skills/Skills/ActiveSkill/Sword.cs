@@ -10,10 +10,10 @@ public class Sword : Skill
     protected override void Awake()
     {
         base.Awake();
-        skillName = "Sword";
+        skillName = "검";
         skillDamage = 2f;
         cooldown = 4f;
-        icon = Resources.Load<Sprite>("UI/Icon/11.png");
+        icon = Resources.Load<Sprite>("UI/Icon/11");
     }
     public override void Activate() // 몬스터와 상호 작용 로직
     {

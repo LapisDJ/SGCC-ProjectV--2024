@@ -6,10 +6,10 @@ public class PoweredSkin : PassiveSkill
 {
     protected override void Awake()
     {
-        skillName = "PoweredSkin";
+        skillName = "강화 피부";
         effect = 0.1f;
         cooldown = 0f;
-        icon = Resources.Load<Sprite>("UI/Icon/8.png");
+        icon = Resources.Load<Sprite>("UI/Icon/8");
     }
     public override void LevelUp() // 강화 피부 레벨업 로직
     {

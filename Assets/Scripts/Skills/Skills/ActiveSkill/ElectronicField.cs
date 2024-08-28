@@ -7,10 +7,10 @@ public class ElectronicField : Skill
     protected override void Awake()
     {
         base.Awake();
-        skillName = "ElectronicField";
+        skillName = "전기장";
         skillDamage = 0.25f;
         cooldown = 0.5f;
-        icon = Resources.Load<Sprite>("UI/Icon/9.png");
+        icon = Resources.Load<Sprite>("UI/Icon/9");
     }
     private float fieldRadius = 1.5f; // 원 범위 반지름
     WeaknessType weaknessType = WeaknessType.Blow;

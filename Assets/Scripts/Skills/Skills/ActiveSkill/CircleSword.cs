@@ -7,10 +7,10 @@ public class CircleSword : Skill
     protected override void Awake()
     {
         base.Awake();
-        skillName = "CircleSword";
+        skillName = "칼날 의수";
         skillDamage = 2f;
         cooldown = 4f;
-        icon = Resources.Load<Sprite>("UI/Icon/11.png");
+        icon = Resources.Load<Sprite>("UI/Icon/11");
     }
 
     private float circleAttackRadius = 2f; // 원 범위 반지름

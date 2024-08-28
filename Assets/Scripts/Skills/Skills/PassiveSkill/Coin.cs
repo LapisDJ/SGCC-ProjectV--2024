@@ -6,10 +6,10 @@ public class Coin : PassiveSkill
 {
     protected override void Awake()
     {
-        skillName = "Coin";
+        skillName = "동전";
         effect = 0.05f;
         cooldown = 0f;
-        icon = Resources.Load<Sprite>("UI/Icon/2.png");
+        icon = Resources.Load<Sprite>("UI/Icon/2");
     }
     public override void LevelUp() // 동전 레벨업 로직
     {

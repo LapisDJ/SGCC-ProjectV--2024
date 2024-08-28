@@ -4,6 +4,7 @@ using JetBrains.Annotations;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class UI_Manager : MonoBehaviour
 {
@@ -14,6 +15,8 @@ public class UI_Manager : MonoBehaviour
     [SerializeField] GameObject pausemenu;
     [SerializeField] SkillManager skillmanager;
     [SerializeField] GameObject StartUI;
+    [SerializeField] TextMeshProUGUI[] skillnames;
+
     private bool ispause = false;
     public static bool isskillchoose = false;
     void Awake()
@@ -42,7 +45,7 @@ public class UI_Manager : MonoBehaviour
             hide.enabled = false;
         }
     }
-    public void SkillChooseStart()//진행중인 게임을 일시정지하고 레벨업할 스킬을 선택하는 창으로 진입.
+    public void SkillChooseStart()//진행중인 게임을 일시정지하고 레벨업 가능한 스킬 리스트 가져옴. 레벨업할 스킬을 선택하는 창으로 진입.
     {
         Time.timeScale = 0;
         skillmanager.LevelUp();
@@ -89,11 +92,15 @@ public class UI_Manager : MonoBehaviour
         }
         if(isskillchoose)
         {
+            SkillChooseStart();//timescale 0으로, skillmanager에서 레벨업 가능한 리스트 뽑아오기, 캔버스 활성화.
             skillchoiceimages[0].sprite = SkillManager.skillchoices[0].icon;
+            skillnames[0].text = SkillManager.skillchoices[0].skillName;
             skillchoiceimages[1].sprite = SkillManager.skillchoices[1].icon;
+            skillnames[1].text = SkillManager.skillchoices[1].skillName;
             skillchoiceimages[2].sprite = SkillManager.passivechoices[0].icon;
+            skillnames[2].text = SkillManager.passivechoices[0].skillName;
             skillchoiceimages[3].sprite = SkillManager.passivechoices[1].icon;
-            SkillChooseStart();
+            skillnames[3].text = SkillManager.passivechoices[1].skillName;
             isskillchoose = false;
         }
         //스킬쿨
@@ -128,7 +135,7 @@ public class UI_Manager : MonoBehaviour
         Application.Quit();
         #endif
     }
-    public void StartConfirmButton()
+    public void StartConfirmButton()//게임시작시 확인버튼 누르면 시작하도록.
     {
         Time.timeScale = 1f;
         StartUI.SetActive(false);
@@ -144,13 +151,16 @@ public class UI_Manager : MonoBehaviour
 
     private void UpdateWeaponImages()
     {
-        for (int i = 0; i < weaponImages.Length; i++)
+        for (int i = 0; i < 4; i++)
         {
             bool isActive = i < SkillManager.activeSkills.Count;
-            weaponImages[i].enabled = isActive;
-            weaponImages[i].sprite = SkillManager.activeSkills[i].icon;
-            hideWeaponImages[i].enabled = isActive;
-            hideWeaponImages[i].sprite = SkillManager.activeSkills[i].icon;
+            if(isActive)
+            {
+                weaponImages[i].sprite = SkillManager.activeSkills[i].icon;
+                weaponImages[i].enabled = isActive;
+                hideWeaponImages[i].sprite = SkillManager.activeSkills[i].icon;
+                hideWeaponImages[i].enabled = isActive;
+            }
         }
     }
 
