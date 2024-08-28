@@ -9,7 +9,7 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 using Debug = UnityEngine.Debug;
 
-public class SimplePathfinding : MonoBehaviour
+public class Pathfinding : MonoBehaviour
 {
     public Tilemap backgroundTilemap;
     public Tilemap[] obstacleTilemaps; // Top, Bottom, Left, Right, Wreck, Building 등을 포함

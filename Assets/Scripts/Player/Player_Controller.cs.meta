@@ -1,14 +1,9 @@
 fileFormatVersion: 2
-<<<<<<<< HEAD:Assets/Scripts/Action/Rocket.cs.meta
-guid: 3d07d4d03a1776445970c1f1d2ee7826
-========
-guid: 8dd02db307a99487099c2cb0df4d8b79
->>>>>>>> 1694c61c7e9e37c40e547f73f118a6e0426bfa32:Assets/Scripts/Controllers/Player_Con.cs.meta
+guid: 1e95affcb77720a4b89c8c9e0747a989
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences:
-  - explosionEffectPrefab: {fileID: 1634457954558367471, guid: 2577f7407ea85dc468acc885bd9d9ed2, type: 3}
+  defaultReferences: []
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
