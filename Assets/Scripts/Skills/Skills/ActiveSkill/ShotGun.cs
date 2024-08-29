@@ -15,7 +15,7 @@ public class ShotGun : Skill
         icon = Resources.Load<Sprite>("UI/Icon/10");
     }
 
-    public GameObject shotGunPrefab; // 샷건 프리펩
+    [SerializeField] public GameObject shotGunPrefab; // 샷건 프리펩
     private Vector2 dir; // 플레이어 이동 방향
     private Vector2 lastdir;
     public float bulletSpeed = 10.0f;
@@ -65,7 +65,7 @@ public class ShotGun : Skill
             }
 
              // 플레이어와 총알 간의 충돌을 무시
-            Collider2D playerCollider = GetComponent<Collider2D>();
+            Collider2D playerCollider = player.GetComponent<Collider2D>();
             Collider2D bulletCollider = ShotGunbullet.GetComponent<Collider2D>();
             if (playerCollider != null && bulletCollider != null)
             {
