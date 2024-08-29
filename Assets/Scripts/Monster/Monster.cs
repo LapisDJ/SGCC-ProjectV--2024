@@ -19,6 +19,7 @@ public class Monster : MonoBehaviour
     [SerializeField] protected float speed; // 이동속도
     [SerializeField] protected float lastAttacktime; // 최근 공격 시각
     [SerializeField] protected float attackCooldown; // 공격 쿨타임
+    [SerializeField] Animator animator;
     protected WeaknessType weakness; // 약점 타입
 
     public Monster(float currentHP, float attackDamage, float speed, WeaknessType weakness)
@@ -64,12 +65,18 @@ public class Monster : MonoBehaviour
         currentHP -= damage;
         if (currentHP <= 0)
         {
+            animator.SetTrigger("isDie");
+            StartCoroutine(Delaytime());
             Die();
         }
     }
 
     public void Die()
     {
-        Destroy(this);
+        gameObject.SetActive(false);
+    }
+    IEnumerator Delaytime()
+    {
+        yield return new WaitForSeconds(1f);
     }
 }

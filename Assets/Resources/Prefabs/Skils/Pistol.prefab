@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 404910819112537194}
   - component: {fileID: 8891897951598764507}
   - component: {fileID: 823363104379115277}
+  - component: {fileID: 8121235684611774757}
   m_Layer: 0
   m_Name: Pistol
   m_TagString: Untagged
@@ -28,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 3482846806749779952}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.1, y: -0.3, z: 0}
+  m_LocalPosition: {x: -1.1, y: -0.314, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -125,5 +126,40 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b67c404c6887374985a03bff86a25cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 0
+  damage: 100
   canPenetrate: 0
+--- !u!70 &8121235684611774757
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3482846806749779952}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.013900578, y: -0.020850904}
+  m_Size: {x: 0.17291486, y: 0.17291497}
+  m_Direction: 0
