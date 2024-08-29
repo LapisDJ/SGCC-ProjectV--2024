@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6816733197759881537}
   - component: {fileID: 2912497194055487305}
   - component: {fileID: 3936959190300442829}
+  - component: {fileID: 1474448235545601010}
   m_Layer: 0
   m_Name: Giant_Spider
   m_TagString: Monster1
@@ -102,3 +103,25 @@ MonoBehaviour:
   speed: 1
   lastAttacktime: 0
   attackCooldown: 0
+  animator: {fileID: 1474448235545601010}
+--- !u!95 &1474448235545601010
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1059873796151527030}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 67b9111312194c144b3b7296ccc734be, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

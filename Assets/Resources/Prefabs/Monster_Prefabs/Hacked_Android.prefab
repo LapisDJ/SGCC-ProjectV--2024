@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 353188647199290388}
   - component: {fileID: 185133285508565144}
   - component: {fileID: 6136144945377114781}
+  - component: {fileID: 6349520261330619852}
   m_Layer: 0
   m_Name: Hacked_Android
   m_TagString: Monster2
@@ -102,3 +103,25 @@ MonoBehaviour:
   speed: 5
   lastAttacktime: 0
   attackCooldown: 0
+  animator: {fileID: 6349520261330619852}
+--- !u!95 &6349520261330619852
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 522800021671838278}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a6767260b2928a544b9b698997d56352, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

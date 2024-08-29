@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5870351080300166570}
   - component: {fileID: 7370588314096063405}
   - component: {fileID: 7588060291044465224}
+  - component: {fileID: 3444978763215726084}
   m_Layer: 0
   m_Name: slime
   m_TagString: Monster1
@@ -161,3 +162,21 @@ CapsuleCollider2D:
   m_Offset: {x: 0.0074335146, y: -0.16682734}
   m_Size: {x: 1.0730733, y: 0.7659173}
   m_Direction: 1
+--- !u!114 &3444978763215726084
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1701313106465796756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abb4e153182e4499585322318b47a6e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentHP: 80
+  attackDamage: 1
+  speed: 1
+  lastAttacktime: 0
+  attackCooldown: 0
+  animator: {fileID: 0}
