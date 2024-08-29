@@ -16,11 +16,12 @@ TagManager:
   - middleBoss
   - Boss
   - wall
+  - map
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - obstacles
   - Water
   - UI
   - 
