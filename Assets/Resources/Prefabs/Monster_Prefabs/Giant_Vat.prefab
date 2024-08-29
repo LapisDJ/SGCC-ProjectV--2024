@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6603839999843275493}
   - component: {fileID: 5727038287831714583}
-  - component: {fileID: 6373219281669989466}
+  - component: {fileID: 3352673936912290219}
   m_Layer: 0
   m_Name: Giant_Vat
   m_TagString: Monster3
@@ -74,8 +74,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Sprite: {fileID: 384939089, guid: 1d1338e480694004c9eb341a29f0013a, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -85,7 +85,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &6373219281669989466
+--- !u!114 &3352673936912290219
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

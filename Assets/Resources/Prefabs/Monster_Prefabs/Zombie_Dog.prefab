@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4298669533083516718}
   - component: {fileID: 1197246053139635414}
-  - component: {fileID: 7267446164192462404}
+  - component: {fileID: 8841283247854461976}
   m_Layer: 0
   m_Name: Zombie_Dog
   m_TagString: Monster1
@@ -74,8 +74,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 0, g: 1, b: 0.7300215, a: 1}
+  m_Sprite: {fileID: -1269128938, guid: 07aeb3bb64c07a242bdf4845dcebb7f1, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -85,7 +85,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &7267446164192462404
+--- !u!114 &8841283247854461976
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

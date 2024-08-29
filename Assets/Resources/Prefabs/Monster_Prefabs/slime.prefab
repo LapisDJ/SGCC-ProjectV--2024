@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4648800366096418616}
   - component: {fileID: 122125688935967386}
-  - component: {fileID: 6011322312977761615}
+  - component: {fileID: 5870351080300166570}
   m_Layer: 0
   m_Name: slime
   m_TagString: Monster1
@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
+  m_Sprite: {fileID: -9074539206338946419, guid: c80534141f80d28489b1ef92f8ff7d99, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -85,7 +85,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &6011322312977761615
+--- !u!114 &5870351080300166570
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -94,11 +94,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1701313106465796756}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: abb4e153182e4499585322318b47a6e3, type: 3}
+  m_Script: {fileID: 11500000, guid: 590cf5cfbd0df1b47a36e2ff47d2943e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentHP: 80
-  attackDamage: 1
-  speed: 1
-  lastAttacktime: 0
-  attackCooldown: 0
+  player: {fileID: 0}
+  speed: 5
+  gridWidth: 0
+  gridHeight: 0
+  nodeSize: 0
+  unwalkableTilemaps: []
