@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7954761224298603737}
   - component: {fileID: 1383190498136245197}
   - component: {fileID: 8239224110992070073}
+  - component: {fileID: 6854346385766608234}
   m_Layer: 0
   m_Name: Spider_Robot
   m_TagString: Monster2
@@ -102,3 +103,25 @@ MonoBehaviour:
   speed: 6.5
   lastAttacktime: 0
   attackCooldown: 0
+  animator: {fileID: 6854346385766608234}
+--- !u!95 &6854346385766608234
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4322310473965505875}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 65e0473aa9187624eaf6228e760edfed, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

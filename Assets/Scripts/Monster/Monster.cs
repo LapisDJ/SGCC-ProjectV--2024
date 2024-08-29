@@ -66,8 +66,8 @@ public class Monster : MonoBehaviour
         if (currentHP <= 0)
         {
             animator.SetTrigger("isDie");
+            RealtimeManager.instance.Monsterkill();
             StartCoroutine(Delaytime());
-            Die();
         }
     }
 
@@ -78,5 +78,6 @@ public class Monster : MonoBehaviour
     IEnumerator Delaytime()
     {
         yield return new WaitForSeconds(1f);
+        Die();
     }
 }

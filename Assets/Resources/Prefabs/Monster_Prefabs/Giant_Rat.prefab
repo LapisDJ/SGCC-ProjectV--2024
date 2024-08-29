@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6190018173501310034}
   - component: {fileID: 3883421051380460213}
   - component: {fileID: 2995306495166443421}
+  - component: {fileID: 3769911158743388810}
   m_Layer: 0
   m_Name: Giant_Rat
   m_TagString: Monster3
@@ -74,8 +75,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 1, g: 0.43153957, b: 0.3066038, a: 1}
+  m_Sprite: {fileID: -1178201715, guid: ae83e83e9b560094cb0fd92105420981, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -102,3 +103,25 @@ MonoBehaviour:
   speed: 2
   lastAttacktime: 0
   attackCooldown: 0
+  animator: {fileID: 3769911158743388810}
+--- !u!95 &3769911158743388810
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8294156271063180642}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 8b6867e6d888ee74fa48b984b855711f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
