@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 404910819112537194}
   - component: {fileID: 8891897951598764507}
   - component: {fileID: 823363104379115277}
-  - component: {fileID: 1854276562081449966}
+  - component: {fileID: 8121235684611774757}
   m_Layer: 0
   m_Name: Pistol
   m_TagString: Untagged
@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 3482846806749779952}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.1, y: -0.3, z: 0}
+  m_LocalPosition: {x: -1.1, y: -0.314, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -126,10 +126,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b67c404c6887374985a03bff86a25cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 0
+  damage: 100
   canPenetrate: 0
---- !u!61 &1854276562081449966
-BoxCollider2D:
+--- !u!70 &8121235684611774757
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -157,19 +157,9 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.0069221854, y: -0.016151845}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.15087378, y: 0.1139552}
-  m_EdgeRadius: 0
+  m_Offset: {x: 0.013900578, y: -0.020850904}
+  m_Size: {x: 0.17291486, y: 0.17291497}
+  m_Direction: 0
