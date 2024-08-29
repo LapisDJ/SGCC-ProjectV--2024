@@ -10,14 +10,21 @@ public class BazookaBullet : Bullet
     void Awake()
     {
         canPenetrate = false;
+        // 총알의 Collider2D가 트리거로 설정되어 있어야 함
+        Collider2D collider = GetComponent<Collider2D>();
+        if (collider != null)
+        {
+            collider.isTrigger = true;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Monster1")||collision.CompareTag("Monster2")||collision.CompareTag("Monster3"))
+        // 몬스터와 충돌할 경우에만 데미지 처리
+        if (collision.CompareTag("Monster1") || collision.CompareTag("Monster2") || collision.CompareTag("Monster3"))
         {
-            Destroy(gameObject); // 총알 제거
             ExplodeAndDamage(collision.transform.position, explosionRadius, damageInfo);
+            Destroy(gameObject); // 충돌 후 총알 제거
         }
     }
 
@@ -27,7 +34,7 @@ public class BazookaBullet : Bullet
 
         foreach (Collider2D hitMonster in hitMonsters)
         {
-            if (hitMonster.CompareTag("Monster1")||hitMonster.CompareTag("Monster2")||hitMonster.CompareTag("Monster3"))
+            if (hitMonster.CompareTag("Monster1") || hitMonster.CompareTag("Monster2") || hitMonster.CompareTag("Monster3"))
             {
                 Monster monster = hitMonster.GetComponent<Monster>();
                 if (monster != null)

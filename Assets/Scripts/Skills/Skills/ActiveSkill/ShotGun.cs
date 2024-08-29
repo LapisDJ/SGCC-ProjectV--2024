@@ -65,7 +65,7 @@ public class ShotGun : Skill
             }
 
              // 플레이어와 총알 간의 충돌을 무시
-            Collider2D playerCollider = GetComponent<Collider2D>();
+            Collider2D playerCollider = player.GetComponent<Collider2D>();
             Collider2D bulletCollider = ShotGunbullet.GetComponent<Collider2D>();
             if (playerCollider != null && bulletCollider != null)
             {

@@ -60,8 +60,8 @@ public class Bazooka : Skill
             BazookaBullet BazookaBulletScript = bazookaBullet.GetComponent<BazookaBullet>();
 
             // 플레이어와 총알 간의 충돌을 무시
-            Collider2D playerCollider = GetComponent<CircleCollider2D>();
-            Collider2D bulletCollider = bazookaBullet.GetComponent<CapsuleCollider2D>();
+            Collider2D playerCollider = player.GetComponent<Collider2D>();
+            Collider2D bulletCollider = bazookaBullet.GetComponent<Collider2D>();
             if (playerCollider != null && bulletCollider != null)
             {
                 Physics2D.IgnoreCollision(playerCollider, bulletCollider);
