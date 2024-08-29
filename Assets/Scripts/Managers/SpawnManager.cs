@@ -148,8 +148,29 @@ public class SpawnManager : MonoBehaviour
             if (monster != null) // 몬스터가 null이 아니면
             {
                 monster.transform.position = spawnPosition; // 큐에서 꺼낸 위치에 몬스터를 스폰시킨다.
+                                                            // SimplePathfinding 컴포넌트를 가져온다.
+                SimplePathfinding pathfinding = monster.GetComponent<SimplePathfinding>();
+                if (pathfinding != null)
+                {
+                    pathfinding.player = GameObject.FindGameObjectWithTag("Player").transform;
+                    pathfinding.backgroundTilemap = GameObject.Find("Background").GetComponent<Tilemap>();
+                    pathfinding.obstacleTilemaps = new Tilemap[6] {
+                    GameObject.Find("Left").GetComponent<Tilemap>(),
+                    GameObject.Find("Right").GetComponent<Tilemap>(),
+                    GameObject.Find("Top").GetComponent<Tilemap>(),
+                    GameObject.Find("Bottom").GetComponent<Tilemap>(),
+                    GameObject.Find("Wreck").GetComponent<Tilemap>(),
+                    GameObject.Find("Building").GetComponent<Tilemap>()
+                };
+                    pathfinding.monster = monster.transform;
+                }
+                else
+                {
+                    Debug.LogWarning("SimplePathfinding 컴포넌트를 찾을 수 없습니다.");
+                }
             }
         }
+        
     }
 
     void GetSpawnPosition(bool isDiagonal)

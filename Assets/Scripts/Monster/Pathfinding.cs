@@ -18,7 +18,7 @@ public class SimplePathfinding : MonoBehaviour
     {
         GenerateGraphFromTilemap();
         UpdateGraphNodes(new Vector3Int(1, 1, 0));
-        OnDrawGizmos();
+        //OnDrawGizmos();
     }
 
     void Update()
@@ -29,7 +29,7 @@ public class SimplePathfinding : MonoBehaviour
         if (graph.ContainsKey(monsterCellPosition) && graph.ContainsKey(playerCellPosition))
         {
             List<Vector3Int> path = FindPath(monsterCellPosition, playerCellPosition);
-
+            
             if (path != null && path.Count > 0)
             {
                 Debug.Log("start : " + monsterCellPosition);
