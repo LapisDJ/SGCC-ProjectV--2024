@@ -101,20 +101,31 @@ public class Pistol : Skill
 
     GameObject FindNearestMonster()
     {
-        GameObject[] Monsters = GameObject.FindGameObjectsWithTag("Monster");
-        GameObject NearestMonster = null;
+        // 여러 태그를 가진 몬스터들을 찾기
+        GameObject[] monsters1 = GameObject.FindGameObjectsWithTag("Monster1");
+        GameObject[] monsters2 = GameObject.FindGameObjectsWithTag("Monster2");
+        GameObject[] monsters3 = GameObject.FindGameObjectsWithTag("Monster3");
+
+        // 하나의 리스트에 모든 몬스터들을 합침
+        List<GameObject> allMonsters = new List<GameObject>();
+        allMonsters.AddRange(monsters1);
+        allMonsters.AddRange(monsters2);
+        allMonsters.AddRange(monsters3);
+
+        GameObject nearestMonster = null;
         float minDistance = Mathf.Infinity;
 
-        foreach (GameObject monster in Monsters)
+        // 모든 몬스터들 중에서 가장 가까운 몬스터를 찾음
+        foreach (GameObject monster in allMonsters)
         {
             float distance = Vector3.Distance(transform.position, monster.transform.position);
             if (distance < minDistance)
             {
                 minDistance = distance;
-                NearestMonster = monster;
+                nearestMonster = monster;
             }
         }
 
-        return NearestMonster;
+        return nearestMonster;
     }
 }

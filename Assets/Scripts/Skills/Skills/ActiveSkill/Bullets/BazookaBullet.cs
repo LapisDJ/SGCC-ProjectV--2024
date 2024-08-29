@@ -16,8 +16,8 @@ public class BazookaBullet : Bullet
     {
         if (collision.CompareTag("Monster1")||collision.CompareTag("Monster2")||collision.CompareTag("Monster3"))
         {
-            ExplodeAndDamage(collision.transform.position, explosionRadius, damageInfo);
             Destroy(gameObject); // 총알 제거
+            ExplodeAndDamage(collision.transform.position, explosionRadius, damageInfo);
         }
     }
 

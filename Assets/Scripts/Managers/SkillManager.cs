@@ -8,14 +8,18 @@ public class SkillManager : MonoBehaviour
 {
     public static SkillManager instance;
 
-    public int maxActiveSkills = 4; //최대 액티브 개수
-    public int maxPassiveSkills = 6; //최대 패시브 개수
+    public int maxActiveSkills = 4; // 최대 액티브 개수
+    public int maxPassiveSkills = 6; // 최대 패시브 개수
+
+    [SerializeField] private List<GameObject> activeSkillPrefabs; // 모든 액티브 스킬 프리팹 리스트
+    [SerializeField] private List<GameObject> passiveSkillPrefabs; // 모든 패시브 스킬 프리팹 리스트
+
+    public List<Skill> activeSkills = new List<Skill>(); // 현재 활성화된 액티브 스킬
+    public List<PassiveSkill> passiveSkills = new List<PassiveSkill>(); // 현재 활성화된 패시브 스킬
 
     private List<Skill> availableActiveSkills = new List<Skill>(); // 모든 액티브 스킬 리스트
     private List<PassiveSkill> availablePassiveSkills = new List<PassiveSkill>(); // 모든 패시브 스킬 리스트
 
-    public List<Skill> activeSkills = new List<Skill>(); // 현재 활성화된 액티브 스킬
-    public List<PassiveSkill> passiveSkills = new List<PassiveSkill>(); // 현재 활성화된 패시브 스킬
     private void Awake()
     {
         if (instance == null)
@@ -28,27 +32,28 @@ public class SkillManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    void Start() // 모든 액티브, 패시브 스킬 초기화 후 담기
+    
+    void Start()
     {
         // 액티브 스킬 초기화
-        availableActiveSkills.Add(CreateActiveSkill<BaseballBat>());
-        availableActiveSkills.Add(CreateActiveSkill<Bazooka>());
-        availableActiveSkills.Add(CreateActiveSkill<CircleSword>());
-        availableActiveSkills.Add(CreateActiveSkill<ElectronicField>());
-        availableActiveSkills.Add(CreateActiveSkill<Pistol>());
-        availableActiveSkills.Add(CreateActiveSkill<RotateKnifeDrone>());
-        availableActiveSkills.Add(CreateActiveSkill<ShotGun>());
+        foreach (GameObject prefab in activeSkillPrefabs)
+        {
+            Skill skill = Instantiate(prefab).GetComponent<Skill>();
+            if (skill != null)
+            {
+                availableActiveSkills.Add(skill);
+            }
+        }
 
         // 패시브 스킬 초기화
-        availablePassiveSkills.Add(CreatePassiveSkill<Adrenaline>());
-        availablePassiveSkills.Add(CreatePassiveSkill<CalculateHelper>());
-        availablePassiveSkills.Add(CreatePassiveSkill<Coin>());
-        availablePassiveSkills.Add(CreatePassiveSkill<FatalVirus>());
-        availablePassiveSkills.Add(CreatePassiveSkill<LearnPill>());
-        availablePassiveSkills.Add(CreatePassiveSkill<PoweredSkin>());
-        availablePassiveSkills.Add(CreatePassiveSkill<ProstheticHand>());
-        availablePassiveSkills.Add(CreatePassiveSkill<RocketBoots>());
-        availablePassiveSkills.Add(CreatePassiveSkill<TeleportDevice>());
+        foreach (GameObject prefab in passiveSkillPrefabs)
+        {
+            PassiveSkill passiveSkill = Instantiate(prefab).GetComponent<PassiveSkill>();
+            if (passiveSkill != null)
+            {
+                availablePassiveSkills.Add(passiveSkill);
+            }
+        }
     }
     private T CreateActiveSkill<T>() where T : Skill
     {
