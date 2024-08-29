@@ -34,7 +34,7 @@ public class WeaponCoolEffect : MonoBehaviour
     {
         for (int i = 0; i < weaponImages.Length; i++)
         {
-            bool isActive = i < SkillManager.activeSkills.Count;
+            bool isActive = i < SkillManager.instance.activeSkills.Count;
             weaponImages[i].enabled = isActive;
             hideWeaponImages[i].enabled = isActive;
         }

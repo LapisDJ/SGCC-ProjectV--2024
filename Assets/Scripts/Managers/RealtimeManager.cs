@@ -7,7 +7,7 @@ public class RealtimeManager : MonoBehaviour
 {
     public static RealtimeManager instance;
 
-    [SerializeField] static Player_Stat playerstat;
+    [SerializeField] Player_Stat playerstat;
     public static int monsterkill; // 처치한 몬스터의 수
 
     private void Awake()
@@ -23,7 +23,7 @@ public class RealtimeManager : MonoBehaviour
         }
     }
 
-    public static void Monsterkill()
+    public void Monsterkill()
     //몬스터가 destroy처리될 때 불러올 함수. 처치한 몬스터 개수를 구하고, 그에따라 플레이어를 레벨업함.
     {
         monsterkill++;

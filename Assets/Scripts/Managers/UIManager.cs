@@ -6,8 +6,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class UI_Manager : MonoBehaviour
+public class UIManager : MonoBehaviour
 {
+    public static UIManager instance;
     [SerializeField] GameObject LayoverUI;
     [SerializeField] GameObject SkillChoose;
     [SerializeField] GameObject MissionUI;
@@ -18,11 +19,19 @@ public class UI_Manager : MonoBehaviour
     [SerializeField] TextMeshProUGUI[] skillnames;
 
     private bool ispause = false;
-    public static bool isskillchoose = false;
-    void Awake()
+    public bool isskillchoose = false;
+    private void Awake()
     {
-        Time.timeScale = 0f;
-        DontDestroyOnLoad(gameObject);
+        if (instance == null)
+        {
+            instance = this;
+            Time.timeScale = 0f;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
     void Start()
     {
@@ -71,10 +80,10 @@ public class UI_Manager : MonoBehaviour
     }
     public void Confirmskillchoosebutton()
     {
-        SkillManager.skillchoice = tempskillchoice;
+        SkillManager.instance.skillchoice = tempskillchoice;
         SkillChoose.SetActive(false);
         Time.timeScale = 1.0f;
-        SkillManager.SkillLevelUP();
+        SkillManager.instance.SkillLevelUP();
     }
     void Update()
     {
@@ -93,14 +102,14 @@ public class UI_Manager : MonoBehaviour
         if(isskillchoose)
         {
             SkillChooseStart();//timescale 0으로, skillmanager에서 레벨업 가능한 리스트 뽑아오기, 캔버스 활성화.
-            skillchoiceimages[0].sprite = SkillManager.skillchoices[0].icon;
-            skillnames[0].text = SkillManager.skillchoices[0].skillName;
-            skillchoiceimages[1].sprite = SkillManager.skillchoices[1].icon;
-            skillnames[1].text = SkillManager.skillchoices[1].skillName;
-            skillchoiceimages[2].sprite = SkillManager.passivechoices[0].icon;
-            skillnames[2].text = SkillManager.passivechoices[0].skillName;
-            skillchoiceimages[3].sprite = SkillManager.passivechoices[1].icon;
-            skillnames[3].text = SkillManager.passivechoices[1].skillName;
+            skillchoiceimages[0].sprite = SkillManager.instance.skillchoices[0].icon;
+            skillnames[0].text = SkillManager.instance.skillchoices[0].skillName;
+            skillchoiceimages[1].sprite = SkillManager.instance.skillchoices[1].icon;
+            skillnames[1].text = SkillManager.instance.skillchoices[1].skillName;
+            skillchoiceimages[2].sprite = SkillManager.instance.passivechoices[0].icon;
+            skillnames[2].text = SkillManager.instance.passivechoices[0].skillName;
+            skillchoiceimages[3].sprite = SkillManager.instance.passivechoices[1].icon;
+            skillnames[3].text = SkillManager.instance.passivechoices[1].skillName;
             isskillchoose = false;
         }
         //스킬쿨
@@ -143,9 +152,9 @@ public class UI_Manager : MonoBehaviour
     //스킬쿨 UI
     public Image[] weaponImages;
     public Image[] hideWeaponImages;
-    public static bool[] isCool = { false, false, false, false };
-    public static float[] weaponTimes = { 3, 6, 9, 12 }; // 추후에 바뀌어야 함(쿨타임 받아오기)
-    public static float[] getWeaponTimes = { 0, 0, 0, 0 };
+    public bool[] isCool = { false, false, false, false };
+    public float[] weaponTimes = { 3, 6, 9, 12 }; // 추후에 바뀌어야 함(쿨타임 받아오기)
+    public float[] getWeaponTimes = { 0, 0, 0, 0 };
 
     private Coroutine[] coolTimeCoroutines = new Coroutine[4];
 
@@ -153,12 +162,12 @@ public class UI_Manager : MonoBehaviour
     {
         for (int i = 0; i < 4; i++)
         {
-            bool isActive = i < SkillManager.activeSkills.Count;
+            bool isActive = i < SkillManager.instance.activeSkills.Count;
             if(isActive)
             {
-                weaponImages[i].sprite = SkillManager.activeSkills[i].icon;
+                weaponImages[i].sprite = SkillManager.instance.activeSkills[i].icon;
                 weaponImages[i].enabled = isActive;
-                hideWeaponImages[i].sprite = SkillManager.activeSkills[i].icon;
+                hideWeaponImages[i].sprite = SkillManager.instance.activeSkills[i].icon;
                 hideWeaponImages[i].enabled = isActive;
             }
         }
@@ -175,7 +184,7 @@ public class UI_Manager : MonoBehaviour
         }
     }
 
-    public static void WeaponCoolSetting(int weaponNum)
+    public void WeaponCoolSetting(int weaponNum)
     {
         getWeaponTimes[weaponNum] = weaponTimes[weaponNum];
         isCool[weaponNum] = true;

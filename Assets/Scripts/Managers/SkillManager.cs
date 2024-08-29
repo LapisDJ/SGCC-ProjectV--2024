@@ -14,9 +14,9 @@ public class SkillManager : MonoBehaviour
     private List<Skill> availableActiveSkills = new List<Skill>(); // 모든 액티브 스킬 리스트
     private List<PassiveSkill> availablePassiveSkills = new List<PassiveSkill>(); // 모든 패시브 스킬 리스트
 
-    public static List<Skill> activeSkills = new List<Skill>(); // 현재 활성화된 액티브 스킬
-    public static List<PassiveSkill> passiveSkills = new List<PassiveSkill>(); // 현재 활성화된 패시브 스킬
-     private void Awake()
+    public List<Skill> activeSkills = new List<Skill>(); // 현재 활성화된 액티브 스킬
+    public List<PassiveSkill> passiveSkills = new List<PassiveSkill>(); // 현재 활성화된 패시브 스킬
+    private void Awake()
     {
         if (instance == null)
         {
@@ -60,8 +60,8 @@ public class SkillManager : MonoBehaviour
         GameObject skillObject = new GameObject(typeof(T).Name);
         return skillObject.AddComponent<T>();
     }
-    public static List<Skill> skillchoices;
-    public static List<PassiveSkill> passivechoices;
+    public List<Skill> skillchoices;
+    public List<PassiveSkill> passivechoices;
     public void LevelUp()
     {
         skillchoices = GetRandomSkillChoices(); // 레벨업 ui에 선택될 액티브 스킬들
@@ -158,8 +158,8 @@ public class SkillManager : MonoBehaviour
         }
         return retList;
     }
-    public static int skillchoice;//ui 버튼으로 입력받아서 int형식으로 저장
-    public static void SkillLevelUP()
+    public int skillchoice;//ui 버튼으로 입력받아서 int형식으로 저장
+    public void SkillLevelUP()
     {
         //0레벨이면 리스트에 등록, 1레벨 이상이면 레벨업만
         if (skillchoice < 2)
@@ -183,8 +183,8 @@ public class SkillManager : MonoBehaviour
         skillchoices.Clear();//랜덤으로 두 개씩 뽑은 스킬 리스트들 초기화.
         passivechoices.Clear();
     }
-    static bool cantfind = true;//지금까지 고른 적 없는 스킬일 때 true
-    private static void LevelUpSkill(Skill skill)
+    bool cantfind = true;//지금까지 고른 적 없는 스킬일 때 true
+    private void LevelUpSkill(Skill skill)
     {
         cantfind = true;//일단 true로 초기화
         foreach (Skill active in activeSkills)
@@ -210,7 +210,7 @@ public class SkillManager : MonoBehaviour
             }
         }
     }
-    private static void LevelUpPassiveSkill(PassiveSkill skill)
+    private void LevelUpPassiveSkill(PassiveSkill skill)
     {
         cantfind = true;
         foreach (PassiveSkill passive in passiveSkills)

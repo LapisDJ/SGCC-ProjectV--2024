@@ -40,7 +40,7 @@ public class Player_Stat : MonoBehaviour
     {
         player_level++;
         UpdateStatsByLevel();
-        UI_Manager.isskillchoose = true;
+        UIManager.instance.isskillchoose = true;
     }
 
     void InitializeStats()
