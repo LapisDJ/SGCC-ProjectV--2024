@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 353188647199290388}
   - component: {fileID: 185133285508565144}
+  - component: {fileID: 6136144945377114781}
   m_Layer: 0
   m_Name: Hacked_Android
   m_TagString: Monster2
@@ -84,3 +85,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &6136144945377114781
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 522800021671838278}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fe303189703d4c5c86742049449a83b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentHP: 250000
+  attackDamage: 12
+  speed: 5
+  lastAttacktime: 0
+  attackCooldown: 0
