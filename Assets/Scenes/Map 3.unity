@@ -862,7 +862,7 @@ Tilemap:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Origin: {x: -29, y: 0, z: 0}
   m_Size: {x: 60, y: 56, z: 1}
-  m_TileAnchor: {x: 0.5, y: 0.5, z: 0}
+  m_TileAnchor: {x: 1, y: 1, z: 0}
   m_TileOrientation: 0
   m_TileOrientationMatrix:
     e00: 1
@@ -1014,9 +1014,6 @@ MonoBehaviour:
   - {fileID: 1261233968}
   player: {fileID: 1394328223}
   monster: {fileID: 55944237}
-  Mon_speed: 7
-  obstacleCheckRadius: 0.5
-  previous_nextcellPosition: {x: 0, y: 0, z: 0}
 --- !u!4 &55944237 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7468599394232733844, guid: ffd17a42ca7cc664981d88e2a35879b9, type: 3}
@@ -1153,6 +1150,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerstat: {fileID: 0}
+  rb: {fileID: 0}
+  dir: {x: 0, y: 0, z: 0}
+  speed: 0
   isInteractionStarted: 0
   player: {fileID: 1394328223}
   boss: {fileID: 55944231}
@@ -35071,7 +35071,7 @@ Tilemap:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Origin: {x: -28, y: -4, z: 0}
   m_Size: {x: 58, y: 58, z: 1}
-  m_TileAnchor: {x: 0.5, y: 0.5, z: 0}
+  m_TileAnchor: {x: 1, y: 1, z: 0}
   m_TileOrientation: 0
   m_TileOrientationMatrix:
     e00: 1
@@ -35108,6 +35108,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerstat: {fileID: 0}
+  rb: {fileID: 0}
+  dir: {x: 0, y: 0, z: 0}
+  speed: 0
   isInteractionStarted: 0
   player: {fileID: 1394328223}
   boss: {fileID: 55944231}
@@ -35125,11 +35128,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7468599394232733844, guid: 0c0b02dca944dcc4ead2c01d020df197, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -96.1
+      value: -4.2
       objectReference: {fileID: 0}
     - target: {fileID: 7468599394232733844, guid: 0c0b02dca944dcc4ead2c01d020df197, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -85.9
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 7468599394232733844, guid: 0c0b02dca944dcc4ead2c01d020df197, type: 3}
       propertyPath: m_LocalPosition.z
@@ -35170,6 +35173,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1034961518565794693, guid: 0c0b02dca944dcc4ead2c01d020df197, type: 3}
       insertIndex: -1
       addedObject: {fileID: 550448571}
+    - targetCorrespondingSourceObject: {fileID: 1034961518565794693, guid: 0c0b02dca944dcc4ead2c01d020df197, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 550448578}
   m_SourcePrefab: {fileID: 100100000, guid: 0c0b02dca944dcc4ead2c01d020df197, type: 3}
 --- !u!1 &550448570 stripped
 GameObject:
@@ -35189,9 +35195,39 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerstat: {fileID: 0}
+  rb: {fileID: 0}
+  dir: {x: 0, y: 0, z: 0}
+  speed: 0
   isInteractionStarted: 0
   player: {fileID: 1394328223}
   boss: {fileID: 55944231}
+--- !u!4 &550448577 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7468599394232733844, guid: 0c0b02dca944dcc4ead2c01d020df197, type: 3}
+  m_PrefabInstance: {fileID: 550448569}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &550448578
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 550448570}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 977ef13a68e58c14aaf8e8188c09ee40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  backgroundTilemap: {fileID: 484461024}
+  obstacleTilemaps:
+  - {fileID: 653376683}
+  - {fileID: 41982912}
+  - {fileID: 770553242}
+  - {fileID: 1488732900}
+  - {fileID: 1774802268}
+  - {fileID: 1261233968}
+  player: {fileID: 1394328223}
+  monster: {fileID: 550448577}
 --- !u!1 &653376680
 GameObject:
   m_ObjectHideFlags: 0
@@ -35928,7 +35964,7 @@ Tilemap:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Origin: {x: -29, y: -5, z: 0}
   m_Size: {x: 60, y: 5, z: 1}
-  m_TileAnchor: {x: 0.5, y: 0.5, z: 0}
+  m_TileAnchor: {x: 1, y: 1, z: 0}
   m_TileOrientation: 0
   m_TileOrientationMatrix:
     e00: 1
@@ -36831,7 +36867,7 @@ Tilemap:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Origin: {x: 0, y: -4, z: 0}
   m_Size: {x: 31, y: 59, z: 1}
-  m_TileAnchor: {x: 0.5, y: 0.5, z: 0}
+  m_TileAnchor: {x: 1, y: 1, z: 0}
   m_TileOrientation: 0
   m_TileOrientationMatrix:
     e00: 1
@@ -37025,6 +37061,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerstat: {fileID: 0}
+  rb: {fileID: 0}
+  dir: {x: 0, y: 0, z: 0}
+  speed: 0
   isInteractionStarted: 0
   player: {fileID: 1394328223}
   boss: {fileID: 55944231}
@@ -42876,7 +42915,7 @@ Tilemap:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Origin: {x: -28, y: -4, z: 0}
   m_Size: {x: 58, y: 58, z: 1}
-  m_TileAnchor: {x: 0.5, y: 0.5, z: 0}
+  m_TileAnchor: {x: 1, y: 1, z: 0}
   m_TileOrientation: 0
   m_TileOrientationMatrix:
     e00: 1
@@ -43815,7 +43854,7 @@ Tilemap:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Origin: {x: -29, y: -4, z: 0}
   m_Size: {x: 29, y: 59, z: 1}
-  m_TileAnchor: {x: 0.5, y: 0.5, z: 0}
+  m_TileAnchor: {x: 1, y: 1, z: 0}
   m_TileOrientation: 0
   m_TileOrientationMatrix:
     e00: 1
@@ -44044,7 +44083,7 @@ Tilemap:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Origin: {x: 0, y: 0, z: 0}
   m_Size: {x: 0, y: 0, z: 1}
-  m_TileAnchor: {x: 0.5, y: 0.5, z: 0}
+  m_TileAnchor: {x: 1, y: 1, z: 0}
   m_TileOrientation: 0
   m_TileOrientationMatrix:
     e00: 1

@@ -15,6 +15,7 @@ TagManager:
   - signalTower
   - middleBoss
   - Boss
+  - wall
   layers:
   - Default
   - TransparentFX

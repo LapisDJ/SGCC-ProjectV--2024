@@ -1,13 +1,7 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq.Expressions;
-using System.Threading;
-using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Tilemaps;
-using Debug = UnityEngine.Debug;
 
 public class SimplePathfinding : MonoBehaviour
 {
@@ -17,20 +11,14 @@ public class SimplePathfinding : MonoBehaviour
     public Transform monster;
     private Vector3Int playerCellPosition;
     private Vector3Int monsterCellPosition;
-    public float Mon_speed = 20f;
 
     private Dictionary<Vector3Int, List<Vector3Int>> graph = new Dictionary<Vector3Int, List<Vector3Int>>();
-    Vector3 nextPosition;
-    Vector3 nextPosition_temp;
-    private int path_x = 0;
-    private int path_y = 0;
-    private float obstacle_distance = 1f;
-    public float obstacleCheckRadius = 0.5f; // 장애물 체크 반경
-    public Vector3Int previous_nextcellPosition = new Vector3Int();
-    int ifStart = 0;
+
     void Start()
     {
         GenerateGraphFromTilemap();
+        UpdateGraphNodes(new Vector3Int(1, 1, 0));
+        OnDrawGizmos();
     }
 
     void Update()
@@ -44,61 +32,15 @@ public class SimplePathfinding : MonoBehaviour
 
             if (path != null && path.Count > 0)
             {
-                int i = 1;
-                Vector3Int nextCellPosition = path[0]; // 기본적으로는 첫 번째 셀을 목표로 설정 
-                /*
-                for (i = 1; i < path.Count; i++)    // 이동하는 그래프 노드에서 일직선 방향의 마지막 노드를 nextCellPosition에 저장
+                Debug.Log("start : " + monsterCellPosition);
+                for(int j = 0; j < path.Count; j++)
                 {
-                    if (path[i].x != path[0].x && path[i].y != path[0].y)
-                    {
-                        nextCellPosition = path[i - 1];
-                        break;
-                    }
+                    Debug.Log(path[j]);
                 }
-                */
-                /*
-                int j = 1;
-                for (j = i; j < path.Count; j++)
-                {
-                    if (path[j].x != path[i - 1].x && path[j].y != path[i - 1].y)
-                    {
- 
-                            nextCellPosition = path[j - 1];
-                            break;
-                    }
-                }
-                */
-                if (ifStart == 0)
-                {
-                    nextCellPosition = path[0];
-                    ifStart++;
-                }
-                previous_nextcellPosition = nextCellPosition;
-                // 가장 가까운 그래프에 포함되지 않은 타일 찾기
-                Vector3Int closestNonGraphTile = FindClosestNonGraphTile(nextCellPosition);
+                Debug.Log("End : " + playerCellPosition);
 
-                // 두 점 사이의 거리 계산
-                float distance = Vector3.Distance(backgroundTilemap.CellToWorld(nextCellPosition), backgroundTilemap.CellToWorld(closestNonGraphTile));
-                //Debug.Log(distance);
-                // 거리가 1.5f보다 작을 경우, 거리를 1.5f로 보정
-                if (distance < 1.42f)
-                {
-                    Vector3 direction = (backgroundTilemap.CellToWorld(nextCellPosition) - backgroundTilemap.CellToWorld(closestNonGraphTile)).normalized;
-                    //Debug.Log(direction);
-                    Vector3 adjustedPosition = backgroundTilemap.CellToWorld(closestNonGraphTile) + direction * 0.48f;
-                    
-                    nextPosition = adjustedPosition; // 보정된 위치를 nextPosition에 저장
-                    //Debug.Log(monsterCellPosition + "               " + backgroundTilemap.CellToWorld(nextCellPosition) + "               " + backgroundTilemap.CellToWorld(closestNonGraphTile) + "               " + monster.position + "               " + nextPosition + " aaaaaaaaaaaaa");
-                }
-                else
-                {
-                    nextPosition = backgroundTilemap.CellToWorld(nextCellPosition);
-                    //Debug.Log(monster.position + "               " + nextPosition + " bbbbbbbbbbbbbbbbbb");
-                }
-
-                //monster.position += (nextPosition - monster.position).normalized * Time.deltaTime * Mon_speed;
-                monster.position = Vector3.MoveTowards(monster.position, nextPosition, Mon_speed * Time.deltaTime);
-                //Debug.Log(monster.position);
+                Vector3 nextPosition = backgroundTilemap.CellToWorld(path[0]);
+                monster.position = Vector3.MoveTowards(monster.position, nextPosition, Time.deltaTime * 2f);
             }
             else
             {
@@ -110,9 +52,6 @@ public class SimplePathfinding : MonoBehaviour
             Debug.LogError("One of the positions (monster or player) is not in the graph.");
         }
     }
-
-
-    
 
     void GenerateGraphFromTilemap()
     {
@@ -146,36 +85,7 @@ public class SimplePathfinding : MonoBehaviour
             }
         }
     }
-
-
-    Vector3Int FindClosestNonGraphTile(Vector3Int referenceTile)
-    {
-        Vector3Int closestTile = referenceTile;
-        float closestDistance = float.MaxValue;
-
-        for (int x = referenceTile.x - 100; x <= referenceTile.x + 100; x++)
-        {
-            for (int y = referenceTile.y - 100; y <= referenceTile.y + 100; y++)
-            {
-                Vector3Int currentTile = new Vector3Int(x, y, 0);
-
-                if (!graph.ContainsKey(currentTile))
-                {
-                    float distance = Vector3.Distance(backgroundTilemap.CellToWorld(referenceTile), backgroundTilemap.CellToWorld(currentTile));
-
-                    if (distance < closestDistance)
-                    {
-                        closestDistance = distance;
-                        closestTile = currentTile;
-                    }
-                }
-            }
-        }
-
-        return closestTile;
-    }
-
-
+    /*
     bool IsWalkable(Vector3Int position)
     {
         if (!backgroundTilemap.HasTile(position))
@@ -189,6 +99,60 @@ public class SimplePathfinding : MonoBehaviour
 
         return true;
     }
+    */
+    void UpdateGraphNodes(Vector3Int offset)
+    {
+        Dictionary<Vector3Int, List<Vector3Int>> newGraph = new Dictionary<Vector3Int, List<Vector3Int>>();
+
+        foreach (var node in graph)
+        {
+            Vector3Int oldPosition = node.Key;
+            List<Vector3Int> neighbors = node.Value;
+
+            // 새 위치로 노드를 이동
+            Vector3Int newPosition = oldPosition + offset;
+            List<Vector3Int> newNeighbors = new List<Vector3Int>();
+
+            // 각 이웃 노드도 새 위치로 이동
+            foreach (var neighbor in neighbors)
+            {
+                newNeighbors.Add(neighbor + offset);
+            }
+
+            // 새로운 그래프에 추가
+            newGraph[newPosition] = newNeighbors;
+        }
+
+        // 기존 그래프를 새로운 그래프로 교체
+        graph = newGraph;
+    }
+    bool IsWalkable(Vector3Int position)
+{
+    // 타일이 존재하지 않으면 걷기 불가능
+    if (!backgroundTilemap.HasTile(position))
+        return false;
+
+    // 장애물 타일을 확인하는 방향
+    Vector3Int[] directions = { Vector3Int.up, Vector3Int.down, Vector3Int.left, Vector3Int.right };
+
+    // 각 방향에 대해 인접한 타일이 장애물 타일인지 확인
+    foreach (Tilemap obstacleTilemap in obstacleTilemaps)
+    {
+        if (obstacleTilemap.HasTile(position))
+        {
+            return false; // 현재 위치가 장애물 타일이면 걷기 불가능
+        }
+
+        
+    }
+
+    // 어떤 장애물 타일과도 닿아 있지 않으면 걷기 가능
+    return true;
+}
+
+
+
+
 
     List<Vector3Int> FindPath(Vector3Int start, Vector3Int goal)
     {
@@ -252,7 +216,35 @@ public class SimplePathfinding : MonoBehaviour
         return Mathf.Abs(a.x - b.x) + Mathf.Abs(a.y - b.y);
     }
 
+
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red; // 노드를 표시할 색상
+        float radius = 0.1f; // 노드를 표시할 구의 반지름
+
+        if (graph != null)
+        {
+            foreach (var node in graph)
+            {
+                Vector3 nodePosition = backgroundTilemap.CellToWorld(node.Key);// + new Vector3(0.5f, 0.5f, 0); // 타일의 중앙을 구할 수 있도록 오프셋 추가
+                Gizmos.DrawSphere(nodePosition, radius); // 노드 위치에 구를 그림
+
+                foreach (var neighbor in node.Value)
+                {
+                    Vector3 neighborPosition = backgroundTilemap.CellToWorld(neighbor);// + new Vector3(0.5f, 0.5f, 0);
+                    Gizmos.DrawLine(nodePosition, neighborPosition); // 노드와 인접 노드 사이에 선을 그림
+                }
+            }
+        }
+    }
+
+
 }
+
+
+
+
+
 
 // 우선순위 큐 클래스 (간단한 최소 힙 구현)
 public class PriorityQueue<T>
@@ -318,8 +310,4 @@ public class PriorityQueue<T>
         elements[indexA] = elements[indexB];
         elements[indexB] = temp;
     }
-
-    
-
-
 }

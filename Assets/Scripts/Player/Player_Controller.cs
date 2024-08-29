@@ -3,11 +3,11 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public Player_Stat playerstat;
-    private Rigidbody2D rb;
-    private Vector3 dir;
-    float speed;
+    public Rigidbody2D rb;
+    public Vector3 dir;
+    public float speed;
     public bool isInteractionStarted = false; // 상호작용이 시작되었는지 여부
-    private void Start()
+    public void Start()
     {
         playerstat = GetComponent<Player_Stat>();
         if (playerstat == null)
@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour
         };
     }
 
-    private void Update()
+    public void FixedUpdate()
     {
         if (!isInteractionStarted)
         {
@@ -38,17 +38,4 @@ public class PlayerController : MonoBehaviour
         }
 
     }
-    /*
-    private void FixedUpdate()
-    {
-        if (!isInteractionStarted)
-        {
-            rb.velocity = dir * speed;
-        }
-        else
-        {
-            rb.velocity = Vector3.zero;
-        }
-    }
-    */
 }
