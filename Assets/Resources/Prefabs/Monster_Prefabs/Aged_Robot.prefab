@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 9007459897288324340}
   - component: {fileID: 5292411357016886321}
   - component: {fileID: 7344576396008713931}
+  - component: {fileID: -44341072381465670}
   m_Layer: 7
   m_Name: Aged_Robot
   m_TagString: Monster2
@@ -179,3 +180,30 @@ MonoBehaviour:
   player: {fileID: 0}
   monster: {fileID: 0}
   nextPosition: {x: 0, y: 0, z: 0}
+--- !u!50 &-44341072381465670
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4404071691490233974}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
