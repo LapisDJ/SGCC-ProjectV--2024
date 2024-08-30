@@ -54,6 +54,7 @@ public class SkillManager : MonoBehaviour
                 availablePassiveSkills.Add(passiveSkill);
             }
         }
+         activeSkills.Add(availableActiveSkills[4]);
     }
     private T CreateActiveSkill<T>() where T : Skill
     {

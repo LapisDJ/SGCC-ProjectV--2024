@@ -7,7 +7,7 @@ public class Bazooka : Skill
     WeaknessType weaknessType = WeaknessType.Blow; // 공격 타임 : 타격
     [SerializeField] public GameObject bazookaPrefab; // 바주카포 프리펩
     public float bulletSpeed = 10.0f;
-    public float exploreRadius = 1f;
+    public float exploreRadius = 0.5f;
 
     protected override void Awake()
     {

@@ -9,12 +9,14 @@ public class Pistol : Skill
     WeaknessType weaknessType = WeaknessType.Blow; // 공격 타임 : 타격
     protected override void Awake()
     {
+        this.level = 1;
         base.Awake();
         skillName = "권총";
         skillDamage = 1f;
         cooldown = 3f;
         icon = Resources.Load<Sprite>("UI/Icon/13");
     }
+
     [SerializeField] public GameObject pistolPrefab;// 권총 프리펩
     public float bulletSpeed = 10.0f;
     public bool canPenetrate = false;    // 총알이 관통하는지 여부를 결정
