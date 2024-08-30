@@ -12,7 +12,9 @@ GameObject:
   - component: {fileID: 3918287650202249183}
   - component: {fileID: 8354860645663210066}
   - component: {fileID: 9007459897288324340}
-  m_Layer: 0
+  - component: {fileID: 5292411357016886321}
+  - component: {fileID: 7344576396008713931}
+  m_Layer: 7
   m_Name: Aged_Robot
   m_TagString: Monster2
   m_Icon: {fileID: 0}
@@ -125,3 +127,55 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!70 &5292411357016886321
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4404071691490233974}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.03, y: 0.5}
+  m_Size: {x: 0.55, y: 1}
+  m_Direction: 0
+--- !u!114 &7344576396008713931
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4404071691490233974}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 977ef13a68e58c14aaf8e8188c09ee40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  backgroundTilemap: {fileID: 0}
+  obstacleTilemaps: []
+  player: {fileID: 0}
+  monster: {fileID: 0}
+  nextPosition: {x: 0, y: 0, z: 0}
