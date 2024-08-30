@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using JetBrains.Annotations;
 using Unity.VisualScripting;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -17,6 +19,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] SkillManager skillmanager;
     [SerializeField] GameObject StartUI;
     [SerializeField] TextMeshProUGUI[] skillnames;
+    [SerializeField] Player_Stat playerstat;
+    [SerializeField] Slider hpbar;
 
     private bool ispause = false;
     public bool isskillchoose = false;
@@ -42,8 +46,10 @@ public class UIManager : MonoBehaviour
         ExitSceneUI.SetActive(false);
         pausemenu.SetActive(false);
         StartUI.SetActive(true);
+        recheckwindow.SetActive(false);
         isskillchoose = false;
         ispause = false;
+        initialtime = Time.time;
         //스킬쿨
         foreach (Image weapon in weaponImages)
         {
@@ -53,6 +59,42 @@ public class UIManager : MonoBehaviour
         {
             hide.enabled = false;
         }
+    }
+    //메인메뉴
+    public void OnClickNewgame()
+    {
+        SceneManager.LoadScene("Character choose");
+    }
+    public void OnClickBringup()
+    {
+        SceneManager.LoadScene("?");
+    }
+    public void OnClickSettings()
+    {
+        SceneManager.LoadScene("Settings");
+    }
+    public void OnClickQuit()
+    {
+        Application.Quit();
+        #if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+        #else
+        Application.Quit();
+        #endif
+    }
+    //캐릭터 선택창
+    int characternum;
+    public void FirstCharacterButton()
+    {
+        characternum = 1;
+    }
+    public void Confirmbutton()
+    {
+        LoadingSceneController.Loadscene("Map1");
+    }
+    public void Previousbutton()
+    {
+        SceneManager.LoadScene("Main Menu");
     }
     public void SkillChooseStart()//진행중인 게임을 일시정지하고 레벨업 가능한 스킬 리스트 가져옴. 레벨업할 스킬을 선택하는 창으로 진입.
     {
@@ -112,9 +154,19 @@ public class UIManager : MonoBehaviour
             skillnames[3].text = SkillManager.instance.passivechoices[1].skillName;
             isskillchoose = false;
         }
+        hpbar.value = playerstat.HPcurrent / playerstat.HPmax;//HP바 표시
         //스킬쿨
         WeaponCoolChk();
         UpdateWeaponImages();
+        //능력쿨
+        if (Input.GetKeyDown(KeyCode.Space)) // 테스트용 키코드. 스페이스를 누르면 능력쿨타임이 돌아간다.
+        {
+            AbilityCoolSetting();
+        }
+        if(isAbilityCool)
+        {
+            AbilityCoolChk();
+        }
     }
     public void Callmenu()
     {
@@ -169,6 +221,7 @@ public class UIManager : MonoBehaviour
                 weaponImages[i].enabled = isActive;
                 hideWeaponImages[i].sprite = SkillManager.instance.activeSkills[i].icon;
                 hideWeaponImages[i].enabled = isActive;
+                weaponTimes[i] = SkillManager.instance.activeSkills[i].cooldown;
             }
         }
     }
@@ -206,4 +259,129 @@ public class UIManager : MonoBehaviour
     }
     //스킬레벨업 UI
     public Image[] skillchoiceimages;
+
+    //정산창
+    [SerializeField] GameObject recheckwindow;
+    public void GotoMainmenuButton()
+    {
+        recheckwindow.SetActive(true);
+    }
+    public void Recheckyes()
+    {
+        LoadingSceneController.Loadscene("Main Menu");
+    }
+    public void Recheckno()
+    {
+        recheckwindow.SetActive(false);
+    }
+    public void Retry()
+    {
+        QuestManager.instance.currentQuest--;
+        switch(QuestManager.instance.currentQuest)
+        {
+            case 1 : 
+                LoadingSceneController.Loadscene("Map1");
+                break;
+            case 2 : 
+                LoadingSceneController.Loadscene("Map1");
+                break;
+            case 3 : 
+                LoadingSceneController.Loadscene("Map1");
+                break;
+            default:
+                break;
+        }
+    }
+    public void Nextchapter()
+    {
+        switch(QuestManager.instance.currentQuest)
+        {
+            case 1 : 
+                LoadingSceneController.Loadscene("Map1");
+                break;
+            case 2 : 
+                LoadingSceneController.Loadscene("Map1");
+                break;
+            case 3 : 
+                LoadingSceneController.Loadscene("Map1");
+                break;
+            default:
+                break;
+        }
+    }
+    //타이머
+    [SerializeField] TextMeshProUGUI timer;
+    public static string time;
+    private int wholetime;
+    private int minute;
+    private int second;
+    private float initialtime;
+
+    void FixedUpdate()
+    {
+        wholetime = Convert.ToInt16(Time.time - initialtime);
+        minute = wholetime/60;
+        second = wholetime%60;
+        if(second < 10)
+        {
+            if(minute < 10)
+            {
+                time = '0' + Convert.ToString(minute) + " : " + '0' + Convert.ToString(second);
+            }
+            else
+            {
+                time = Convert.ToString(minute) + " : " + '0' + Convert.ToString(second);
+            }
+        }
+        else
+        {
+            if(minute < 10)
+            {
+                time = '0' + Convert.ToString(minute) + " : " + Convert.ToString(second);
+            }
+            else
+            {
+                time = Convert.ToString(minute) + " : " + Convert.ToString(second);
+            }
+        }
+        timer.text = time;
+    }
+    //
+    public Image abilityImage;
+    public Image hideAbilityImage;
+    public static bool isAbilityCool = false; // 능력 쿨타임 여부
+    public static float abilityTime = 5f; // 능력 쿨타임
+    public static float getAbilityTime = 0f; // 능력 사용 후 시간 체크
+
+    private Coroutine coolTimeCoroutine;
+
+    private void AbilityCoolChk()
+    {
+        if (isAbilityCool && coolTimeCoroutine == null)
+        {
+            coolTimeCoroutine = StartCoroutine(CoolTimeChk());
+        }
+    }
+
+    public static void AbilityCoolSetting()
+    {
+        getAbilityTime = abilityTime;
+        isAbilityCool = true;
+    }
+
+    IEnumerator CoolTimeChk() // 능력 쿨타임 잔여량만큼 불투명한 상자로 가리는 함수. 쿨타임이 0 이하일 시 isAbilityCool도 false로 바꿔줌.
+    {
+        while (getAbilityTime > 0)
+        {
+            getAbilityTime -= Time.deltaTime;
+            float time = Mathf.Clamp01(getAbilityTime / abilityTime);
+            hideAbilityImage.fillAmount = time;
+            yield return null;
+        }
+
+        // 쿨타임 종료 처리
+        isAbilityCool = false;
+        hideAbilityImage.fillAmount = 0f;
+        coolTimeCoroutine = null;
+    }
 }

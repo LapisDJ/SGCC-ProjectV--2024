@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1885542057529090263}
   - component: {fileID: 8731086571415922541}
+  - component: {fileID: 4918271163978410027}
   m_Layer: 0
   m_Name: CircleSword
   m_TagString: Untagged
@@ -50,3 +51,24 @@ MonoBehaviour:
   cooldown: 0
   icon: {fileID: 0}
   player: {fileID: 0}
+--- !u!95 &4918271163978410027
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2483729412032129873}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: eb80c87918b86f543a997878e5c9a4b4, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
