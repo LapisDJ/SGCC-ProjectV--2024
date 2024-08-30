@@ -20,14 +20,16 @@ public class Monster : MonoBehaviour
     [SerializeField] protected float lastAttacktime; // 최근 공격 시각
     [SerializeField] protected float attackCooldown; // 공격 쿨타임
     [SerializeField] Animator animator;
+    [SerializeField] public string key;
     protected WeaknessType weakness; // 약점 타입
 
-    public Monster(float currentHP, float attackDamage, float speed, WeaknessType weakness)
+    public Monster(float currentHP, float attackDamage, float speed, WeaknessType weakness, string key)
     {
         this.currentHP = currentHP;
         this.attackDamage = attackDamage;
         this.speed = speed;
         this.weakness = weakness;
+        this.key = key;
     }
     
     public float GetCurrentSpeed()
@@ -58,26 +60,32 @@ public class Monster : MonoBehaviour
             Attack();
             lastAttacktime = Time.time; // 마지막 근접 공격 시간 업데이트
         }
+       
     }
 
     public void TakeDamage(float damage)
     {
         currentHP -= damage;
-        if (currentHP <= 0)
+         if (currentHP <= 0)
         {
+            this.speed = 0;
+            this.attackDamage = 0;
             animator.SetTrigger("isDie");
             RealtimeManager.instance.Monsterkill();
-            StartCoroutine(Delaytime());
+            //StartCoroutine(Delaytime());
+            Destroy(gameObject);
+            //Die();
         }
     }
 
     public void Die()
     {
         gameObject.SetActive(false);
+        SpawnManager.instance.objectPools[this.key].Enqueue(gameObject);
     }
     IEnumerator Delaytime()
     {
-        yield return new WaitForSeconds(1f);
-        Die();
+        yield return new WaitForSeconds(0.5f);
+        
     }
 }

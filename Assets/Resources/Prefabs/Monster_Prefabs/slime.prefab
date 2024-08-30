@@ -180,7 +180,7 @@ MonoBehaviour:
   speed: 1
   lastAttacktime: 0
   attackCooldown: 0
-  animator: {fileID: 0}
+  animator: {fileID: 7370588314096063405}
 --- !u!114 &1028999604159111274
 MonoBehaviour:
   m_ObjectHideFlags: 0

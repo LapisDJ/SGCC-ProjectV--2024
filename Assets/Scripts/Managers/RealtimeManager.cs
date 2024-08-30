@@ -8,7 +8,7 @@ public class RealtimeManager : MonoBehaviour
     public static RealtimeManager instance;
 
     [SerializeField] Player_Stat playerstat;
-    public static int monsterkill; // 처치한 몬스터의 수
+    public int monsterkill; // 처치한 몬스터의 수
 
     private void Awake()
     {

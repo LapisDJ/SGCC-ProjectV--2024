@@ -14,7 +14,7 @@ public class SpawnManager : MonoBehaviour
     private Camera mainCamera; // 카메라
     private float startTime; // 게임 시작 이후 경과시간
 
-    private Dictionary<string, Queue<GameObject>> objectPools = new Dictionary<string, Queue<GameObject>>(); // <몬스터, 큐>의 형태로 오브젝트 풀 구성
+    public Dictionary<string, Queue<GameObject>> objectPools = new Dictionary<string, Queue<GameObject>>(); // <몬스터, 큐>의 형태로 오브젝트 풀 구성
     private Queue<Vector3> spawnPointsQueue = new Queue<Vector3>(); // 동시 스폰을 위한, 해당 스폰 타이밍마다의 가능한 스폰 포인트 좌표 큐
     [SerializeField] public Tilemap tilemap; // 유효 스폰 위치 검사 위한 타일맵
 
@@ -69,7 +69,7 @@ public class SpawnManager : MonoBehaviour
         {
             GameObject obj = objectPools[key].Dequeue(); // <이름이 key인> 풀에서 front pop
             obj.SetActive(true); // pop된 몬스터 활성화
-            objectPools[key].Enqueue(obj); // 활성화 된 상태로 rear에 push
+            //objectPools[key].Enqueue(obj); // 활성화 된 상태로 rear에 push
             return obj; //pop된 몬스터 반환
         }
         return null; // 아니면 null 반환
