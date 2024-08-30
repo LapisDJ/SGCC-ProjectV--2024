@@ -559,6 +559,7 @@ GameObject:
   m_Component:
   - component: {fileID: 193708225}
   - component: {fileID: 193708226}
+  - component: {fileID: 193708227}
   m_Layer: 0
   m_Name: UI_Manager
   m_TagString: Untagged
@@ -611,6 +612,8 @@ MonoBehaviour:
   - {fileID: 1090524260}
   - {fileID: 615944255}
   - {fileID: 558877301}
+  playerstat: {fileID: 193708227}
+  hpbar: {fileID: 789065519}
   isskillchoose: 0
   tempskillchoice: 9
   weaponImages:
@@ -639,6 +642,36 @@ MonoBehaviour:
   - {fileID: 519732602}
   - {fileID: 1986730217}
   - {fileID: 350906253}
+  recheckwindow: {fileID: 0}
+  timer: {fileID: 1517984169}
+  abilityImage: {fileID: 65850485}
+  hideAbilityImage: {fileID: 1758974369}
+--- !u!114 &193708227
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 193708223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5de58e3a2014e4d4b8c86e4800d7adb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player_level: 1
+  expgainrate: 1
+  WorkSpeed: 1
+  Luck: 0
+  CriticalChance: 0
+  HPcurrent: 0
+  HPbylevel: 50
+  HPbonus: 1
+  HPmax: 0
+  HPpreviousmax: 0
+  speedAdd: 5
+  speedMulti: 1
+  speedFin: 0
+  attackDamageByLevel: 5
 --- !u!1 &221152305
 GameObject:
   m_ObjectHideFlags: 0
@@ -17064,7 +17097,7 @@ RectTransform:
   m_GameObject: {fileID: 1062601522}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 100}
-  m_LocalScale: {x: 0.016666666, y: 0.016666666, z: 0.016666666}
+  m_LocalScale: {x: 0.016666668, y: 0.016666668, z: 0.016666668}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 789065518}
@@ -17091,6 +17124,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timer: {fileID: 1517984169}
+  wholetime: 0
+  minute: 0
+  second: 0
+  initialtime: 0
 --- !u!114 &1062601529
 MonoBehaviour:
   m_ObjectHideFlags: 0

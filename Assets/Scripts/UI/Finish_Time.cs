@@ -8,8 +8,6 @@ public class Finish_Time : MonoBehaviour
     [SerializeField] TextMeshProUGUI finaltime;
     void Start()
     {
-        finaltime.text = "클리어 시간 : " + Timer.time;
+        finaltime.text = "클리어 시간 : " + UIManager.time;
     }
-
-    
 }
