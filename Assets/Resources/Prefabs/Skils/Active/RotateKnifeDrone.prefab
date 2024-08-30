@@ -50,6 +50,6 @@ MonoBehaviour:
   cooldown: 0
   icon: {fileID: 0}
   player: {fileID: 0}
-  knifeDronePrefab: {fileID: 0}
+  knifeDronePrefab: {fileID: 1470415539538301416, guid: 762f963cf9e1f304081965438345abfc, type: 3}
   rotationSpeed: 90
   knifeRadius: 2
