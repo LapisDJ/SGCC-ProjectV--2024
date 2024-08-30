@@ -6,46 +6,47 @@ using UnityEngine.Tilemaps;
 
 public class SimplePathfinding : MonoBehaviour
 {
+    private Monster monster_S;
     public Tilemap backgroundTilemap;
     public Tilemap[] obstacleTilemaps; // Top, Bottom, Left, Right, Wreck, Building 등을 포함
     public Transform player;
     public Transform monster;
     private Vector3Int playerCellPosition;
     private Vector3Int monsterCellPosition;
-
+    private float speed;
     private Dictionary<Vector3Int, List<Vector3Int>> graph = new Dictionary<Vector3Int, List<Vector3Int>>();
     private List<Vector3Int> path;
     private List<Vector3Int> moveDirectPool;
-    private List<Vector3Int> moveDirect;
-    //private Collider2D prefabCollider;
+    private List<Vector3> moveDirect;
     public Vector3 nextPosition;
-    //private bool isOneRoot = false;
     void Start()
     {
-
-        /*
-        prefabCollider = GetComponent<Collider2D>();  // 이 스크립트가 붙은 오브젝트의 Collider2D를 가져옴
-
-        if (prefabCollider == null)
+        monster_S = GetComponent<Monster>();
+        if (monster_S == null)
         {
-            Debug.LogError("이 오브젝트에 Collider2D가 없습니다.");
+            Debug.LogError("Monster 컴포넌트를 찾을 수 없습니다!");
         }
-        */
         GenerateGraphFromTilemap();
         UpdateGraphNodes(new Vector3Int(1, 1, 0));
-        //OnDrawGizmos();
     }
 
     void Update()
     {
+        if (monster != null)
+        {
+            // 이동 속도를 가져옴
+            speed = monster_S.GetCurrentSpeed();
+            Debug.Log(speed);
+        }
+
         if (Vector3.Distance(monster.position, nextPosition) <= 0.8f)
         {
             monster.position = nextPosition;
         }
+
         // 경로 갱신 전에 이전 경로를 null로 초기화
         path = null;
         moveDirect = null;
-        //isOneRoot = false;
 
         playerCellPosition = backgroundTilemap.WorldToCell(player.position);
         monsterCellPosition = backgroundTilemap.WorldToCell(monster.position);
@@ -56,45 +57,21 @@ public class SimplePathfinding : MonoBehaviour
 
             if (path != null && path.Count > 0)
             {
-                moveDirect = new List<Vector3Int>();
-
-                Debug.Log("start : " + monsterCellPosition);
-                for (int j = 0; j < path.Count; j++)
-                {
-                    Debug.Log(path[j]);
-                }
-                Debug.Log("End : " + playerCellPosition);
-
+                moveDirect = new List<Vector3>();
                 // path에서 moveDirectPool에 있는 좌표들을 moveDirect에 추가
                 foreach (var position in path)
                 {
                     if (moveDirectPool.Contains(position))
                     {
                         moveDirect.Add(position);
-                        //isOneRoot = true;
                     }
                 }
-                moveDirect.Add(playerCellPosition);
-                /*
-                if (!IsPrefabCollidingWithTile() && isOneRoot)
-                {
-                    nextPosition = backgroundTilemap.CellToWorld(moveDirect[1]);
-                }
-                else
-                {
-                */
+                moveDirect.Add(player.position);
 
-                nextPosition = backgroundTilemap.CellToWorld(moveDirect[0]);
-                //}
+                nextPosition = moveDirect[0];
 
-                
-                //else
-                {
-                    // 0.2f보다 거리가 크면 천천히 이동
-                    monster.position = Vector3.MoveTowards(monster.position, nextPosition, Time.deltaTime * 2f);
-                }
+                monster.position = Vector3.MoveTowards(monster.position, nextPosition, Time.deltaTime * speed);
 
-                //monster.position = Vector3.MoveTowards(monster.position, nextPosition, Time.deltaTime * 2f);
             }
             else
             {
@@ -110,7 +87,6 @@ public class SimplePathfinding : MonoBehaviour
         UpdateGizmos();
 
     }
-    // IsPrefabCollidingWithTile
 
 
     void GenerateGraphFromTilemap()
@@ -145,21 +121,7 @@ public class SimplePathfinding : MonoBehaviour
             }
         }
     }
-    /*
-    bool IsWalkable(Vector3Int position)
-    {
-        if (!backgroundTilemap.HasTile(position))
-            return false;
 
-        foreach (Tilemap obstacleTilemap in obstacleTilemaps)
-        {
-            if (obstacleTilemap.HasTile(position))
-                return false;
-        }
-
-        return true;
-    }
-    */
     void UpdateGraphNodes(Vector3Int offset)
     {
         Dictionary<Vector3Int, List<Vector3Int>> newGraph = new Dictionary<Vector3Int, List<Vector3Int>>();
@@ -182,10 +144,10 @@ public class SimplePathfinding : MonoBehaviour
             // 새로운 그래프에 추가
             newGraph[newPosition] = newNeighbors;
         }
-
         // 기존 그래프를 새로운 그래프로 교체
         graph = newGraph;
     }
+
     bool IsWalkable(Vector3Int position)
     {
         // 타일이 존재하지 않으면 걷기 불가능
@@ -202,10 +164,7 @@ public class SimplePathfinding : MonoBehaviour
             {
                 return false; // 현재 위치가 장애물 타일이면 걷기 불가능
             }
-
-
         }
-
         // 어떤 장애물 타일과도 닿아 있지 않으면 걷기 가능
         return true;
     }
@@ -370,7 +329,7 @@ public class SimplePathfinding : MonoBehaviour
             // moveDirect의 각 좌표들을 순서대로 연결
             for (int i = 0; i < moveDirect.Count; i++)
             {
-                Vector3 worldPos = backgroundTilemap.CellToWorld(moveDirect[i]);
+                Vector3 worldPos = moveDirect[i];//
                 Gizmos.DrawSphere(worldPos, 2f * radius);
 
                 // 이전 위치와 현재 위치를 선으로 연결
@@ -382,81 +341,11 @@ public class SimplePathfinding : MonoBehaviour
         }
     }
 
-
-
-
-
-
-
     void UpdateGizmos()
     {
         // 이 메서드는 OnDrawGizmos를 호출하도록 Unity에게 알려줍니다.
         UnityEditor.EditorUtility.SetDirty(this);
     }
-
-    /* 타일맵 확인 용 
-    void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red; // 노드를 표시할 색상
-        float radius = 0.1f; // 노드를 표시할 구의 반지름
-
-        if (graph != null)
-        {
-            foreach (var node in graph)
-            {
-                Vector3 nodePosition = backgroundTilemap.CellToWorld(node.Key);// + new Vector3(0.5f, 0.5f, 0); // 타일의 중앙을 구할 수 있도록 오프셋 추가
-                Gizmos.DrawSphere(nodePosition, radius); // 노드 위치에 구를 그림
-
-                foreach (var neighbor in node.Value)
-                {
-                    Vector3 neighborPosition = backgroundTilemap.CellToWorld(neighbor);// + new Vector3(0.5f, 0.5f, 0);
-                    Gizmos.DrawLine(nodePosition, neighborPosition); // 노드와 인접 노드 사이에 선을 그림
-                }
-            }
-        }
-    }
-    */
-
-    /*
-    public bool IsPrefabCollidingWithTile()
-    {
-        if (prefabCollider == null)
-        {
-            Debug.LogError("Prefab에 Collider2D가 없습니다.");
-            return false;
-        }                                                                                                                
-
-        BoundsInt bounds = backgroundTilemap.cellBounds;
-
-        for (int x = bounds.xMin; x < bounds.xMax; x++)
-        {
-            for (int y = bounds.yMin; y < bounds.yMax; y++)
-            {
-                Vector3Int tilePosition = new Vector3Int(x, y, 0);
-
-                if (backgroundTilemap.HasTile(tilePosition) && !graph.ContainsKey(tilePosition))
-                {
-                    Vector3 tileWorldPos = backgroundTilemap.CellToWorld(tilePosition) + new Vector3(1f, 1f, 0);
-
-                    GameObject tempTile = new GameObject("TempTileCollider");
-                    BoxCollider2D tileCollider = tempTile.AddComponent<BoxCollider2D>();
-                    tileCollider.size = Vector2.one;
-                    tempTile.transform.position = tileWorldPos;
-
-                    if (prefabCollider.IsTouching(tileCollider))
-                    {
-                        Destroy(tempTile);
-                        return true;
-                    }
-
-                    Destroy(tempTile);
-                }
-            }
-        }
-
-        return false;
-    }
-    */  
 }
 
 

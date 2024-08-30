@@ -10,12 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 4648800366096418616}
   - component: {fileID: 122125688935967386}
-  - component: {fileID: 5870351080300166570}
   - component: {fileID: 7370588314096063405}
   - component: {fileID: 7588060291044465224}
   - component: {fileID: 3444978763215726084}
   - component: {fileID: 1028999604159111274}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: slime
   m_TagString: Monster1
   m_Icon: {fileID: 0}
@@ -89,24 +88,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &5870351080300166570
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1701313106465796756}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 590cf5cfbd0df1b47a36e2ff47d2943e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  speed: 5
-  gridWidth: 0
-  gridHeight: 0
-  nodeSize: 0
-  unwalkableTilemaps: []
 --- !u!95 &7370588314096063405
 Animator:
   serializedVersion: 5
