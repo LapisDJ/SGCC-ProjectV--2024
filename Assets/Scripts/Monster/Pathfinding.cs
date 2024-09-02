@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using UnityEngine.Tilemaps;
-
+using Utilities;  // PriorityQueue가 포함된 네임스페이스 참조
 public class SimplePathfinding : MonoBehaviour
 {
     private Monster monster_S;
@@ -36,7 +36,6 @@ public class SimplePathfinding : MonoBehaviour
         {
             // 이동 속도를 가져옴
             speed = monster_S.GetCurrentSpeed();
-            Debug.Log(speed);
         }
 
         if (Vector3.Distance(monster.position, nextPosition) <= 0.8f)
@@ -246,11 +245,11 @@ public class SimplePathfinding : MonoBehaviour
         {
             for (int j = 0; j < path.Count; j++)
             {
-                Gizmos.DrawSphere(path[j], radius);
+                //Gizmos.DrawSphere(path[j], radius);
 
                 if (j < path.Count - 1)
                 {
-                    Gizmos.DrawLine(path[j], path[j + 1]);
+                    //Gizmos.DrawLine(path[j], path[j + 1]);
                 }
             }
         }
@@ -310,7 +309,7 @@ public class SimplePathfinding : MonoBehaviour
                 {
                     // 해당 위치에 초록색 원을 표시하고 moveDirectPool에 추가
                     Vector3 worldPosition = backgroundTilemap.CellToWorld(node.Key);
-                    Gizmos.DrawSphere(worldPosition, 3f * radius);
+                    //Gizmos.DrawSphere(worldPosition, 3f * radius);
 
                     // moveDirectPool에 노드의 위치 추가
                     moveDirectPool.Add(node.Key);
@@ -324,16 +323,16 @@ public class SimplePathfinding : MonoBehaviour
 
             // 첫 번째 점은 플레이어의 위치로 설정
             Vector3 previousWorldPos = monster.position;
-            Gizmos.DrawSphere(previousWorldPos, 2f * radius);
+            //Gizmos.DrawSphere(previousWorldPos, 2f * radius);
 
             // moveDirect의 각 좌표들을 순서대로 연결
             for (int i = 0; i < moveDirect.Count; i++)
             {
                 Vector3 worldPos = moveDirect[i];//
-                Gizmos.DrawSphere(worldPos, 2f * radius);
+                //Gizmos.DrawSphere(worldPos, 2f * radius);
 
                 // 이전 위치와 현재 위치를 선으로 연결
-                Gizmos.DrawLine(previousWorldPos, worldPos);
+                //Gizmos.DrawLine(previousWorldPos, worldPos);
 
                 // 현재 위치를 다음 선의 시작 위치로 설정
                 previousWorldPos = worldPos;
@@ -347,73 +346,3 @@ public class SimplePathfinding : MonoBehaviour
         UnityEditor.EditorUtility.SetDirty(this);
     }
 }
-
-
-
-
-
-    // 우선순위 큐 클래스 (간단한 최소 힙 구현)
-    public class PriorityQueue<T>
-    {
-        private List<KeyValuePair<T, float>> elements = new List<KeyValuePair<T, float>>();
-
-        public int Count => elements.Count;
-
-        public void Enqueue(T item, float priority)
-        {
-            elements.Add(new KeyValuePair<T, float>(item, priority));
-            HeapifyUp(elements.Count - 1);
-        }
-
-        public T Dequeue()
-        {
-            if (elements.Count == 0)
-                throw new InvalidOperationException("The queue is empty.");
-
-            T bestItem = elements[0].Key;
-            elements[0] = elements[elements.Count - 1];
-            elements.RemoveAt(elements.Count - 1);
-            HeapifyDown(0);
-
-            return bestItem;
-        }
-
-        private void HeapifyUp(int index)
-        {
-            while (index > 0)
-            {
-                int parentIndex = (index - 1) / 2;
-                if (elements[index].Value >= elements[parentIndex].Value) break;
-
-                Swap(index, parentIndex);
-                index = parentIndex;
-            }
-        }
-
-        private void HeapifyDown(int index)
-        {
-            while (index * 2 + 1 < elements.Count)
-            {
-                int leftChildIndex = index * 2 + 1;
-                int rightChildIndex = index * 2 + 2;
-                int smallestChildIndex = leftChildIndex;
-
-                if (rightChildIndex < elements.Count && elements[rightChildIndex].Value < elements[leftChildIndex].Value)
-                {
-                    smallestChildIndex = rightChildIndex;
-                }
-
-                if (elements[index].Value <= elements[smallestChildIndex].Value) break;
-
-                Swap(index, smallestChildIndex);
-                index = smallestChildIndex;
-            }
-        }
-
-        private void Swap(int indexA, int indexB)
-        {
-            var temp = elements[indexA];
-            elements[indexA] = elements[indexB];
-            elements[indexB] = temp;
-        }
-    }
