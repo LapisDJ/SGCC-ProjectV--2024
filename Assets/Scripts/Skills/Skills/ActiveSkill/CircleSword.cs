@@ -42,6 +42,7 @@ public class CircleSword : Skill
                 monster.TakeDamage(totalDamage);
             }
         }
+        lastUsedTime = Time.time;
     }
 
     public override void LevelUp() // 칼날 의수(원형 참격) 레벨업 로직

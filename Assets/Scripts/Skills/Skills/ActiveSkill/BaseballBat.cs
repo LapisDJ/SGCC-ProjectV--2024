@@ -64,6 +64,8 @@ public class BaseballBat : Skill
         {
             StartCoroutine(DoubleAttack());
         }
+
+        lastUsedTime = Time.time;
     }
 
     public override void LevelUp() // 야구 방망이 레벨업 로직

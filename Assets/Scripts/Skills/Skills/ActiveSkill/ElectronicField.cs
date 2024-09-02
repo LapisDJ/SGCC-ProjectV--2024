@@ -54,6 +54,7 @@ public class ElectronicField : Skill
                 lastDamageTime[hitCollider] = Time.time;
             }
         }
+        lastUsedTime = Time.time;
     }
 
     public override void LevelUp() // 전자 필드(원형 범위) 레벨업 로직

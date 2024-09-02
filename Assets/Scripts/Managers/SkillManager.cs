@@ -32,7 +32,7 @@ public class SkillManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    
+
     void Start()
     {
         // 액티브 스킬 초기화
@@ -54,7 +54,12 @@ public class SkillManager : MonoBehaviour
                 availablePassiveSkills.Add(passiveSkill);
             }
         }
-         activeSkills.Add(availableActiveSkills[4]);
+        activeSkills.Add(availableActiveSkills[4]);
+
+        foreach (Skill skill in activeSkills)
+        {
+            StartCoroutine(AutoActivateSkill(skill));
+        }
     }
     private T CreateActiveSkill<T>() where T : Skill
     {
@@ -240,6 +245,20 @@ public class SkillManager : MonoBehaviour
                     break;
                 }
             }
+        }
+    }
+
+    private IEnumerator AutoActivateSkill(Skill skill)
+    {
+        while (true)
+        {
+            if (skill.CanActivate())
+            {
+                skill.Activate();
+            }
+
+            // 스킬의 쿨타임을 기다린 후 다시 체크
+            yield return new WaitForSeconds(skill.cooldown);
         }
     }
 }

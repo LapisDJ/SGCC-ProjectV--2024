@@ -72,6 +72,7 @@ public class ShotGun : Skill
                 Physics2D.IgnoreCollision(playerCollider, bulletCollider);
             }
         }
+        lastUsedTime = Time.time;
     }
 
     public override void LevelUp() // 샷건 레벨업 로직

@@ -49,6 +49,7 @@ public class Sword : Skill
                 StartCoroutine(DoubleAttack());
             }
         }
+        lastUsedTime = Time.time;
     }
 
     public override void LevelUp() // 검 레벨 업 로직

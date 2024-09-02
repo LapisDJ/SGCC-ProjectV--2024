@@ -66,6 +66,7 @@ public class RotateKnifeDrone : Skill
                 }
             }
         }
+        lastUsedTime = Time.time;
     }
 
     public override void LevelUp()

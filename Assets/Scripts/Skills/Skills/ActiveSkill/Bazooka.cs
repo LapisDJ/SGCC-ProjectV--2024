@@ -85,6 +85,7 @@ public class Bazooka : Skill
                 bulletRb.velocity = direction * bulletSpeed;
             }
         }
+        lastUsedTime = Time.time;
     }
 
     GameObject FindNearestMonster()

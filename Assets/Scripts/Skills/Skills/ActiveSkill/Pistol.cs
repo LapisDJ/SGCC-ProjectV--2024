@@ -72,6 +72,7 @@ public class Pistol : Skill
         {
             StartCoroutine(DoubleAttack());
         }
+        lastUsedTime = Time.time;
     }
 
 

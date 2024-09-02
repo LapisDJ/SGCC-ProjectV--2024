@@ -19,6 +19,7 @@ public abstract class Skill : MonoBehaviour
     public float cooldown; // 쿨타임
     [SerializeField] public Sprite icon;//아이콘
     [SerializeField] protected Player__ player;
+    protected float lastUsedTime; // 마지막으로 사용한 시간
 
     // 생성자에서는 데이터를 초기화하지 않습니다. 대신 Awake 또는 Start를 사용
     protected Skill() // 기본 생성자
@@ -63,6 +64,11 @@ public abstract class Skill : MonoBehaviour
             return basicDamage * 1.5f;
         else
             return basicDamage;
+    }
+
+    public bool CanActivate()
+    {
+        return Time.time >= lastUsedTime + cooldown;
     }
 
 }
