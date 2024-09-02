@@ -9,6 +9,7 @@ public class RealtimeManager : MonoBehaviour
 
     [SerializeField] Player_Stat playerstat;
     public int monsterkill; // 처치한 몬스터의 수
+    public int needKillsToLevelUp = 1;
 
     private void Awake()
     {
@@ -29,11 +30,38 @@ public class RealtimeManager : MonoBehaviour
         monsterkill++;
         //처치한 몬스터 수에 따라 레벨업. 레벨업 기준에 따라 작성할 것(현재는 레벨에 해당하는 숫자만큼 넣어둠)
 
-        if (monsterkill / 10 >= 1)
+        if (monsterkill >= needKillsToLevelUp)
         {
             playerstat.LevelUp();
-            monsterkill %= 10;
+            updateNeedKillsToLevelUp();
         }
         
+    }
+
+    private void updateNeedKillsToLevelUp()
+    {
+        if(needKillsToLevelUp == 1)
+        {
+            needKillsToLevelUp = 3;
+        }
+        else if(needKillsToLevelUp ==3)
+        {
+            needKillsToLevelUp = 5;
+        }
+        else if(needKillsToLevelUp ==5)
+        {
+            needKillsToLevelUp = 10;
+        }
+        else if(needKillsToLevelUp ==10)
+        {
+            needKillsToLevelUp = 15;
+        }
+        else if(needKillsToLevelUp ==15)
+        {
+            needKillsToLevelUp = 20;
+        }
+        else{
+            needKillsToLevelUp += 10;
+        }
     }
 }
