@@ -671,8 +671,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ee63692cce604eac87e2b8f2049496f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  abilityImage: {fileID: 2041184734}
-  hideAbilityImage: {fileID: 9663782}
 --- !u!114 &175288636
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1245,7 +1243,7 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 2
-  m_Camera: {fileID: 0}
+  m_Camera: {fileID: 2023131565}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -1445,9 +1443,9 @@ RectTransform:
   - {fileID: 526140264}
   m_Father: {fileID: 541991402}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 410, y: -50}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &282533812
@@ -36381,9 +36379,9 @@ RectTransform:
   - {fileID: 672702227}
   m_Father: {fileID: 541991402}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 50, y: -50}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &526140261
@@ -36822,7 +36820,7 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 1
-  m_Camera: {fileID: 0}
+  m_Camera: {fileID: 2023131565}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -36961,14 +36959,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slimePrefab: {fileID: 1701313106465796756, guid: 5f359b991e0f29d49ad3ec0c79075865, type: 3}
-  ratPrefab: {fileID: 8294156271063180642, guid: 9bcb20847fe55df42829fd7afff6e25b, type: 3}
-  batPrefab: {fileID: 3654580727515874687, guid: 29e3f55dc378a2c4d9450eddcf85b18b, type: 3}
-  zombieDogPrefab: {fileID: 87247722495281557, guid: 9335ecac85fb9ce439f7bfe4f56d563d, type: 3}
-  zombiePrefab: {fileID: 9200465564139760282, guid: c7d5575bdb2af5646a80ac02b298369b, type: 3}
-  elite1Prefab: {fileID: 522800021671838278, guid: e6c9b95bf7448f64db3b8de167ae7839, type: 3}
-  elite2Prefab: {fileID: 3015670882417463067, guid: fa182bbdcfb84134c9a588193b031fec, type: 3}
-  oldRobotPrefab: {fileID: 4404071691490233974, guid: 7dd10d1fd46c7dc488800f6d9d088eba, type: 3}
-  smallSpiderRobotPrefab: {fileID: 4322310473965505875, guid: 26b141374fc40044499f8655fbfdb771, type: 3}
+  ratPrefab: {fileID: 8294156271063180642, guid: 009ce9d1db4e341a2a57377c26cb2ee8, type: 3}
+  batPrefab: {fileID: 3654580727515874687, guid: 2d68d092a38ce420da12e653892a0e9e, type: 3}
+  zombieDogPrefab: {fileID: 87247722495281557, guid: eede9ae24ced142cc959714028fb878f, type: 3}
+  zombiePrefab: {fileID: 9200465564139760282, guid: 4da727c879f08431d8546609c19cebd9, type: 3}
+  elite1Prefab: {fileID: 522800021671838278, guid: e6fb4ae678ef04ec78856eaada685c70, type: 3}
+  elite2Prefab: {fileID: 3015670882417463067, guid: 1312c186ce4ec41808842218cfa4671b, type: 3}
+  oldRobotPrefab: {fileID: 4404071691490233974, guid: 8bc262c4d726f473f867976a8f670b4e, type: 3}
+  smallSpiderRobotPrefab: {fileID: 4322310473965505875, guid: b16240a913a294271bda1d25b898c19d, type: 3}
   player: {fileID: 1799502635}
   spawnDistance: 10
   obstacleLayer:
@@ -39647,7 +39645,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &953467203
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -39672,6 +39670,8 @@ MonoBehaviour:
   - {fileID: 1290877000}
   - {fileID: 538942638}
   - {fileID: 1809990753}
+  playerstat: {fileID: 1799502654}
+  hpbar: {fileID: 461111156}
   isskillchoose: 0
   tempskillchoice: 9
   weaponImages:
@@ -39700,6 +39700,10 @@ MonoBehaviour:
   - {fileID: 282533815}
   - {fileID: 316541501}
   - {fileID: 1430059508}
+  recheckwindow: {fileID: 0}
+  timer: {fileID: 299093768}
+  abilityImage: {fileID: 2041184734}
+  hideAbilityImage: {fileID: 9663782}
 --- !u!4 &953467204
 Transform:
   m_ObjectHideFlags: 0
@@ -39754,7 +39758,7 @@ RectTransform:
   m_Father: {fileID: 196815416}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -39828,9 +39832,9 @@ RectTransform:
   - {fileID: 682318936}
   m_Father: {fileID: 541991402}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 170, y: -50}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1008313464
@@ -40136,6 +40140,63 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1046447347}
   m_CullTransparentMesh: 1
+--- !u!1001 &1231355114
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 6061013600083493923, guid: c03667ac81072c6479a8ef49e69c0b9b, type: 3}
+      propertyPath: m_Name
+      value: Upgrade_Zombie
+      objectReference: {fileID: 0}
+    - target: {fileID: 6135599934158280677, guid: c03667ac81072c6479a8ef49e69c0b9b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 10.762111
+      objectReference: {fileID: 0}
+    - target: {fileID: 6135599934158280677, guid: c03667ac81072c6479a8ef49e69c0b9b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 8.452369
+      objectReference: {fileID: 0}
+    - target: {fileID: 6135599934158280677, guid: c03667ac81072c6479a8ef49e69c0b9b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6135599934158280677, guid: c03667ac81072c6479a8ef49e69c0b9b, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6135599934158280677, guid: c03667ac81072c6479a8ef49e69c0b9b, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6135599934158280677, guid: c03667ac81072c6479a8ef49e69c0b9b, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6135599934158280677, guid: c03667ac81072c6479a8ef49e69c0b9b, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6135599934158280677, guid: c03667ac81072c6479a8ef49e69c0b9b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6135599934158280677, guid: c03667ac81072c6479a8ef49e69c0b9b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6135599934158280677, guid: c03667ac81072c6479a8ef49e69c0b9b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c03667ac81072c6479a8ef49e69c0b9b, type: 3}
 --- !u!1 &1262132559
 GameObject:
   m_ObjectHideFlags: 0
@@ -41046,7 +41107,7 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 1
-  m_Camera: {fileID: 0}
+  m_Camera: {fileID: 2023131565}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -41112,9 +41173,9 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1621604327}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.7416667, y: 0.7416667, z: 0.7416667}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 90}
+  m_LocalScale: {x: 0.016666668, y: 0.016666668, z: 0.016666668}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 461111155}
@@ -41125,8 +41186,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 223, y: 222.5}
-  m_SizeDelta: {x: 601.3483, y: 600}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1621604329
 MonoBehaviour:
@@ -41154,8 +41215,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16abea25099e24d5c8e32d58e2ad08b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerstat: {fileID: 1621604332}
-  hpbar: {fileID: 461111156}
 --- !u!114 &1621604331
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -41168,7 +41227,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cbdd68a3858546c5840aa836a796530, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timer: {fileID: 299093768}
 --- !u!114 &1621604332
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -41245,7 +41303,7 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 1
-  m_Camera: {fileID: 0}
+  m_Camera: {fileID: 2023131565}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -41366,7 +41424,7 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 1
-  m_Camera: {fileID: 0}
+  m_Camera: {fileID: 2023131565}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -41825,6 +41883,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae028458a60a78046bd41b2a7c1e6ba3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentQuest: 1
 --- !u!4 &1751348908
 Transform:
   m_ObjectHideFlags: 0
@@ -41859,10 +41918,6 @@ PrefabInstance:
     - target: {fileID: 1034961518565794693, guid: 318bb5e12a81b67409a0e40e0a64039d, type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 1034961518565794693, guid: 318bb5e12a81b67409a0e40e0a64039d, type: 3}
-      propertyPath: m_Layer
-      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5703075016005794536, guid: 318bb5e12a81b67409a0e40e0a64039d, type: 3}
       propertyPath: m_SortingOrder
@@ -42170,9 +42225,9 @@ RectTransform:
   - {fileID: 1470751389}
   m_Father: {fileID: 541991402}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 290, y: -50}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1835011270
@@ -42188,6 +42243,7 @@ GameObject:
   - component: {fileID: 1835011279}
   - component: {fileID: 1835011278}
   - component: {fileID: 1835011277}
+  - component: {fileID: 1835011281}
   - component: {fileID: 1835011276}
   - component: {fileID: 1835011275}
   - component: {fileID: 1835011274}
@@ -42199,7 +42255,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1835011271
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -42254,6 +42310,7 @@ MonoBehaviour:
   level: 0
   skillDamage: 0
   cooldown: 0
+  animator: {fileID: 0}
   icon: {fileID: 0}
   player: {fileID: 0}
 --- !u!114 &1835011273
@@ -42272,6 +42329,7 @@ MonoBehaviour:
   level: 0
   skillDamage: 0
   cooldown: 0
+  animator: {fileID: 0}
   icon: {fileID: 0}
   player: {fileID: 0}
   shotGunPrefab: {fileID: 2216668499185153775, guid: a2b2e7ba8fded164598971f8ec05f70b, type: 3}
@@ -42294,11 +42352,13 @@ MonoBehaviour:
   level: 0
   skillDamage: 0
   cooldown: 0
+  animator: {fileID: 0}
   icon: {fileID: 0}
   player: {fileID: 0}
   knifeDronePrefab: {fileID: 0}
   rotationSpeed: 90
   knifeRadius: 2
+  damageCooldown: 1
 --- !u!114 &1835011275
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -42315,6 +42375,7 @@ MonoBehaviour:
   level: 0
   skillDamage: 0
   cooldown: 0
+  animator: {fileID: 0}
   icon: {fileID: 0}
   player: {fileID: 0}
   pistolPrefab: {fileID: 3482846806749779952, guid: 5ce27470d1a2a7942a9defd049aa3572, type: 3}
@@ -42336,6 +42397,7 @@ MonoBehaviour:
   level: 0
   skillDamage: 0
   cooldown: 0
+  animator: {fileID: 0}
   icon: {fileID: 0}
   player: {fileID: 0}
 --- !u!114 &1835011277
@@ -42354,6 +42416,7 @@ MonoBehaviour:
   level: 0
   skillDamage: 0
   cooldown: 0
+  animator: {fileID: 1835011281}
   icon: {fileID: 0}
   player: {fileID: 0}
 --- !u!114 &1835011278
@@ -42372,6 +42435,7 @@ MonoBehaviour:
   level: 0
   skillDamage: 0
   cooldown: 0
+  animator: {fileID: 0}
   icon: {fileID: 0}
   player: {fileID: 0}
   bazookaPrefab: {fileID: 4954568644503957765, guid: 7e9106525c6b6294cacabe05c577d54c, type: 3}
@@ -42393,6 +42457,7 @@ MonoBehaviour:
   level: 0
   skillDamage: 0
   cooldown: 0
+  animator: {fileID: 0}
   icon: {fileID: 0}
   player: {fileID: 0}
 --- !u!4 &1835011280
@@ -42410,6 +42475,27 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &1835011281
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1835011270}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: eb80c87918b86f543a997878e5c9a4b4, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1843954255
 GameObject:
   m_ObjectHideFlags: 0
@@ -46420,7 +46506,7 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 1
-  m_Camera: {fileID: 0}
+  m_Camera: {fileID: 2023131565}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -46560,9 +46646,9 @@ RectTransform:
   - {fileID: 9663781}
   m_Father: {fileID: 175288634}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 50, y: -50}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &2023131563
@@ -64901,3 +64987,4 @@ SceneRoots:
   - {fileID: 1835011280}
   - {fileID: 953467204}
   - {fileID: 210154917}
+  - {fileID: 1231355114}

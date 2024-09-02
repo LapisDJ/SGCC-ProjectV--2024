@@ -17,6 +17,7 @@ public class CircleSword : Skill
     WeaknessType weaknessType = WeaknessType.Slash;
     public override void Activate() // 몬스터와 상호 작용 로직
     {
+        animator.SetBool("isUse" , true);
         Monster monster;
         float totalDamage = 0f; // 몬스터가 입는 총 데미지
 
@@ -43,6 +44,7 @@ public class CircleSword : Skill
             }
         }
         lastUsedTime = Time.time;
+        StartCoroutine(Waitforseconds());
     }
 
     public override void LevelUp() // 칼날 의수(원형 참격) 레벨업 로직
@@ -69,5 +71,10 @@ public class CircleSword : Skill
                 break;
 
         }
+    }
+    IEnumerator Waitforseconds()
+    {
+        yield return new WaitForSeconds(1.0f);
+        animator.SetBool("isUse", false);
     }
 }

@@ -682,7 +682,6 @@ GameObject:
   m_Component:
   - component: {fileID: 221152306}
   - component: {fileID: 221152307}
-  - component: {fileID: 221152308}
   m_Layer: 5
   m_Name: Ablilitycool
   m_TagString: Untagged
@@ -736,20 +735,6 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
---- !u!114 &221152308
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 221152305}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3ee63692cce604eac87e2b8f2049496f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  abilityImage: {fileID: 65850485}
-  hideAbilityImage: {fileID: 1758974369}
 --- !u!1 &270252532
 GameObject:
   m_ObjectHideFlags: 0
@@ -16988,9 +16973,6 @@ GameObject:
   - component: {fileID: 1062601526}
   - component: {fileID: 1062601525}
   - component: {fileID: 1062601524}
-  - component: {fileID: 1062601523}
-  - component: {fileID: 1062601528}
-  - component: {fileID: 1062601529}
   - component: {fileID: 1062601530}
   m_Layer: 5
   m_Name: Layover UI
@@ -16999,32 +16981,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1062601523
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1062601522}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5de58e3a2014e4d4b8c86e4800d7adb1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player_level: 1
-  expgainrate: 1
-  WorkSpeed: 1
-  Luck: 0
-  CriticalChance: 0
-  HPcurrent: 0
-  HPbylevel: 50
-  HPbonus: 1
-  HPmax: 0
-  HPpreviousmax: 0
-  speedAdd: 5
-  speedMulti: 1
-  speedFin: 0
-  attackDamageByLevel: 5
 --- !u!114 &1062601524
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17111,37 +17067,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1062601528
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1062601522}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8cbdd68a3858546c5840aa836a796530, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timer: {fileID: 1517984169}
-  wholetime: 0
-  minute: 0
-  second: 0
-  initialtime: 0
---- !u!114 &1062601529
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1062601522}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16abea25099e24d5c8e32d58e2ad08b7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerstat: {fileID: 1062601523}
-  hpbar: {fileID: 789065519}
 --- !u!114 &1062601530
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18385,90 +18310,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1274275853}
   m_CullTransparentMesh: 1
---- !u!1 &1284678468
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1284678470}
-  - component: {fileID: 1284678469}
-  m_Layer: 0
-  m_Name: 10
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!212 &1284678469
-SpriteRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1284678468}
-  m_Enabled: 1
-  m_CastShadows: 0
-  m_ReceiveShadows: 0
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 0
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 0
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 49e33f7c7a41041a6abdaf2b49eb26c5, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
-  m_FlipY: 0
-  m_DrawMode: 0
-  m_Size: {x: 5, y: 5}
-  m_AdaptiveModeThreshold: 0.5
-  m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
---- !u!4 &1284678470
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1284678468}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1361205519
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18755,7 +18596,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slider: {fileID: 1938851971}
   player: {fileID: 1084714429}
-  playerstat: {fileID: 1062601523}
+  playerstat: {fileID: 0}
 --- !u!1 &1498013731
 GameObject:
   m_ObjectHideFlags: 0
@@ -20252,6 +20093,7 @@ GameObject:
   - component: {fileID: 1861284612}
   - component: {fileID: 1861284611}
   - component: {fileID: 1861284610}
+  - component: {fileID: 1861284613}
   - component: {fileID: 1861284609}
   - component: {fileID: 1861284608}
   - component: {fileID: 1861284607}
@@ -20278,8 +20120,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxActiveSkills: 4
   maxPassiveSkills: 6
-  activeSkillPrefabs: []
-  passiveSkillPrefabs: []
+  activeSkillPrefabs:
+  - {fileID: 386066316676404890, guid: 4cc44c0369a2b0243a75d18344455028, type: 3}
+  - {fileID: 6544181557765939018, guid: db6cf45ca357148409c8021c2c5dca6d, type: 3}
+  - {fileID: 2483729412032129873, guid: bf4cc17e24ac4ee4c880e24f8ed0892e, type: 3}
+  - {fileID: 1504720127329836421, guid: c1cffbd343b6f8941881be4fc5a869eb, type: 3}
+  - {fileID: 4246305692764360799, guid: ac56b45479ab2f44f8fa6b2e7e1052dc, type: 3}
+  - {fileID: 8468666503645504596, guid: 56655edaa463fd54ca3c800f711664b0, type: 3}
+  - {fileID: 838203633543041813, guid: 8742710c7a225aa47b6692a02101f9a7, type: 3}
+  - {fileID: 7172049026627292035, guid: 6cdde0d6d899d1b4baa54fca51a98b8d, type: 3}
+  passiveSkillPrefabs:
+  - {fileID: 6175152605695281152, guid: 3b7bf02ff17b98e4d9664e3fe4c8271f, type: 3}
+  - {fileID: 4279191058897610289, guid: 54f57d351aee2834298cca0167073c94, type: 3}
+  - {fileID: 674642867921799934, guid: 37988d7a4c9bc5e4d8265d97bbe655fa, type: 3}
+  - {fileID: 8527392729802441016, guid: b4a6b524414dc714dbc447e2f0f1dd12, type: 3}
+  - {fileID: 3519151920181755658, guid: 48b67ffb6c71fa341afb565878606df1, type: 3}
+  - {fileID: 3449954199869448338, guid: 70cd490efd17d8c42b9daa65fb7c3d28, type: 3}
+  - {fileID: 4512628116988427981, guid: 5a9c39393ddae5a439d0a121d2b71c57, type: 3}
+  - {fileID: 6409858692068228973, guid: 6ee83a9a9e04766438c376e4949f3219, type: 3}
+  - {fileID: 5886908134055387066, guid: 08e76abe46a001c41b157739f880fc2f, type: 3}
+  - {fileID: 2155050408302375817, guid: a8d37b0bd7a2f274492b834910c01ce8, type: 3}
   activeSkills: []
   passiveSkills: []
   skillchoices: []
@@ -20316,6 +20176,7 @@ MonoBehaviour:
   level: 0
   skillDamage: 0
   cooldown: 0
+  animator: {fileID: 0}
   icon: {fileID: 0}
   player: {fileID: 0}
 --- !u!114 &1861284606
@@ -20334,6 +20195,7 @@ MonoBehaviour:
   level: 0
   skillDamage: 0
   cooldown: 0
+  animator: {fileID: 0}
   icon: {fileID: 0}
   player: {fileID: 0}
   shotGunPrefab: {fileID: 0}
@@ -20356,11 +20218,13 @@ MonoBehaviour:
   level: 0
   skillDamage: 0
   cooldown: 0
+  animator: {fileID: 0}
   icon: {fileID: 0}
   player: {fileID: 0}
   knifeDronePrefab: {fileID: 0}
   rotationSpeed: 90
   knifeRadius: 2
+  damageCooldown: 1
 --- !u!114 &1861284608
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20377,6 +20241,7 @@ MonoBehaviour:
   level: 0
   skillDamage: 0
   cooldown: 0
+  animator: {fileID: 0}
   icon: {fileID: 0}
   player: {fileID: 0}
   pistolPrefab: {fileID: 0}
@@ -20398,6 +20263,7 @@ MonoBehaviour:
   level: 0
   skillDamage: 0
   cooldown: 0
+  animator: {fileID: 0}
   icon: {fileID: 0}
   player: {fileID: 0}
 --- !u!114 &1861284610
@@ -20416,6 +20282,7 @@ MonoBehaviour:
   level: 0
   skillDamage: 0
   cooldown: 0
+  animator: {fileID: 1861284613}
   icon: {fileID: 0}
   player: {fileID: 0}
 --- !u!114 &1861284611
@@ -20434,6 +20301,7 @@ MonoBehaviour:
   level: 0
   skillDamage: 0
   cooldown: 0
+  animator: {fileID: 0}
   icon: {fileID: 0}
   player: {fileID: 0}
   bazookaPrefab: {fileID: 0}
@@ -20455,8 +20323,30 @@ MonoBehaviour:
   level: 0
   skillDamage: 0
   cooldown: 0
+  animator: {fileID: 0}
   icon: {fileID: 0}
   player: {fileID: 0}
+--- !u!95 &1861284613
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1861284602}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: eb80c87918b86f543a997878e5c9a4b4, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1875975676
 GameObject:
   m_ObjectHideFlags: 0
@@ -21184,5 +21074,4 @@ SceneRoots:
   - {fileID: 193708225}
   - {fileID: 576629783}
   - {fileID: 1861284604}
-  - {fileID: 1284678470}
   - {fileID: 1361205519}

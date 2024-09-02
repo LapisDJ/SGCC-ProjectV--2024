@@ -22,6 +22,8 @@ public class Monster : MonoBehaviour
     [SerializeField] Animator animator;
     [SerializeField] public string key;
     protected WeaknessType weakness; // 약점 타입
+    public float fadeDuration = 1.0f; // 알파값이 줄어드는 시간 (초)
+    private SpriteRenderer spriteRenderer;
 
     public Monster(float currentHP, float attackDamage, float speed, WeaknessType weakness, string key)
     {
@@ -71,8 +73,8 @@ public class Monster : MonoBehaviour
             this.speed = 0;
             this.attackDamage = 0;
             animator.SetTrigger("isDie");
+            StartCoroutine(FadeOutCoroutine());
             RealtimeManager.instance.Monsterkill();
-            //StartCoroutine(Delaytime());
             Destroy(gameObject);
             //Die();
         }
@@ -83,9 +85,23 @@ public class Monster : MonoBehaviour
         gameObject.SetActive(false);
         SpawnManager.instance.objectPools[this.key].Enqueue(gameObject);
     }
-    IEnumerator Delaytime()
+    IEnumerator FadeOutCoroutine()
     {
-        yield return new WaitForSeconds(0.5f);
-        
+        Color color = spriteRenderer.color;
+        float startAlpha = color.a;
+        float elapsedTime = 0f;
+
+        while (elapsedTime < fadeDuration)
+        {
+            elapsedTime += Time.deltaTime;
+            float newAlpha = Mathf.Lerp(startAlpha, 0f, elapsedTime / fadeDuration);
+            color.a = newAlpha;
+            spriteRenderer.color = color;
+            yield return null;
+        }
+
+        // 최종적으로 알파값을 0으로 설정
+        color.a = 0f;
+        spriteRenderer.color = color;
     }
 }

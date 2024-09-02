@@ -17,6 +17,7 @@ public abstract class Skill : MonoBehaviour
     public int level; // 스킬 레벨
     public float skillDamage; // 데미지
     public float cooldown; // 쿨타임
+    public Animator animator; //이펙트
     [SerializeField] public Sprite icon;//아이콘
     [SerializeField] protected Player__ player;
     protected float lastUsedTime; // 마지막으로 사용한 시간
