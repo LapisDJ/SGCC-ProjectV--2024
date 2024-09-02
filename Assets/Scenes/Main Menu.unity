@@ -179,10 +179,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: New Game
+  m_text: "\uC0C8 \uAC8C\uC784"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: fb78c291d7dd0438a841d35620496fb3, type: 2}
+  m_sharedMaterial: {fileID: -4032383289711631781, guid: fb78c291d7dd0438a841d35620496fb3, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -313,10 +313,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Settings
+  m_text: "\uC124\uC815"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: fb78c291d7dd0438a841d35620496fb3, type: 2}
+  m_sharedMaterial: {fileID: -4032383289711631781, guid: fb78c291d7dd0438a841d35620496fb3, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -474,7 +474,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1356506114}
-        m_TargetAssemblyTypeName: MainButton, Assembly-CSharp
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
         m_MethodName: OnClickSettings
         m_Mode: 1
         m_Arguments:
@@ -580,10 +580,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Bring Up
+  m_text: "\uBD88\uB7EC\uC624"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: fb78c291d7dd0438a841d35620496fb3, type: 2}
+  m_sharedMaterial: {fileID: -4032383289711631781, guid: fb78c291d7dd0438a841d35620496fb3, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -741,7 +741,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1356506114}
-        m_TargetAssemblyTypeName: MainButton, Assembly-CSharp
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
         m_MethodName: OnClickQuit
         m_Mode: 1
         m_Arguments:
@@ -1007,10 +1007,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Quit
+  m_text: "\uB098\uAC00\uAE30"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: fb78c291d7dd0438a841d35620496fb3, type: 2}
+  m_sharedMaterial: {fileID: -4032383289711631781, guid: fb78c291d7dd0438a841d35620496fb3, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1141,10 +1141,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Game Title
+  m_text: "\uD0C8\uCD9C1\uBD84\uC804!"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: fb78c291d7dd0438a841d35620496fb3, type: 2}
+  m_sharedMaterial: {fileID: -4032383289711631781, guid: fb78c291d7dd0438a841d35620496fb3, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1175,7 +1175,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -1302,7 +1302,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1356506114}
-        m_TargetAssemblyTypeName: MainButton, Assembly-CSharp
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
         m_MethodName: OnClickNewgame
         m_Mode: 1
         m_Arguments:
@@ -1435,7 +1435,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1356506114}
-        m_TargetAssemblyTypeName: MainButton, Assembly-CSharp
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
         m_MethodName: OnClickBringup
         m_Mode: 1
         m_Arguments:
@@ -1601,9 +1601,39 @@ MonoBehaviour:
   m_GameObject: {fileID: 1356506109}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5a05b0562437841109f783e89bb78fcf, type: 3}
+  m_Script: {fileID: 11500000, guid: 2df9d277acc074cd3a5f2e0470795d1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  LayoverUI: {fileID: 0}
+  SkillChoose: {fileID: 0}
+  MissionUI: {fileID: 0}
+  ExitSceneUI: {fileID: 0}
+  pausemenu: {fileID: 0}
+  skillmanager: {fileID: 0}
+  StartUI: {fileID: 0}
+  skillnames: []
+  playerstat: {fileID: 0}
+  hpbar: {fileID: 0}
+  isskillchoose: 0
+  tempskillchoice: 9
+  weaponImages: []
+  hideWeaponImages: []
+  isCool: 00000000
+  weaponTimes:
+  - 3
+  - 6
+  - 9
+  - 12
+  getWeaponTimes:
+  - 0
+  - 0
+  - 0
+  - 0
+  skillchoiceimages: []
+  recheckwindow: {fileID: 0}
+  timer: {fileID: 0}
+  abilityImage: {fileID: 0}
+  hideAbilityImage: {fileID: 0}
 --- !u!1 &1852111628
 GameObject:
   m_ObjectHideFlags: 0

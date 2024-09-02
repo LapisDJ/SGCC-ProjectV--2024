@@ -90,7 +90,7 @@ public class UIManager : MonoBehaviour
     }
     public void Confirmbutton()
     {
-        LoadingSceneController.Loadscene("Map1");
+        LoadingSceneController.Loadscene("Map 1");
     }
     public void Previousbutton()
     {
@@ -280,13 +280,13 @@ public class UIManager : MonoBehaviour
         switch(QuestManager.instance.currentQuest)
         {
             case 1 : 
-                LoadingSceneController.Loadscene("Map1");
+                LoadingSceneController.Loadscene("Map 1");
                 break;
             case 2 : 
-                LoadingSceneController.Loadscene("Map1");
+                LoadingSceneController.Loadscene("Map 2");
                 break;
             case 3 : 
-                LoadingSceneController.Loadscene("Map1");
+                LoadingSceneController.Loadscene("Map 3");
                 break;
             default:
                 break;
@@ -297,13 +297,13 @@ public class UIManager : MonoBehaviour
         switch(QuestManager.instance.currentQuest)
         {
             case 1 : 
-                LoadingSceneController.Loadscene("Map1");
+                LoadingSceneController.Loadscene("Map 1");
                 break;
             case 2 : 
-                LoadingSceneController.Loadscene("Map1");
+                LoadingSceneController.Loadscene("Map 2");
                 break;
             case 3 : 
-                LoadingSceneController.Loadscene("Map1");
+                LoadingSceneController.Loadscene("Map 3");
                 break;
             default:
                 break;
