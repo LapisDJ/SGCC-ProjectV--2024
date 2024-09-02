@@ -121,7 +121,7 @@ public class Pistol : Skill
         // 모든 몬스터들 중에서 가장 가까운 몬스터를 찾음
         foreach (GameObject monster in allMonsters)
         {
-            float distance = Vector3.Distance(transform.position, monster.transform.position);
+            float distance = Vector3.Distance(player.transform.position, monster.transform.position);
             if (distance < minDistance)
             {
                 minDistance = distance;
