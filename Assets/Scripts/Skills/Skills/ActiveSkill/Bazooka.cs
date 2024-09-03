@@ -104,7 +104,7 @@ public class Bazooka : Skill
             // 오브젝트가 몬스터 레이어에 속해 있는지 확인
             if (obj.layer == monsterLayer1)
             {
-                float distance = Vector3.Distance(transform.position, obj.transform.position);
+                float distance = Vector3.Distance(player.transform.position, obj.transform.position);
                 if (distance < minDistance)
                 {
                     minDistance = distance;
