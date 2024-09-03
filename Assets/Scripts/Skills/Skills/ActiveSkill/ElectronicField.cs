@@ -42,9 +42,9 @@ public class ElectronicField : Skill
                 DamageInfo damageInfo = new DamageInfo
                 {
                     skillDamage = this.skillDamage,
-                    playerDamage = player.playerStat.attackDamageByLevel,
+                    playerDamage = Player_Stat.instance.attackDamageByLevel,
                     weaknessMultipler = weaknessMultipler,
-                    isCritical = player.playerStat.CheckCritical()
+                    isCritical = Player_Stat.instance.CheckCritical()
                 };
 
                 totalDamage = finalDamage(damageInfo);

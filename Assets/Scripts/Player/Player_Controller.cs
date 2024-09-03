@@ -4,7 +4,6 @@ using UnityEngine.Tilemaps;
 using Utilities;  // PriorityQueue가 포함된 네임스페이스 참조
 public class PlayerController : MonoBehaviour
 {
-    public Player_Stat playerstat;
     public Rigidbody2D rb;
     public Vector3 dir;
     public float speed;
@@ -40,8 +39,7 @@ public class PlayerController : MonoBehaviour
         UpdateGraphNodes(new Vector3Int(1, 1, 0));
         // Map을 그래프로 저장함
 
-        playerstat = GetComponent<Player_Stat>();
-        if (playerstat == null)
+        if (Player_Stat.instance == null)
         {
             Debug.LogError("PlayerStat is missing on the Player.");
         }
@@ -105,13 +103,12 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         if (!isInteractionStarted)
         {
-            playerstat = GetComponent<Player_Stat>();
-            if (playerstat == null)
+            if (Player_Stat.instance == null)
             {
                 Debug.LogError("PlayerStat component is missing!");
                 return;
             }
-            speed = playerstat.speedAdd * playerstat.speedMulti;
+            speed = Player_Stat.instance.speedAdd * Player_Stat.instance.speedMulti;
             dir = new Vector3(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), 0).normalized;
             rb.velocity = dir * speed;
         }

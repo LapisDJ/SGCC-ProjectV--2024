@@ -72,8 +72,8 @@ public class Bazooka : Skill
                 DamageInfo damageInfo = new DamageInfo
                 {
                     skillDamage = this.skillDamage,
-                    playerDamage = player.playerStat.attackDamageByLevel,
-                    isCritical = player.playerStat.CheckCritical()
+                    playerDamage = Player_Stat.instance.attackDamageByLevel,
+                    isCritical = Player_Stat.instance.CheckCritical()
                 };
 
                 BazookaBulletScript.damageInfo = damageInfo;
