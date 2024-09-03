@@ -107,6 +107,8 @@ MonoBehaviour:
   lastAttacktime: 0
   attackCooldown: 0
   animator: {fileID: 3677165446116522289}
+  key: 
+  fadeDuration: 1
 --- !u!95 &3677165446116522289
 Animator:
   serializedVersion: 5
@@ -188,7 +190,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 87247722495281557}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0

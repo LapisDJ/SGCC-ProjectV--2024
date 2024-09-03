@@ -121,6 +121,9 @@ public class Monster : MonoBehaviour
         attackDamage = stats.initialAttackDamage;
         speed = stats.initialSpeed;
         lastAttacktime = 0f; // 초기 쿨타임 시간은 0으로 설정
+        Color color = spriteRenderer.color;
+        color.a = 1f;
+        spriteRenderer.color = color;
     }
 
 }
