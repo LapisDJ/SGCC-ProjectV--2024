@@ -5,18 +5,18 @@ using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class SurvAndBoss : PlayerController
 {
-    public GameObject boss; // º¸
+    public GameObject boss; // ï¿½ï¿½
     public GameObject targetObject;
-    private static int count = 0;   // ±¸ÃâµÈ »ýÁ¸ÀÚ ¼ö ( 3¸íÀÏ ‹š´Â »ýÁ¸ÀÚ ±¸Ãâ ¿Ï·á°¡ trueÀÎ bull ÇüÅÂ·Îµµ È°¿ë )
-    private Vector3 finVector = new Vector3(2f, 24f, 0);    // Äù½ºÆ®3 ¸¶Áö¸· ¹Ì¼Ç¿¡¼­ µµ´ÞÇØ¾ß ÇÒ À§Ä¡
+    private static int count = 0;   // ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ( 3ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ï·á°¡ trueï¿½ï¿½ bull ï¿½ï¿½ï¿½Â·Îµï¿½ È°ï¿½ï¿½ )
+    private Vector3 finVector = new Vector3(2f, 24f, 0);    // ï¿½ï¿½ï¿½ï¿½Æ®3 ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¼Ç¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ø¾ï¿½ ï¿½ï¿½ ï¿½ï¿½Ä¡
     private bool isBossAppear = false;
     private float hp_prev;
     private float hp_cur;
     private float interactionTime = 0f;
     private Vector3 interactPlayerPosition;
     private float requiredInteractionTime = 10.0f;
-    private bool isBossDead = false;    // º¸½º¸ó½ºÅÍ Ã³Ä¡¿©ºÎ
-    private Vector3 interactPosition;   // »óÈ£ÀÛ¿ëÇÒ questPositionÀÇ ÈÄº¸µé
+    private bool isBossDead = false;    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ã³Ä¡ï¿½ï¿½ï¿½ï¿½
+    private Vector3 interactPosition;   // ï¿½ï¿½È£ï¿½Û¿ï¿½ï¿½ï¿½ questPositionï¿½ï¿½ ï¿½Äºï¿½ï¿½ï¿½
     private Vector3 bossPosition;
     private bool bossAlive = false;
     private float interactReach = 3.0f;
@@ -58,11 +58,11 @@ public class SurvAndBoss : PlayerController
         interactPosition = targetObject.transform.position;
         interactPosition = new Vector3(interactPosition.x + 3f, interactPosition.y, interactPosition.z);
         Debug.Log(interactPosition);
-        boss.transform.position = finVector;    // º¸½º ¸ó½ºÅÍ ½ÃÀÛ À§Ä¡ Á¤ÇÔ
-        boss.SetActive(false);  // °ÔÀÓ ½ÃÀÛ ½Ã º¸½º ºñÈ°¼ºÈ­
-        isInteractionStarted = false;   // »ýÁ¸ÀÚ ±¸Ãâ¿¡ »ç¿ëÇÏ´Â º¯¼ö ( ±â´É : ... )
+        boss.transform.position = finVector;    // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ ï¿½ï¿½ï¿½ï¿½
+        boss.SetActive(false);  // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È°ï¿½ï¿½È­
+        isInteractionStarted = false;   // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½â¿¡ ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½ ( ï¿½ï¿½ï¿½ : ... )
 
-        GameObject player = GameObject.Find("Player"); // Player ¿ÀºêÁ§Æ® Ã£±â
+        GameObject player = GameObject.Find("Player"); // Player ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® Ã£ï¿½ï¿½
         if (player != null)
         {
             PlayerController playerController = player.GetComponent<PlayerController>();
@@ -76,15 +76,15 @@ public class SurvAndBoss : PlayerController
 
     private void Update()
     {
-        GameObject player = GameObject.Find("Player"); // Player ¿ÀºêÁ§Æ® Ã£±â
+        GameObject player = GameObject.Find("Player"); // Player ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® Ã£ï¿½ï¿½
         if (player != null)
         {
             PlayerController playerController = player.GetComponent<PlayerController>();
             if (playerController != null)
             {
-                hp_cur = playerController.playerstat.HPcurrent;
+                hp_cur = Player_Stat.instance.HPcurrent;
 
-                if (count < 3)  // »ýÁ¸ÀÚ°¡ ¸ðµÎ ±¸ÃâµÇÁö ¾ÊÀº °æ¿ì
+                if (count < 3)  // ï¿½ï¿½ï¿½ï¿½ï¿½Ú°ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
                 {
                     if (questPosition != interactPosition)
                     {
@@ -96,17 +96,17 @@ public class SurvAndBoss : PlayerController
                             Debug.Log(questPosition);
                         }
                     }
-                    CheckSurvivorInteraction(); // »ýÁ¸ÀÚ ±¸ÃâÇÏ´Â ¹Ì¼ÇÀ» ¼öÇàÇÔ
+                    CheckSurvivorInteraction(); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Ì¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
                 }
-                else            // »ýÁ¸ÀÚ ¸ðµÎ ±¸ÃâÇÑ °æ¿ì ³ª¸ÓÁö ¹Ì¼ÇÀ» ¼öÇàÇÔ
+                else            // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
                 {
-                    if (!isBossAppear && count == 3 && Vector3.Distance(player_T.position, finVector) <= 10f) // ÇÃ·¹ÀÌ¾î°¡ ½ÃÀÛ À§Ä¡ ±ÙÃ³·Î °£ °æ¿ì º¸½º¸ó½ºÅÍ°¡ ¼ÒÈ¯µÊ
+                    if (!isBossAppear && count == 3 && Vector3.Distance(player_T.position, finVector) <= 10f) // ï¿½Ã·ï¿½ï¿½Ì¾î°¡ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ ï¿½ï¿½Ã³ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í°ï¿½ ï¿½ï¿½È¯ï¿½ï¿½
                     {
-                        Debug.Log("º¸½º¸ó½ºÅÍ ÃâÇö!");
-                        boss.SetActive(true);   // º¸½º¸ó½ºÅÍ ¼ÒÈ¯
-                        if (boss.activeSelf)    // º¸½º°¡ ¼ÒÈ¯µÇ¸é
+                        Debug.Log("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½!");
+                        boss.SetActive(true);   // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¯
+                        if (boss.activeSelf)    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¯ï¿½Ç¸ï¿½
                         {
-                            isBossAppear = true;    // º¸½º°¡ 1È¸¸¸ ¼ÒÈ¯µÇµµ·Ï ÇÔ
+                            isBossAppear = true;    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 1È¸ï¿½ï¿½ ï¿½ï¿½È¯ï¿½Çµï¿½ï¿½ï¿½ ï¿½ï¿½
                         }
                         bossAlive = true;
                     }
@@ -117,25 +117,25 @@ public class SurvAndBoss : PlayerController
                         Debug.Log(bossPosition);
                         playerController.questPosition = bossPosition;
                     }
-                    // º¸½º¸ó½ºÅÍ Ã³Ä¡ Ä¡Æ®Å°
+                    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ã³Ä¡ Ä¡Æ®Å°
                     if (boss != null && Input.GetKeyDown(KeyCode.O))
                     {
-                        Destroy(boss); // º¸½º ÆÄ±«
+                        Destroy(boss); // ï¿½ï¿½ï¿½ï¿½ ï¿½Ä±ï¿½
                         bossAlive = false;
                     }
 
-                    if (!isBossDead && boss == null)    // º¸½º ¸ó½ºÅÍ¸¦ Ã³ÁöÇÒ °æ¿ì
+                    if (!isBossDead && boss == null)    // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Í¸ï¿½ Ã³ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
                     {
-                        Debug.Log("Áß°£º¸½º¸¦ Ã³Ä¡ÇÏ¿´½À´Ï´Ù!");
+                        Debug.Log("ï¿½ß°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ã³Ä¡ï¿½Ï¿ï¿½ï¿½ï¿½ï¿½Ï´ï¿½!");
                         playerController.questPosition = finVector;
-                        Debug.Log("Ãâ¹ß ÁöÁ¡À¸·Î µ¹¾Æ°¡¼¼¿ä");
+                        Debug.Log("ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Æ°ï¿½ï¿½ï¿½ï¿½ï¿½");
                         isBossDead = true;
                     }
 
-                    if (boss == null && Vector3.Distance(player_T.position, finVector) <= 3f) // º¸½º ¸ó½ºÅÍ¸¦ Ã³Ä¡ÇÑ ÈÄ ½ÃÀÛ À§Ä¡¿¡ µµ´ÞÇÏ¸é Äù½ºÆ®3 ¸¶¹«¸® ÈÄ ¿£µù¾À ÁøÀÔ
+                    if (boss == null && Vector3.Distance(player_T.position, finVector) <= 3f) // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Í¸ï¿½ Ã³Ä¡ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®3 ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
                     {
-                        Debug.Log("Äù½ºÆ®3 Å¬¸®¾î!");
-                        QuestManager.instance.CompleteQuest();  // ¿£µù¾À ¸ÊÀ¸·Î ÀÌµ¿
+                        Debug.Log("ï¿½ï¿½ï¿½ï¿½Æ®3 Å¬ï¿½ï¿½ï¿½ï¿½!");
+                        QuestManager.instance.CompleteQuest();  // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½
                     }
                 }
 
@@ -144,7 +144,7 @@ public class SurvAndBoss : PlayerController
         hp_prev = hp_cur;
     }
 
-    private void CheckSurvivorInteraction() // »ýÁ¸ÀÚ ±¸Ãâ ÇÔ¼ö
+    private void CheckSurvivorInteraction() // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ô¼ï¿½
     {
         GameObject player = GameObject.Find("Player");
         if (player != null)
@@ -157,7 +157,7 @@ public class SurvAndBoss : PlayerController
                     if (!isInteractionStarted && Input.GetKey(KeyCode.F))
                     {
                         interactionTime = 0.1f;
-                        Debug.Log("»ýÁ¸ÀÚ ±¸ÃâÀ» ½ÃÀÛÇÕ´Ï´Ù");
+                        Debug.Log("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½");
                         playerController.isInteractionStarted = true;
                         isInteractionStarted = true;
                     }
@@ -168,7 +168,7 @@ public class SurvAndBoss : PlayerController
                     if (interactionTime >= requiredInteractionTime)
                     {
                         count++;
-                        Debug.Log("»ýÁ¸ÀÚ " + count + "¸í ±¸Ãâ ¿Ï·á");
+                        Debug.Log("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ " + count + "ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ï·ï¿½");
 
                         Destroy(gameObject);
                         playerController.isInteractionStarted = false;
@@ -176,19 +176,19 @@ public class SurvAndBoss : PlayerController
                         if (count == 3)
                         {
                             playerController.questPosition = finVector;
-                            Debug.Log("Ãâ¹ß ÁöÁ¡À¸·Î µ¹¾Æ°¡¼¼¿ä");
+                            Debug.Log("ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Æ°ï¿½ï¿½ï¿½ï¿½ï¿½");
                         }
                     }
                     else if (isInteractionStarted && Input.GetKey(KeyCode.G))
                     {
-                        Debug.Log("»ýÁ¸ÀÚ ±¸Ãâ Áß´Ü");
+                        Debug.Log("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ß´ï¿½");
                         playerController.isInteractionStarted = false;
                         isInteractionStarted = false;
                         interactionTime = 0f;
                     }
                     else if (hp_cur < hp_prev)
                     {
-                        Debug.Log("»ýÁ¸ÀÚ ±¸Ãâ ½ÇÆÐ");
+                        Debug.Log("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½");
                         playerController.isInteractionStarted = false;
                         isInteractionStarted = false;
                         interactionTime = 0f; 

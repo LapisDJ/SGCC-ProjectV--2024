@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Player_Stat : MonoBehaviour
 {
+    public static Player_Stat instance;
     [SerializeField] public int player_level = 1; // 플레이어 레벨
     [SerializeField] float expgainrate = 1.0f; // 플레이어 경험치
     [SerializeField] float WorkSpeed = 1.0f; // 플레이어 작업 속도
@@ -22,6 +23,19 @@ public class Player_Stat : MonoBehaviour
     public float speedFin;
     //attackdamage
     public float attackDamageByLevel = 5.0f; //플레이어 자체 공격력
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
     void Start()
     {
