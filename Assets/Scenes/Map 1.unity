@@ -40353,7 +40353,10 @@ MonoBehaviour:
   dir: {x: 0, y: 0, z: 0}
   speed: 0
   isInteractionStarted: 0
-  player: {fileID: 1799502645}
+  backgroundTilemap: {fileID: 0}
+  obstacleTilemaps: []
+  player_T: {fileID: 0}
+  nextPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &1279397283
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -42040,6 +42043,10 @@ MonoBehaviour:
   dir: {x: 0, y: 0, z: 0}
   speed: 0
   isInteractionStarted: 0
+  backgroundTilemap: {fileID: 0}
+  obstacleTilemaps: []
+  player_T: {fileID: 0}
+  nextPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &1799502659
 MonoBehaviour:
   m_ObjectHideFlags: 0

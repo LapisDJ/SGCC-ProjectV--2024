@@ -46,7 +46,7 @@ public class UIManager : MonoBehaviour
         ExitSceneUI.SetActive(false);
         pausemenu.SetActive(false);
         StartUI.SetActive(true);
-        recheckwindow.SetActive(false);
+        
         isskillchoose = false;
         ispause = false;
         initialtime = Time.time;
@@ -60,28 +60,7 @@ public class UIManager : MonoBehaviour
             hide.enabled = false;
         }
     }
-    //메인메뉴
-    public void OnClickNewgame()
-    {
-        SceneManager.LoadScene("Character choose");
-    }
-    public void OnClickBringup()
-    {
-        SceneManager.LoadScene("?");
-    }
-    public void OnClickSettings()
-    {
-        SceneManager.LoadScene("Settings");
-    }
-    public void OnClickQuit()
-    {
-        Application.Quit();
-        #if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-        #else
-        Application.Quit();
-        #endif
-    }
+    
     //캐릭터 선택창
     int characternum;
     public void FirstCharacterButton()
@@ -259,56 +238,6 @@ public class UIManager : MonoBehaviour
     }
     //스킬레벨업 UI
     public Image[] skillchoiceimages;
-
-    //정산창
-    [SerializeField] GameObject recheckwindow;
-    public void GotoMainmenuButton()
-    {
-        recheckwindow.SetActive(true);
-    }
-    public void Recheckyes()
-    {
-        LoadingSceneController.Loadscene("Main Menu");
-    }
-    public void Recheckno()
-    {
-        recheckwindow.SetActive(false);
-    }
-    public void Retry()
-    {
-        QuestManager.instance.currentQuest--;
-        switch(QuestManager.instance.currentQuest)
-        {
-            case 1 : 
-                LoadingSceneController.Loadscene("Map 1");
-                break;
-            case 2 : 
-                LoadingSceneController.Loadscene("Map 2");
-                break;
-            case 3 : 
-                LoadingSceneController.Loadscene("Map 3");
-                break;
-            default:
-                break;
-        }
-    }
-    public void Nextchapter()
-    {
-        switch(QuestManager.instance.currentQuest)
-        {
-            case 1 : 
-                LoadingSceneController.Loadscene("Map 1");
-                break;
-            case 2 : 
-                LoadingSceneController.Loadscene("Map 2");
-                break;
-            case 3 : 
-                LoadingSceneController.Loadscene("Map 3");
-                break;
-            default:
-                break;
-        }
-    }
     //타이머
     [SerializeField] TextMeshProUGUI timer;
     public static string time;

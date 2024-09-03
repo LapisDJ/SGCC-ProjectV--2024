@@ -237,39 +237,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 158569053}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2df9d277acc074cd3a5f2e0470795d1f, type: 3}
+  m_Script: {fileID: 11500000, guid: 4cd32b138a81847fda5c1b379eb86f8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LayoverUI: {fileID: 0}
-  SkillChoose: {fileID: 0}
-  MissionUI: {fileID: 0}
-  ExitSceneUI: {fileID: 0}
-  pausemenu: {fileID: 0}
-  skillmanager: {fileID: 0}
-  StartUI: {fileID: 0}
-  skillnames: []
-  playerstat: {fileID: 0}
-  hpbar: {fileID: 0}
-  isskillchoose: 0
-  tempskillchoice: 9
-  weaponImages: []
-  hideWeaponImages: []
-  isCool: 00000000
-  weaponTimes:
-  - 3
-  - 6
-  - 9
-  - 12
-  getWeaponTimes:
-  - 0
-  - 0
-  - 0
-  - 0
-  skillchoiceimages: []
   recheckwindow: {fileID: 0}
-  timer: {fileID: 0}
-  abilityImage: {fileID: 0}
-  hideAbilityImage: {fileID: 0}
 --- !u!1 &248281010
 GameObject:
   m_ObjectHideFlags: 0
@@ -354,7 +325,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 158569058}
-        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_TargetAssemblyTypeName: UIoutofgame, Assembly-CSharp
         m_MethodName: Previousbutton
         m_Mode: 1
         m_Arguments:
@@ -469,8 +440,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4288651167
-  m_fontColor: {r: 0.6226415, g: 0.6226415, b: 0.6226415, a: 1}
+    rgba: 4293717228
+  m_fontColor: {r: 0.9254902, g: 0.9254902, b: 0.9254902, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -603,8 +574,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4288322202
-  m_fontColor: {r: 0.6037736, g: 0.6037736, b: 0.6037736, a: 1}
+    rgba: 4293717228
+  m_fontColor: {r: 0.9254902, g: 0.9254902, b: 0.9254902, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -847,7 +818,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 158569058}
-        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_TargetAssemblyTypeName: UIoutofgame, Assembly-CSharp
         m_MethodName: FirstCharacterButton
         m_Mode: 1
         m_Arguments:
@@ -1257,7 +1228,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 158569058}
-        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_TargetAssemblyTypeName: UIoutofgame, Assembly-CSharp
         m_MethodName: Confirmbutton
         m_Mode: 1
         m_Arguments:
