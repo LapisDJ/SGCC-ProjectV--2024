@@ -7,7 +7,7 @@ public class Bazooka : Skill
     WeaknessType weaknessType = WeaknessType.Blow; // 공격 타임 : 타격
     [SerializeField] public GameObject bazookaPrefab; // 바주카포 프리펩
     public float bulletSpeed = 10.0f;
-    public float exploreRadius = 0.5f;
+    public float exploreRadius = 5f;
 
     protected override void Awake()
     {
@@ -58,6 +58,7 @@ public class Bazooka : Skill
             Debug.Log("Bazooka bullet 프리펩 생성 완료");
 
             BazookaBullet BazookaBulletScript = bazookaBullet.GetComponent<BazookaBullet>();
+            BazookaBulletScript.explosionRadius = exploreRadius;
 
             // 플레이어와 총알 간의 충돌을 무시
             Collider2D playerCollider = player.GetComponent<Collider2D>();

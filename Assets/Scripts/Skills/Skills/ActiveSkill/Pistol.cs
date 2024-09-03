@@ -12,8 +12,8 @@ public class Pistol : Skill
         this.level = 1;
         base.Awake();
         skillName = "권총";
-        skillDamage = 1f;
-        cooldown = 3f;
+        skillDamage = 29f;
+        cooldown = 1.5f;
         icon = Resources.Load<Sprite>("UI/Icon/13");
     }
 
@@ -84,10 +84,10 @@ public class Pistol : Skill
         switch (level)
         {
             case 3: // 2->3랩 : 쿨타임 1초 감소
-                this.cooldown -= 1f;
+                this.cooldown -= 0.25f;
                 break;
             case 5: // 4->5랩 : 쿨타임 1초 감소
-                this.cooldown -= 1f;
+                this.cooldown -= 0.25f;
                 break;
             case 7: // 6->7랩 : 데미지 2 증가
                 this.skillDamage += 2f;
