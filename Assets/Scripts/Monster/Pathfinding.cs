@@ -38,15 +38,14 @@ public class SimplePathfinding : MonoBehaviour
             speed = monster_S.GetCurrentSpeed();
         }
 
-        if (Vector3.Distance(monster.position, nextPosition) <= 0.8f)
-        {
-            monster.position = nextPosition;
-        }
+        //if (Vector3.Distance(monster.position, nextPosition) <= 0.8f)
+        //{
+        //    monster.position = nextPosition;
+        //}
 
         // 경로 갱신 전에 이전 경로를 null로 초기화
         path = null;
         moveDirect = null;
-
         playerCellPosition = backgroundTilemap.WorldToCell(player.position);
         monsterCellPosition = backgroundTilemap.WorldToCell(monster.position);
 
@@ -54,7 +53,7 @@ public class SimplePathfinding : MonoBehaviour
         {
             path = FindPath(monsterCellPosition, playerCellPosition);
 
-            if (path != null && path.Count > 0)
+            if (path != null && path.Count > 0 && moveDirectPool != null)
             {
                 moveDirect = new List<Vector3>();
                 // path에서 moveDirectPool에 있는 좌표들을 moveDirect에 추가
@@ -72,14 +71,14 @@ public class SimplePathfinding : MonoBehaviour
                 monster.position = Vector3.MoveTowards(monster.position, nextPosition, Time.deltaTime * speed);
 
             }
-            else
+            else if(path != null && path.Count == 0)
             {
-                Debug.LogWarning("No path found from monster to player.");
+                Debug.LogWarning("플레이어가 몬스터에게 피격받았습니다! ");
             }
         }
         else
         {
-            Debug.LogError("One of the positions (monster or player) is not in the graph.");
+            Debug.LogError("몬스터 또는 플레이어가 이동 불가능한 영역에 있습니다");
         }
 
         // Gizmos를 갱신하도록 요청
@@ -270,49 +269,52 @@ public class SimplePathfinding : MonoBehaviour
         Vector3Int.right
     };
 
-        // moveDirectPool 초기화
-        moveDirectPool = new List<Vector3Int>();
-
-        // 조건을 만족하는 경우 초록색 구를 그리고, 좌표를 moveDirectPool에 추가
-        Gizmos.color = Color.green;
-        foreach (var node in graph)
+        if (moveDirectPool == null)
         {
-            // 상하좌우 방향이 모두 그래프에 포함되는지 확인
-            bool isCardinalValid = true;
-            foreach (var cardinalDirection in cardinalDirections)
+            // moveDirectPool 초기화
+            moveDirectPool = new List<Vector3Int>();
+
+            // 조건을 만족하는 경우 초록색 구를 그리고, 좌표를 moveDirectPool에 추가
+            Gizmos.color = Color.green;
+            foreach (var node in graph)
             {
-                Vector3Int adjacentPosition = node.Key + cardinalDirection;
-                if (!graph.ContainsKey(adjacentPosition))
+                // 상하좌우 방향이 모두 그래프에 포함되는지 확인
+                bool isCardinalValid = true;
+                foreach (var cardinalDirection in cardinalDirections)
                 {
-                    isCardinalValid = false;
-                    break;
-                }
-            }
-
-            if (isCardinalValid)
-            {
-                // 대각선 방향에 하나라도 그래프에 포함되지 않은 경우
-                bool hasDiagonalNonGraph = false;
-
-                foreach (var direction in diagonalDirections)
-                {
-                    Vector3Int diagonalPosition = node.Key + direction;
-
-                    if (!graph.ContainsKey(diagonalPosition))
+                    Vector3Int adjacentPosition = node.Key + cardinalDirection;
+                    if (!graph.ContainsKey(adjacentPosition))
                     {
-                        hasDiagonalNonGraph = true;
+                        isCardinalValid = false;
                         break;
                     }
                 }
 
-                if (hasDiagonalNonGraph)
+                if (isCardinalValid)
                 {
-                    // 해당 위치에 초록색 원을 표시하고 moveDirectPool에 추가
-                    Vector3 worldPosition = backgroundTilemap.CellToWorld(node.Key);
-                    //Gizmos.DrawSphere(worldPosition, 3f * radius);
+                    // 대각선 방향에 하나라도 그래프에 포함되지 않은 경우
+                    bool hasDiagonalNonGraph = false;
 
-                    // moveDirectPool에 노드의 위치 추가
-                    moveDirectPool.Add(node.Key);
+                    foreach (var direction in diagonalDirections)
+                    {
+                        Vector3Int diagonalPosition = node.Key + direction;
+
+                        if (!graph.ContainsKey(diagonalPosition))
+                        {
+                            hasDiagonalNonGraph = true;
+                            break;
+                        }
+                    }
+
+                    if (hasDiagonalNonGraph)
+                    {
+                        // 해당 위치에 초록색 원을 표시하고 moveDirectPool에 추가
+                        Vector3 worldPosition = backgroundTilemap.CellToWorld(node.Key);
+                        //Gizmos.DrawSphere(worldPosition, 3f * radius);
+
+                        // moveDirectPool에 노드의 위치 추가
+                        moveDirectPool.Add(node.Key);
+                    }
                 }
             }
         }

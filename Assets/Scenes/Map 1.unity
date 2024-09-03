@@ -671,8 +671,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ee63692cce604eac87e2b8f2049496f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  abilityImage: {fileID: 2041184734}
-  hideAbilityImage: {fileID: 9663782}
 --- !u!114 &175288636
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -36947,7 +36945,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &619059095
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -36997,7 +36995,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 619059094}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 977ef13a68e58c14aaf8e8188c09ee40, type: 3}
   m_Name: 
@@ -39083,6 +39081,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6376288817696366330, guid: 77726c54b6beef1408b5a37a7d8bbd95, type: 3}
   m_PrefabInstance: {fileID: 1585001887292791514}
   m_PrefabAsset: {fileID: 0}
+--- !u!1839735485 &653376686 stripped
+Tilemap:
+  m_CorrespondingSourceObject: {fileID: 7292480506235024484, guid: 77726c54b6beef1408b5a37a7d8bbd95, type: 3}
+  m_PrefabInstance: {fileID: 1585001887292791514}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &658207240
 GameObject:
   m_ObjectHideFlags: 0
@@ -39672,6 +39675,8 @@ MonoBehaviour:
   - {fileID: 1290877000}
   - {fileID: 538942638}
   - {fileID: 1809990753}
+  playerstat: {fileID: 0}
+  hpbar: {fileID: 0}
   isskillchoose: 0
   tempskillchoice: 9
   weaponImages:
@@ -39700,6 +39705,10 @@ MonoBehaviour:
   - {fileID: 282533815}
   - {fileID: 316541501}
   - {fileID: 1430059508}
+  recheckwindow: {fileID: 0}
+  timer: {fileID: 0}
+  abilityImage: {fileID: 0}
+  hideAbilityImage: {fileID: 0}
 --- !u!4 &953467204
 Transform:
   m_ObjectHideFlags: 0
@@ -40136,6 +40145,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1046447347}
   m_CullTransparentMesh: 1
+--- !u!1839735485 &1220996710 stripped
+Tilemap:
+  m_CorrespondingSourceObject: {fileID: 811637697940905324, guid: e130e96a106fa554b9e7d6cde7a8ae95, type: 3}
+  m_PrefabInstance: {fileID: 7966086324553405196}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1262132559
 GameObject:
   m_ObjectHideFlags: 0
@@ -40292,7 +40306,16 @@ MonoBehaviour:
   dir: {x: 0, y: 0, z: 0}
   speed: 0
   isInteractionStarted: 0
-  player: {fileID: 1799502645}
+  backgroundTilemap: {fileID: 484461024}
+  obstacleTilemaps:
+  - {fileID: 653376686}
+  - {fileID: 1220996710}
+  - {fileID: 1401922605}
+  - {fileID: 1488732903}
+  - {fileID: 645941946}
+  - {fileID: 1878825005}
+  player_T: {fileID: 1799502645}
+  nextPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &1279397283
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -40666,6 +40689,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1369076550}
   m_CullTransparentMesh: 1
+--- !u!1839735485 &1401922605 stripped
+Tilemap:
+  m_CorrespondingSourceObject: {fileID: 1450941760238024493, guid: 07daf1ace3165ba48896d2a02d372454, type: 3}
+  m_PrefabInstance: {fileID: 8645897512614841105}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1430059507
 GameObject:
   m_ObjectHideFlags: 0
@@ -40900,6 +40928,11 @@ PrefabInstance:
 --- !u!4 &1488732898 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7786402558572339465, guid: f3aed67682776ea439f1be6cbbd65506, type: 3}
+  m_PrefabInstance: {fileID: 3388871518763881938}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1839735485 &1488732903 stripped
+Tilemap:
+  m_CorrespondingSourceObject: {fileID: 960647767379924398, guid: f3aed67682776ea439f1be6cbbd65506, type: 3}
   m_PrefabInstance: {fileID: 3388871518763881938}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1520646050
@@ -41154,8 +41187,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16abea25099e24d5c8e32d58e2ad08b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerstat: {fileID: 1621604332}
-  hpbar: {fileID: 461111156}
 --- !u!114 &1621604331
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -41168,7 +41199,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cbdd68a3858546c5840aa836a796530, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timer: {fileID: 299093768}
 --- !u!114 &1621604332
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -41805,7 +41835,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1751348908}
-  - component: {fileID: 1751348907}
+  - component: {fileID: 1751348909}
   m_Layer: 0
   m_Name: QuestManager
   m_TagString: Untagged
@@ -41813,18 +41843,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1751348907
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1751348906}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae028458a60a78046bd41b2a7c1e6ba3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1751348908
 Transform:
   m_ObjectHideFlags: 0
@@ -41840,6 +41858,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1751348909
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1751348906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae028458a60a78046bd41b2a7c1e6ba3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentQuest: 1
 --- !u!1001 &1764436284
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -41985,6 +42016,16 @@ MonoBehaviour:
   dir: {x: 0, y: 0, z: 0}
   speed: 0
   isInteractionStarted: 0
+  backgroundTilemap: {fileID: 484461024}
+  obstacleTilemaps:
+  - {fileID: 653376686}
+  - {fileID: 1220996710}
+  - {fileID: 1401922605}
+  - {fileID: 645941946}
+  - {fileID: 1488732903}
+  - {fileID: 1878825005}
+  player_T: {fileID: 1799502645}
+  nextPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &1799502659
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -42299,6 +42340,7 @@ MonoBehaviour:
   knifeDronePrefab: {fileID: 0}
   rotationSpeed: 90
   knifeRadius: 2
+  damageCooldown: 1
 --- !u!114 &1835011275
 MonoBehaviour:
   m_ObjectHideFlags: 0
