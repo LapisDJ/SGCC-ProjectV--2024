@@ -21,13 +21,13 @@ public class PlayerController : MonoBehaviour
             _questPosition = value;
         }
     }
-    //public Vector3 questPosition =  new Vector3(-20, 50, 0);
     private Vector3Int playerCellPosition;
     private Vector3Int questPositionCellPosition;
     public Dictionary<Vector3Int, List<Vector3Int>> graph = new Dictionary<Vector3Int, List<Vector3Int>>();
-    private List<Vector3Int> path;
-    private List<Vector3Int> moveDirectPool;
-    private List<Vector3> moveDirect;
+    private List<Vector3Int> pathInt;
+    private List<Vector3> path;
+    //private List<Vector3Int> moveDirectPool;
+    //private List<Vector3> moveDirect;
     public Vector3 nextPosition;
     // 기존 변수들
     public LineRenderer lineRenderer;
@@ -73,18 +73,23 @@ public class PlayerController : MonoBehaviour
     {
         // 경로 갱신 전에 이전 경로를 null로 초기화
         path = null;
-        moveDirect = null;
+        pathInt = null;
+        //moveDirect = null;
         playerCellPosition = backgroundTilemap.WorldToCell(player_T.position);  // 플레이어 위치를 정수좌표로 저장
         questPositionCellPosition = backgroundTilemap.WorldToCell(_questPosition);   // 퀘스트에서 이동해야할 위치를 정수좌표로 저장
 
         if (graph.ContainsKey(questPositionCellPosition) && graph.ContainsKey(playerCellPosition))  // 퀘스트 이동좌표와 플레이어 위치가 그래프 안에 있는 경우
         {
-            path = FindPath(questPositionCellPosition, playerCellPosition);    // path를 통해 플레이어 위치에서 퀘스트 이동좌표까지 최단 경로를 계산
-
+            pathInt = FindPath(questPositionCellPosition, playerCellPosition);    // path를 통해 플레이어 위치에서 퀘스트 이동좌표까지 최단 경로를 계산
+            if (pathInt != null)
+            {
+                path = ConvertPathToWorldCoordinates(pathInt);
+            }
+            /*
             if (path != null && path.Count > 0)
             {
-                moveDirect = new List<Vector3>();
-
+                //moveDirect = new List<Vector3>();
+                
                 if (moveDirectPool != null)
                 {
                     foreach (var position in path)  // path에서 moveDirectPool에 있는 좌표들을 moveDirect에 추가
@@ -98,6 +103,7 @@ public class PlayerController : MonoBehaviour
                     moveDirect.Add(player_T.position);
                 }
             }
+            */
         }
 
         rb = GetComponent<Rigidbody2D>();
@@ -204,26 +210,72 @@ public class PlayerController : MonoBehaviour
 
     void DrawMoveDirect()
     {
-        if (moveDirect != null && moveDirect.Count > 0)
+        int diagonalTurnIndex = FindDiagonalTurnIndex(path);
+        Debug.Log(diagonalTurnIndex);
+        if (diagonalTurnIndex != -1)
         {
-            Vector3 prevWorldPos = _questPosition;
-            lineRenderer.positionCount = moveDirect.Count + 1;
-            lineRenderer.SetPosition(0, prevWorldPos);
-            for (int i = 0; i < moveDirect.Count; i++)
+            if (path != null && path.Count > 0)
             {
-                // 월드 좌표에서의 위치를 얻고, 약간의 오프셋을 추가하여 타일의 중심에 맞춤
-                Vector3 worldPosition = moveDirect[i];
-                lineRenderer.SetPosition(i + 1, worldPosition);
-                //prevWorldPos = worldPosition;
+                // 시작 포지션
+                Vector3 prevWorldPos = _questPosition;
+
+                // LineRenderer의 포지션 개수 설정
+                int positionsCount = path.Count - diagonalTurnIndex + 2; // 시작 포인트 + 경로 포인트들 + 마지막 포인트
+                lineRenderer.positionCount = positionsCount;
+
+                // 시작 포지션 설정
+                lineRenderer.SetPosition(0, prevWorldPos);
+
+                // 경로 포인트 설정 (diagonalTurnIndex만큼 제외)
+                for (int i = 0; i < path.Count - diagonalTurnIndex; i++)
+                {
+                    Vector3 worldPosition = path[i];
+                    lineRenderer.SetPosition(i + 1, worldPosition);
+                }
+
+                // 마지막 포인트 설정 (플레이어의 위치)
+                lineRenderer.SetPosition(path.Count - diagonalTurnIndex + 1, player_T.position);
+
+                // Debug 로그 출력
+                Debug.Log("Player Position: " + player_T.position);
+                for (int i = 0; i < path.Count; i++)
+                {
+                    Debug.Log($"Path Position {i}: " + path[i]);
+                }
+
+                // LineRenderer 포지션 출력
+                PrintLineRendererPositions(lineRenderer);
+            }
+            else
+            {
+                lineRenderer.positionCount = 0; // path가 없으면 LineRenderer를 비움
             }
         }
         else
         {
-            lineRenderer.positionCount = 0; // moveDirect가 없으면 LineRenderer를 비움
+            if (path != null && path.Count > 0)
+            {
+                Vector3 prevWorldPos = _questPosition;
+                lineRenderer.positionCount = path.Count + 2;
+                lineRenderer.SetPosition(0, prevWorldPos);
+                for (int i = 0; i < path.Count; i++)
+                {
+                    // 월드 좌표에서의 위치를 얻고, 약간의 오프셋을 추가하여 타일의 중심에 맞춤
+                    Vector3 worldPosition = path[i];
+                    lineRenderer.SetPosition(i + 1, worldPosition);
+                    //prevWorldPos = worldPosition;
+                }
+                lineRenderer.SetPosition(path.Count + 1, player_T.position);
+            }
+            else
+            {
+                lineRenderer.positionCount = 0; // moveDirect가 없으면 LineRenderer를 비움
+            }
         }
+        
     }
 
-
+    /*
     List<Vector3Int> FindPath(Vector3Int start, Vector3Int goal)
     {
         HashSet<Vector3Int> visited = new HashSet<Vector3Int>();
@@ -269,6 +321,73 @@ public class PlayerController : MonoBehaviour
 
         return null;
     }
+    */
+
+    List<Vector3Int> FindPath(Vector3Int start, Vector3Int goal)
+    {
+        HashSet<Vector3Int> visited = new HashSet<Vector3Int>();
+        PriorityQueue<Vector3Int> frontier = new PriorityQueue<Vector3Int>();
+        Dictionary<Vector3Int, Vector3Int> cameFrom = new Dictionary<Vector3Int, Vector3Int>();
+        Dictionary<Vector3Int, float> costSoFar = new Dictionary<Vector3Int, float>();
+
+        frontier.Enqueue(start, 0);
+        visited.Add(start);
+        cameFrom[start] = start;
+        costSoFar[start] = 0;
+
+        // 모든 방향(대각선 포함) 설정
+        Vector3Int[] directions = {
+        Vector3Int.up,
+        Vector3Int.down,
+        Vector3Int.left,
+        Vector3Int.right,
+        new Vector3Int(1, 1, 0),   // 오른쪽 위 대각선
+        new Vector3Int(-1, 1, 0),  // 왼쪽 위 대각선
+        new Vector3Int(1, -1, 0),  // 오른쪽 아래 대각선
+        new Vector3Int(-1, -1, 0)  // 왼쪽 아래 대각선
+    };
+
+        while (frontier.Count > 0)
+        {
+            Vector3Int current = frontier.Dequeue();
+
+            if (current == goal)
+            {
+                return ReconstructPath(cameFrom, start, goal);
+            }
+
+            foreach (Vector3Int direction in directions)
+            {
+                Vector3Int neighborPos = current + direction;
+                if (!graph.ContainsKey(neighborPos))  // 그래프에 노드가 없으면 건너뜀
+                    continue;
+
+                // 대각선 이동 시, 인접한 가로 및 세로 방향에 장애물이 있는지 확인
+                if (Mathf.Abs(direction.x) == 1 && Mathf.Abs(direction.y) == 1)
+                {
+                    Vector3Int adjacent1 = current + new Vector3Int(direction.x, 0, 0);
+                    Vector3Int adjacent2 = current + new Vector3Int(0, direction.y, 0);
+
+                    if (!graph.ContainsKey(adjacent1) || !graph.ContainsKey(adjacent2))
+                        continue;
+                }
+
+                // 코스트 계산 (대각선 이동 시 가중치 1.4)
+                float newCost = costSoFar[current] + ((Mathf.Abs(direction.x) == 1 && Mathf.Abs(direction.y) == 1) ? 1.4f : 1f);
+
+                if (!costSoFar.ContainsKey(neighborPos) || newCost < costSoFar[neighborPos])
+                {
+                    costSoFar[neighborPos] = newCost;
+                    float priority = newCost + Heuristic(neighborPos, goal);
+                    frontier.Enqueue(neighborPos, priority);
+                    cameFrom[neighborPos] = current;
+                }
+            }
+        }
+
+        return null;
+    }
+
 
 
 
@@ -296,7 +415,7 @@ public class PlayerController : MonoBehaviour
         return Mathf.Abs(a.x - b.x) + Mathf.Abs(a.y - b.y);
     }
 
-
+    
     void OnDrawGizmos()
     {
         float radius = 0.1f;
@@ -307,104 +426,13 @@ public class PlayerController : MonoBehaviour
         {
             for (int j = 0; j < path.Count; j++)
             {
-                //Gizmos.DrawSphere(path[j], radius);
+                Gizmos.DrawSphere(path[j], radius);
 
                 if (j < path.Count - 1)
                 {
-                    //Gizmos.DrawLine(path[j], path[j + 1]);
+                    Gizmos.DrawLine(path[j], path[j + 1]);
                 }
             }
-        }
-
-        // 대각선 방향을 위한 배열
-        Vector3Int[] diagonalDirections = {
-        new Vector3Int(-1, 1, 0),
-        new Vector3Int(1, 1, 0),
-        new Vector3Int(-1, -1, 0), 
-        new Vector3Int(1, -1, 0)
-    };
-
-        // 상하좌우 방향을 위한 배열
-        Vector3Int[] cardinalDirections = {
-        Vector3Int.up,
-        Vector3Int.down,
-        Vector3Int.left,
-        Vector3Int.right
-    };
-
-        // moveDirectPool 초기화
-        moveDirectPool = new List<Vector3Int>();
-
-        // 조건을 만족하는 경우 초록색 구를 그리고, 좌표를 moveDirectPool에 추가
-        Gizmos.color = Color.green;
-        foreach (var node in graph)
-        {
-            // 상하좌우 방향이 모두 그래프에 포함되는지 확인
-            bool isCardinalValid = true;
-            foreach (var cardinalDirection in cardinalDirections)
-            {
-                Vector3Int adjacentPosition = node.Key + cardinalDirection;
-                if (!graph.ContainsKey(adjacentPosition))
-                {
-                    isCardinalValid = false;
-                    break;
-                }
-            }
-
-            if (isCardinalValid)
-            {
-                // 대각선 방향에 하나라도 그래프에 포함되지 않은 경우
-                bool hasDiagonalNonGraph = false;
-
-                foreach (var direction in diagonalDirections)
-                {
-                    Vector3Int diagonalPosition = node.Key + direction;
-
-                    if (!graph.ContainsKey(diagonalPosition))
-                    {
-                        hasDiagonalNonGraph = true;
-                        break;
-                    }
-                }
-
-                if (hasDiagonalNonGraph)
-                {
-                    // 해당 위치에 초록색 원을 표시하고 moveDirectPool에 추가
-                    Vector3 worldPosition = backgroundTilemap.CellToWorld(node.Key);
-                    //Gizmos.DrawSphere(worldPosition, 3f * radius);
-
-                    // moveDirectPool에 노드의 위치 추가
-                    moveDirectPool.Add(node.Key);
-                }
-            }
-        }
-
-        // moveDirect를 빨간 점으로 표시하고 선으로 연결
-        if (moveDirect != null && moveDirect.Count > 0)
-        {
-            Gizmos.color = Color.green;
-
-            // 첫 번째 점은 퀘스트 이동의 위치로 설정
-            Vector3 previousWorldPos = _questPosition;
-            Gizmos.DrawSphere(previousWorldPos, 1f * radius);
-
-            // moveDirect의 각 좌표들을 순서대로 연결
-            for (int i = 0; i < moveDirect.Count; i++)
-            {
-                Vector3 worldPos = moveDirect[i];
-                //Gizmos.DrawSphere(worldPos, 2f * radius);
-
-                // 이전 위치와 현재 위치를 선으로 연결
-                //Gizmos.DrawLine(previousWorldPos, worldPos);
-
-                // 현재 위치를 다음 선의 시작 위치로 설정
-                previousWorldPos = worldPos;
-            }
-
-            // 마지막에 questPosition 추가
-            Vector3 questWorldPos = _questPosition;
-            Gizmos.DrawSphere(questWorldPos, 2f * radius);
-            Gizmos.DrawLine(previousWorldPos, questWorldPos);
         }
     }
 
@@ -414,7 +442,60 @@ public class PlayerController : MonoBehaviour
         // 이 메서드는 OnDrawGizmos를 호출하도록 Unity에게 알려줍니다.
         UnityEditor.EditorUtility.SetDirty(this);
     }
+    
 
+    List<Vector3> ConvertPathToWorldCoordinates(List<Vector3Int> pathInCells)
+    {
+        List<Vector3> pathInWorld = new List<Vector3>();  // List<Vector3> 타입으로 변경
+        for (int i = 0; i < pathInCells.Count; i++)
+        {
+            pathInWorld.Add(backgroundTilemap.CellToWorld(pathInCells[i]));
+        }
+        return pathInWorld;
+    }
 
+    int FindDiagonalTurnIndex(List<Vector3> path)
+    {
+        if (path == null || path.Count < 2)
+            return -1;  // 경로가 없거나 경로 길이가 2 미만이면 대각선 전환이 발생할 수 없음
+        int j = 0;
+        for (int i = path.Count - 1; i > 0; i--)
+        {
+            float distancePath = Vector3.Distance(path[i] , path[i - 1]);
+            if(distancePath > 1.01)
+            { 
+                if(j == 0)
+                {
+                    return -1;
+                }
+                return j;  // 대각선으로 처음 꺾이는 지점의 index 반환
+            }
+            else 
+            {
+                j++;
+            }
+        }
+        return -1;  // 대각선으로 꺾이는 부분이 없는 경우
+    }
 
+    void PrintLineRendererPositions(LineRenderer lineRenderer)
+    {
+        // LineRenderer의 포지션 수를 가져옵니다.
+        int positionCount = lineRenderer.positionCount;
+
+        // 포지션 수가 0이면 아무것도 출력하지 않습니다.
+        if (positionCount == 0)
+        {
+            Debug.Log("LineRenderer has no positions.");
+            return;
+        }
+
+        // 모든 포지션 값을 출력합니다.
+        Debug.Log($"LineRenderer has {positionCount} positions:");
+        for (int i = 0; i < positionCount; i++)
+        {
+            Vector3 position = lineRenderer.GetPosition(i);
+            Debug.Log($"Position {i}: {position}");
+        }
+    }
 }
