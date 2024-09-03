@@ -120,7 +120,7 @@ public class UIManager : MonoBehaviour
             skillnames[3].text = SkillManager.instance.passivechoices[1].skillName;
             isskillchoose = false;
         }
-        hpbar.value = playerstat.HPcurrent / playerstat.HPmax;//HP바 표시
+        hpbar.value = Player_Stat.instance.HPcurrent / Player_Stat.instance.HPmax;//HP바 표시
         //스킬쿨
         WeaponCoolChk();
         UpdateWeaponImages();
