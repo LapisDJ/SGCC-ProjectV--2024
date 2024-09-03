@@ -8,7 +8,7 @@ public class CircleSword : Skill
     {
         base.Awake();
         skillName = "칼날 의수";
-        skillDamage = 2f;
+        skillDamage = 60f;
         cooldown = 4f;
         icon = Resources.Load<Sprite>("UI/Icon/11");
     }

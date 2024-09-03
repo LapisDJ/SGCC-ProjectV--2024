@@ -6,6 +6,7 @@ public class Zombie_Dog : Monster
 {
     protected override void Awake()
     {
+        spriteRenderer = GetComponent<SpriteRenderer>();
         stats = new MonsterStats
         {
             initialHP = 200f,

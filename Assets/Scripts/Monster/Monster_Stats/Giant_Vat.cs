@@ -6,6 +6,7 @@ public class Giant_Vat : Monster
 {
     protected override void Awake()
     {
+        spriteRenderer = GetComponent<SpriteRenderer>();
         stats = new MonsterStats
         {
             initialHP = 200f,

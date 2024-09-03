@@ -13,7 +13,7 @@ public class BaseballBat : Skill
     {
         base.Awake();
         skillName = "야구 방망이";
-        skillDamage = 2f;
+        skillDamage = 60f;
         cooldown = 4f;
         icon = Resources.Load<Sprite>("UI/Icon/12");
     }

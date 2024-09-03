@@ -10,7 +10,7 @@ public class ShotGun : Skill
     {
         base.Awake();
         skillName = "샷건";
-        skillDamage = 1f;
+        skillDamage = 30f;
         cooldown = 5f;
         icon = Resources.Load<Sprite>("UI/Icon/10");
     }
