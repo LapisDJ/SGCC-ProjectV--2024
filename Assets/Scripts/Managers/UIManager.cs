@@ -61,20 +61,7 @@ public class UIManager : MonoBehaviour
         }
     }
     
-    //캐릭터 선택창
-    int characternum;
-    public void FirstCharacterButton()
-    {
-        characternum = 1;
-    }
-    public void Confirmbutton()
-    {
-        LoadingSceneController.Loadscene("Map 1");
-    }
-    public void Previousbutton()
-    {
-        SceneManager.LoadScene("Main Menu");
-    }
+    
     public void SkillChooseStart()//진행중인 게임을 일시정지하고 레벨업 가능한 스킬 리스트 가져옴. 레벨업할 스킬을 선택하는 창으로 진입.
     {
         Time.timeScale = 0;
