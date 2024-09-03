@@ -7,7 +7,6 @@ public class RealtimeManager : MonoBehaviour
 {
     public static RealtimeManager instance;
 
-    [SerializeField] Player_Stat playerstat;
     public int monsterkill; // 처치한 몬스터의 수
     public int needKillsToLevelUp = 1;
 
@@ -32,7 +31,7 @@ public class RealtimeManager : MonoBehaviour
 
         if (monsterkill >= needKillsToLevelUp)
         {
-            playerstat.LevelUp();
+            Player_Stat.instance.LevelUp();
             monsterkill -= needKillsToLevelUp;
             updateNeedKillsToLevelUp();
         }
