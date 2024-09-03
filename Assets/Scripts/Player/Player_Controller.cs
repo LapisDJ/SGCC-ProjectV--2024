@@ -30,7 +30,8 @@ public class PlayerController : MonoBehaviour
     private List<Vector3Int> moveDirectPool;
     private List<Vector3> moveDirect;
     public Vector3 nextPosition;
-
+    // 기존 변수들
+    public LineRenderer lineRenderer;
     public void Start()
     {
         player_T = GameObject.FindGameObjectWithTag("Player").transform;
@@ -59,6 +60,15 @@ public class PlayerController : MonoBehaviour
             _ => player_T.position
         };
 
+
+        // LineRenderer 설정
+        lineRenderer = gameObject.AddComponent<LineRenderer>();
+        lineRenderer.startWidth = 0.1f;
+        lineRenderer.endWidth = 0.1f;
+        lineRenderer.positionCount = 0;
+        lineRenderer.material = new Material(Shader.Find("Sprites/Default")); // 기본 스프라이트 셰이더 사용
+        lineRenderer.startColor = Color.red;
+        lineRenderer.endColor = Color.red;
     }
 
     void Update()
@@ -111,7 +121,8 @@ public class PlayerController : MonoBehaviour
         }
         // Gizmos를 갱신하도록 요청
         UpdateGizmos();
-
+        // moveDirect를 LineRenderer로 그리기
+        DrawMoveDirect();
     }
 
     void GenerateGraphFromTilemap()
@@ -194,6 +205,27 @@ public class PlayerController : MonoBehaviour
         return true;
     }
 
+    void DrawMoveDirect()
+    {
+        if (moveDirect != null && moveDirect.Count > 0)
+        {
+            Vector3 prevWorldPos = _questPosition;
+            lineRenderer.positionCount = moveDirect.Count + 1;
+            lineRenderer.SetPosition(0, prevWorldPos);
+            for (int i = 0; i < moveDirect.Count; i++)
+            {
+                // 월드 좌표에서의 위치를 얻고, 약간의 오프셋을 추가하여 타일의 중심에 맞춤
+                Vector3 worldPosition = moveDirect[i];
+                lineRenderer.SetPosition(i + 1, worldPosition);
+                //prevWorldPos = worldPosition;
+            }
+        }
+        else
+        {
+            lineRenderer.positionCount = 0; // moveDirect가 없으면 LineRenderer를 비움
+        }
+    }
+
 
     List<Vector3Int> FindPath(Vector3Int start, Vector3Int goal)
     {
@@ -225,7 +257,7 @@ public class PlayerController : MonoBehaviour
                 {
                     if (moveDirectPool.Contains(next))
                     {
-                        newCost -= -10f; // 보너스 값은 조정 가능
+                        newCost -= -5f; // 보너스 값은 조정 가능
                     }
                 }
                 if (!costSoFar.ContainsKey(next) || newCost < costSoFar[next])
@@ -291,7 +323,7 @@ public class PlayerController : MonoBehaviour
         Vector3Int[] diagonalDirections = {
         new Vector3Int(-1, 1, 0),
         new Vector3Int(1, 1, 0),
-        new Vector3Int(-1, -1, 0),
+        new Vector3Int(-1, -1, 0), 
         new Vector3Int(1, -1, 0)
     };
 
@@ -342,13 +374,14 @@ public class PlayerController : MonoBehaviour
                 {
                     // 해당 위치에 초록색 원을 표시하고 moveDirectPool에 추가
                     Vector3 worldPosition = backgroundTilemap.CellToWorld(node.Key);
-                    Gizmos.DrawSphere(worldPosition, 3f * radius);
+                    //Gizmos.DrawSphere(worldPosition, 3f * radius);
 
                     // moveDirectPool에 노드의 위치 추가
                     moveDirectPool.Add(node.Key);
                 }
             }
         }
+
         // moveDirect를 빨간 점으로 표시하고 선으로 연결
         if (moveDirect != null && moveDirect.Count > 0)
         {
@@ -361,17 +394,23 @@ public class PlayerController : MonoBehaviour
             // moveDirect의 각 좌표들을 순서대로 연결
             for (int i = 0; i < moveDirect.Count; i++)
             {
-                Vector3 worldPos = moveDirect[i];//
-                Gizmos.DrawSphere(worldPos, 2f * radius);
+                Vector3 worldPos = moveDirect[i];
+                //Gizmos.DrawSphere(worldPos, 2f * radius);
 
                 // 이전 위치와 현재 위치를 선으로 연결
-                Gizmos.DrawLine(previousWorldPos, worldPos);
+                //Gizmos.DrawLine(previousWorldPos, worldPos);
 
                 // 현재 위치를 다음 선의 시작 위치로 설정
                 previousWorldPos = worldPos;
             }
+
+            // 마지막에 questPosition 추가
+            Vector3 questWorldPos = _questPosition;
+            Gizmos.DrawSphere(questWorldPos, 2f * radius);
+            Gizmos.DrawLine(previousWorldPos, questWorldPos);
         }
     }
+
 
     void UpdateGizmos()
     {
