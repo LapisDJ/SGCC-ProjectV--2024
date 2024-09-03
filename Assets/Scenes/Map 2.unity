@@ -36162,7 +36162,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df54b186eae0b9446b0c4cc0553759cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerstat: {fileID: 0}
   rb: {fileID: 0}
   dir: {x: 0, y: 0, z: 0}
   speed: 0
@@ -36171,34 +36170,9 @@ MonoBehaviour:
   obstacleTilemaps: []
   player_T: {fileID: 0}
   nextPosition: {x: 0, y: 0, z: 0}
+  lineRenderer: {fileID: 0}
   middleBoss: {fileID: 94617094}
   player: {fileID: 822701242}
---- !u!114 &801895824
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 801895818}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5de58e3a2014e4d4b8c86e4800d7adb1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player_level: 1
-  expgainrate: 1
-  WorkSpeed: 1
-  Luck: 0
-  CriticalChance: 0
-  HPcurrent: 0
-  HPbylevel: 50
-  HPbonus: 1
-  HPmax: 0
-  HPpreviousmax: 0
-  speedAdd: 5
-  speedMulti: 1
-  speedFin: 0
-  attackDamageByLevel: 5
 --- !u!1001 &822701241
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -36303,9 +36277,6 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 1034961518565794693, guid: 318bb5e12a81b67409a0e40e0a64039d, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 822701244}
-    - targetCorrespondingSourceObject: {fileID: 1034961518565794693, guid: 318bb5e12a81b67409a0e40e0a64039d, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 822701245}
   m_SourcePrefab: {fileID: 100100000, guid: 318bb5e12a81b67409a0e40e0a64039d, type: 3}
 --- !u!4 &822701242 stripped
@@ -36318,32 +36289,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1034961518565794693, guid: 318bb5e12a81b67409a0e40e0a64039d, type: 3}
   m_PrefabInstance: {fileID: 822701241}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &822701244
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 822701243}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5de58e3a2014e4d4b8c86e4800d7adb1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player_level: 1
-  expgainrate: 1
-  WorkSpeed: 1
-  Luck: 0
-  CriticalChance: 0
-  HPcurrent: 0
-  HPbylevel: 50
-  HPbonus: 1
-  HPmax: 0
-  HPpreviousmax: 0
-  speedAdd: 5
-  speedMulti: 1
-  speedFin: 0
-  attackDamageByLevel: 5
 --- !u!114 &822701245
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -36356,7 +36301,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d07d4d03a1776445970c1f1d2ee7826, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerstat: {fileID: 0}
   rb: {fileID: 0}
   dir: {x: 0, y: 0, z: 0}
   speed: 0
@@ -36370,6 +36314,7 @@ MonoBehaviour:
   - {fileID: 1337156385}
   player_T: {fileID: 0}
   nextPosition: {x: 0, y: 0, z: 0}
+  lineRenderer: {fileID: 0}
 --- !u!1 &861163145
 GameObject:
   m_ObjectHideFlags: 0
@@ -49276,9 +49221,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1034961518565794693, guid: 0c0b02dca944dcc4ead2c01d020df197, type: 3}
       insertIndex: -1
       addedObject: {fileID: 801895819}
-    - targetCorrespondingSourceObject: {fileID: 1034961518565794693, guid: 0c0b02dca944dcc4ead2c01d020df197, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 801895824}
   m_SourcePrefab: {fileID: 100100000, guid: 0c0b02dca944dcc4ead2c01d020df197, type: 3}
 --- !u!1 &2023131563
 GameObject:

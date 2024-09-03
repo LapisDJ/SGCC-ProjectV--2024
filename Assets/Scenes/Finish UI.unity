@@ -2556,7 +2556,6 @@ GameObject:
   - component: {fileID: 1897088658}
   - component: {fileID: 1897088662}
   - component: {fileID: 1897088663}
-  - component: {fileID: 1897088664}
   - component: {fileID: 1897088665}
   m_Layer: 5
   m_Name: Canvas
@@ -2680,34 +2679,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 775a0985216e2477fb30a52748c5e8a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerstat: {fileID: 1897088664}
   level: {fileID: 253851025}
---- !u!114 &1897088664
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1897088657}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5de58e3a2014e4d4b8c86e4800d7adb1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player_level: 1
-  expgainrate: 1
-  WorkSpeed: 1
-  Luck: 0
-  CriticalChance: 0
-  HPcurrent: 0
-  HPbylevel: 50
-  HPbonus: 1
-  HPmax: 0
-  HPpreviousmax: 0
-  speedAdd: 5
-  speedMulti: 1
-  speedFin: 0
-  attackDamageByLevel: 5
 --- !u!114 &1897088665
 MonoBehaviour:
   m_ObjectHideFlags: 0
