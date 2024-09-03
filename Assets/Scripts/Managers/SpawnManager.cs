@@ -140,7 +140,7 @@ public class SpawnManager : MonoBehaviour
     void SpawnMonster(string poolKey, bool isDiagonal = false) // 몬스터 스폰시키기
     {
         GetSpawnPosition(isDiagonal);
-        while (spawnPointsQueue.Count > 0) // 큐에 스폰 포인트가 남아 있는지 확인
+        while (spawnPointsQueue.Count > 0) // 큐에 스폰 포인트가 남아 있는지 확인s
         {
             Vector3 spawnPosition = spawnPointsQueue.Dequeue(); // 큐에서 위치를 꺼낸다.
 

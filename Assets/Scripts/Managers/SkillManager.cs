@@ -210,6 +210,7 @@ public class SkillManager : MonoBehaviour
         if (cantfind)//이전 if문이 발동되지 않음(리스트에 없음)
         {
             activeSkills.Add(skill);//리스트에 없다는 이야기이므로 일단 레벨업
+            StartCoroutine(AutoActivateSkill(skill));
             foreach (Skill active in activeSkills)//아까 Add한 스킬 찾아서 레벨업.
             {
                 if (active == skill)

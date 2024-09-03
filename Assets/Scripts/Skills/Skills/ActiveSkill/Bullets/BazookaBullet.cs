@@ -29,27 +29,27 @@ public class BazookaBullet : Bullet
     }
 
     void ExplodeAndDamage(Vector3 explosionCenter, float radius, DamageInfo damageInfo)
+{
+    int monsterLayerMask = LayerMask.GetMask("Monster"); // "MonsterLayer"는 몬스터가 속한 레이어 이름
+
+    Collider2D[] hitMonsters = Physics2D.OverlapCircleAll(explosionCenter, radius, monsterLayerMask);
+
+    foreach (Collider2D hitMonster in hitMonsters)
     {
-        Collider2D[] hitMonsters = Physics2D.OverlapCircleAll(explosionCenter, radius);
-
-        foreach (Collider2D hitMonster in hitMonsters)
+        Monster monster = hitMonster.GetComponent<Monster>();
+        if (monster != null)
         {
-            if (hitMonster.CompareTag("Monster1") || hitMonster.CompareTag("Monster2") || hitMonster.CompareTag("Monster3"))
-            {
-                Monster monster = hitMonster.GetComponent<Monster>();
-                if (monster != null)
-                {
-                    float totalDamage;
-                    float weaknessMultiplier = (hitMonster.CompareTag("Monster1") || hitMonster.CompareTag("Monster3")) ? 1.5f : 1f;
+            float totalDamage;
+            float weaknessMultiplier = (hitMonster.CompareTag("Monster1") || hitMonster.CompareTag("Monster3")) ? 1.5f : 1f;
 
-                    damageInfo.weaknessMultipler = weaknessMultiplier;
+            damageInfo.weaknessMultipler = weaknessMultiplier;
 
-                    totalDamage = finalDamage(damageInfo);
-                    monster.TakeDamage(totalDamage);
-                }
-            }
+            totalDamage = finalDamage(damageInfo);
+            monster.TakeDamage(totalDamage);
         }
     }
+}
+
 
     protected float finalDamage(DamageInfo damageInfo)
     {
