@@ -33,12 +33,12 @@ public class PlayerController : MonoBehaviour
 
     public void Start()
     {
-        // questPosition = new Vector3(-20f, 50f, 0);    // 플레이어가 게임 시작 후 처음으로 퀘스트1을 클리어 하기 위해 이동해야할 위치 벡터
-        
+        player_T = GameObject.FindGameObjectWithTag("Player").transform;
+
         GenerateGraphFromTilemap();
         UpdateGraphNodes(new Vector3Int(1, 1, 0));
         // Map을 그래프로 저장함
-        
+
         playerstat = GetComponent<Player_Stat>();
         if (playerstat == null)
         {
@@ -46,17 +46,19 @@ public class PlayerController : MonoBehaviour
         }
 
         rb = GetComponent<Rigidbody2D>();
+        if (rb == null)
+        {
+            Debug.LogError("rb is missing on the Player.");
+        }
 
-       // transform.position = new Vector3(2f, 24f, 0);
-        
-        transform.position = QuestManager.instance.GetCurrentQuest() switch
+        player_T.position = QuestManager.instance.GetCurrentQuest() switch
         {
             1 => new Vector3(29.5f, -3.5f, 0),
             2 => new Vector3(1.5f, -2f, 0),
             3 => new Vector3(2f, 24f, 0),
-             _=> transform.position
+            _ => player_T.position
         };
-        
+
     }
 
     void Update()
@@ -64,12 +66,12 @@ public class PlayerController : MonoBehaviour
         // 경로 갱신 전에 이전 경로를 null로 초기화
         path = null;
         moveDirect = null;
-        playerCellPosition = backgroundTilemap.WorldToCell(transform.position);  // 플레이어 위치를 정수좌표로 저장
+        playerCellPosition = backgroundTilemap.WorldToCell(player_T.position);  // 플레이어 위치를 정수좌표로 저장
         questPositionCellPosition = backgroundTilemap.WorldToCell(_questPosition);   // 퀘스트에서 이동해야할 위치를 정수좌표로 저장
 
         if (graph.ContainsKey(questPositionCellPosition) && graph.ContainsKey(playerCellPosition))  // 퀘스트 이동좌표와 플레이어 위치가 그래프 안에 있는 경우
         {
-            path = FindPath(questPositionCellPosition , playerCellPosition);    // path를 통해 플레이어 위치에서 퀘스트 이동좌표까지 최단 경로를 계산
+            path = FindPath(questPositionCellPosition, playerCellPosition);    // path를 통해 플레이어 위치에서 퀘스트 이동좌표까지 최단 경로를 계산
 
             if (path != null && path.Count > 0)
             {
@@ -85,14 +87,20 @@ public class PlayerController : MonoBehaviour
                         }
                     }
 
-                    moveDirect.Add(transform.position);
+                    moveDirect.Add(player_T.position);
                 }
             }
         }
 
-
+        rb = GetComponent<Rigidbody2D>();
         if (!isInteractionStarted)
         {
+            playerstat = GetComponent<Player_Stat>();
+            if (playerstat == null)
+            {
+                Debug.LogError("PlayerStat component is missing!");
+                return;
+            }
             speed = playerstat.speedAdd * playerstat.speedMulti;
             dir = new Vector3(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), 0).normalized;
             rb.velocity = dir * speed;
@@ -187,10 +195,7 @@ public class PlayerController : MonoBehaviour
     }
 
 
-
-
-
-    List<Vector3Int> FindPath(Vector3Int start, Vector3Int goal)    // start 위치에서 goal위치까지 최단 경로로 이동하는 경로를 path[]에 저장함
+    List<Vector3Int> FindPath(Vector3Int start, Vector3Int goal)
     {
         HashSet<Vector3Int> visited = new HashSet<Vector3Int>();
         PriorityQueue<Vector3Int> frontier = new PriorityQueue<Vector3Int>();
@@ -215,6 +220,14 @@ public class PlayerController : MonoBehaviour
             {
                 float newCost = costSoFar[current] + 1; // Assuming uniform cost between nodes
 
+                // moveDirectPool에 포함된 노드일 경우, 코스트에 보너스를 줌
+                if (moveDirect != null)
+                {
+                    if (moveDirectPool.Contains(next))
+                    {
+                        newCost -= -10f; // 보너스 값은 조정 가능
+                    }
+                }
                 if (!costSoFar.ContainsKey(next) || newCost < costSoFar[next])
                 {
                     costSoFar[next] = newCost;
@@ -227,6 +240,8 @@ public class PlayerController : MonoBehaviour
 
         return null;
     }
+
+
 
     List<Vector3Int> ReconstructPath(Dictionary<Vector3Int, Vector3Int> cameFrom, Vector3Int start, Vector3Int goal)
     {
@@ -256,7 +271,21 @@ public class PlayerController : MonoBehaviour
     void OnDrawGizmos()
     {
         float radius = 0.1f;
-        
+        Gizmos.color = Color.blue;
+
+        // 경로를 파란색 구와 선으로 표시
+        if (path != null)
+        {
+            for (int j = 0; j < path.Count; j++)
+            {
+                //Gizmos.DrawSphere(path[j], radius);
+
+                if (j < path.Count - 1)
+                {
+                    //Gizmos.DrawLine(path[j], path[j + 1]);
+                }
+            }
+        }
 
         // 대각선 방향을 위한 배열
         Vector3Int[] diagonalDirections = {
@@ -313,7 +342,7 @@ public class PlayerController : MonoBehaviour
                 {
                     // 해당 위치에 초록색 원을 표시하고 moveDirectPool에 추가
                     Vector3 worldPosition = backgroundTilemap.CellToWorld(node.Key);
-                    //Gizmos.DrawSphere(worldPosition, 3f * radius);
+                    Gizmos.DrawSphere(worldPosition, 3f * radius);
 
                     // moveDirectPool에 노드의 위치 추가
                     moveDirectPool.Add(node.Key);
@@ -349,6 +378,7 @@ public class PlayerController : MonoBehaviour
         // 이 메서드는 OnDrawGizmos를 호출하도록 Unity에게 알려줍니다.
         UnityEditor.EditorUtility.SetDirty(this);
     }
+
 
 
 }
