@@ -4,8 +4,18 @@ using UnityEngine;
 
 public class Giant_Rat : Monster
 {
-    public Giant_Rat() : base(100f, 2f, 2f, WeaknessType.All, "Rat") { } // 생성자 : 최대 체력, 공격력, 이동 속도, 약점 타입
-
+    protected override void Awake()
+    {
+        stats = new MonsterStats
+        {
+            initialHP = 100f,
+            initialAttackDamage = 2f,
+            initialSpeed = 2f
+        };
+        InitializeStats();
+        weakness = WeaknessType.All;
+        key = "Rat";
+    }
     public float getAttackDamage()
     {
         return this.attackDamage;

@@ -4,8 +4,18 @@ using UnityEngine;
 
 public class Zombie : Monster
 {
-    public Zombie() : base(5000f, 5f, 2.5f, WeaknessType.All, "Zombie") { } // 생성자 : 최대 체력, 공격력, 이동 속도, 약점 타입
-
+    protected override void Awake()
+    {
+        stats = new MonsterStats
+        {
+            initialHP = 5000f,
+            initialAttackDamage = 5f,
+            initialSpeed = 2.5f
+        };
+        InitializeStats();
+        weakness = WeaknessType.All;
+        key = "Zombie";
+    }
     public float getAttackDamage()
     {
         return this.attackDamage;

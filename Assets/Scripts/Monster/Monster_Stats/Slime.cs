@@ -4,8 +4,18 @@ using UnityEngine;
 
 public class Slime : Monster
 {
-    public Slime() : base(80f, 1f, 1f, WeaknessType.All, "Slime") { } // 생성자 : 최대 체력, 공격력, 이동 속도, 약점 타입
-
+    protected override void Awake()
+    {
+        stats = new MonsterStats
+        {
+            initialHP = 80f,
+            initialAttackDamage = 1f,
+            initialSpeed = 1f
+        };
+        InitializeStats();
+        weakness = WeaknessType.Slash;
+        key = "Slime";
+    }
     public float getAttackDamage()
     {
         return this.attackDamage;

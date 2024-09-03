@@ -4,8 +4,18 @@ using UnityEngine;
 
 public class Upgrade_Zombie : Monster
 {
-    public Upgrade_Zombie() : base(30000f, 10f, 4f, WeaknessType.Slash, "Elite1") { } // 생성자 : 최대 체력, 공격력, 이동 속도, 약점 타입
-
+    protected override void Awake()
+    {
+        stats = new MonsterStats
+        {
+            initialHP = 30000f,
+            initialAttackDamage = 10f,
+            initialSpeed = 4f
+        };
+        InitializeStats();
+        weakness = WeaknessType.Slash;
+        key = "Elite1";
+    }
     public float getAttackDamage()
     {
         return this.attackDamage;

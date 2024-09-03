@@ -11,9 +11,17 @@ public enum WeaknessType
     All // 참격, 타격
 };
 
+public struct MonsterStats
+{
+    public float initialHP;        // 초기 체력
+    public float initialAttackDamage;  // 초기 공격력
+    public float initialSpeed;     // 초기 이동속도
+}
+
 public class Monster : MonoBehaviour
 {
     private float attackRange = Mathf.PI * 2; // 공격 범위
+    protected MonsterStats stats;
     [SerializeField] protected float currentHP; // 현재 체력
     [SerializeField] protected float attackDamage; // 공격력 
     [SerializeField] protected float speed; // 이동속도
@@ -24,14 +32,10 @@ public class Monster : MonoBehaviour
     protected WeaknessType weakness; // 약점 타입
     public float fadeDuration = 1.0f; // 알파값이 줄어드는 시간 (초)
     private SpriteRenderer spriteRenderer;
-
-    public Monster(float currentHP, float attackDamage, float speed, WeaknessType weakness, string key)
+    protected virtual void Awake()
     {
-        this.currentHP = currentHP;
-        this.attackDamage = attackDamage;
-        this.speed = speed;
-        this.weakness = weakness;
-        this.key = key;
+        // 초기화
+        InitializeStats();
     }
     
     public float GetCurrentSpeed()
@@ -75,13 +79,13 @@ public class Monster : MonoBehaviour
             animator.SetTrigger("isDie");
             StartCoroutine(FadeOutCoroutine());
             RealtimeManager.instance.Monsterkill();
-            Destroy(gameObject);
-            //Die();
+            Die();
         }
     }
 
     public void Die()
     {
+        InitializeStats();
         gameObject.SetActive(false);
         SpawnManager.instance.objectPools[this.key].Enqueue(gameObject);
     }
@@ -104,4 +108,14 @@ public class Monster : MonoBehaviour
         color.a = 0f;
         spriteRenderer.color = color;
     }
+
+     protected void InitializeStats()
+    {
+        // 구조체에 정의된 초기 값을 멤버 변수에 할당
+        currentHP = stats.initialHP;
+        attackDamage = stats.initialAttackDamage;
+        speed = stats.initialSpeed;
+        lastAttacktime = 0f; // 초기 쿨타임 시간은 0으로 설정
+    }
+
 }
