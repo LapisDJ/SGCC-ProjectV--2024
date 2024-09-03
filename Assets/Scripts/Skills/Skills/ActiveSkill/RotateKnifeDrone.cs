@@ -9,7 +9,7 @@ public class RotateKnifeDrone : Skill
     {
         base.Awake();
         skillName = "회전형 칼날 드론";
-        skillDamage = 1f;
+        skillDamage = 30f;
         cooldown = 0f;
         icon = Resources.Load<Sprite>("UI/Icon/17");
     }

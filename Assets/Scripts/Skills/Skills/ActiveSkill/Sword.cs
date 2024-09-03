@@ -11,7 +11,7 @@ public class Sword : Skill
     {
         base.Awake();
         skillName = "검";
-        skillDamage = 2f;
+        skillDamage = 60f;
         cooldown = 4f;
         icon = Resources.Load<Sprite>("UI/Icon/11");
     }

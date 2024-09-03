@@ -13,7 +13,7 @@ public class Bazooka : Skill
     {
         base.Awake();
         skillName = "바주카포";
-        skillDamage = 2f;
+        skillDamage = 60f;
         cooldown = 5f;
         icon = Resources.Load<Sprite>("UI/Icon/20");
     }
