@@ -13,6 +13,7 @@ public class ShotGun : Skill
         skillDamage = 30f;
         cooldown = 5f;
         icon = Resources.Load<Sprite>("UI/Icon/10");
+        levelupguide = "효과적인 대화수단";
     }
 
     [SerializeField] public GameObject shotGunPrefab; // 샷건 프리펩

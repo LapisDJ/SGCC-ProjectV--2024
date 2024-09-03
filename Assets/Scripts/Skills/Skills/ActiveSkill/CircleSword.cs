@@ -11,6 +11,7 @@ public class CircleSword : Skill
         skillDamage = 60f;
         cooldown = 4f;
         icon = Resources.Load<Sprite>("UI/Icon/11");
+        levelupguide = "원 범위로 피해를 줍니다";
     }
 
     private float circleAttackRadius = 2f; // 원 범위 반지름

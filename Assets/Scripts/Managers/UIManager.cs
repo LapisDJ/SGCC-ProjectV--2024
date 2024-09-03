@@ -19,6 +19,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] SkillManager skillmanager;
     [SerializeField] GameObject StartUI;
     [SerializeField] TextMeshProUGUI[] skillnames;
+    [SerializeField] TextMeshProUGUI[] levelupguides;
     [SerializeField] Player_Stat playerstat;
     [SerializeField] Slider hpbar;
 
@@ -112,12 +113,19 @@ public class UIManager : MonoBehaviour
             SkillChooseStart();//timescale 0으로, skillmanager에서 레벨업 가능한 리스트 뽑아오기, 캔버스 활성화.
             skillchoiceimages[0].sprite = SkillManager.instance.skillchoices[0].icon;
             skillnames[0].text = SkillManager.instance.skillchoices[0].skillName;
+            levelupguides[0].text = SkillManager.instance.skillchoices[0].levelupguide;
+
             skillchoiceimages[1].sprite = SkillManager.instance.skillchoices[1].icon;
             skillnames[1].text = SkillManager.instance.skillchoices[1].skillName;
+            levelupguides[1].text = SkillManager.instance.skillchoices[1].levelupguide;
+
             skillchoiceimages[2].sprite = SkillManager.instance.passivechoices[0].icon;
             skillnames[2].text = SkillManager.instance.passivechoices[0].skillName;
+            levelupguides[2].text = SkillManager.instance.passivechoices[0].levelupguide;
+
             skillchoiceimages[3].sprite = SkillManager.instance.passivechoices[1].icon;
             skillnames[3].text = SkillManager.instance.passivechoices[1].skillName;
+            levelupguides[3].text = SkillManager.instance.passivechoices[1].levelupguide;
             isskillchoose = false;
         }
         hpbar.value = playerstat.HPcurrent / playerstat.HPmax;//HP바 표시

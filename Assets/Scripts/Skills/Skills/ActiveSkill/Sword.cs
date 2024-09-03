@@ -14,6 +14,7 @@ public class Sword : Skill
         skillDamage = 60f;
         cooldown = 4f;
         icon = Resources.Load<Sprite>("UI/Icon/11");
+        levelupguide = "플레이어 중심으로 양쪽으로 참격을 가합니다";
     }
     public override void Activate() // 몬스터와 상호 작용 로직
     {

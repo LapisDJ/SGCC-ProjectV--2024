@@ -16,6 +16,7 @@ public class BaseballBat : Skill
         skillDamage = 60f;
         cooldown = 4f;
         icon = Resources.Load<Sprite>("UI/Icon/12");
+        levelupguide = "방망이를 휘둘러 피해를 줍니다";
     }
 
     private float angle = Mathf.PI / 8; // 부채꼴 범위의 반각
@@ -75,17 +76,27 @@ public class BaseballBat : Skill
 
         switch (level)
         {
+            case 1:
+                this.levelupguide = "데미지 30 -> 31";
+                break;
+            case 2:
+                this.levelupguide = "데미지 31 -> 32, 쿨타임 4 -> 3";
+                break;
             case 3: // 2->3랩: 쿨타임 1초 감소
                 this.cooldown--;
+                this.levelupguide = "데미지 32 -> 33, 스킬 범위 증가";
                 break;
             case 4: // 3->4랩: 반지름 2->2.25
                 this.radius = 2f;
+                this.levelupguide = "데미지 33 -> 34, 쿨타임 3 -> 2";
                 break;
             case 6: //5->6랩: 쿨타임 1초 감소
                 this.cooldown--;
+                this.levelupguide = "데미지 34 -> 35, 스킬 범위 증가";
                 break;
             case 7: //6->7랩: 범위 증가
                 angle = Mathf.PI / 3;
+                this.levelupguide = "공격 1회 추가";
                 break;
             case 8: //2회 공격
                 this.skillDamage *= 2;

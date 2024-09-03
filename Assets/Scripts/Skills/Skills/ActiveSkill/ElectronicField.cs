@@ -11,6 +11,7 @@ public class ElectronicField : Skill
         skillDamage = 0.25f;
         cooldown = 0.5f;
         icon = Resources.Load<Sprite>("UI/Icon/9");
+        levelupguide = "플레이어를 중심으로 전기장을 생성합니다";
     }
     private float fieldRadius = 1.5f; // 원 범위 반지름
     WeaknessType weaknessType = WeaknessType.Blow;

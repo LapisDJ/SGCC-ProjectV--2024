@@ -15,6 +15,7 @@ public class Pistol : Skill
         skillDamage = 29f;
         cooldown = 1.5f;
         icon = Resources.Load<Sprite>("UI/Icon/13");
+        levelupguide = "권총을 쏴요";
     }
 
     [SerializeField] public GameObject pistolPrefab;// 권총 프리펩

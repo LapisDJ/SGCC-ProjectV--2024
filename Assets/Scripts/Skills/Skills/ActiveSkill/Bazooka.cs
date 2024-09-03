@@ -16,6 +16,7 @@ public class Bazooka : Skill
         skillDamage = 60f;
         cooldown = 5f;
         icon = Resources.Load<Sprite>("UI/Icon/20");
+        levelupguide = "폭발을 일으키는 총알을 발사합니다";
     }
     public override void LevelUp() // 바주카포 레벨업 로직
     {
@@ -24,19 +25,30 @@ public class Bazooka : Skill
 
         switch (level)
         {
+            case 1:
+                this.levelupguide = "데미지 60 -> 61";
+                break;
+            case 2:
+                this.levelupguide = "데미지 61 -> 62, 쿨타임 5 -> 4";
+                break;
             case 3: // 2->3랩 : 쿨타임 1초 감소
+                this.levelupguide = "데미지 62 -> 63, 폭발범위 증가";
                 cooldown -= 1f;
                 break;
             case 4: // 3->4랩 : 폭발 범위 반지름 증가(반지름 1→ 반지름 1.5)
+                this.levelupguide = "데미지 63 -> 64, 쿨타임 4 -> 3";
                 exploreRadius += 0.5f;
                 break;
             case 5: // 4->5랩 : 쿨타임 1초 감소
+                this.levelupguide = "데미지 64 -> 65, 폭발범위 증가";
                 cooldown -= 1f;
                 break;
             case 6: // 5->6랩 : 폭발 범위 반지름 증가 (1.5→2)
+                this.levelupguide = "데미지 65 -> 66, 쿨타임 3 -> 2";
                 exploreRadius += 0.5f;
                 break;
             case 7: // 6->7랩 : 쿨타임 1초 감소
+                this.levelupguide = "데미지 66 -> 67, 폭발범위 대폭증가";
                 cooldown -= 1f;
                 break;
             case 8: // 7->8랩 : 폭발 범위 반지름 (2→3)

@@ -12,6 +12,7 @@ public class RotateKnifeDrone : Skill
         skillDamage = 30f;
         cooldown = 0f;
         icon = Resources.Load<Sprite>("UI/Icon/17");
+        levelupguide = "플레이어 주변을 회전하는 드론을 생성합니다";
     }
 
     public GameObject knifeDronePrefab; // 칼날 드론 프리팹
