@@ -12,8 +12,8 @@ public class Pistol : Skill
         this.level = 1;
         base.Awake();
         skillName = "권총";
-        skillDamage = 1f;
-        cooldown = 3f;
+        skillDamage = 29f;
+        cooldown = 1.5f;
         icon = Resources.Load<Sprite>("UI/Icon/13");
     }
 
@@ -84,10 +84,10 @@ public class Pistol : Skill
         switch (level)
         {
             case 3: // 2->3랩 : 쿨타임 1초 감소
-                this.cooldown -= 1f;
+                this.cooldown -= 0.25f;
                 break;
             case 5: // 4->5랩 : 쿨타임 1초 감소
-                this.cooldown -= 1f;
+                this.cooldown -= 0.25f;
                 break;
             case 7: // 6->7랩 : 데미지 2 증가
                 this.skillDamage += 2f;
@@ -104,28 +104,26 @@ public class Pistol : Skill
 
     GameObject FindNearestMonster()
     {
-        // 여러 태그를 가진 몬스터들을 찾기
-        GameObject[] monsters1 = GameObject.FindGameObjectsWithTag("Monster1");
-        GameObject[] monsters2 = GameObject.FindGameObjectsWithTag("Monster2");
-        GameObject[] monsters3 = GameObject.FindGameObjectsWithTag("Monster3");
-
-        // 하나의 리스트에 모든 몬스터들을 합침
-        List<GameObject> allMonsters = new List<GameObject>();
-        allMonsters.AddRange(monsters1);
-        allMonsters.AddRange(monsters2);
-        allMonsters.AddRange(monsters3);
+        // 찾고자 하는 레이어들을 정의 (예시로 몬스터들이 속한 레이어)
+        int monsterLayer1 = LayerMask.NameToLayer("Monster");
 
         GameObject nearestMonster = null;
         float minDistance = Mathf.Infinity;
 
-        // 모든 몬스터들 중에서 가장 가까운 몬스터를 찾음
-        foreach (GameObject monster in allMonsters)
+        // 씬 내의 모든 활성화된 게임 오브젝트를 가져옴
+        GameObject[] allObjects = FindObjectsOfType<GameObject>();
+
+        foreach (GameObject obj in allObjects)
         {
-            float distance = Vector3.Distance(player.transform.position, monster.transform.position);
-            if (distance < minDistance)
+            // 오브젝트가 몬스터 레이어에 속해 있는지 확인
+            if (obj.layer == monsterLayer1)
             {
-                minDistance = distance;
-                nearestMonster = monster;
+                float distance = Vector3.Distance(player.transform.position, obj.transform.position);
+                if (distance < minDistance)
+                {
+                    minDistance = distance;
+                    nearestMonster = obj;
+                }
             }
         }
 

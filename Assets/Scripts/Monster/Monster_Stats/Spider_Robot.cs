@@ -6,6 +6,7 @@ public class Spider_Robot : Monster
 {
     protected override void Awake()
     {
+        spriteRenderer = GetComponent<SpriteRenderer>();
         stats = new MonsterStats
         {
             initialHP = 80f,

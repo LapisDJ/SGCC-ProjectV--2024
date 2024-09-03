@@ -6,6 +6,7 @@ public class Hacked_Android : Monster
 {
      protected override void Awake()
     {
+        spriteRenderer = GetComponent<SpriteRenderer>();
         stats = new MonsterStats
         {
             initialHP = 250000f,

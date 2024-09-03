@@ -31,13 +31,13 @@ public class Monster : MonoBehaviour
     [SerializeField] public string key;
     protected WeaknessType weakness; // 약점 타입
     public float fadeDuration = 1.0f; // 알파값이 줄어드는 시간 (초)
-    private SpriteRenderer spriteRenderer;
+    protected SpriteRenderer spriteRenderer;
     protected virtual void Awake()
     {
         // 초기화
         InitializeStats();
     }
-    
+
     public float GetCurrentSpeed()
     {
         return this.speed;
@@ -66,21 +66,26 @@ public class Monster : MonoBehaviour
             Attack();
             lastAttacktime = Time.time; // 마지막 근접 공격 시간 업데이트
         }
-       
+
     }
 
     public void TakeDamage(float damage)
     {
         currentHP -= damage;
-         if (currentHP <= 0)
+        if (currentHP <= 0)
         {
             this.speed = 0;
             this.attackDamage = 0;
             animator.SetTrigger("isDie");
-            StartCoroutine(FadeOutCoroutine());
+            StartCoroutine(FadeOutAndDie());
             RealtimeManager.instance.Monsterkill();
-            Die();
         }
+    }
+
+    private IEnumerator FadeOutAndDie()
+    {
+        yield return FadeOutCoroutine();
+        Die();
     }
 
     public void Die()
@@ -109,7 +114,7 @@ public class Monster : MonoBehaviour
         spriteRenderer.color = color;
     }
 
-     protected void InitializeStats()
+    protected void InitializeStats()
     {
         // 구조체에 정의된 초기 값을 멤버 변수에 할당
         currentHP = stats.initialHP;
