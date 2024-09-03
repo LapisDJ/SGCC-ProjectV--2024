@@ -125,16 +125,16 @@ public class SkillManager : MonoBehaviour
             {
                 rand2 = UnityEngine.Random.Range(0, maxActiveSkills);
             }
-            retList.Add(availableActiveSkills[rand1]);
-            retList.Add(availableActiveSkills[rand2]);
+            retList.Add(activeSkills[rand1]);
+            retList.Add(activeSkills[rand2]);
         }
         else//액티브 스킬 가짓수를 모두 채우지 않았으면 모든 리스트에서 가져옴
         {
-            int rand1 = UnityEngine.Random.Range(0, 7);
-            int rand2 = UnityEngine.Random.Range(0, 7);
+            int rand1 = UnityEngine.Random.Range(0, 8);
+            int rand2 = UnityEngine.Random.Range(0, 8);
             while (rand1 == rand2)
             {
-                rand2 = UnityEngine.Random.Range(0, 7);
+                rand2 = UnityEngine.Random.Range(0, 8);
             }
             retList.Add(availableActiveSkills[rand1]);
             retList.Add(availableActiveSkills[rand2]);
@@ -153,8 +153,8 @@ public class SkillManager : MonoBehaviour
             {
                 rand2 = UnityEngine.Random.Range(0, maxPassiveSkills);
             }
-            retList.Add(availablePassiveSkills[rand1]);
-            retList.Add(availablePassiveSkills[rand2]);
+            retList.Add(passiveSkills[rand1]);
+            retList.Add(passiveSkills[rand2]);
         }
         else
         {
@@ -215,7 +215,16 @@ public class SkillManager : MonoBehaviour
             {
                 if (active == skill)
                 {
-                    active.LevelUp();
+                    //레벨 최대치에 도달했을 경우, 체력회복 아이템을 제공하는 로직이 필요함.
+                    if(active.level >= 8)
+                    {
+                        active.skillName = "회복아이템";
+                        Player_Stat.instance.HPcurrent += (Player_Stat.instance.HPmax - Player_Stat.instance.HPcurrent)/2;
+                    }
+                    else
+                    {
+                        active.LevelUp();
+                    }
                     cantfind = false;
                     break;
                 }
@@ -229,7 +238,15 @@ public class SkillManager : MonoBehaviour
         {
             if (passive == skill)
             {
-                passive.LevelUp();
+                if(passive.level >= 8)
+                {
+                    passive.skillName = "회복아이템";
+                    Player_Stat.instance.HPcurrent += (Player_Stat.instance.HPmax - Player_Stat.instance.HPcurrent)/2;
+                }
+                else
+                {
+                    passive.LevelUp();
+                }
                 cantfind = false;
                 break;
             }
