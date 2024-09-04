@@ -236,7 +236,6 @@ public class SimplePathfinding : MonoBehaviour
 
     void OnDrawGizmos()
     {
-        float radius = 0.1f;
         Gizmos.color = Color.blue;
 
         // 경로를 파란색 구와 선으로 표시

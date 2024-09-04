@@ -212,7 +212,7 @@ public class PlayerController : MonoBehaviour
                 }
 
                 // 마지막 포인트 설정 (플레이어의 위치)
-                lineRenderer.SetPosition(path.Count - diagonalTurnIndex + 1, player_T.position);
+                lineRenderer.SetPosition(path.Count - diagonalTurnIndex + 1, player_T.position); 
 
             }
             else
@@ -395,11 +395,11 @@ public class PlayerController : MonoBehaviour
         {
             for (int j = 0; j < path.Count; j++)
             {
-                Gizmos.DrawSphere(path[j], radius);
+                //Gizmos.DrawSphere(path[j], radius);
 
                 if (j < path.Count - 1)
                 {
-                    Gizmos.DrawLine(path[j], path[j + 1]);
+                    //Gizmos.DrawLine(path[j], path[j + 1]);
                 }
             }
         }

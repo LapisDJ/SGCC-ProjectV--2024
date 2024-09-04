@@ -5,64 +5,51 @@ using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class SurvAndBoss : PlayerController
 {
-    public GameObject boss; // ��
+    public GameObject boss; 
     public GameObject targetObject;
-    private static int count = 0;   // ����� ������ �� ( 3���� ���� ������ ���� �Ϸᰡ true�� bull ���·ε� Ȱ�� )
-    private Vector3 finVector = new Vector3(2f, 24f, 0);    // ����Ʈ3 ������ �̼ǿ��� �����ؾ� �� ��ġ
+    private static int count = 0;  
+    private Vector3 finVector = new Vector3(2f, 24f, 0);  
     private bool isBossAppear = false;
     private float hp_prev;
     private float hp_cur;
     private float interactionTime = 0f;
     private Vector3 interactPlayerPosition;
     private float requiredInteractionTime = 10.0f;
-    private bool isBossDead = false;    // �������� óġ����
-    private Vector3 interactPosition;   // ��ȣ�ۿ��� questPosition�� �ĺ���
+    private bool isBossDead = false;
+    private Vector3 interactPosition;
     private Vector3 bossPosition;
     private bool bossAlive = false;
-    private float interactReach = 3.0f;
+    private float interactReach = 5.0f;
     private new void Start()
     {
         GameObject surv1 = GameObject.Find("Surv1");
         if (surv1 != null)
         {
-            surv1.transform.position = new Vector3(-4f, 49f, 0f);
+           surv1.transform.position = new Vector3(-5f, 48f, 0f);
         }
 
         GameObject surv2 = GameObject.Find("Surv2");
         if (surv2 != null)
         {
-            surv2.transform.position = new Vector3(-15f, 12f, 0f);
+            surv2.transform.position = new Vector3(-15.5f, 12.5f, 0f);
         }
 
         GameObject surv3 = GameObject.Find("Surv3");
         if (surv3 != null)
         {
-            surv3.transform.position = new Vector3(25f, 14f, 0f);
+            surv3.transform.position = new Vector3(24.5f, 14.5f, 0f);
         }
 
 
         targetObject = this.gameObject;
         player_T = GameObject.Find("Player").transform;
-        /*
-         * backgroundTilemap = GameObject.Find("Background").GetComponent<Tilemap>();
-        obstacleTilemaps = new Tilemap[6]
-            {
-                    GameObject.Find("Left").GetComponent<Tilemap>(),
-                    GameObject.Find("Right").GetComponent<Tilemap>(),
-                    GameObject.Find("Top").GetComponent<Tilemap>(),
-                    GameObject.Find("Bottom").GetComponent<Tilemap>(),
-                    GameObject.Find("Wreck").GetComponent<Tilemap>(),
-                    GameObject.Find("Building").GetComponent<Tilemap>()
-            };
-        */
         interactPosition = targetObject.transform.position;
         interactPosition = new Vector3(interactPosition.x + 3f, interactPosition.y, interactPosition.z);
-        Debug.Log(interactPosition);
-        boss.transform.position = finVector;    // ���� ���� ���� ��ġ ����
-        boss.SetActive(false);  // ���� ���� �� ���� ��Ȱ��ȭ
-        isInteractionStarted = false;   // ������ ���⿡ ����ϴ� ���� ( ��� : ... )
+        boss.transform.position = finVector;    
+        boss.SetActive(false); 
+        isInteractionStarted = false;   
 
-        GameObject player = GameObject.Find("Player"); // Player ������Ʈ ã��
+        GameObject player = GameObject.Find("Player"); 
         if (player != null)
         {
             PlayerController playerController = player.GetComponent<PlayerController>();
@@ -72,11 +59,13 @@ public class SurvAndBoss : PlayerController
             }
         }
         questPosition = new Vector3(27f, 14f, 0);
+        Debug.Log("퀘스트3 : 생존자 3명 구출");
+        Debug.Log("길 안내를 따라 생존자를 구출하세요!");
     }
 
     private void Update()
     {
-        GameObject player = GameObject.Find("Player"); // Player ������Ʈ ã��
+        GameObject player = GameObject.Find("Player"); 
         if (player != null)
         {
             PlayerController playerController = player.GetComponent<PlayerController>();
@@ -84,29 +73,40 @@ public class SurvAndBoss : PlayerController
             {
                 hp_cur = Player_Stat.instance.HPcurrent;
 
-                if (count < 3)  // �����ڰ� ��� ������� ���� ���
+                if (count < 3) 
                 {
-                    if (questPosition != interactPosition)
+                    
+                    if(count == 0)
                     {
-                        if (Vector3.Distance(player_T.position, interactPosition) < Vector3.Distance(player_T.position, questPosition))
-                        {
-                            playerController.questPosition = interactPosition;
-                            questPosition = interactPosition;
-                            Debug.Log(playerController.questPosition);
-                            Debug.Log(questPosition);
-                        }
+                        playerController.questPosition = new Vector3(-12f, 12f, 0f);
+                        questPosition = new Vector3(-12f, 12f, 0f);
+                        
                     }
-                    CheckSurvivorInteraction(); // ������ �����ϴ� �̼��� ������
-                }
-                else            // ������ ��� ������ ��� ������ �̼��� ������
-                {
-                    if (!isBossAppear && count == 3 && Vector3.Distance(player_T.position, finVector) <= 10f) // �÷��̾ ���� ��ġ ��ó�� �� ��� �������Ͱ� ��ȯ��
+
+                    if (count == 1)
                     {
-                        Debug.Log("�������� ����!");
-                        boss.SetActive(true);   // �������� ��ȯ
-                        if (boss.activeSelf)    // ������ ��ȯ�Ǹ�
+                        playerController.questPosition = new Vector3(-1f, 49f, 0f);
+                        questPosition = new Vector3(-1f, 49f, 0f);
+
+                    }
+
+                    if (count == 2)
+                    {
+                        playerController.questPosition = new Vector3(28f, 14f, 0f);
+                        questPosition = new Vector3(28f, 14f, 0f);
+
+                    }
+                    CheckSurvivorInteraction(); 
+                }
+                else            
+                {
+                    if (!isBossAppear && count == 3 && Vector3.Distance(player_T.position, finVector) <= 10f)
+                    {
+                        Debug.Log("보스몬스터 출현!");
+                        boss.SetActive(true);   
+                        if (boss.activeSelf)    
                         {
-                            isBossAppear = true;    // ������ 1ȸ�� ��ȯ�ǵ��� ��
+                            isBossAppear = true;    
                         }
                         bossAlive = true;
                     }
@@ -114,28 +114,27 @@ public class SurvAndBoss : PlayerController
                     if (bossAlive)
                     {
                         bossPosition = boss.transform.position;
-                        Debug.Log(bossPosition);
                         playerController.questPosition = bossPosition;
                     }
-                    // �������� óġ ġƮŰ
+                    
                     if (boss != null && Input.GetKeyDown(KeyCode.O))
                     {
-                        Destroy(boss); // ���� �ı�
+                        Destroy(boss);
                         bossAlive = false;
                     }
 
-                    if (!isBossDead && boss == null)    // ���� ���͸� ó���� ���
+                    if (!isBossDead && boss == null)    
                     {
-                        Debug.Log("�߰������� óġ�Ͽ����ϴ�!");
+                        Debug.Log("보스몬스터 처치!");
                         playerController.questPosition = finVector;
-                        Debug.Log("��� �������� ���ư�����");
+                        Debug.Log("출발 지점으로 돌아가세요");
                         isBossDead = true;
                     }
 
-                    if (boss == null && Vector3.Distance(player_T.position, finVector) <= 3f) // ���� ���͸� óġ�� �� ���� ��ġ�� �����ϸ� ����Ʈ3 ������ �� ������ ����
+                    if (boss == null && Vector3.Distance(player_T.position, finVector) <= 3f)
                     {
-                        Debug.Log("����Ʈ3 Ŭ����!");
-                        QuestManager.instance.CompleteQuest();  // ������ ������ �̵�
+                        Debug.Log("퀘스트3 클리어!");
+                        QuestManager.instance.CompleteQuest();  
                     }
                 }
 
@@ -144,7 +143,7 @@ public class SurvAndBoss : PlayerController
         hp_prev = hp_cur;
     }
 
-    private void CheckSurvivorInteraction() // ������ ���� �Լ�
+    private void CheckSurvivorInteraction() 
     {
         GameObject player = GameObject.Find("Player");
         if (player != null)
@@ -157,7 +156,7 @@ public class SurvAndBoss : PlayerController
                     if (!isInteractionStarted && Input.GetKey(KeyCode.F))
                     {
                         interactionTime = 0.1f;
-                        Debug.Log("������ ������ �����մϴ�");
+                        Debug.Log("생존자 구출 시작");
                         playerController.isInteractionStarted = true;
                         isInteractionStarted = true;
                     }
@@ -168,7 +167,7 @@ public class SurvAndBoss : PlayerController
                     if (interactionTime >= requiredInteractionTime)
                     {
                         count++;
-                        Debug.Log("������ " + count + "�� ���� �Ϸ�");
+                        Debug.Log("생존자 " + count + "명을 구출했습니다");
 
                         Destroy(gameObject);
                         playerController.isInteractionStarted = false;
@@ -176,19 +175,23 @@ public class SurvAndBoss : PlayerController
                         if (count == 3)
                         {
                             playerController.questPosition = finVector;
-                            Debug.Log("��� �������� ���ư�����");
+                            Debug.Log("출발지점으로 돌아가세요");
+                        }
+                        else
+                        {
+                            Debug.Log("길 안내를 따라 다음 생존자를 구출하세요!");
                         }
                     }
                     else if (isInteractionStarted && Input.GetKey(KeyCode.G))
                     {
-                        Debug.Log("������ ���� �ߴ�");
+                        Debug.Log("생존자 구출을 중단합니다");
                         playerController.isInteractionStarted = false;
                         isInteractionStarted = false;
                         interactionTime = 0f;
                     }
                     else if (hp_cur < hp_prev)
                     {
-                        Debug.Log("������ ���� ����");
+                        Debug.Log("생존자 구출 실패");
                         playerController.isInteractionStarted = false;
                         isInteractionStarted = false;
                         interactionTime = 0f; 

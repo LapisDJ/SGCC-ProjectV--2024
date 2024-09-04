@@ -16,7 +16,8 @@ public class MiddleBossActivator : PlayerController
     private Vector3 interactPlayerPosition;                                                 // Player_Controller.cs에서 public
     private float requiredInteractionTime = 10.0f;                                          // Player_Controller.cs에서 public
     private bool isBossDead = false;    // 중간보스가 처치되었는지 여부
-
+    private bool bossAlive = false;
+    private Vector3 bossPosition;
     private new void Start()
     {
         GameObject player = GameObject.Find("Player"); // Player 오브젝트 찾기
@@ -53,11 +54,17 @@ public class MiddleBossActivator : PlayerController
                     Debug.Log("중간보스가 소환되었습니다!!");
                     middleBoss.SetActive(true); // 중간보스 소환
                     isBossAppear = true;    // 중간보스 소환여부 True로 변환 : 중간보스는 1회만 출현
+                    bossAlive = true;
                 }
-
+                if (bossAlive)
+                {
+                    bossPosition = middleBoss.transform.position;
+                    playerController.questPosition = bossPosition;
+                }
                 if (middleBoss != null && Input.GetKeyDown(KeyCode.O))  // 임시로 퀘스트 클리어 위해 만든 치트키 42~45 Lines는 삭제 예정
                 {
                     Destroy(middleBoss); // 보스 파괴
+                    bossAlive = false;
                 }
 
                 if (!isBossDead && middleBoss == null)
@@ -66,10 +73,11 @@ public class MiddleBossActivator : PlayerController
                     playerController.questPosition = new Vector3(1.5f, 18f, 0);
                     Debug.Log("신호타워를 복구해 주세요!");
                     isBossDead = true;
+                    bossAlive = false;
                 }
 
 
-                if (middleBoss == null && Vector3.Distance(player_T.position, transform.position) <= 3f && !isRestore)    // 중간보스가 처치되고 신호타워와 상호작용할 조건을 만족할 경우 다음 미션 진행
+                if (middleBoss == null && Vector3.Distance(player_T.position, transform.position) <= 5f && !isRestore)    // 중간보스가 처치되고 신호타워와 상호작용할 조건을 만족할 경우 다음 미션 진행
                 {
                     if (!isInteractionStarted && Input.GetKey(KeyCode.F))   // F키를 누르면 상호작용 시작
                     {
@@ -118,5 +126,10 @@ public class MiddleBossActivator : PlayerController
             }
         }
         hp_prev = hp_cur;
+        if (Input.GetKey(KeyCode.P))
+        {
+            Debug.Log("퀘스트2 치트키 클리어!");
+            QuestManager.instance.CompleteQuest();
+        }
     }
 }

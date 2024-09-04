@@ -35,7 +35,7 @@ public class Engineer : PlayerController
     private float requiredInteractionTime = 10.0f;                                                              // Player_Controller.cs에서 public
     private bool following = false;     // 엔지니어가 플레이어 따라다니는지 여부
     private Vector3 inputDirection;     // 플레이어 이동방향 저장
-    private Vector3 engineerStartVector = new Vector3(-19f, 50f, 0); // 엔지니어 시작 위치
+    private Vector3 engineerStartVector = new Vector3(-18f, 50f, 0); // 엔지니어 시작 위치
     private Vector3 dir_temp;   // 플레이어가 마지막으로 바라본 방향 저장
     private float engineerPlayerDistance;   // 엔지니어 플레이어 사이 거리 저장
     private Vector3 finVector = new Vector3(29.5f, -3.5f, 0);
@@ -122,5 +122,10 @@ public class Engineer : PlayerController
             }
         }
         hp_prev = hp_cur;
+        if(Input.GetKey(KeyCode.P))
+        {
+            Debug.Log("퀘스트1 치트키 클리어!");
+            QuestManager.instance.CompleteQuest();
+        }
     }
 }
