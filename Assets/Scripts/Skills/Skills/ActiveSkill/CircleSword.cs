@@ -11,6 +11,7 @@ public class CircleSword : Skill
         skillDamage = 60f;
         cooldown = 4f;
         icon = Resources.Load<Sprite>("UI/Icon/11");
+        animator = GetComponent<Animator>();
     }
 
     private float circleAttackRadius = 2f; // 원 범위 반지름
@@ -18,7 +19,17 @@ public class CircleSword : Skill
     public override void Activate() // 몬스터와 상호 작용 로직
     {
         transform.position = player.transform.position;
-        animator.SetBool("isUse" , true);
+
+        float scaleMultiplier = circleAttackRadius * 2f; // 이 값은 범위에 따라 조정 가능
+        transform.localScale = new Vector3(scaleMultiplier, scaleMultiplier, 1f);
+
+        if (animator != null)
+        {
+            animator.speed = 2.0f;  // 2.0배 속도로 재생 (기본은 1.0)
+            animator.SetTrigger("isCircleSword");
+            Debug.Log("CircleSword 트리거가 호출되었습니다.");
+        }
+
         Monster monster;
         float totalDamage = 0f; // 몬스터가 입는 총 데미지
 
@@ -45,7 +56,6 @@ public class CircleSword : Skill
             }
         }
         lastUsedTime = Time.time;
-        StartCoroutine(Waitforseconds());
     }
 
     public override void LevelUp() // 칼날 의수(원형 참격) 레벨업 로직
@@ -73,9 +83,5 @@ public class CircleSword : Skill
 
         }
     }
-    IEnumerator Waitforseconds()
-    {
-        yield return new WaitForSeconds(1.0f);
-        animator.SetBool("isUse", false);
-    }
+
 }

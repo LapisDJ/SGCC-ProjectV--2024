@@ -41064,7 +41064,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ea1fd6a6243d4d99a4805d98850f89e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerstat: {fileID: 0}
   monsterkill: 0
   needKillsToLevelUp: 1
 --- !u!4 &1530311332
@@ -41218,8 +41217,8 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1621604327}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 90}
-  m_LocalScale: {x: 0.016666668, y: 0.016666668, z: 0.016666668}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 461111155}
@@ -41232,7 +41231,7 @@ RectTransform:
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0, y: 0}
 --- !u!114 &1621604329
 MonoBehaviour:
   m_ObjectHideFlags: 0
