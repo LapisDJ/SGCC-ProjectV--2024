@@ -141,6 +141,11 @@ public class SurvAndBoss : PlayerController
             }
         }
         hp_prev = hp_cur;
+        if (Input.GetKey(KeyCode.P))
+        {
+            Debug.Log("퀘스트3 치트키 클리어!");
+            QuestManager.instance.CompleteQuest();
+        }
     }
 
     private void CheckSurvivorInteraction() 

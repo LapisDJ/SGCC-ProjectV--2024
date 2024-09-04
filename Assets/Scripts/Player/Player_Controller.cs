@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
 using Utilities;  // PriorityQueue가 포함된 네임스페이스 참조
 public class PlayerController : MonoBehaviour
@@ -32,8 +33,10 @@ public class PlayerController : MonoBehaviour
     public Animator animator;
     // 기존 변수들
     public LineRenderer lineRenderer;
+
     public void Start()
     {
+        Debug.Log(QuestManager.instance.GetCurrentQuest());
         player_T = GameObject.FindGameObjectWithTag("Player").transform;
 
         GenerateGraphFromTilemap();
@@ -51,13 +54,8 @@ public class PlayerController : MonoBehaviour
             Debug.LogError("rb is missing on the Player.");
         }
 
-        player_T.position = QuestManager.instance.GetCurrentQuest() switch
-        {
-            1 => new Vector3(29.5f, -3.5f, 0),
-            2 => new Vector3(1.5f, -2f, 0),
-            3 => new Vector3(2f, 24f, 0),
-            _ => player_T.position
-        };
+        // QuestManager에서 현재 퀘스트에 맞는 플레이어 시작 위치를 가져옴
+        player_T.position = QuestManager.instance.GetPlayerStartPosition(QuestManager.instance.GetCurrentQuest());
 
 
         // LineRenderer 설정

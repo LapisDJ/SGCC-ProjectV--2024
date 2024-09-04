@@ -138,18 +138,6 @@ PrefabInstance:
       propertyPath: m_GravityScale
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 522800021671838278, guid: e6c9b95bf7448f64db3b8de167ae7839, type: 3}
-      propertyPath: m_Name
-      value: middleBoss
-      objectReference: {fileID: 0}
-    - target: {fileID: 522800021671838278, guid: e6c9b95bf7448f64db3b8de167ae7839, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 522800021671838278, guid: e6c9b95bf7448f64db3b8de167ae7839, type: 3}
-      propertyPath: m_TagString
-      value: middleBoss
-      objectReference: {fileID: 0}
     - target: {fileID: 185133285508565144, guid: e6c9b95bf7448f64db3b8de167ae7839, type: 3}
       propertyPath: m_SortingOrder
       value: 2
@@ -206,8 +194,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: middleBoss
       objectReference: {fileID: 0}
+    - target: {fileID: 522800021671838278, guid: e6c9b95bf7448f64db3b8de167ae7839, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 522800021671838278, guid: e6c9b95bf7448f64db3b8de167ae7839, type: 3}
+      propertyPath: m_TagString
+      value: middleBoss
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 98710969819657621, guid: ffd17a42ca7cc664981d88e2a35879b9, type: 3}
+    - {fileID: -2790580598004981758, guid: e6c9b95bf7448f64db3b8de167ae7839, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -36167,6 +36164,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 0}
+  spriteRenderer: {fileID: 0}
   dir: {x: 0, y: 0, z: 0}
   speed: 0
   isInteractionStarted: 0
@@ -36174,6 +36172,7 @@ MonoBehaviour:
   obstacleTilemaps: []
   player_T: {fileID: 0}
   nextPosition: {x: 0, y: 0, z: 0}
+  animator: {fileID: 0}
   lineRenderer: {fileID: 0}
   middleBoss: {fileID: 94617094}
   player: {fileID: 822701242}
@@ -36282,6 +36281,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1034961518565794693, guid: 318bb5e12a81b67409a0e40e0a64039d, type: 3}
       insertIndex: -1
       addedObject: {fileID: 822701245}
+    - targetCorrespondingSourceObject: {fileID: 1034961518565794693, guid: 318bb5e12a81b67409a0e40e0a64039d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 822701248}
   m_SourcePrefab: {fileID: 100100000, guid: 318bb5e12a81b67409a0e40e0a64039d, type: 3}
 --- !u!4 &822701242 stripped
 Transform:
@@ -36291,6 +36293,11 @@ Transform:
 --- !u!1 &822701243 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1034961518565794693, guid: 318bb5e12a81b67409a0e40e0a64039d, type: 3}
+  m_PrefabInstance: {fileID: 822701241}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &822701244 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 4458877752216685475, guid: 318bb5e12a81b67409a0e40e0a64039d, type: 3}
   m_PrefabInstance: {fileID: 822701241}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &822701245
@@ -36305,7 +36312,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d07d4d03a1776445970c1f1d2ee7826, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 0}
+  rb: {fileID: 822701247}
+  spriteRenderer: {fileID: 822701246}
   dir: {x: 0, y: 0, z: 0}
   speed: 0
   isInteractionStarted: 0
@@ -36316,9 +36324,33 @@ MonoBehaviour:
   - {fileID: 1243422389}
   - {fileID: 1106523257}
   - {fileID: 1337156385}
-  player_T: {fileID: 0}
+  player_T: {fileID: 822701242}
   nextPosition: {x: 0, y: 0, z: 0}
+  animator: {fileID: 822701244}
   lineRenderer: {fileID: 0}
+--- !u!212 &822701246 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 5703075016005794536, guid: 318bb5e12a81b67409a0e40e0a64039d, type: 3}
+  m_PrefabInstance: {fileID: 822701241}
+  m_PrefabAsset: {fileID: 0}
+--- !u!50 &822701247 stripped
+Rigidbody2D:
+  m_CorrespondingSourceObject: {fileID: -3574141526916872300, guid: 318bb5e12a81b67409a0e40e0a64039d, type: 3}
+  m_PrefabInstance: {fileID: 822701241}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &822701248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 822701243}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a791af17c4f464c639cc08e73f2f2936, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerController: {fileID: 0}
 --- !u!1 &861163145
 GameObject:
   m_ObjectHideFlags: 0

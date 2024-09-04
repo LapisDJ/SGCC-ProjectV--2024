@@ -2285,6 +2285,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1394328217}
     - target: {fileID: 4044078766096519034, guid: 318bb5e12a81b67409a0e40e0a64039d, type: 3}
+      propertyPath: spriteRenderer
+      value: 
+      objectReference: {fileID: 131381596}
+    - target: {fileID: 4044078766096519034, guid: 318bb5e12a81b67409a0e40e0a64039d, type: 3}
       propertyPath: interactionRange
       value: 5
       objectReference: {fileID: 0}
@@ -2383,8 +2387,16 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1034961518565794693, guid: 318bb5e12a81b67409a0e40e0a64039d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1394328224}
   m_SourcePrefab: {fileID: 100100000, guid: 318bb5e12a81b67409a0e40e0a64039d, type: 3}
+--- !u!212 &131381596 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 5703075016005794536, guid: 318bb5e12a81b67409a0e40e0a64039d, type: 3}
+  m_PrefabInstance: {fileID: 131381595}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &231102547 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1034961518565794693, guid: 0c0b02dca944dcc4ead2c01d020df197, type: 3}
@@ -2403,6 +2415,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 0}
+  spriteRenderer: {fileID: 0}
   dir: {x: 0, y: 0, z: 0}
   speed: 0
   isInteractionStarted: 0
@@ -2416,6 +2429,7 @@ MonoBehaviour:
   - {fileID: 1261233968}
   player_T: {fileID: 1394328223}
   nextPosition: {x: 0, y: 0, z: 0}
+  animator: {fileID: 0}
   lineRenderer: {fileID: 0}
   boss: {fileID: 55944231}
   targetObject: {fileID: 231102547}
@@ -2489,6 +2503,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 98710969819657621, guid: ffd17a42ca7cc664981d88e2a35879b9, type: 3}
+    - {fileID: -8562292920151804934, guid: fa182bbdcfb84134c9a588193b031fec, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -36470,6 +36485,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 0}
+  spriteRenderer: {fileID: 0}
   dir: {x: 0, y: 0, z: 0}
   speed: 0
   isInteractionStarted: 0
@@ -36483,6 +36499,7 @@ MonoBehaviour:
   - {fileID: 1261233968}
   player_T: {fileID: 1394328223}
   nextPosition: {x: 0, y: 0, z: 0}
+  animator: {fileID: 0}
   lineRenderer: {fileID: 0}
   boss: {fileID: 55944231}
   targetObject: {fileID: 517085695}
@@ -36576,6 +36593,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 0}
+  spriteRenderer: {fileID: 0}
   dir: {x: 0, y: 0, z: 0}
   speed: 0
   isInteractionStarted: 0
@@ -36583,6 +36601,7 @@ MonoBehaviour:
   obstacleTilemaps: []
   player_T: {fileID: 0}
   nextPosition: {x: 0, y: 0, z: 0}
+  animator: {fileID: 0}
   lineRenderer: {fileID: 0}
   boss: {fileID: 55944231}
   targetObject: {fileID: 0}
@@ -40979,6 +40998,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 0}
+  spriteRenderer: {fileID: 0}
   dir: {x: 0, y: 0, z: 0}
   speed: 0
   isInteractionStarted: 0
@@ -40992,6 +41012,7 @@ MonoBehaviour:
   - {fileID: 1261233968}
   player_T: {fileID: 1394328223}
   nextPosition: {x: 0, y: 0, z: 0}
+  animator: {fileID: 0}
   lineRenderer: {fileID: 0}
   boss: {fileID: 55944231}
   targetObject: {fileID: 1013867807}
@@ -47488,6 +47509,19 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7468599394232733844, guid: 318bb5e12a81b67409a0e40e0a64039d, type: 3}
   m_PrefabInstance: {fileID: 131381595}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1394328224
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1394328217}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a791af17c4f464c639cc08e73f2f2936, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerController: {fileID: 0}
 --- !u!1 &1488732897
 GameObject:
   m_ObjectHideFlags: 0
@@ -49713,6 +49747,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 0}
+  spriteRenderer: {fileID: 0}
   dir: {x: 0, y: 0, z: 0}
   speed: 0
   isInteractionStarted: 0
@@ -49720,6 +49755,7 @@ MonoBehaviour:
   obstacleTilemaps: []
   player_T: {fileID: 0}
   nextPosition: {x: 0, y: 0, z: 0}
+  animator: {fileID: 0}
   lineRenderer: {fileID: 0}
   boss: {fileID: 55944231}
   targetObject: {fileID: 0}
