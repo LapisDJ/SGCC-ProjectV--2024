@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 1184759712856789489}
   - component: {fileID: 4044078766096519034}
   - component: {fileID: 5668213205554492814}
+  - component: {fileID: 4458877752216685475}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -141,7 +142,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d07d4d03a1776445970c1f1d2ee7826, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerstat: {fileID: 0}
   rb: {fileID: -3574141526916872300}
   dir: {x: 0, y: 0, z: 0}
   speed: 0
@@ -150,6 +150,8 @@ MonoBehaviour:
   obstacleTilemaps: []
   player_T: {fileID: 0}
   nextPosition: {x: 0, y: 0, z: 0}
+  animator: {fileID: 4458877752216685475}
+  lineRenderer: {fileID: 0}
 --- !u!70 &5668213205554492814
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -185,3 +187,24 @@ CapsuleCollider2D:
   m_Offset: {x: -0.010982505, y: -0.090999454}
   m_Size: {x: 0.13776182, y: 0.34800145}
   m_Direction: 0
+--- !u!95 &4458877752216685475
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1034961518565794693}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 27bda42810c87426a90cf17970959e76, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

@@ -1,10 +1,12 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using Utilities;  // PriorityQueue가 포함된 네임스페이스 참조
 public class PlayerController : MonoBehaviour
 {
     public Rigidbody2D rb;
+    public SpriteRenderer spriteRenderer;
     public Vector3 dir;
     public float speed;
     public bool isInteractionStarted = false; // 상호작용이 시작되었는지 여부
@@ -27,6 +29,7 @@ public class PlayerController : MonoBehaviour
     private List<Vector3Int> pathInt;
     private List<Vector3> path;
     public Vector3 nextPosition;
+    public Animator animator;
     // 기존 변수들
     public LineRenderer lineRenderer;
     public void Start()
@@ -95,6 +98,22 @@ public class PlayerController : MonoBehaviour
             }
             speed = Player_Stat.instance.speedAdd * Player_Stat.instance.speedMulti;
             dir = new Vector3(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), 0).normalized;
+            if(dir.x != 0 || dir.y != 0)
+            {
+                animator.SetBool("isWalk", true);
+                if(dir.x >= 0)
+                {
+                    spriteRenderer.flipX = false;
+                }
+                else
+                {
+                    spriteRenderer.flipX = true;
+                }
+            }
+            else
+            {
+                animator.SetBool("isWalk", false);
+            }
             rb.velocity = dir * speed;
         }
         else
