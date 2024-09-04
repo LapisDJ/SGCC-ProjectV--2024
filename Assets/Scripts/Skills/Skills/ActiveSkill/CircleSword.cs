@@ -56,17 +56,27 @@ public class CircleSword : Skill
 
         switch (level)
         {
+            case 1:
+                this.levelupguide = "데미지 60 -> 61";
+                break;
+            case 2:
+                this.levelupguide = "데미지 61 -> 62, 쿨타임 4 -> 3";
+                break;
             case 3: // 2->3랩: 쿨타임 1초 감소
                 this.cooldown--;
+                this.levelupguide = "데미지 62 -> 63, 스킬범위 증가";
                 break;
             case 5: // 3->4랩: 반지름 2->2.25
                 this.circleAttackRadius = 2.25f;
+                this.levelupguide = "데미지 63 -> 64, 쿨타임 3 -> 2";
                 break;
             case 6: //5->6랩: 쿨타임 1초 감소
                 this.cooldown--;
+                this.levelupguide = "데미지 64 -> 65, 스킬범위 증가";
                 break;
             case 7: //6->7랩: 반지름 2->2.25
                 this.circleAttackRadius = 2.5f;
+                this.levelupguide = "스킬 데미지 2배 증가";
                 break;
             case 8: //7->8랩: 스킬 데미지 2배 증가
                 this.skillDamage *= 2;

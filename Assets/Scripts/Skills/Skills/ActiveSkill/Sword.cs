@@ -14,7 +14,7 @@ public class Sword : Skill
         skillDamage = 60f;
         cooldown = 4f;
         icon = Resources.Load<Sprite>("UI/Icon/11");
-        levelupguide = "플레이어 중심으로 양쪽으로 참격을 가합니다";
+        levelupguide = "하세기!!";
     }
     public override void Activate() // 몬스터와 상호 작용 로직
     {
@@ -60,16 +60,29 @@ public class Sword : Skill
 
         switch (level)
         {
+            case 1:
+                this.levelupguide = "스킬 데미지 61 -> 62";
+                break;
+            case 2:
+                this.levelupguide = "스킬 데미지 62 -> 63, 쿨타임 4 -> 3";
+                break;
             case 3:
+                this.levelupguide = "스킬 데미지 63 -> 64";
                 this.cooldown--;
                 break;
+            case 4:
+                this.levelupguide = "스킬 데미지 64 -> 65, 쿨타임 3 -> 2";
+                break;
             case 5:
+                this.levelupguide = "스킬 데미지 65 -> 66, 쿨타임 2 -> 1";
                 this.cooldown--;
                 break;
             case 6:
+                this.levelupguide = "스킬 대미지 66 -> 67, 범위 증가";
                 this.cooldown--;
                 break;
             case 7: // 6->7랩: 범위 5x1로 증가
+                this.levelupguide = "이제부터 스킬을 이중으로 사용합니다.";
                 attackWidth = 5f;
                 break;
         }

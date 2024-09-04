@@ -13,7 +13,7 @@ public class ShotGun : Skill
         skillDamage = 30f;
         cooldown = 5f;
         icon = Resources.Load<Sprite>("UI/Icon/10");
-        levelupguide = "효과적인 대화수단";
+        levelupguide = "훌륭한 대화수단";
     }
 
     [SerializeField] public GameObject shotGunPrefab; // 샷건 프리펩
@@ -85,15 +85,28 @@ public class ShotGun : Skill
         {
             case 1: // 0 -> 1랩 : 기본값으로 샷건 발사 가능
                 numOfBullet = 3;
+                this.levelupguide = "스킬 데미지 31 -> 32";
+                break;
+            case 2:
+                this.levelupguide = "스킬 데미지 32 -> 33, 쿨타임 5 -> 4";
                 break;
             case 3: // 2->3랩 : 쿨타임 1초 감소
                 cooldown -= 1f;
+                this.levelupguide = "스킬 데미지 33 -> 34";
+                break;
+            case 4:
+                this.levelupguide = "스킬 데미지 34 -> 35, 탄환 개수 3 -> 4";
                 break;
             case 5: // 4->5랩 : 샷건 4발
                 numOfBullet = 4;
+                this.levelupguide = "스킬 데미지 35 -> 36";
+                break;
+            case 6:
+                this.levelupguide = "스킬 데미지 36 -> 37, 쿨타임 4 -> 3";
                 break;
             case 7: // 6->7랩 : 쿨타임 1초 감소
                 cooldown -= 1f;
+                this.levelupguide = "스킬 데미지 37 -> 38, 탄환 개수 4 -> 5";
                 break;
             case 8: // 7->8랩 : 샷건 5발
                 numOfBullet = 5;

@@ -84,14 +84,29 @@ public class Pistol : Skill
 
         switch (level)
         {
+            case 1:
+                this.levelupguide = "스킬 데미지 29 -> 30";
+                break;
+            case 2:
+                this.levelupguide = "스킬 데미지 30 -> 31, 쿨타임 1.5 -> 1.25";
+                break;
             case 3: // 2->3랩 : 쿨타임 1초 감소
                 this.cooldown -= 0.25f;
+                this.levelupguide = "스킬 데미지 31 -> 32";
+                break;
+            case 4:
+                this.levelupguide = "스킬 데미지 32 -> 33, 쿨타임 1.25 -> 1";
                 break;
             case 5: // 4->5랩 : 쿨타임 1초 감소
                 this.cooldown -= 0.25f;
+                this.levelupguide = "스킬 데미지 33 -> 34";
+                break;
+            case 6:
+                this.levelupguide = "스킬 데미지 34 -> 36";
                 break;
             case 7: // 6->7랩 : 데미지 2 증가
                 this.skillDamage += 2f;
+                this.levelupguide = "이제부터 권총을 2발 연속으로 사용합니다";
                 break;
         }
     }

@@ -65,11 +65,28 @@ public class ElectronicField : Skill
 
         switch (level)
         {
+            case 1:
+                this.levelupguide = "스킬 데미지 증가";
+                break;
+            case 2:
+                this.levelupguide = "스킬 데미지, 범위 증가";
+                break;
             case 3: // 2->3랩: 반지름 증가
+                this.levelupguide = "스킬 데미지 증가";
                 this.fieldRadius = 1.75f;
                 break;
+            case 4:
+                this.levelupguide = "스킬 데미지, 범위 증가";
+                break;
             case 5: // 4->5랩: 반지름 증가
+                this.levelupguide = "스킬 데미지 증가";
                 this.fieldRadius = 2f;
+                break;
+            case 6:
+                this.levelupguide = "스킬 데미지 증가";
+                break;
+            case 7:
+                this.levelupguide = "스킬 데미지, 범위 증가";
                 break;
             case 8: //7->8랩: 반지름 증가
                 this.fieldRadius = 2.5f;

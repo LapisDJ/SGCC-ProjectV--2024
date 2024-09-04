@@ -12,7 +12,7 @@ public class RotateKnifeDrone : Skill
         skillDamage = 30f;
         cooldown = 0f;
         icon = Resources.Load<Sprite>("UI/Icon/17");
-        levelupguide = "플레이어 주변을 회전하는 드론을 생성합니다";
+        levelupguide = "플레이어 주변을 회전하는 드론을 2개 생성합니다";
     }
 
     public GameObject knifeDronePrefab; // 칼날 드론 프리팹
@@ -79,21 +79,26 @@ public class RotateKnifeDrone : Skill
         {
             case 1:
                 GenerateKnives(this.knifeCount); // 칼날 2개 생성
+                this.levelupguide = "드론 개수 2 -> 4";
                 break;
             case 3:
                 this.knifeCount += 2;
                 GenerateKnives(this.knifeCount); // 칼날 4개 생성
+                this.levelupguide = "드론 회전속도 2배 증가";
                 break;
             case 4:
                 this.rotationSpeed *= 2; // 회전 속도 2배 증가
+                this.levelupguide = "드론 개수 4 -> 6";
                 break;
             case 6:
                 this.knifeCount += 2;
                 GenerateKnives(this.knifeCount); // 칼날 6개 생성
+                this.levelupguide = "드론 개수 6 -> 8";
                 break;
             case 7:
                 this.knifeCount += 2;
                 GenerateKnives(this.knifeCount); // 칼날 8개 생성
+                this.levelupguide = "드론 회전속도 2배 증가";
                 break;
             case 8:
                 this.rotationSpeed *= 2; // 회전 속도 2배 증가
