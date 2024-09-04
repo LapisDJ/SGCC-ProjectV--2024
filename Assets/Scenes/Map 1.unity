@@ -40643,6 +40643,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 1279397285}
+  spriteRenderer: {fileID: 0}
   dir: {x: 0, y: 0, z: 0}
   speed: 0
   isInteractionStarted: 0
@@ -40650,6 +40651,7 @@ MonoBehaviour:
   obstacleTilemaps: []
   player_T: {fileID: 1799502645}
   nextPosition: {x: 0, y: 0, z: 0}
+  animator: {fileID: 0}
   lineRenderer: {fileID: 0}
 --- !u!50 &1279397285 stripped
 Rigidbody2D:
@@ -42662,6 +42664,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 1799502661}
+  spriteRenderer: {fileID: 1799502664}
   dir: {x: 0, y: 0, z: 0}
   speed: 0
   isInteractionStarted: 0
@@ -42675,6 +42678,7 @@ MonoBehaviour:
   - {fileID: 1878825005}
   player_T: {fileID: 0}
   nextPosition: {x: 0, y: 0, z: 0}
+  animator: {fileID: 1799502662}
   lineRenderer: {fileID: 0}
 --- !u!114 &1799502659
 MonoBehaviour:
@@ -42692,6 +42696,16 @@ MonoBehaviour:
 --- !u!50 &1799502661 stripped
 Rigidbody2D:
   m_CorrespondingSourceObject: {fileID: -3574141526916872300, guid: 318bb5e12a81b67409a0e40e0a64039d, type: 3}
+  m_PrefabInstance: {fileID: 1764436284}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1799502662 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 4458877752216685475, guid: 318bb5e12a81b67409a0e40e0a64039d, type: 3}
+  m_PrefabInstance: {fileID: 1764436284}
+  m_PrefabAsset: {fileID: 0}
+--- !u!212 &1799502664 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 5703075016005794536, guid: 318bb5e12a81b67409a0e40e0a64039d, type: 3}
   m_PrefabInstance: {fileID: 1764436284}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1809990750
