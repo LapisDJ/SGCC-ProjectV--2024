@@ -14,6 +14,7 @@ public class Sword : Skill
         skillDamage = 60f;
         cooldown = 4f;
         icon = Resources.Load<Sprite>("UI/Icon/11");
+        animator = GetComponent<Animator>();
     }
     public override void Activate() // 몬스터와 상호 작용 로직
     {
@@ -21,6 +22,19 @@ public class Sword : Skill
         Vector2 attackPosition = player.transform.position; // 기준점 : 플레이어 위치
         Monster monster;
         float totalDamage = 0f; // 몬스터가 입는 총 데미지
+
+        transform.position = player.transform.position;
+
+        float widthMultiplier = attackWidth * 2;
+        float heightMultiplier = attackHeight * 2;
+        transform.localScale = new Vector3(widthMultiplier, heightMultiplier, 1f);
+
+        if (animator != null)
+        {
+            animator.speed = 2.0f;  // 2.0배 속도로 재생 (기본은 1.0)
+            animator.SetTrigger("isSword");
+            Debug.Log("Sword 트리거가 호출되었습니다.");
+        }
 
         // 범위 내의 모든 콜라이더를 가져옴 (히트스캔 방식)
         Collider2D[] hitColliders = Physics2D.OverlapBoxAll(attackPosition, attackSize, 0f);
