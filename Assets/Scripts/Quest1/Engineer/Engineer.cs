@@ -40,7 +40,7 @@ public class Engineer : PlayerController
     private float engineerPlayerDistance;   // 엔지니어 플레이어 사이 거리 저장
     private Vector3 finVector = new Vector3(29.5f, -3.5f, 0);
     private bool questEnd = false;
-    private void Start()
+    private new void Start()
     {
         transform.position = engineerStartVector;   // 엔지니어 시작위치 정하기
         Debug.Log("퀘스트1을 시작합니다!");

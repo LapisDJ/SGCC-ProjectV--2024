@@ -20,7 +20,7 @@ public class SurvAndBoss : PlayerController
     private Vector3 bossPosition;
     private bool bossAlive = false;
     private float interactReach = 3.0f;
-    private void Start()
+    private new void Start()
     {
         GameObject surv1 = GameObject.Find("Surv1");
         if (surv1 != null)

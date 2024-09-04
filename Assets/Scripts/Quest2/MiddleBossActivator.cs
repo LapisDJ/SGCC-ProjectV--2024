@@ -17,7 +17,7 @@ public class MiddleBossActivator : PlayerController
     private float requiredInteractionTime = 10.0f;                                          // Player_Controller.cs에서 public
     private bool isBossDead = false;    // 중간보스가 처치되었는지 여부
 
-    private void Start()
+    private new void Start()
     {
         GameObject player = GameObject.Find("Player"); // Player 오브젝트 찾기
         if (player != null)

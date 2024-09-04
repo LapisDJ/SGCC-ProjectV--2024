@@ -26,8 +26,6 @@ public class PlayerController : MonoBehaviour
     public Dictionary<Vector3Int, List<Vector3Int>> graph = new Dictionary<Vector3Int, List<Vector3Int>>();
     private List<Vector3Int> pathInt;
     private List<Vector3> path;
-    //private List<Vector3Int> moveDirectPool;
-    //private List<Vector3> moveDirect;
     public Vector3 nextPosition;
     // 기존 변수들
     public LineRenderer lineRenderer;
@@ -85,25 +83,6 @@ public class PlayerController : MonoBehaviour
             {
                 path = ConvertPathToWorldCoordinates(pathInt);
             }
-            /*
-            if (path != null && path.Count > 0)
-            {
-                //moveDirect = new List<Vector3>();
-                
-                if (moveDirectPool != null)
-                {
-                    foreach (var position in path)  // path에서 moveDirectPool에 있는 좌표들을 moveDirect에 추가
-                    {
-                        if (moveDirectPool.Contains(position))
-                        {
-                            moveDirect.Add(position);
-                        }
-                    }
-
-                    moveDirect.Add(player_T.position);
-                }
-            }
-            */
         }
 
         rb = GetComponent<Rigidbody2D>();
@@ -211,7 +190,6 @@ public class PlayerController : MonoBehaviour
     void DrawMoveDirect()
     {
         int diagonalTurnIndex = FindDiagonalTurnIndex(path);
-        Debug.Log(diagonalTurnIndex);
         if (diagonalTurnIndex != -1)
         {
             if (path != null && path.Count > 0)
@@ -236,15 +214,6 @@ public class PlayerController : MonoBehaviour
                 // 마지막 포인트 설정 (플레이어의 위치)
                 lineRenderer.SetPosition(path.Count - diagonalTurnIndex + 1, player_T.position);
 
-                // Debug 로그 출력
-                Debug.Log("Player Position: " + player_T.position);
-                for (int i = 0; i < path.Count; i++)
-                {
-                    Debug.Log($"Path Position {i}: " + path[i]);
-                }
-
-                // LineRenderer 포지션 출력
-                PrintLineRendererPositions(lineRenderer);
             }
             else
             {
@@ -478,24 +447,4 @@ public class PlayerController : MonoBehaviour
         return -1;  // 대각선으로 꺾이는 부분이 없는 경우
     }
 
-    void PrintLineRendererPositions(LineRenderer lineRenderer)
-    {
-        // LineRenderer의 포지션 수를 가져옵니다.
-        int positionCount = lineRenderer.positionCount;
-
-        // 포지션 수가 0이면 아무것도 출력하지 않습니다.
-        if (positionCount == 0)
-        {
-            Debug.Log("LineRenderer has no positions.");
-            return;
-        }
-
-        // 모든 포지션 값을 출력합니다.
-        Debug.Log($"LineRenderer has {positionCount} positions:");
-        for (int i = 0; i < positionCount; i++)
-        {
-            Vector3 position = lineRenderer.GetPosition(i);
-            Debug.Log($"Position {i}: {position}");
-        }
-    }
 }
