@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5553078275326630331}
   - component: {fileID: 1128198851734439}
-  - component: {fileID: 2295378333169853194}
   m_Layer: 0
   m_Name: ElectronicField
   m_TagString: Untagged
@@ -49,27 +48,5 @@ MonoBehaviour:
   level: 0
   skillDamage: 0
   cooldown: 0
-  animator: {fileID: 2295378333169853194}
   icon: {fileID: 0}
   player: {fileID: 0}
---- !u!95 &2295378333169853194
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1504720127329836421}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 4438889db29fa224f951d26edd96d0e9, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0

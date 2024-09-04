@@ -129,7 +129,6 @@ MonoBehaviour:
   damage: 100
   canPenetrate: 0
   explosionRadius: 100
-  explosionPrefab: {fileID: 4904431857573505227, guid: 73776c2736892e24f8af5e34e5bff8aa, type: 3}
 --- !u!70 &9108922429399089781
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
