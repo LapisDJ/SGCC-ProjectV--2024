@@ -89,6 +89,9 @@ public class Bazooka : Skill
                 };
 
                 BazookaBulletScript.damageInfo = damageInfo;
+
+                // BazookaBullet의 explosionRadius에 exploreRadius 값 전달
+                BazookaBulletScript.explosionRadius = exploreRadius;
             }
 
             Rigidbody2D bulletRb = bazookaBullet.GetComponent<Rigidbody2D>();
