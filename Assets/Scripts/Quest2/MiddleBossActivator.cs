@@ -20,15 +20,6 @@ public class MiddleBossActivator : PlayerController
     private Vector3 bossPosition;
     private new void Start()
     {
-        GameObject player = GameObject.Find("Player"); // Player 오브젝트 찾기
-        if (player != null)
-        {
-            PlayerController playerController = player.GetComponent<PlayerController>();
-            if (playerController != null)
-            {
-                playerController.questPosition = new Vector3(1.5f, 35f, 0);
-            }
-        }
         questPosition = new Vector3(1.5f, 35f, 0);
         player_T = GameObject.Find("Player").transform;
         middleBoss.SetActive(false);    // Map2 입장 시 중간보스 ( 해킹된 안드로이드 ) 비활성화 
@@ -40,91 +31,86 @@ public class MiddleBossActivator : PlayerController
 
     private void Update()
     {
-        GameObject player = GameObject.Find("Player"); // Player 오브젝트 찾기
-        if (player != null)
+        hp_cur = Player_Stat.instance.HPcurrent;
+        bool isWithinXRange = player_T.position.x >= -0.5f && player_T.position.x <= 2.5f;  // 중간보스 소환 지점 X좌표 범위에 있는지
+        bool isWithinYRange = player_T.position.y >= 34f && player_T.position.y <= 36f;     // 중간보스 소환 지점 y좌표 범위에 있는지
+
+        if (isWithinXRange && isWithinYRange && !isBossAppear)  // 중간보스 소환 범위에 있으며 보스가 아직 소환되지 않은 경우 새로운 미션으로 보스를 소환해서 처치하는 미션을 시작
         {
-            PlayerController playerController = player.GetComponent<PlayerController>();
-            if (playerController != null)
+            Debug.Log("중간보스가 소환되었습니다!!");
+            middleBoss.SetActive(true); // 중간보스 소환
+            isBossAppear = true;    // 중간보스 소환여부 True로 변환 : 중간보스는 1회만 출현
+            bossAlive = true;
+        }
+        if (bossAlive)
+        {
+            bossPosition = middleBoss.transform.position;
+            questPosition = bossPosition;
+        }
+        if (middleBoss != null && Input.GetKeyDown(KeyCode.O))  // 임시로 퀘스트 클리어 위해 만든 치트키 42~45 Lines는 삭제 예정
+        {
+            Destroy(middleBoss); // 보스 파괴
+            bossAlive = false;
+        }
+
+        if (!isBossDead && middleBoss == null)
+        {
+            Debug.Log("중간보스를 처치하였습니다!");
+            questPosition = new Vector3(1.5f, 18f, 0);
+            Debug.Log("신호타워를 복구해 주세요!");
+            isBossDead = true;
+            bossAlive = false;
+        }
+
+
+        if (middleBoss == null && Vector3.Distance(player_T.position, transform.position) <= 5f && !isRestore)    // 중간보스가 처치되고 신호타워와 상호작용할 조건을 만족할 경우 다음 미션 진행
+        {
+            if (!isInteractionStarted && Input.GetKey(KeyCode.F))   // F키를 누르면 상호작용 시작
             {
-                bool isWithinXRange = player_T.position.x >= -0.5f && player_T.position.x <= 2.5f;  // 중간보스 소환 지점 X좌표 범위에 있는지
-                bool isWithinYRange = player_T.position.y >= 34f && player_T.position.y <= 36f;     // 중간보스 소환 지점 y좌표 범위에 있는지
+                interactionTime = 0.1f; // 상호작용 시작하면 상호작용 시간 초기화
+                Debug.Log("고장난 신호 타워를 복구합니다");
+                interactPlayerPosition = player_T.position;   // 상호작용 시작시 플레이어 위치를 기록
+                isInteractionStarted = true;
+                isInteractionStarted = true;
+            }
 
-                if (isWithinXRange && isWithinYRange && !isBossAppear)  // 중간보스 소환 범위에 있으며 보스가 아직 소환되지 않은 경우 새로운 미션으로 보스를 소환해서 처치하는 미션을 시작
-                {
-                    Debug.Log("중간보스가 소환되었습니다!!");
-                    middleBoss.SetActive(true); // 중간보스 소환
-                    isBossAppear = true;    // 중간보스 소환여부 True로 변환 : 중간보스는 1회만 출현
-                    bossAlive = true;
-                }
-                if (bossAlive)
-                {
-                    bossPosition = middleBoss.transform.position;
-                    playerController.questPosition = bossPosition;
-                }
-                if (middleBoss != null && Input.GetKeyDown(KeyCode.O))  // 임시로 퀘스트 클리어 위해 만든 치트키 42~45 Lines는 삭제 예정
-                {
-                    Destroy(middleBoss); // 보스 파괴
-                    bossAlive = false;
-                }
+            if (interactionTime > 0f)
+            {
+                interactionTime += Time.deltaTime;
+            }
 
-                if (!isBossDead && middleBoss == null)
-                {
-                    Debug.Log("중간보스를 처치하였습니다!");
-                    playerController.questPosition = new Vector3(1.5f, 18f, 0);
-                    Debug.Log("신호타워를 복구해 주세요!");
-                    isBossDead = true;
-                    bossAlive = false;
-                }
-
-
-                if (middleBoss == null && Vector3.Distance(player_T.position, transform.position) <= 5f && !isRestore)    // 중간보스가 처치되고 신호타워와 상호작용할 조건을 만족할 경우 다음 미션 진행
-                {
-                    if (!isInteractionStarted && Input.GetKey(KeyCode.F))   // F키를 누르면 상호작용 시작
-                    {
-                        interactionTime = 0.1f; // 상호작용 시작하면 상호작용 시간 초기화
-                        Debug.Log("고장난 신호 타워를 복구합니다");
-                        interactPlayerPosition = player_T.position;   // 상호작용 시작시 플레이어 위치를 기록
-                        playerController.isInteractionStarted = true;
-                        isInteractionStarted = true;
-                    }
-
-                    if (interactionTime > 0f)
-                    {
-                        interactionTime += Time.deltaTime;
-                    }
-
-                    if (interactionTime >= requiredInteractionTime)
-                    {
-                        Debug.Log("신호 타워 복구 완료");
-                        isRestore = true;
-                        playerController.questPosition = finVector;
-                        playerController.isInteractionStarted = false;
-                        Debug.Log("출발 지점으로 돌아가세요");
-                    }
-                    else if (isInteractionStarted && Input.GetKey(KeyCode.G))  // 구출 중단 조건
-                    {
-                        Debug.Log("신호 타워 복구 중단");
-                        playerController.isInteractionStarted = false;
-                        isInteractionStarted = false;
-                        interactionTime = 0f;  // 상호작용이 중단되면 시간을 초기화
-                    }
-                    else if (hp_cur < hp_prev)
-                    {
-                        // 상호작용이 중단되었을 때
-                        Debug.Log("신호 타워 복구 실패");
-                        playerController.isInteractionStarted = false;
-                        isInteractionStarted = false;
-                        interactionTime = 0f;  // 상호작용이 중단되면 시간을 초기화
-                    }
-                }
-
-                if (isRestore && (Vector3.Distance(finVector, player_T.position)) < 3f)
-                {
-                    Debug.Log("퀘스트2 클리어!");
-                    QuestManager.instance.CompleteQuest();
-                }
+            if (interactionTime >= requiredInteractionTime)
+            {
+                Debug.Log("신호 타워 복구 완료");
+                isRestore = true;
+                questPosition = finVector;
+                isInteractionStarted = false;
+                Debug.Log("출발 지점으로 돌아가세요");
+            }
+            else if (isInteractionStarted && Input.GetKey(KeyCode.G))  // 구출 중단 조건
+            {
+                Debug.Log("신호 타워 복구 중단");
+                isInteractionStarted = false;
+                isInteractionStarted = false;
+                interactionTime = 0f;  // 상호작용이 중단되면 시간을 초기화
+            }
+            else if (hp_cur < hp_prev)
+            {
+                // 상호작용이 중단되었을 때
+                Debug.Log("신호 타워 복구 실패");
+                isInteractionStarted = false;
+                isInteractionStarted = false;
+                interactionTime = 0f;  // 상호작용이 중단되면 시간을 초기화
             }
         }
+
+        if (isRestore && (Vector3.Distance(finVector, player_T.position)) < 3f)
+        {
+            Debug.Log("퀘스트2 클리어!");
+            QuestManager.instance.CompleteQuest();
+        }
+
+
         hp_prev = hp_cur;
         if (Input.GetKey(KeyCode.P))
         {

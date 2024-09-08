@@ -21,6 +21,16 @@ public class SimplePathfinding : MonoBehaviour
     public Vector3 nextPosition;
     void Start()
     {
+        GameObject playerObject = GameObject.FindWithTag("Player"); // 태그가 Player인 오브젝트 찾기
+        if (playerObject != null)
+        {
+            player = playerObject.transform; // 찾은 오브젝트의 Transform을 player에 할당
+        }
+        else
+        {
+            Debug.LogError("Player 태그를 가진 오브젝트가 없습니다!");
+        }
+
         monster_S = GetComponent<Monster>();
         if (monster_S == null)
         {
