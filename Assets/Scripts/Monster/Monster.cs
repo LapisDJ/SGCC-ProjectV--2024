@@ -92,6 +92,7 @@ public class Monster : MonoBehaviour
     {
         InitializeStats();
         gameObject.SetActive(false);
+        Destroy(gameObject);
         SpawnManager.instance.objectPools[this.key].Enqueue(gameObject);
     }
     IEnumerator FadeOutCoroutine()

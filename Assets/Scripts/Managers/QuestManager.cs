@@ -9,7 +9,7 @@ public class QuestManager : MonoBehaviour
     // 각 맵에서의 플레이어 시작 위치를 저장하는 딕셔너리
     public Dictionary<int, Vector3> playerStartPositions = new Dictionary<int, Vector3>()
     {
-        { 1, new Vector3(28.5f, -2.5f, 0) },  // Map 1 시작 위치
+        //{ 1, new Vector3(28.5f, -2.5f, 0) },  // Map 1 시작 위치
         { 2, new Vector3(1.5f, -2f, 0) },    // Map 2 시작 위치
         { 3, new Vector3(2f, 24f, 0) },      // Map 3 시작 위치
     };
@@ -28,7 +28,7 @@ public class QuestManager : MonoBehaviour
     }
 
     public int currentQuest = 1;
-
+    /*
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         // Map1 씬이 로드될 때 QuestManager 및 오브젝트 초기화
@@ -49,20 +49,29 @@ public class QuestManager : MonoBehaviour
             newPlayer.transform.position = GetPlayerStartPosition(1);
         }
     }
-
+    */
     // 씬 이동을 관리하는 함수
     public void CompleteQuest()
     {
         currentQuest++;
-
+        //SpawnManager spawnManager = SpawnManager.instance;
         if (currentQuest > 3)
         {
+            //SpawnManager.instance.DestroyAllPools();  // 모든 오브젝트 풀 삭제
             SceneManager.LoadScene("Finish UI");
             Destroy(GameObject.FindWithTag("Player"));  // Player 오브젝트 파괴
+            Destroy(GameObject.FindWithTag("SpawnManager"));
+            Destroy(GameObject.FindWithTag("SkillManager"));
+            Destroy(GameObject.FindWithTag("UIManager"));
+            Destroy(GameObject.FindWithTag("RealTimeManager"));
+            Destroy(GameObject.FindWithTag("MainCamera"));
+            SpawnManager.instance.DestroyAllPools();
         }
         else
         {
+            //SpawnManager.instance.DeactivateActivePools();  // 활성화된 풀 비활성화
             SceneManager.LoadScene("Map " + currentQuest);
+            SpawnManager.instance.ReturnActiveObjectsToPool();
         }
     }
 

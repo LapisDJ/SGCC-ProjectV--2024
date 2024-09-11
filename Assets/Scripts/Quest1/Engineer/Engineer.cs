@@ -43,6 +43,7 @@ public class Engineer : PlayerController
     private void Start()
     {
         QuestManager.instance.currentQuest = 1;
+        player_T.position = questFinVector;
         transform.position = engineerStartVector;   // 엔지니어 시작위치 정하기
         Debug.Log("퀘스트1을 시작합니다!");
         Debug.Log("미션 1 : 경로를 따라가서 엔지니어를 구출하세요");

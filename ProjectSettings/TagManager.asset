@@ -17,6 +17,10 @@ TagManager:
   - Boss
   - wall
   - map
+  - SpawnManager
+  - UIManager
+  - RealTimeManager
+  - SkillManager
   layers:
   - Default
   - TransparentFX

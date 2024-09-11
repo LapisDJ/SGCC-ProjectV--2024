@@ -15,6 +15,7 @@ public class SpawnManager : MonoBehaviour
     private float startTime; // 게임 시작 이후 경과시간
 
     public Dictionary<string, Queue<GameObject>> objectPools = new Dictionary<string, Queue<GameObject>>(); // <몬스터, 큐>의 형태로 오브젝트 풀 구성
+    public List<GameObject> activeObjects = new List<GameObject>(); // 활성화된 오브젝트들을 저장할 리스트                                                  // 추가
     private Queue<Vector3> spawnPointsQueue = new Queue<Vector3>(); // 동시 스폰을 위한, 해당 스폰 타이밍마다의 가능한 스폰 포인트 좌표 큐
     [SerializeField] public Tilemap tilemap; // 유효 스폰 위치 검사 위한 타일맵
 
@@ -59,6 +60,7 @@ public class SpawnManager : MonoBehaviour
         {
             GameObject obj = Instantiate(prefab); // 객체 생성
             obj.SetActive(false); // 비활성화 상태로
+            DontDestroyOnLoad(obj);
             objectPools[key].Enqueue(obj); // 풀에 담는다.
         }
     }
@@ -69,7 +71,10 @@ public class SpawnManager : MonoBehaviour
         {
             GameObject obj = objectPools[key].Dequeue(); // <이름이 key인> 풀에서 front pop
             obj.SetActive(true); // pop된 몬스터 활성화
-            //objectPools[key].Enqueue(obj); // 활성화 된 상태로 rear에 push
+
+            activeObjects.Add(obj); // 활성화된 오브젝트를 리스트에 추가
+
+            objectPools[key].Enqueue(obj); // 활성화 된 상태로 rear에 push
             return obj; //pop된 몬스터 반환
         }
         return null; // 아니면 null 반환
@@ -170,7 +175,7 @@ public class SpawnManager : MonoBehaviour
                 }
             }
         }
-        
+
     }
 
     void GetSpawnPosition(bool isDiagonal)
@@ -237,33 +242,72 @@ public class SpawnManager : MonoBehaviour
 
 
     void SpawnLineFormation(string poolKey, int rows, int countPerRow) // 플레이어 위치 기준 몬스터를 여러 줄 스폰
-{
-    Vector3 playerPosition = player.transform.position; // 플레이어 포지션
-    float offset = 2.0f; // 떨어진 거리
-
-    for (int i = 0; i < rows; i++) // 스폰할 줄만큼 반복
     {
-        Vector3 rowStart = new Vector3(playerPosition.x - (countPerRow / 2) * offset, playerPosition.y + (i * offset), 0);
+        Vector3 playerPosition = player.transform.position; // 플레이어 포지션
+        float offset = 2.0f; // 떨어진 거리
 
-        for (int j = 0; j < countPerRow; j++)
+        for (int i = 0; i < rows; i++) // 스폰할 줄만큼 반복
         {
-            Vector3 position = rowStart + new Vector3(j * offset, 0, 0);
+            Vector3 rowStart = new Vector3(playerPosition.x - (countPerRow / 2) * offset, playerPosition.y + (i * offset), 0);
 
-            Vector3Int tilePosition = tilemap.WorldToCell(position); // 월드 좌표를 타일맵 셀 좌표로 변환
-            TileBase tile = tilemap.GetTile(tilePosition); // 해당 위치의 타일을 가져옴
-
-            // 타일이 존재하고, 해당 타일맵의 타일이 "map" 태그를 가지고 있으며, 해당 위치가 장애물이 아닌 경우
-            if (tile != null && tilemap.HasTile(tilePosition) && tilemap.gameObject.CompareTag("map") &&
-                !Physics2D.OverlapCircle(position, 0.5f, obstacleLayer))
+            for (int j = 0; j < countPerRow; j++)
             {
-                GameObject monster = GetFromPool(poolKey); // 몬스터를 풀에서 가져옴
-                if (monster != null)
+                Vector3 position = rowStart + new Vector3(j * offset, 0, 0);
+
+                Vector3Int tilePosition = tilemap.WorldToCell(position); // 월드 좌표를 타일맵 셀 좌표로 변환
+                TileBase tile = tilemap.GetTile(tilePosition); // 해당 위치의 타일을 가져옴
+
+                // 타일이 존재하고, 해당 타일맵의 타일이 "map" 태그를 가지고 있으며, 해당 위치가 장애물이 아닌 경우
+                if (tile != null && tilemap.HasTile(tilePosition) && tilemap.gameObject.CompareTag("map") &&
+                    !Physics2D.OverlapCircle(position, 0.5f, obstacleLayer))
                 {
-                    monster.transform.position = position; // 몬스터를 해당 위치에 스폰
+                    GameObject monster = GetFromPool(poolKey); // 몬스터를 풀에서 가져옴
+                    if (monster != null)
+                    {
+                        monster.transform.position = position; // 몬스터를 해당 위치에 스폰
+                    }
                 }
             }
         }
     }
-}
 
+    public void DestroyAllPools()
+    {
+        foreach (var pool in objectPools)
+        {
+            // 각각의 몬스터 풀(queue)에 있는 모든 객체를 가져와서 파괴
+            while (pool.Value.Count > 0)
+            {
+                GameObject obj = pool.Value.Dequeue();
+
+                // 게임 오브젝트가 파괴되지 않았으면 파괴
+                if (obj != null)
+                {
+                    Destroy(obj);
+                }
+            }
+        }
+
+        // 딕셔너리 초기화 (objectPools를 비운다)
+        objectPools.Clear();
+    }
+
+    // 활성화된 오브젝트들을 다시 풀에 담는 함수
+    public void ReturnActiveObjectsToPool()
+    {
+        foreach (GameObject obj in activeObjects)
+        {
+            if (obj.activeInHierarchy)
+            {
+                obj.SetActive(false); // 비활성화
+            }
+            // 다시 원래 풀로 넣음
+            string poolKey = obj.name.Replace("(Clone)", "").Trim(); // 풀 이름을 복구
+            if (objectPools.ContainsKey(poolKey))
+            {
+                objectPools[poolKey].Enqueue(obj);
+            }
+        }
+        activeObjects.Clear(); // 리스트 초기화
+    }
 }
