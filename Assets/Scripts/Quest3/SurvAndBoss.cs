@@ -121,6 +121,7 @@ public class SurvAndBoss : PlayerController
                 isInteractionStarted = false;
                 player_T.position = new Vector3(28.5f, -2.5f, 0);
                 QuestManager.instance.CompleteQuest();
+                count = 0;
             }
         }
 
@@ -134,6 +135,7 @@ public class SurvAndBoss : PlayerController
             isInteractionStarted = false;
             player_T.position = new Vector3(28.5f, -2.5f, 0);
             QuestManager.instance.CompleteQuest();
+            count = 0;
         }
     }
 

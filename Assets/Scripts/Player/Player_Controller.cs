@@ -14,10 +14,10 @@ public class PlayerController : MonoBehaviour
     public SpriteRenderer spriteRenderer;
     public Vector3 dir;
     public float speed;
-    public static bool isInteractionStarted = false; 
+    public static bool isInteractionStarted = false;
 
     private Tilemap backgroundTilemap;
-    private Tilemap[] obstacleTilemaps; 
+    private Tilemap[] obstacleTilemaps;
     public Transform player_T;
     public static Vector3 questPosition = new Vector3(-20f, 50f, 0);
     private Vector3Int playerCellPosition;
@@ -68,9 +68,9 @@ public class PlayerController : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-            // graph를 초기화
-            graph.Clear();
-            InitializeTilemaps();
+        // graph를 초기화
+        graph.Clear();
+        InitializeTilemaps();
     }
     private void InitializeTilemaps()
     {
@@ -136,7 +136,7 @@ public class PlayerController : MonoBehaviour
         UpdateGraphNodes(new Vector3Int(1, 1, 0));
     }
 
-    
+
 
 
 

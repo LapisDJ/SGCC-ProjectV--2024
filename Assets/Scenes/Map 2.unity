@@ -2343,6 +2343,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Top
       objectReference: {fileID: 0}
+    - target: {fileID: 6615689191324992926, guid: e130e96a106fa554b9e7d6cde7a8ae95, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -36235,6 +36239,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bottom
       objectReference: {fileID: 0}
+    - target: {fileID: 1490599696246847761, guid: 77726c54b6beef1408b5a37a7d8bbd95, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 2905391008555302852, guid: 77726c54b6beef1408b5a37a7d8bbd95, type: 3}
       propertyPath: m_SortingOrder
       value: 1
@@ -41518,6 +41526,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Right
       objectReference: {fileID: 0}
+    - target: {fileID: 6057328771785343182, guid: 07daf1ace3165ba48896d2a02d372454, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 6252050447065278667, guid: 07daf1ace3165ba48896d2a02d372454, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -41587,7 +41599,7 @@ GameObject:
   - component: {fileID: 1243422392}
   - component: {fileID: 1243422391}
   - component: {fileID: 1243422390}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Wall
   m_TagString: wall
   m_Icon: {fileID: 0}
@@ -48938,6 +48950,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Left
       objectReference: {fileID: 0}
+    - target: {fileID: 4177130667724666524, guid: f3aed67682776ea439f1be6cbbd65506, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 7786402558572339465, guid: f3aed67682776ea439f1be6cbbd65506, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -49094,7 +49110,7 @@ GameObject:
   - component: {fileID: 1932331112}
   - component: {fileID: 1932331111}
   - component: {fileID: 1932331110}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Wreck
   m_TagString: wall
   m_Icon: {fileID: 0}
@@ -53715,7 +53731,7 @@ GameObject:
   - component: {fileID: 2014025289}
   - component: {fileID: 2014025288}
   - component: {fileID: 2014025287}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Building
   m_TagString: wall
   m_Icon: {fileID: 0}

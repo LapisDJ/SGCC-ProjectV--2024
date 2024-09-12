@@ -71,7 +71,7 @@ public class QuestManager : MonoBehaviour
         {
             //SpawnManager.instance.DeactivateActivePools();  // 활성화된 풀 비활성화
             SceneManager.LoadScene("Map " + currentQuest);
-            SpawnManager.instance.ReturnActiveObjectsToPool();
+            SpawnManager.instance.DestroyActiveObjects();
         }
     }
 

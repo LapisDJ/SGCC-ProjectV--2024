@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
 
 public class SpawnManager : MonoBehaviour
@@ -15,9 +16,15 @@ public class SpawnManager : MonoBehaviour
     private float startTime; // 게임 시작 이후 경과시간
 
     public Dictionary<string, Queue<GameObject>> objectPools = new Dictionary<string, Queue<GameObject>>(); // <몬스터, 큐>의 형태로 오브젝트 풀 구성
-    public List<GameObject> activeObjects = new List<GameObject>(); // 활성화된 오브젝트들을 저장할 리스트                                                  // 추가
+    public Queue<GameObject> activeObjects = new Queue<GameObject>(); // 리스트 대신 큐로 변경                      // 추가
     private Queue<Vector3> spawnPointsQueue = new Queue<Vector3>(); // 동시 스폰을 위한, 해당 스폰 타이밍마다의 가능한 스폰 포인트 좌표 큐
     [SerializeField] public Tilemap tilemap; // 유효 스폰 위치 검사 위한 타일맵
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        player = GameObject.FindWithTag("Player");
+        tilemap = GameObject.Find("Background").GetComponent<Tilemap>();
+    }
 
     private void Awake()
     {
@@ -30,6 +37,12 @@ public class SpawnManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        SceneManager.sceneLoaded += OnSceneLoaded; // 씬이 로드될 때마다 호출
+    }
+
+    private void OnDestroy()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded; // 메모리 누수 방지
     }
 
     void Start()
@@ -72,9 +85,9 @@ public class SpawnManager : MonoBehaviour
             GameObject obj = objectPools[key].Dequeue(); // <이름이 key인> 풀에서 front pop
             obj.SetActive(true); // pop된 몬스터 활성화
 
-            activeObjects.Add(obj); // 활성화된 오브젝트를 리스트에 추가
+            activeObjects.Enqueue(obj); // 활성화된 오브젝트를 activeObjects 큐에 추가 (FIFO)
 
-            objectPools[key].Enqueue(obj); // 활성화 된 상태로 rear에 push
+            //objectPools[key].Enqueue(obj); // 활성화 된 상태로 rear에 push
             return obj; //pop된 몬스터 반환
         }
         return null; // 아니면 null 반환
@@ -159,11 +172,12 @@ public class SpawnManager : MonoBehaviour
                 {
                     pathfinding.player = GameObject.FindGameObjectWithTag("Player").transform;
                     pathfinding.backgroundTilemap = GameObject.Find("Background").GetComponent<Tilemap>();
-                    pathfinding.obstacleTilemaps = new Tilemap[6] {
+                    pathfinding.obstacleTilemaps = new Tilemap[7] {
                     GameObject.Find("Left").GetComponent<Tilemap>(),
                     GameObject.Find("Right").GetComponent<Tilemap>(),
                     GameObject.Find("Top").GetComponent<Tilemap>(),
                     GameObject.Find("Bottom").GetComponent<Tilemap>(),
+                    GameObject.Find("Wall").GetComponent<Tilemap>(),
                     GameObject.Find("Wreck").GetComponent<Tilemap>(),
                     GameObject.Find("Building").GetComponent<Tilemap>()
                 };
@@ -288,26 +302,28 @@ public class SpawnManager : MonoBehaviour
             }
         }
 
+        DestroyActiveObjects();
+
         // 딕셔너리 초기화 (objectPools를 비운다)
         objectPools.Clear();
+        activeObjects.Clear();
     }
 
     // 활성화된 오브젝트들을 다시 풀에 담는 함수
-    public void ReturnActiveObjectsToPool()
+    public void DestroyActiveObjects()
     {
-        foreach (GameObject obj in activeObjects)
+        // 1. activeObjects 큐에 있는 모든 오브젝트를 Destroy
+        while (activeObjects.Count > 0) // activeObjects 큐에 오브젝트가 남아 있을 때까지
         {
-            if (obj.activeInHierarchy)
+            GameObject obj = activeObjects.Dequeue(); // activeObjects에서 오브젝트를 꺼냄
+            if (obj != null && obj.activeInHierarchy)
             {
-                obj.SetActive(false); // 비활성화
-            }
-            // 다시 원래 풀로 넣음
-            string poolKey = obj.name.Replace("(Clone)", "").Trim(); // 풀 이름을 복구
-            if (objectPools.ContainsKey(poolKey))
-            {
-                objectPools[poolKey].Enqueue(obj);
+                Destroy(obj); // 오브젝트를 파괴
             }
         }
-        activeObjects.Clear(); // 리스트 초기화
+        activeObjects.Clear();
     }
+
+
+
 }
