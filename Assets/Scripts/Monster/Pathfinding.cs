@@ -81,10 +81,6 @@ public class SimplePathfinding : MonoBehaviour
                 monster.position = Vector3.MoveTowards(monster.position, nextPosition, Time.deltaTime * speed);
 
             }
-            else if(path != null && path.Count == 0)
-            {
-                Debug.LogWarning("플레이어가 몬스터에게 피격받았습니다! ");
-            }
         }
         else
         {

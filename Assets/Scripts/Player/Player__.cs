@@ -27,6 +27,7 @@ public class Player__ : MonoBehaviour
 
     public void Die() // 플레이어 사망 게임 오버
     {
-        Destroy(this);
+        QuestManager.instance.currentQuest = 3;
+        QuestManager.instance.CompleteQuest();
     }
 }

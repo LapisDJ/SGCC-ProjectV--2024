@@ -29,7 +29,6 @@ public class Engineer : PlayerController
 {
     private Vector3 questFinVector = new Vector3(29.5f, -3.5f, 0);   // 플레이어 시작위치 ( 퀘스트 완료 조건으로 사용 )
     private float hp_prev;
-    private float hp_cur;                                                                                         // Player_Controller.cs에서 public ( 아직 미구현 )
     private float interactionTime = 0f;                                                                         // Player_Controller.cs에서 public
     private Vector3 interactPlayerPosition;                                                                     // Player_Controller.cs에서 public
     private float requiredInteractionTime = 10.0f;                                                              // Player_Controller.cs에서 public
@@ -92,7 +91,7 @@ public class Engineer : PlayerController
                 isInteractionStarted = false;
                 interactionTime = 0f;  // 상호작용이 중단되면 시간을 초기화
             }
-            else if (hp_cur < hp_prev)
+            else if (Player_Stat.instance.HPcurrent < hp_prev)
             {
                 Debug.Log("엔지니어 구출 실패");
                 isInteractionStarted = false;
@@ -114,7 +113,7 @@ public class Engineer : PlayerController
         }
 
         
-        hp_prev = hp_cur;
+        hp_prev = Player_Stat.instance.HPcurrent;
         if (Input.GetKey(KeyCode.P))
         {
             Debug.Log("퀘스트1 치트키 클리어!");

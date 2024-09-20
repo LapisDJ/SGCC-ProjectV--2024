@@ -56,13 +56,13 @@ public class SpawnManager : MonoBehaviour
     void InitializeObjectPools() // 풀 초기화 함수
     {
         CreatePool("Slime", slimePrefab, 100);
-        CreatePool("Rat", ratPrefab, 100);
-        CreatePool("Bat", batPrefab, 100);
-        CreatePool("ZombieDog", zombieDogPrefab, 100);
-        CreatePool("Zombie", zombiePrefab, 100);
+        CreatePool("Rat", ratPrefab, 200);
+        CreatePool("Bat", batPrefab, 150);
+        CreatePool("ZombieDog", zombieDogPrefab, 300);
+        CreatePool("Zombie", zombiePrefab, 300);
         CreatePool("Elite1", elite1Prefab, 10);
         CreatePool("Elite2", elite2Prefab, 10);
-        CreatePool("OldRobot", oldRobotPrefab, 100);
+        CreatePool("OldRobot", oldRobotPrefab, 200);
         CreatePool("SmallSpiderRobot", smallSpiderRobotPrefab, 100);
     }
 

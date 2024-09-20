@@ -32,6 +32,11 @@ public class Monster : MonoBehaviour
     protected WeaknessType weakness; // 약점 타입
     public float fadeDuration = 1.0f; // 알파값이 줄어드는 시간 (초)
     protected SpriteRenderer spriteRenderer;
+
+    // ( 플레이어 , 엔지지어 ) 충돌 피해 변수
+    private float lastPlayerDamageTime = -1f;
+    private float lastEngineerDamageTime = -1f;
+
     protected virtual void Awake()
     {
         // 초기화
@@ -42,7 +47,7 @@ public class Monster : MonoBehaviour
     {
         return this.speed;
     }
-    void Attack()
+    void Attack()       // 총 쏘는 몬스터들 추가로 피해주기 구현하기!!
     {
         UnityEngine.Vector2 attackPosition = transform.position; // 몬스터의 현재 위치를 공격 중심으로 설정
         attackPosition.y += 0.5f;
@@ -68,7 +73,49 @@ public class Monster : MonoBehaviour
         }
 
     }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            damageToObjects(collision, "Player");
+        }
 
+        if (collision.CompareTag("Engineer"))
+        {
+            damageToObjects(collision, "Engineer");
+        }
+    }
+    private void damageToObjects(Collider2D collision, string tag)
+    {
+        if (tag == "Player")
+        {
+            // 마지막으로 플레이어에게 피해를 준 시간이 0.1초 이내인지 확인 후 충돌시 피해주기
+            if (Time.time - lastPlayerDamageTime >= 0.1f)
+            {
+                Player__ player__ = collision.GetComponent<Player__>();
+                if (player__ != null)
+                {
+                    player__.TakeDamage(attackDamage);  // 계산된 데미지를 적용
+                    Debug.LogWarning("플레이어가 " + attackDamage + "를 입었습니다");
+                    lastPlayerDamageTime = Time.time; // 피해를 준 시간 기록
+                }
+            }
+        }
+        else if (tag == "Engineer")
+        {
+            // 마지막으로 엔지니어에게 피해를 준 시간이 0.1초 이내인지 확인 후 충돌시 피해주기
+            if (Time.time - lastEngineerDamageTime >= 0.1)
+            {
+                Engineer_Damage engineer = collision.GetComponent<Engineer_Damage>();
+                if (engineer != null)
+                {
+                    engineer.TakeDamage(attackDamage);  // 계산된 데미지를 적용
+                    Debug.LogWarning("엔지니어가 피해를 입었습니다");
+                    lastEngineerDamageTime = Time.time; // 피해를 준 시간 기록
+                }
+            }
+        }
+    }
     public void TakeDamage(float damage)
     {
         currentHP -= damage;

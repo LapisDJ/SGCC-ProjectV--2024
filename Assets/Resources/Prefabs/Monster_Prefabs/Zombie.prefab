@@ -106,6 +106,8 @@ MonoBehaviour:
   lastAttacktime: 0
   attackCooldown: 0
   animator: {fileID: 0}
+  key: 
+  fadeDuration: 1
 --- !u!70 &6368578729481547090
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -135,7 +137,7 @@ CapsuleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.01, y: -0.1}
