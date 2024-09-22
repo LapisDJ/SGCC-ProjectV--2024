@@ -32,7 +32,7 @@ public class RealtimeManager : MonoBehaviour
 
         if (monsterkill >= needKillsToLevelUp)
         {
-            playerstat.LevelUp();
+            Player_Stat.instance.LevelUp();
             monsterkill -= needKillsToLevelUp;
             updateNeedKillsToLevelUp();
         }
