@@ -18,7 +18,7 @@ public class MiddleBossActivator : PlayerController
     private bool isBossDead = false;    // 중간보스가 처치되었는지 여부
     private bool bossAlive = false;
     private Vector3 bossPosition;
-    private new void Start()
+    private void Start()
     {
         questPosition = new Vector3(1.5f, 35f, 0);
         player_T = GameObject.Find("Player").transform;

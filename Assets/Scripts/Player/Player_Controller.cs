@@ -81,8 +81,6 @@ public class PlayerController : MonoBehaviour
 
     private void SetTilemaps()
     {
-        Debug.Log("Map을 불러오는 중입니다...");
-
         // Background 타일맵을 Tag를 사용해서 불러옴
         GameObject backgroundTilemapObject = GameObject.FindWithTag("map");
         if (backgroundTilemapObject != null)

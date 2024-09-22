@@ -2374,11 +2374,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7468599394232733844, guid: 0c0b02dca944dcc4ead2c01d020df197, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 21.1
+      value: -15
       objectReference: {fileID: 0}
     - target: {fileID: 7468599394232733844, guid: 0c0b02dca944dcc4ead2c01d020df197, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 37.5
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 7468599394232733844, guid: 0c0b02dca944dcc4ead2c01d020df197, type: 3}
       propertyPath: m_LocalPosition.z
@@ -52053,16 +52053,6 @@ Tilemap:
   - first: {x: -9, y: 46, z: 0}
     second:
       serializedVersion: 2
-      m_TileIndex: 16
-      m_TileSpriteIndex: 16
-      m_TileMatrixIndex: 0
-      m_TileColorIndex: 0
-      m_TileObjectToInstantiateIndex: 65535
-      dummyAlignment: 0
-      m_AllTileFlags: 1073741825
-  - first: {x: -8, y: 46, z: 0}
-    second:
-      serializedVersion: 2
       m_TileIndex: 83
       m_TileSpriteIndex: 83
       m_TileMatrixIndex: 0
@@ -52070,7 +52060,7 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
-  - first: {x: -7, y: 46, z: 0}
+  - first: {x: -8, y: 46, z: 0}
     second:
       serializedVersion: 2
       m_TileIndex: 84
@@ -52080,11 +52070,21 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
-  - first: {x: -6, y: 46, z: 0}
+  - first: {x: -7, y: 46, z: 0}
     second:
       serializedVersion: 2
       m_TileIndex: 85
       m_TileSpriteIndex: 85
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 1073741825
+  - first: {x: -6, y: 46, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 16
+      m_TileSpriteIndex: 16
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -52123,16 +52123,6 @@ Tilemap:
   - first: {x: -9, y: 47, z: 0}
     second:
       serializedVersion: 2
-      m_TileIndex: 16
-      m_TileSpriteIndex: 16
-      m_TileMatrixIndex: 0
-      m_TileColorIndex: 0
-      m_TileObjectToInstantiateIndex: 65535
-      dummyAlignment: 0
-      m_AllTileFlags: 1073741825
-  - first: {x: -8, y: 47, z: 0}
-    second:
-      serializedVersion: 2
       m_TileIndex: 80
       m_TileSpriteIndex: 80
       m_TileMatrixIndex: 0
@@ -52140,7 +52130,7 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
-  - first: {x: -7, y: 47, z: 0}
+  - first: {x: -8, y: 47, z: 0}
     second:
       serializedVersion: 2
       m_TileIndex: 81
@@ -52150,11 +52140,21 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
-  - first: {x: -6, y: 47, z: 0}
+  - first: {x: -7, y: 47, z: 0}
     second:
       serializedVersion: 2
       m_TileIndex: 82
       m_TileSpriteIndex: 82
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 1073741825
+  - first: {x: -6, y: 47, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 16
+      m_TileSpriteIndex: 16
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -52193,16 +52193,6 @@ Tilemap:
   - first: {x: -9, y: 48, z: 0}
     second:
       serializedVersion: 2
-      m_TileIndex: 16
-      m_TileSpriteIndex: 16
-      m_TileMatrixIndex: 0
-      m_TileColorIndex: 0
-      m_TileObjectToInstantiateIndex: 65535
-      dummyAlignment: 0
-      m_AllTileFlags: 1073741825
-  - first: {x: -8, y: 48, z: 0}
-    second:
-      serializedVersion: 2
       m_TileIndex: 77
       m_TileSpriteIndex: 77
       m_TileMatrixIndex: 0
@@ -52210,7 +52200,7 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
-  - first: {x: -7, y: 48, z: 0}
+  - first: {x: -8, y: 48, z: 0}
     second:
       serializedVersion: 2
       m_TileIndex: 78
@@ -52220,11 +52210,21 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
-  - first: {x: -6, y: 48, z: 0}
+  - first: {x: -7, y: 48, z: 0}
     second:
       serializedVersion: 2
       m_TileIndex: 79
       m_TileSpriteIndex: 79
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 1073741825
+  - first: {x: -6, y: 48, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 16
+      m_TileSpriteIndex: 16
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -53681,11 +53681,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7468599394232733844, guid: 0c0b02dca944dcc4ead2c01d020df197, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 26.3
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 7468599394232733844, guid: 0c0b02dca944dcc4ead2c01d020df197, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 22.7
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 7468599394232733844, guid: 0c0b02dca944dcc4ead2c01d020df197, type: 3}
       propertyPath: m_LocalPosition.z
@@ -55928,19 +55928,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player_level: 1
-  expgainrate: 1
-  WorkSpeed: 1
-  Luck: 0
+  expgainratebylevel: 1
+  expgainratebypassive: 1
+  expgainratefin: 0
+  WorkSpeedbylevel: 1
+  WorkSpeedbypassive: 1
+  WorkSpeedfin: 0
+  Luckbylevel: 0
+  Luckbypassive: 0
+  Luckfin: 0
   CriticalChance: 0
+  CriticalChancebypassive: 0
+  CriticalChancefin: 0
   HPcurrent: 0
   HPbylevel: 50
   HPbonus: 1
+  HPbypassive: 0
   HPmax: 0
   HPpreviousmax: 0
   speedAdd: 5
   speedMulti: 1
+  speedbypassive: 0
   speedFin: 0
   attackDamageByLevel: 5
+  attackDamagebypassive: 0
+  attackDamagefin: 0
+  instancedeathchance: 0
+  isinvincible: 0
 --- !u!114 &1766559826
 MonoBehaviour:
   m_ObjectHideFlags: 0

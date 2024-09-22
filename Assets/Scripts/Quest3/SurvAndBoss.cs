@@ -25,19 +25,19 @@ public class SurvAndBoss : PlayerController
         GameObject surv1 = GameObject.Find("Surv1");
         if (surv1 != null)
         {
-            surv1.transform.position = new Vector3(-5f, 48f, 0f);
+            surv1.transform.position = new Vector3(-4f, 48f, 0f);
         }
 
         GameObject surv2 = GameObject.Find("Surv2");
         if (surv2 != null)
         {
-            surv2.transform.position = new Vector3(-15.5f, 12.5f, 0f);
+            surv2.transform.position = new Vector3(-15f, 13f, 0f);
         }
 
         GameObject surv3 = GameObject.Find("Surv3");
         if (surv3 != null)
         {
-            surv3.transform.position = new Vector3(24.5f, 14.5f, 0f);
+            surv3.transform.position = new Vector3(25f, 15f, 0f);
         }
 
 
