@@ -40010,7 +40010,7 @@ MonoBehaviour:
   - {fileID: 1755180216}
   - {fileID: 570736373}
   - {fileID: 261996772}
-  playerstat: {fileID: 0}
+  playerstat: {fileID: 1791539609}
   hpbar: {fileID: 461111156}
   isskillchoose: 0
   tempskillchoice: 9
@@ -41206,6 +41206,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Engineer
       objectReference: {fileID: 0}
+    - target: {fileID: 1422554002004728650, guid: 0c0b02dca944dcc4ead2c01d020df197, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3818108064310841686, guid: 0c0b02dca944dcc4ead2c01d020df197, type: 3}
       propertyPath: m_Radius
       value: 0.1
@@ -41234,6 +41238,10 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 7295288512913145437, guid: 0c0b02dca944dcc4ead2c01d020df197, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 2023131565}
     - target: {fileID: 7468599394232733844, guid: 0c0b02dca944dcc4ead2c01d020df197, type: 3}
       propertyPath: m_LocalScale.x
       value: 4.5
@@ -41280,6 +41288,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7468599394232733844, guid: 0c0b02dca944dcc4ead2c01d020df197, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7861136034998015232, guid: 0c0b02dca944dcc4ead2c01d020df197, type: 3}
+      propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
@@ -41408,7 +41420,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ea1fd6a6243d4d99a4805d98850f89e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerstat: {fileID: 0}
+  playerstat: {fileID: 1791539609}
   monsterkill: 0
   needKillsToLevelUp: 1
 --- !u!4 &1530311332
@@ -41677,9 +41689,6 @@ GameObject:
   - component: {fileID: 1621604335}
   - component: {fileID: 1621604334}
   - component: {fileID: 1621604333}
-  - component: {fileID: 1621604332}
-  - component: {fileID: 1621604331}
-  - component: {fileID: 1621604330}
   - component: {fileID: 1621604329}
   m_Layer: 5
   m_Name: Layover UI
@@ -41725,56 +41734,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 2
   m_VerticalFit: 2
---- !u!114 &1621604330
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1621604327}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16abea25099e24d5c8e32d58e2ad08b7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1621604331
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1621604327}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8cbdd68a3858546c5840aa836a796530, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1621604332
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1621604327}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5de58e3a2014e4d4b8c86e4800d7adb1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player_level: 1
-  expgainrate: 1
-  WorkSpeed: 1
-  Luck: 0
-  CriticalChance: 0
-  HPcurrent: 0
-  HPbylevel: 50
-  HPbonus: 1
-  HPmax: 0
-  HPpreviousmax: 0
-  speedAdd: 5
-  speedMulti: 1
-  speedFin: 0
-  attackDamageByLevel: 5
 --- !u!114 &1621604333
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -42595,6 +42554,78 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1799502665}
   m_SourcePrefab: {fileID: 100100000, guid: 318bb5e12a81b67409a0e40e0a64039d, type: 3}
+--- !u!1 &1791539608
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1791539610}
+  - component: {fileID: 1791539609}
+  m_Layer: 0
+  m_Name: Player_Stat
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1791539609
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1791539608}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5de58e3a2014e4d4b8c86e4800d7adb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player_level: 1
+  expgainratebylevel: 1
+  expgainratebypassive: 1
+  expgainratefin: 0
+  WorkSpeedbylevel: 1
+  WorkSpeedbypassive: 1
+  WorkSpeedfin: 0
+  Luckbylevel: 0
+  Luckbypassive: 0
+  Luckfin: 0
+  CriticalChance: 0
+  CriticalChancebypassive: 0
+  CriticalChancefin: 0
+  HPcurrent: 0
+  HPbylevel: 50
+  HPbonus: 1
+  HPbypassive: 0
+  HPmax: 0
+  HPpreviousmax: 0
+  speedAdd: 5
+  speedMulti: 1
+  speedbypassive: 0
+  speedFin: 0
+  attackDamageByLevel: 5
+  attackDamagebypassive: 0
+  attackDamagefin: 0
+  instancedeathchance: 0
+  isinvincible: 0
+--- !u!4 &1791539610
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1791539608}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -3.9507113, y: 9.11729, z: -0.22126074}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1799502635 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1034961518565794693, guid: 318bb5e12a81b67409a0e40e0a64039d, type: 3}
@@ -70212,3 +70243,4 @@ SceneRoots:
   - {fileID: 210154917}
   - {fileID: 1530311332}
   - {fileID: 1830412169}
+  - {fileID: 1791539610}
