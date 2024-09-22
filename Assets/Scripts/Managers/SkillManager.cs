@@ -278,4 +278,16 @@ public class SkillManager : MonoBehaviour
             yield return new WaitForSeconds(skill.cooldown);
         }
     }
+    private IEnumerator Invincible(PassiveSkill passive)
+    {
+        while(true)
+        {
+            if (passive.CanActivate())
+            {
+                Player_Stat.instance.isinvincible = true;
+            }
+            yield return new WaitForSeconds(passive.effect);
+            Player_Stat.instance.isinvincible = false;
+        }
+    }
 }

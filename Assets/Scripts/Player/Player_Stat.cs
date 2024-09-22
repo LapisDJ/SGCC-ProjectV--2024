@@ -7,23 +7,36 @@ public class Player_Stat : MonoBehaviour
 {
     public static Player_Stat instance;
     [SerializeField] public int player_level = 1; // 플레이어 레벨
-    [SerializeField] float expgainrate = 1.0f; // 플레이어 경험치
-    [SerializeField] float WorkSpeed = 1.0f; // 플레이어 작업 속도
-    [SerializeField] float Luck = 0.0f; // 플레이어 행운
+    [SerializeField] float expgainratebylevel = 1.0f; // 플레이어 경험치
+    public float expgainratebypassive = 1.0f;
+    [SerializeField] float expgainratefin;
+    [SerializeField] float WorkSpeedbylevel = 1.0f; // 플레이어 작업 속도
+    public float WorkSpeedbypassive = 1.0f; 
+    [SerializeField] float WorkSpeedfin;
+    [SerializeField] float Luckbylevel = 0.0f; // 플레이어 행운
+    public float Luckbypassive = 0.0f;
+    [SerializeField] float Luckfin;
     [SerializeField] float CriticalChance = 0.0f; // 플레이어 치명타 확률
+    public float CriticalChancebypassive = 0.0f;
+    [SerializeField] float CriticalChancefin;
     //hp
     public float HPcurrent; // 플레이어 현재 HP
     [SerializeField] float HPbylevel = 50.0f; // 플레이어 10랩마다 성장 체력
     [SerializeField] float HPbonus = 1.0f; // 플
+    public float HPbypassive;
     public float HPmax; // 플례이어 최대체력
     public float HPpreviousmax;
     //speed
     public float speedAdd = 5.0f;
     public float speedMulti = 1.0f;
+    public float speedbypassive;
     public float speedFin;
     //attackdamage
     public float attackDamageByLevel = 5.0f; //플레이어 자체 공격력
-
+    public float attackDamagebypassive;
+    public float attackDamagefin;
+    public float instancedeathchance;
+    public bool isinvincible = false;
     private void Awake()
     {
         if (instance == null)
@@ -64,13 +77,10 @@ public class Player_Stat : MonoBehaviour
     }
     void UpdateStatsByLevel()
     {
-        HPmax = HPbylevel * HPbonus;
-        HPpreviousmax = HPmax;
+        HPpreviousmax = HPbylevel * HPbonus * HPbypassive;
         switch (player_level)
         {
             case 1:
-                HPmax = HPbylevel * HPbonus;
-                HPpreviousmax = HPmax;
                 HPcurrent = HPmax;
                 attackDamageByLevel = 5.0f;
                 break;
@@ -85,7 +95,7 @@ public class Player_Stat : MonoBehaviour
                 break;
             case 5:
                 attackDamageByLevel++;
-                Luck += 0.05f;
+                Luckbylevel += 0.05f;
                 break;
             case 6:
                 attackDamageByLevel++;
@@ -101,8 +111,8 @@ public class Player_Stat : MonoBehaviour
                 break;
             case 10:
                 attackDamageByLevel += 3;
-                WorkSpeed += 0.05f;
-                Luck += 0.05f;
+                WorkSpeedbylevel += 0.05f;
+                Luckbylevel += 0.05f;
                 speedMulti += 0.1f;
                 HPbonus += 0.1f;
                 break;
@@ -120,7 +130,7 @@ public class Player_Stat : MonoBehaviour
                 break;
             case 15:
                 attackDamageByLevel++;
-                Luck += 0.05f;
+                Luckbylevel += 0.05f;
                 break;
             case 16:
                 attackDamageByLevel++;
@@ -136,8 +146,8 @@ public class Player_Stat : MonoBehaviour
                 break;
             case 20:
                 attackDamageByLevel+= 3;
-                Luck += 0.05f;
-                WorkSpeed += 0.05f;
+                Luckbylevel += 0.05f;
+                WorkSpeedbylevel += 0.05f;
                 break;
             case 21:
                 attackDamageByLevel++;
@@ -153,7 +163,7 @@ public class Player_Stat : MonoBehaviour
                 break;
             case 25:
                 attackDamageByLevel++;
-                Luck += 0.05f;
+                Luckbylevel += 0.05f;
                 break;
             case 26:
                 attackDamageByLevel++;
@@ -176,16 +186,23 @@ public class Player_Stat : MonoBehaviour
                 // 최고 레벨을 넘어가는 경우 처리
                 break;
         }
-        HPmax = HPbylevel * HPbonus;
-        HPcurrent += HPmax - HPpreviousmax;
-        speedFin = speedAdd * speedMulti;
-
-        // 현재 체력 증가량만큼 추가
+        setStat();
     }
 
     public bool CheckCritical()
     {
         float randomValue = Random.Range(0f, 1f); // 0에서 1 사이의 랜덤 값을 생성
         return randomValue < CriticalChance;
+    }
+    public void setStat()
+    {
+        expgainratefin = expgainratebylevel + expgainratebypassive;
+        WorkSpeedfin = WorkSpeedbylevel * WorkSpeedbypassive;
+        Luckfin = Luckbylevel + Luckbypassive;
+        CriticalChancefin = CriticalChance + CriticalChancebypassive;
+        HPmax = HPbylevel * HPbonus * HPbylevel;
+        HPcurrent += HPmax - HPpreviousmax;
+        speedFin = speedAdd * speedMulti * speedbypassive;
+        attackDamagefin = attackDamageByLevel * attackDamagebypassive;
     }
 }

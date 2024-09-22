@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class Player__ : MonoBehaviour
@@ -17,6 +18,10 @@ public class Player__ : MonoBehaviour
     {
         if (Player_Stat.instance != null)
         {
+            if(Player_Stat.instance.isinvincible)
+            {
+                damage = 0;
+            }
             Player_Stat.instance.HPcurrent -= damage;
             if (Player_Stat.instance.HPcurrent <= 0)
             {

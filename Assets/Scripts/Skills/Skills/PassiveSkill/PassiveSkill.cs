@@ -10,6 +10,7 @@ public class PassiveSkill : MonoBehaviour
     public float effect; // 효과량
     public float cooldown; // 쿨타임
     public string levelupguide;
+    public float lastUsedTime;
     [SerializeField] public Sprite icon;//아이콘
     protected PassiveSkill() // 기본 생성자
     {
@@ -33,5 +34,9 @@ public class PassiveSkill : MonoBehaviour
     public float GetCooldown() // 스킬 쿨타임, 각 스킬에서 오버라이딩 필요
     {
         return cooldown;
+    }
+    public bool CanActivate()
+    {
+        return Time.time >= lastUsedTime + cooldown;
     }
 }

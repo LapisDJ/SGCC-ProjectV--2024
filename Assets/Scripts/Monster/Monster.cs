@@ -118,6 +118,11 @@ public class Monster : MonoBehaviour
     }
     public void TakeDamage(float damage)
     {
+        float randomValue = Random.Range(0f, 1f); // 0에서 1 사이의 랜덤 값을 생성
+        if(randomValue < Player_Stat.instance.instancedeathchance)
+        {
+            damage = 2147483647;
+        }
         currentHP -= damage;
         if (currentHP <= 0)
         {
