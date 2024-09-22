@@ -12,14 +12,17 @@ public class CircleSword : Skill
         cooldown = 4f;
         icon = Resources.Load<Sprite>("UI/Icon/11");
         levelupguide = "원 범위로 피해를 줍니다";
+        animator = GetComponent<Animator>();
     }
 
     private float circleAttackRadius = 2f; // 원 범위 반지름
     WeaknessType weaknessType = WeaknessType.Slash;
     public override void Activate() // 몬스터와 상호 작용 로직
     {
+        transform.localScale = new Vector3(circleAttackRadius, circleAttackRadius, 1f); // 원하는 크기로 설정, 예시로 2배 크기
+
         transform.position = player.transform.position;
-        animator.SetBool("isUse" , true);
+        animator.Play("bladestorm");
         Monster monster;
         float totalDamage = 0f; // 몬스터가 입는 총 데미지
 
@@ -87,6 +90,5 @@ public class CircleSword : Skill
     IEnumerator Waitforseconds()
     {
         yield return new WaitForSeconds(1.0f);
-        animator.SetBool("isUse", false);
     }
 }
