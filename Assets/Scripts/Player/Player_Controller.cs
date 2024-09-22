@@ -88,7 +88,6 @@ public class PlayerController : MonoBehaviour
         if (backgroundTilemapObject != null)
         {
             backgroundTilemap = backgroundTilemapObject.GetComponent<Tilemap>();
-            Debug.Log("Background 타일맵을 불러왔습니다...");
         }
         else
         {
@@ -112,7 +111,6 @@ public class PlayerController : MonoBehaviour
             if (obstacleTilemapObject != null)
             {
                 obstacleTilemaps[i] = obstacleTilemapObject.GetComponent<Tilemap>();
-                Debug.Log(obstacleTilemapNames[i] + " 타일맵을 불러왔습니다.");
             }
             else
             {
@@ -128,7 +126,6 @@ public class PlayerController : MonoBehaviour
     private void InitializePlayerAndGraph() // 새로운 씬 로드 후 플레이어와 그래프 초기화
     {
         // QuestManager에서 현재 퀘스트에 맞는 플레이어 시작 위치를 가져옴
-        Debug.Log("Map " + QuestManager.instance.GetCurrentQuest() + "의 플레이어 위치를 초기화 했습니다...");
         player_T.position = QuestManager.instance.GetPlayerStartPosition(QuestManager.instance.GetCurrentQuest());
 
         // 그래프 초기화
@@ -142,38 +139,6 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        // 경로 갱신 전에 이전 경로들을 null로 초기화
-        path = null;
-        pathInt = null;
-        playerCellPosition = backgroundTilemap.WorldToCell(player_T.position);  // 플레이어 위치를 정수좌표로 저장
-        // 만약 이전 프레임의 플레이어 위치가 그래프에 포함되지 않았다면, 이전 위치로 되돌림
-        if (!graph.ContainsKey(playerCellPosition))
-        {
-            Debug.Log("그래프에 포함되지 않은 위치로 이동하려고 합니다. 이전 위치로 되돌립니다.");
-            playerCellPosition = previousPlayerCellPosition;
-            player_T.position = prevPlayerPosition;
-            prevPlayerPosition = player_T.position;
-        }
-        else
-        {
-            // 현재 위치가 그래프에 포함된 경우, 이전 위치를 갱신
-            previousPlayerCellPosition = playerCellPosition;
-            prevPlayerPosition = player_T.position;
-        }
-
-
-
-        questCellPosition = backgroundTilemap.WorldToCell(questPosition);   // 퀘스트에서 이동해야할 위치를 정수좌표로 저장
-
-        if (graph.ContainsKey(questCellPosition) && graph.ContainsKey(playerCellPosition))  // 퀘스트 이동좌표와 플레이어 위치가 그래프 안에 있는 경우
-        {
-            pathInt = FindPath(questCellPosition, playerCellPosition);    // path를 통해 플레이어 위치에서 퀘스트 이동좌표까지 최단 경로를 계산
-            if (pathInt != null)
-            {
-                path = ConvertVector3IntToVector3(pathInt);
-            }
-        }
-
         if (!isInteractionStarted)
         {
             if (Player_Stat.instance == null)
@@ -205,6 +170,93 @@ public class PlayerController : MonoBehaviour
         {
             rb.velocity = Vector3.zero;
         }
+        // 경로 갱신 전에 이전 경로들을 null로 초기화
+        path = null;
+        pathInt = null;
+        playerCellPosition = backgroundTilemap.WorldToCell(player_T.position);  // 플레이어 위치를 정수좌표로 저장
+        // 만약 이전 프레임의 플레이어 위치가 그래프에 포함되지 않았다면, 이전 위치로 되돌림
+        if (!graph.ContainsKey(playerCellPosition))
+        {
+            // 이동하려는 방향에 대한 보정 로직
+            if (Mathf.Abs(dir.x) > 0 && Mathf.Abs(dir.y) > 0) // 대각선 방향인지 확인
+            {
+
+                // 네 방향 좌표 계산
+                Vector3Int rightPosition = new Vector3Int(playerCellPosition.x + 1, playerCellPosition.y, 0);
+                Vector3Int leftPosition = new Vector3Int(playerCellPosition.x - 1, playerCellPosition.y, 0);
+                Vector3Int upPosition = new Vector3Int(playerCellPosition.x, playerCellPosition.y + 1, 0);
+                Vector3Int downPosition = new Vector3Int(playerCellPosition.x, playerCellPosition.y - 1, 0);
+
+                // 각 방향에 대한 이동 가능 여부 확인
+                bool canMoveRight = graph.ContainsKey(rightPosition);
+                bool canMoveLeft = graph.ContainsKey(leftPosition);
+                bool canMoveUp = graph.ContainsKey(upPosition);
+                bool canMoveDown = graph.ContainsKey(downPosition);
+
+                // 오른쪽 위 대각선 방향인 경우
+                if (dir.x > 0 && dir.y > 0)
+                {
+                    if (canMoveRight)
+                    {
+                        dir = Vector3Int.right;
+                    }
+                    else if (canMoveUp)
+                    {
+                        dir = Vector3Int.up;
+                    }
+                }
+                // 오른쪽 아래 대각선 방향인 경우
+                else if (dir.x > 0 && dir.y < 0)
+                {
+                    if (canMoveRight)
+                    {
+                        dir = Vector3Int.right;
+                    }
+                    else if (canMoveDown)
+                    {
+                        dir = Vector3Int.down;
+                    }
+                }
+                // 왼쪽 위 대각선 방향인 경우
+                else if (dir.x < 0 && dir.y > 0)
+                {
+                    if (canMoveLeft)
+                    {
+                        dir = Vector3Int.left;
+                    }
+                    else if (canMoveUp)
+                    {
+                        dir = Vector3Int.up;
+                    }
+                }
+                // 왼쪽 아래 대각선 방향인 경우
+                else if (dir.x < 0 && dir.y < 0)
+                {
+                    if (canMoveLeft)
+                    {
+                        dir = Vector3Int.left;
+                    }
+                    else if (canMoveDown)
+                    {
+                        dir = Vector3Int.down;
+                    }
+                }
+            }
+        }
+
+
+        questCellPosition = backgroundTilemap.WorldToCell(questPosition);   // 퀘스트에서 이동해야할 위치를 정수좌표로 저장
+
+        if (graph.ContainsKey(questCellPosition) && graph.ContainsKey(playerCellPosition))  // 퀘스트 이동좌표와 플레이어 위치가 그래프 안에 있는 경우
+        {
+            pathInt = FindPath(questCellPosition, playerCellPosition);    // path를 통해 플레이어 위치에서 퀘스트 이동좌표까지 최단 경로를 계산
+            if (pathInt != null)
+            {
+                path = ConvertVector3IntToVector3(pathInt);
+            }
+        }
+
+
 
         // Path를 LineRenderer로 그리기
         DrawPath();
