@@ -106,7 +106,7 @@ public class Monster : MonoBehaviour
             // 마지막으로 엔지니어에게 피해를 준 시간이 0.1초 이내인지 확인 후 충돌시 피해주기
             if (Time.time - lastEngineerDamageTime >= 0.1)
             {
-                Engineer_Damage engineer = collision.GetComponent<Engineer_Damage>();
+                Engineer engineer = collision.GetComponent<Engineer>();
                 if (engineer != null)
                 {
                     engineer.TakeDamage(attackDamage);  // 계산된 데미지를 적용

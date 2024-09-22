@@ -1,32 +1,15 @@
-/*
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class Engineer : Player
-{
-    // 엔지니어 전용 체력 설정
-    [SerializeField] private float engineerBaseHP = 100.0f; // 엔지니어 기본 HP
-
-
-    public void TakeDamage(float damage)
-    {
-        Debug.Log($"엔지니어가 {damage} 데미지를 받았습니다. 남은 체력: {engineerBaseHP}");
-    }
-
-    public void Die()
-    {
-        Debug.Log("엔지니어가 사망했습니다.");
-    }
-}
-*/
-// 엔지니어 체력 조건 추가해서 퀘스트에 사용해야함 
-
 using UnityEngine;
 using static UnityEngine.RuleTile.TilingRuleOutput;
+using UnityEngine.UI; // UI 관련 라이브러리 추가
 
 public class Engineer : PlayerController
 {
+    public float Engineer_HP = 100f; // 엔지니어 시작 체력 설정
+    public float maxHP = 100f;      // 최대 체력
+    public Slider hpSlider;         // HP 바를 연결할 슬라이더
+    public Vector3 hpBarOffset = new Vector3(0, -27f, 0); // 엔지니어 머리 위에 표시될 HP 바의 오프셋 위치
+
+
     private Vector3 questFinVector = new Vector3(29.5f, -3.5f, 0);   // 플레이어 시작위치 ( 퀘스트 완료 조건으로 사용 )
     private float hp_prev;
     private float interactionTime = 0f;                                                                         // Player_Controller.cs에서 public
@@ -41,6 +24,13 @@ public class Engineer : PlayerController
     private bool questEnd = false;
     private void Start()
     {
+        // 시작할 때 HP 슬라이더 값을 최대 체력에 맞게 초기화
+        if (hpSlider != null)
+        {
+            hpSlider.minValue = 0;         // 슬라이더의 최소값 설정
+            hpSlider.maxValue = maxHP;
+            hpSlider.value = Engineer_HP;
+        }
         QuestManager.instance.currentQuest = 1;
         player_T.position = questFinVector;
         transform.position = engineerStartVector;   // 엔지니어 시작위치 정하기
@@ -52,6 +42,14 @@ public class Engineer : PlayerController
     private void Update()
     {
         inputDirection = new Vector3(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;  // 플레이어 이동 방향 저장
+
+        // 엔지니어 머리 위에 HP 바 위치 설정
+        if (hpSlider != null)
+        {
+            Vector3 worldPosition = transform.position - new Vector3 (0 , -0.5f , 0); // 엔지니어의 위치에서 오프셋 추가
+            hpSlider.transform.position = worldPosition; // 슬라이더 위치를 화면 좌표로 설정
+        }
+
         if (inputDirection == Vector3.zero) // 플레이어가 이동하지 않은 경우
         {
             inputDirection = dir_temp; // 이전에 저장한 마지막으로 플레이어 이동한 방향으로 저장
@@ -119,5 +117,35 @@ public class Engineer : PlayerController
             Debug.Log("퀘스트1 치트키 클리어!");
             QuestManager.instance.CompleteQuest();
         }
+    }
+
+    public void TakeDamage(float damage) // 엔지니어가 받는 데미지 로직
+    {
+        Debug.Log("엔지니어 체력 : " + Engineer_HP);
+        Engineer_HP -= damage;
+
+        // HP가 0 이하로 떨어지면 사망 처리
+        if (Engineer_HP <= 0)
+        {
+            Engineer_HP = 0;
+            Die();
+        }
+        
+        // 슬라이더 값 업데이트
+        if (hpSlider != null)
+        {
+            hpSlider.value = Engineer_HP;
+        }
+        
+    }
+
+    public void Die() // 엔지니어 사망 시 게임 오버
+    {
+        // 게임 오브젝트를 파괴하고 게임 오버 처리
+        Destroy(this.gameObject);
+
+        // 게임 마지막 화면으로 가도록 퀘스트 상태 변경
+        QuestManager.instance.currentQuest = 3;
+        QuestManager.instance.CompleteQuest();
     }
 }
