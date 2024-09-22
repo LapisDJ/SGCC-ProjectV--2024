@@ -93,6 +93,7 @@ public class UIManager : MonoBehaviour
         SkillChoose.SetActive(false);
         Time.timeScale = 1.0f;
         SkillManager.instance.SkillLevelUP();
+        Player_Stat.instance.setStat();
     }
     void Update()
     {

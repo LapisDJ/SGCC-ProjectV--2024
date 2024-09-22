@@ -17,6 +17,7 @@ public class LearnPill : PassiveSkill
     {
         base.LevelUp(); // 스킬 레벨업
         this.effect += 0.1f; // 1레벨을 제외한 모든 레벨에서 효과가 10%p씩 상승.
+        Player_Stat.instance.expgainratebypassive = effect;
         this.levelupguide = "경헙치 획득량 증가 " + Convert.ToString(effect * 100) + "% -> " + Convert.ToString((effect + 0.1f) * 100) + "%";
     }
 }
