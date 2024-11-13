@@ -41,6 +41,7 @@ public class SkillManager : MonoBehaviour
             Skill skill = Instantiate(prefab).GetComponent<Skill>();
             if (skill != null)
             {
+                DontDestroyOnLoad(skill.gameObject); // 생성된 스킬 오브젝트가 씬 전환 시 삭제되지 않도록 설정
                 availableActiveSkills.Add(skill);
             }
         }
@@ -51,16 +52,23 @@ public class SkillManager : MonoBehaviour
             PassiveSkill passiveSkill = Instantiate(prefab).GetComponent<PassiveSkill>();
             if (passiveSkill != null)
             {
+                DontDestroyOnLoad(passiveSkill.gameObject); // 생성된 패시브 스킬 오브젝트가 씬 전환 시 삭제되지 않도록 설정
                 availablePassiveSkills.Add(passiveSkill);
             }
         }
-        activeSkills.Add(availableActiveSkills[4]);
+
+        // 초기 액티브 스킬 추가
+        if (availableActiveSkills.Count > 4)
+        {
+            activeSkills.Add(availableActiveSkills[4]);
+        }
 
         foreach (Skill skill in activeSkills)
         {
             StartCoroutine(AutoActivateSkill(skill));
         }
     }
+
     private T CreateActiveSkill<T>() where T : Skill
     {
         GameObject skillObject = new GameObject(typeof(T).Name);

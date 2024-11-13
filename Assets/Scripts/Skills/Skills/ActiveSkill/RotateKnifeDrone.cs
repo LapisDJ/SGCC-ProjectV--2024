@@ -115,6 +115,10 @@ public class RotateKnifeDrone : Skill
             float angle = i * Mathf.PI * 2f / knifeCount;
             Vector3 position = new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0) * knifeRadius;
             GameObject knife = Instantiate(knifeDronePrefab, transform.position + position, Quaternion.identity);
+
+            // DontDestroyOnLoad 설정
+            DontDestroyOnLoad(knife);
+
             knifeDrones.Add(knife);
             knifeCooldowns.Add(0f); // 쿨다운 초기화
         }
