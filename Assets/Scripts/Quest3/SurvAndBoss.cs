@@ -2,6 +2,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using static UnityEngine.RuleTile.TilingRuleOutput;
+using UnityEngine.UI;
 
 public class SurvAndBoss : PlayerController
 {
@@ -20,8 +21,54 @@ public class SurvAndBoss : PlayerController
     private Vector3 bossPosition;
     private bool bossAlive = false;
     private float interactReach = 5.0f;
+    public Slider interactionSlider1; // 상호작용 게이지 바 연결
+    public Slider interactionSlider2;
+    public Slider interactionSlider3;
     private void Start()
     {
+        GameObject gauzeBar1 = GameObject.Find("Gauze_Bar2"); // Gauze_Bar3 오브젝트 찾기
+        if (gauzeBar1 != null)
+        {
+            interactionSlider1 = gauzeBar1.GetComponentInChildren<Slider>(); // 하위에 있는 Slider 컴포넌트 가져오기
+        }
+        GameObject gauzeBar2 = GameObject.Find("Gauze_Bar1"); // Gauze_Bar3 오브젝트 찾기
+        if (gauzeBar2 != null)
+        {
+            interactionSlider2 = gauzeBar2.GetComponentInChildren<Slider>(); // 하위에 있는 Slider 컴포넌트 가져오기
+        }
+        GameObject gauzeBar3 = GameObject.Find("Gauze_Bar3"); // Gauze_Bar3 오브젝트 찾기
+        if (gauzeBar3 != null)
+        {
+            interactionSlider3 = gauzeBar3.GetComponentInChildren<Slider>(); // 하위에 있는 Slider 컴포넌트 가져오기
+        }
+
+        // 상호작용 게이지 초기화
+        if (interactionSlider1 != null)
+        {
+            interactionSlider1.minValue = 0f;
+            interactionSlider1.maxValue = requiredInteractionTime;
+            interactionSlider1.value = 0f; // 초기값 설정
+            interactionSlider1.gameObject.SetActive(false); // 상호작용 시작 시에만 표시
+        }
+
+        // 상호작용 게이지 초기화
+        if (interactionSlider2 != null)
+        {
+            interactionSlider2.minValue = 0f;
+            interactionSlider2.maxValue = requiredInteractionTime;
+            interactionSlider2.value = 0f; // 초기값 설정
+            interactionSlider2.gameObject.SetActive(false); // 상호작용 시작 시에만 표시
+        }
+        // 상호작용 게이지 초기화
+        if (interactionSlider3 != null)
+        {
+            interactionSlider3.minValue = 0f;
+            interactionSlider3.maxValue = requiredInteractionTime;
+            interactionSlider3.value = 0f; // 초기값 설정
+            interactionSlider3.gameObject.SetActive(false); // 상호작용 시작 시에만 표시
+        }
+
+
         GameObject surv1 = GameObject.Find("Surv1");
         if (surv1 != null)
         {
@@ -185,8 +232,61 @@ public class SurvAndBoss : PlayerController
                 interactionTime = 0f;
             }
         }
+        if (count == 0)
+        {
+            // 상호작용 진행 상태에 따라 게이지 바를 업데이트
+            if (isInteractionStarted)
+            {
+                // 상호작용 게이지 바 표시
+                if (interactionSlider1 != null)
+                {
+                    interactionSlider1.gameObject.SetActive(true);
+                    interactionSlider1.value = interactionTime; // 상호작용 시간에 따라 게이지 업데이트
+                }
+            }
+            else if (interactionSlider1 != null)
+            {
+                // 상호작용이 끝나거나 중단되면 게이지 바 숨기기
+                interactionSlider1.gameObject.SetActive(false);
+            }
+        }
 
-
+        if (count == 1)
+        {
+            // 상호작용 진행 상태에 따라 게이지 바를 업데이트
+            if (isInteractionStarted)
+            {
+                // 상호작용 게이지 바 표시
+                if (interactionSlider2 != null)
+                {
+                    interactionSlider2.gameObject.SetActive(true);
+                    interactionSlider2.value = interactionTime; // 상호작용 시간에 따라 게이지 업데이트
+                }
+            }
+            else if (interactionSlider2 != null)
+            {
+                // 상호작용이 끝나거나 중단되면 게이지 바 숨기기
+                interactionSlider2.gameObject.SetActive(false);
+            }
+        }
+        if(count == 2)
+        {
+            // 상호작용 진행 상태에 따라 게이지 바를 업데이트
+            if (isInteractionStarted)
+            {
+                // 상호작용 게이지 바 표시
+                if (interactionSlider3 != null)
+                {
+                    interactionSlider3.gameObject.SetActive(true);
+                    interactionSlider3.value = interactionTime; // 상호작용 시간에 따라 게이지 업데이트
+                }
+            }
+            else if (interactionSlider3 != null)
+            {
+                // 상호작용이 끝나거나 중단되면 게이지 바 숨기기
+                interactionSlider3.gameObject.SetActive(false);
+            }
+        }
     }
 }
 

@@ -974,11 +974,11 @@ PrefabInstance:
     - target: {fileID: 811637697940905324, guid: e130e96a106fa554b9e7d6cde7a8ae95, type: 3}
       propertyPath: m_TileSpriteArray.Array.data[5].m_Data
       value: 
-      objectReference: {fileID: 148148559, guid: e09a4527e4f1271488fac58fca49fd4b, type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 811637697940905324, guid: e130e96a106fa554b9e7d6cde7a8ae95, type: 3}
       propertyPath: m_TileSpriteArray.Array.data[6].m_Data
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 148148559, guid: e09a4527e4f1271488fac58fca49fd4b, type: 3}
     - target: {fileID: 811637697940905324, guid: e130e96a106fa554b9e7d6cde7a8ae95, type: 3}
       propertyPath: m_Tiles.Array.data[0].second.m_TileIndex
       value: 5
@@ -1433,11 +1433,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 811637697940905324, guid: e130e96a106fa554b9e7d6cde7a8ae95, type: 3}
       propertyPath: m_TileSpriteArray.Array.data[5].m_RefCount
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 811637697940905324, guid: e130e96a106fa554b9e7d6cde7a8ae95, type: 3}
       propertyPath: m_TileSpriteArray.Array.data[6].m_RefCount
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 811637697940905324, guid: e130e96a106fa554b9e7d6cde7a8ae95, type: 3}
       propertyPath: m_Tiles.Array.data[100].second.m_TileIndex
@@ -1669,7 +1669,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 811637697940905324, guid: e130e96a106fa554b9e7d6cde7a8ae95, type: 3}
       propertyPath: m_Tiles.Array.data[1].second.m_TileSpriteIndex
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 811637697940905324, guid: e130e96a106fa554b9e7d6cde7a8ae95, type: 3}
       propertyPath: m_Tiles.Array.data[2].second.m_TileSpriteIndex
@@ -36181,6 +36181,7 @@ MonoBehaviour:
   lineRenderer: {fileID: 0}
   middleBoss: {fileID: 94617094}
   player: {fileID: 0}
+  interactionSlider: {fileID: 0}
 --- !u!1 &861163145
 GameObject:
   m_ObjectHideFlags: 0
@@ -49045,13 +49046,41 @@ PrefabInstance:
       propertyPath: m_TagString
       value: signalTower
       objectReference: {fileID: 0}
+    - target: {fileID: 2467013723761998392, guid: 0c0b02dca944dcc4ead2c01d020df197, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.07
+      objectReference: {fileID: 0}
+    - target: {fileID: 2467013723761998392, guid: 0c0b02dca944dcc4ead2c01d020df197, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.3
+      objectReference: {fileID: 0}
     - target: {fileID: 3818108064310841686, guid: 0c0b02dca944dcc4ead2c01d020df197, type: 3}
       propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5524665679896418075, guid: 0c0b02dca944dcc4ead2c01d020df197, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5524665679896418075, guid: 0c0b02dca944dcc4ead2c01d020df197, type: 3}
+      propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5703075016005794536, guid: 0c0b02dca944dcc4ead2c01d020df197, type: 3}
       propertyPath: m_SortingOrder
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6506106039172840677, guid: 0c0b02dca944dcc4ead2c01d020df197, type: 3}
+      propertyPath: m_Color.b
+      value: 0.45098042
+      objectReference: {fileID: 0}
+    - target: {fileID: 6506106039172840677, guid: 0c0b02dca944dcc4ead2c01d020df197, type: 3}
+      propertyPath: m_Color.g
+      value: 0.7490196
+      objectReference: {fileID: 0}
+    - target: {fileID: 6506106039172840677, guid: 0c0b02dca944dcc4ead2c01d020df197, type: 3}
+      propertyPath: m_Color.r
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7468599394232733844, guid: 0c0b02dca944dcc4ead2c01d020df197, type: 3}
       propertyPath: m_LocalScale.x
@@ -49105,7 +49134,13 @@ PrefabInstance:
     - {fileID: 5145284096008356335, guid: 0c0b02dca944dcc4ead2c01d020df197, type: 3}
     - {fileID: 3736099413039503924, guid: 0c0b02dca944dcc4ead2c01d020df197, type: 3}
     - {fileID: 3818108064310841686, guid: 0c0b02dca944dcc4ead2c01d020df197, type: 3}
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 9080033774703498973, guid: 0c0b02dca944dcc4ead2c01d020df197, type: 3}
+    - {fileID: 1284111065715271846, guid: 0c0b02dca944dcc4ead2c01d020df197, type: 3}
+    - {fileID: 4650224862622213401, guid: 0c0b02dca944dcc4ead2c01d020df197, type: 3}
+    - {fileID: 9115368004036325934, guid: 0c0b02dca944dcc4ead2c01d020df197, type: 3}
+    - {fileID: 8997264850243471576, guid: 0c0b02dca944dcc4ead2c01d020df197, type: 3}
+    - {fileID: 904984752325452145, guid: 0c0b02dca944dcc4ead2c01d020df197, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 1034961518565794693, guid: 0c0b02dca944dcc4ead2c01d020df197, type: 3}
