@@ -22,8 +22,17 @@ public class Engineer : PlayerController
     private float engineerPlayerDistance;   // 엔지니어 플레이어 사이 거리 저장
     private Vector3 finVector = new Vector3(29.5f, -3.5f, 0);
     private bool questEnd = false;
+    public Slider interactionSlider; // 상호작용 게이지 바 연결
     private void Start()
     {
+        // 상호작용 게이지 초기화
+        if (interactionSlider != null)
+        {
+            interactionSlider.minValue = 0f;
+            interactionSlider.maxValue = requiredInteractionTime;
+            interactionSlider.value = 0f; // 초기값 설정
+            interactionSlider.gameObject.SetActive(false); // 상호작용 시작 시에만 표시
+        }
         // 시작할 때 HP 슬라이더 값을 최대 체력에 맞게 초기화
         if (hpSlider != null)
         {
@@ -117,6 +126,23 @@ public class Engineer : PlayerController
             Debug.Log("퀘스트1 치트키 클리어!");
             QuestManager.instance.CompleteQuest();
         }
+
+        // 상호작용 진행 상태에 따라 게이지 바를 업데이트
+        if (isInteractionStarted)
+        {
+            // 상호작용 게이지 바 표시
+            if (interactionSlider != null)
+            {
+                interactionSlider.gameObject.SetActive(true);
+                interactionSlider.value = interactionTime; // 상호작용 시간에 따라 게이지 업데이트
+            }
+        }
+        else if (interactionSlider != null)
+        {
+            // 상호작용이 끝나거나 중단되면 게이지 바 숨기기
+            interactionSlider.gameObject.SetActive(false);
+        }
+
     }
 
     public void TakeDamage(float damage) // 엔지니어가 받는 데미지 로직

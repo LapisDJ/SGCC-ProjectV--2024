@@ -1,7 +1,7 @@
 using Unity.VisualScripting;
 using UnityEngine;
 using static UnityEngine.RuleTile.TilingRuleOutput;
-
+using UnityEngine.UI;
 
 public class MiddleBossActivator : PlayerController
 {
@@ -18,8 +18,17 @@ public class MiddleBossActivator : PlayerController
     private bool isBossDead = false;    // 중간보스가 처치되었는지 여부
     private bool bossAlive = false;
     private Vector3 bossPosition;
+    public Slider interactionSlider; // 상호작용 게이지 바 연결
     private void Start()
     {
+        // 상호작용 게이지 초기화
+        if (interactionSlider != null)
+        {
+            interactionSlider.minValue = 0f;
+            interactionSlider.maxValue = requiredInteractionTime;
+            interactionSlider.value = 0f; // 초기값 설정
+            interactionSlider.gameObject.SetActive(false); // 상호작용 시작 시에만 표시
+        }
         questPosition = new Vector3(1.5f, 35f, 0);
         player_T = GameObject.Find("Player").transform;
         middleBoss.SetActive(false);    // Map2 입장 시 중간보스 ( 해킹된 안드로이드 ) 비활성화 
@@ -116,6 +125,22 @@ public class MiddleBossActivator : PlayerController
         {
             Debug.Log("퀘스트2 치트키 클리어!");
             QuestManager.instance.CompleteQuest();
+        }
+
+        // 상호작용 진행 상태에 따라 게이지 바를 업데이트
+        if (isInteractionStarted)
+        {
+            // 상호작용 게이지 바 표시
+            if (interactionSlider != null)
+            {
+                interactionSlider.gameObject.SetActive(true);
+                interactionSlider.value = interactionTime; // 상호작용 시간에 따라 게이지 업데이트
+            }
+        }
+        else if (interactionSlider != null)
+        {
+            // 상호작용이 끝나거나 중단되면 게이지 바 숨기기
+            interactionSlider.gameObject.SetActive(false);
         }
     }
 }

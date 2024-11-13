@@ -39975,6 +39975,17 @@ Transform:
   - {fileID: 1878825003}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &912039833 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5729042884226500503, guid: 0c0b02dca944dcc4ead2c01d020df197, type: 3}
+  m_PrefabInstance: {fileID: 1482744113}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &953467202
 GameObject:
   m_ObjectHideFlags: 0
@@ -40655,6 +40666,7 @@ MonoBehaviour:
   maxHP: 100
   hpSlider: {fileID: 668324486}
   hpBarOffset: {x: 0, y: 2, z: 0}
+  interactionSlider: {fileID: 912039833}
 --- !u!50 &1279397285 stripped
 Rigidbody2D:
   m_CorrespondingSourceObject: {fileID: -3574141526916872300, guid: 0c0b02dca944dcc4ead2c01d020df197, type: 3}
@@ -41294,6 +41306,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -0.149
       objectReference: {fileID: 0}
+    - target: {fileID: 248534806135391537, guid: 0c0b02dca944dcc4ead2c01d020df197, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.50021
+      objectReference: {fileID: 0}
     - target: {fileID: 313689949200939712, guid: 0c0b02dca944dcc4ead2c01d020df197, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -41398,6 +41414,14 @@ PrefabInstance:
       propertyPath: m_UsedByEffector
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3966746311011192604, guid: 0c0b02dca944dcc4ead2c01d020df197, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3966746311011192604, guid: 0c0b02dca944dcc4ead2c01d020df197, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4399595522340253752, guid: 0c0b02dca944dcc4ead2c01d020df197, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -41478,7 +41502,27 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7941654495571665821, guid: 0c0b02dca944dcc4ead2c01d020df197, type: 3}
+      propertyPath: m_Color.b
+      value: 0.48235297
+      objectReference: {fileID: 0}
+    - target: {fileID: 7941654495571665821, guid: 0c0b02dca944dcc4ead2c01d020df197, type: 3}
+      propertyPath: m_Color.g
+      value: 0.5529412
+      objectReference: {fileID: 0}
+    - target: {fileID: 7941654495571665821, guid: 0c0b02dca944dcc4ead2c01d020df197, type: 3}
+      propertyPath: m_Color.r
+      value: 0.9058824
+      objectReference: {fileID: 0}
     - target: {fileID: 8034675085374932250, guid: 0c0b02dca944dcc4ead2c01d020df197, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8268348036807810465, guid: 0c0b02dca944dcc4ead2c01d020df197, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8268348036807810465, guid: 0c0b02dca944dcc4ead2c01d020df197, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
@@ -41490,7 +41534,12 @@ PrefabInstance:
     - {fileID: 5145284096008356335, guid: 0c0b02dca944dcc4ead2c01d020df197, type: 3}
     - {fileID: 3736099413039503924, guid: 0c0b02dca944dcc4ead2c01d020df197, type: 3}
     - {fileID: 3818108064310841686, guid: 0c0b02dca944dcc4ead2c01d020df197, type: 3}
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 4650224862622213401, guid: 0c0b02dca944dcc4ead2c01d020df197, type: 3}
+    - {fileID: 3420130383192317860, guid: 0c0b02dca944dcc4ead2c01d020df197, type: 3}
+    - {fileID: 9115368004036325934, guid: 0c0b02dca944dcc4ead2c01d020df197, type: 3}
+    - {fileID: 8997264850243471576, guid: 0c0b02dca944dcc4ead2c01d020df197, type: 3}
+    - {fileID: 904984752325452145, guid: 0c0b02dca944dcc4ead2c01d020df197, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 1034961518565794693, guid: 0c0b02dca944dcc4ead2c01d020df197, type: 3}
