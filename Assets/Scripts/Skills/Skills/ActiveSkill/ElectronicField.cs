@@ -12,6 +12,7 @@ public class ElectronicField : Skill
         cooldown = 0.5f;
         icon = Resources.Load<Sprite>("UI/Icon/9");
         levelupguide = "플레이어를 중심으로 전기장을 생성합니다";
+        animator = GetComponent<Animator>();
     }
     private float fieldRadius = 1.5f; // 원 범위 반지름
     WeaknessType weaknessType = WeaknessType.Blow;
@@ -21,6 +22,10 @@ public class ElectronicField : Skill
 
     public override void Activate() // 몬스터와 상호 작용 로직
     {
+        if(this.level != 0) animator.SetBool("isUse", true);
+        transform.localScale = new Vector3(2 *  fieldRadius, 2 *  fieldRadius, 1f); // 원하는 크기로 설정, 예시로 2배 크기
+        transform.position = player.transform.position;
+
         Monster monster;
         float totalDamage = 0f; // 몬스터가 입는 총 데미지
 
