@@ -51,6 +51,7 @@ MonoBehaviour:
   skillDamage: 0
   cooldown: 0
   animator: {fileID: 4918271163978410027}
+  levelupguide: 
   icon: {fileID: 0}
   player: {fileID: 0}
 --- !u!95 &4918271163978410027
@@ -63,7 +64,7 @@ Animator:
   m_GameObject: {fileID: 2483729412032129873}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: eb80c87918b86f543a997878e5c9a4b4, type: 2}
+  m_Controller: {fileID: 9100000, guid: 5b4484b11d7999941aea8a4e0b16e008, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

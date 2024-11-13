@@ -19,10 +19,10 @@ public class CircleSword : Skill
     WeaknessType weaknessType = WeaknessType.Slash;
     public override void Activate() // 몬스터와 상호 작용 로직
     {
-        transform.localScale = new Vector3(circleAttackRadius, circleAttackRadius, 1f); // 원하는 크기로 설정, 예시로 2배 크기
+        transform.localScale = new Vector3(2 * circleAttackRadius, 2 * circleAttackRadius, 1f); // 원하는 크기로 설정, 예시로 2배 크기
 
         transform.position = player.transform.position;
-        animator.Play("bladestorm");
+        animator.SetBool("isUse", true);
         Monster monster;
         float totalDamage = 0f; // 몬스터가 입는 총 데미지
 
@@ -49,6 +49,7 @@ public class CircleSword : Skill
             }
         }
         lastUsedTime = Time.time;
+
         StartCoroutine(Waitforseconds());
     }
 
@@ -90,5 +91,11 @@ public class CircleSword : Skill
     IEnumerator Waitforseconds()
     {
         yield return new WaitForSeconds(1.0f);
+        animator.SetBool("isUse", false);
+    }
+
+     public void OnEffectTrigger()
+    {
+        // AnimationEvent에서 호출할 빈 함수
     }
 }
