@@ -36181,7 +36181,7 @@ MonoBehaviour:
   lineRenderer: {fileID: 0}
   middleBoss: {fileID: 94617094}
   player: {fileID: 0}
-  interactionSlider: {fileID: 0}
+  interactionSlider: {fileID: 1473316335}
 --- !u!1 &861163145
 GameObject:
   m_ObjectHideFlags: 0
@@ -49215,6 +49215,17 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 801895819}
   m_SourcePrefab: {fileID: 100100000, guid: 0c0b02dca944dcc4ead2c01d020df197, type: 3}
+--- !u!114 &1473316335 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8520162476309755970, guid: 0c0b02dca944dcc4ead2c01d020df197, type: 3}
+  m_PrefabInstance: {fileID: 1473316334}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1932331109
 GameObject:
   m_ObjectHideFlags: 0
